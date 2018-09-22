@@ -1,0 +1,25 @@
+DROP TABLE ex_fact_detalii ;
+DROP TABLE ex_fact ;
+
+CREATE TABLE ex_fact (
+	NrFact NUMBER(6) NOT NULL PRIMARY KEY,
+  DataFact DATE DEFAULT CURRENT_DATE NOT NULL,
+	NrLinii NUMBER(2) DEFAULT 0 NOT NULL
+		CONSTRAINT ck_linii CHECK (NrLinii > 0 ) DEFERRABLE INITIALLY DEFERRED
+	) ;
+
+CREATE TABLE ex_fact_detalii (
+	NrFact NUMBER(6) NOT NULL REFERENCES ex_fact (NrFact),
+	Linie NUMBER(2) NOT NULL CONSTRAINT ck_linie_fd CHECK (Linie > 0),
+	Produs VARCHAR2(40) NOT NULL,
+	Cantitate NUMBER(8) NOT NULL,
+  PretUnit NUMBER (9,2) NOT NULL,
+  CONSTRAINT pk_fact_detalii PRIMARY KEY (NrFact,Linie),
+  CONSTRAINT un_fact_detalii UNIQUE (NrFact, Produs)
+	) ;
+
+INSERT INTO ex_fact (NrFact)  VALUES (123456) ;
+
+INSERT INTO ex_fact_detalii VALUES (123456, 1, 'Un produs', 100, 50) ;
+
+UPDATE ex_fact SET NrLinii = NrLinii + 1 WHERE NrFact = 123456 ;

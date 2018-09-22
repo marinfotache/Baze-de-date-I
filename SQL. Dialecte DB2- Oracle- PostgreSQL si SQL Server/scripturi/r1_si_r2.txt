@@ -1,0 +1,97 @@
+DROP TABLE r1 ;
+DROP TABLE r2 ;
+
+CREATE TABLE r1 (
+	A NUMERIC(4), 
+	B VARCHAR(6), 
+	C NUMERIC(4)
+	) ;
+
+
+CREATE TABLE r2   (
+	C NUMERIC(4), 
+	D VARCHAR(6), 
+	E NUMERIC(4)
+   ) ; 
+
+   
+INSERT INTO r1 VALUES (20, 'XYZ', 30) ;
+INSERT INTO r1 VALUES (30, 'XXZ', 20) ;
+INSERT INTO r1 VALUES (40, 'YYX', 25) ;
+
+
+INSERT INTO r2 VALUES (25, 'XYZ', 30) ;
+INSERT INTO r2 VALUES (40, 'YYX', 25) ;
+INSERT INTO r2 VALUES (30, 'XXZ', 40) ;
+
+
+
+-- tabelele pentru diviziune relationala 
+DROP TABLE rd1 ;
+DROP TABLE rd2 ;
+
+CREATE TABLE rd1 
+   (	X CHAR(2), 
+	Y CHAR(2)
+   )  ;
+ 
+CREATE TABLE rd2 
+   (	Y CHAR(2)
+   )  ;
+
+INSERT INTO rd1 VALUES ('x1',	'y1');
+INSERT INTO rd1 VALUES ('x2',	'y1');
+INSERT INTO rd1 VALUES ('x3',	'y1');
+INSERT INTO rd1 VALUES ('x1',	'y2');
+INSERT INTO rd1 VALUES ('x3',	'y2');
+INSERT INTO rd1 VALUES ('x4',	'y2');
+INSERT INTO rd1 VALUES ('x1',	'y3');
+INSERT INTO rd1 VALUES ('x3',	'y3');
+INSERT INTO rd1 VALUES ('x5',	'y3');
+INSERT INTO rd1 VALUES ('x1',	'y4');
+INSERT INTO rd1 VALUES ('x3',	'y4');
+INSERT INTO rd1 VALUES ('x4',	'y4');
+INSERT INTO rd1 VALUES ('x1',	'y5');
+INSERT INTO rd1 VALUES ('x2',	'y5');
+INSERT INTO rd1 VALUES ('x3',	'y5');
+INSERT INTO rd1 VALUES ('x5',	'y5');
+
+
+INSERT INTO rd2 VALUES ('y1');
+INSERT INTO rd2 VALUES ('y2');
+INSERT INTO rd2 VALUES ('y3');
+INSERT INTO rd2 VALUES ('y4');
+INSERT INTO rd2 VALUES ('y5');
+
+
+ 
+
+/*
+CREATE TABLE rr1 (
+	a NUMERIC(4), 
+	b VARCHAR(6), 
+	c NUMERIC(4)
+	) ;
+
+
+CREATE TABLE rr2   (
+	c NUMERIC(4), 
+	d VARCHAR(6), 
+	e NUMERIC(4)
+   ) ; 
+
+   
+INSERT INTO rr1 VALUES (20, 'XYZ', 30) ;
+INSERT INTO rr1 VALUES (30, 'XXZ', 20) ;
+INSERT INTO rr1 VALUES (40, 'YYX', 25) ;
+INSERT INTO rr1 VALUES (20, 'XYZ', 30) ;
+INSERT INTO rr1 VALUES (30, 'XXZ', 20) ;
+
+
+INSERT INTO rr2 VALUES (25, 'XYZ', 30) ;
+INSERT INTO rr2 VALUES (40, 'YYX', 25) ;
+INSERT INTO rr2 VALUES (30, 'XXZ', 40) ;
+INSERT INTO rr2 VALUES (40, 'YYX', 25) ;
+INSERT INTO rr2 VALUES (30, 'XXZ', 40) ;
+
+*/

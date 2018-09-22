@@ -1,0 +1,147 @@
+DROP TABLE incasfact  ;
+DROP TABLE incasari ;
+DROP TABLE liniifact ;
+DROP TABLE facturi ;
+DROP TABLE produse ;
+DROP TABLE persclienti ;
+DROP TABLE persoane ;
+DROP TABLE clienti ;
+DROP TABLE coduri_postale ;
+DROP TABLE judete ;
+
+CREATE TABLE judete (
+    	Jud CHAR(2)
+        		CONSTRAINT pk_judete PRIMARY KEY
+        		CONSTRAINT ck_jud CHECK (Jud=LTRIM(UPPER(Jud))),
+    	Judet VARCHAR(25)
+        		CONSTRAINT un_judet UNIQUE
+        		CONSTRAINT nn_judet NOT NULL,
+    	Regiune VARCHAR(15)
+        		DEFAULT 'Moldova' CONSTRAINT nn_regiune NOT NULL
+        		CONSTRAINT ck_regiune CHECK (Regiune IN ('Banat', 'Transilvania',
+				 'Dobrogea', 'Oltenia', 'Muntenia', 'Moldova'))
+    	) ;
+
+CREATE TABLE coduri_postale (
+	CodPost CHAR(6)
+        		CONSTRAINT pk_coduri_post PRIMARY KEY
+        		CONSTRAINT ck_codpost CHECK (CodPost=LTRIM(CodPost)),
+    	Loc VARCHAR(25) CONSTRAINT nn_loc NOT NULL,
+    	Jud CHAR(2) DEFAULT 'IS'  CONSTRAINT fk_coduri_post_jud 
+		REFERENCES judete(Jud) ON UPDATE CASCADE
+    	) ;
+
+CREATE TABLE clienti (
+    	CodCl SMALLINT IDENTITY (1001,1)
+        		CONSTRAINT pk_clienti PRIMARY KEY
+        		CONSTRAINT ck_codcl CHECK (CodCl > 1000),
+    	DenCl VARCHAR(30) NOT NULL
+        		CONSTRAINT ck_dencl CHECK (SUBSTRING(DenCl,1,1) =
+			UPPER(SUBSTRING(DenCl,1,1))),
+    	CodFiscal CHAR(9) NOT NULL
+		CONSTRAINT un_codfiscal UNIQUE
+        		CONSTRAINT ck_codfiscal CHECK (SUBSTRING(CodFiscal,1,1) =
+			UPPER(SUBSTRING(CodFiscal,1,1))),
+    	Adresa VARCHAR(40)
+        		CONSTRAINT ck_adresa_clienti CHECK (SUBSTRING(Adresa,1,1) =
+			UPPER(SUBSTRING(Adresa,1,1))),
+    	CodPost CHAR(6) NOT NULL CONSTRAINT fk_clienti_cp 
+		REFERENCES coduri_postale(CodPost) ON UPDATE CASCADE,
+    	Telefon VARCHAR(10)
+    	) ;
+
+CREATE TABLE persoane (
+    	CNP CHAR(14)
+        		CONSTRAINT pk_persoane PRIMARY KEY
+        		CONSTRAINT ck_cnp CHECK (CNP=LTRIM(UPPER(CNP))),
+    	Nume VARCHAR(20) NOT NULL,
+    	Prenume VARCHAR(20) NOT NULL,
+     	Adresa VARCHAR(50)
+        		CONSTRAINT ck_adresa_persoane CHECK (SUBSTRING(Adresa,1,1) =
+			UPPER(SUBSTRING(Adresa,1,1))),
+    	Sex CHAR(1) DEFAULT 'B' NOT NULL
+        		CONSTRAINT ck_sex CHECK (Sex IN ('F','B')),
+    	CodPost CHAR(6) NOT NULL CONSTRAINT fk_persoane_cp 
+		REFERENCES coduri_postale(CodPost) ON UPDATE CASCADE,
+    	TelAcasa VARCHAR(10),
+    	TelBirou VARCHAR(10),
+    	TelMobil VARCHAR(10),
+    	Email VARCHAR(30)
+    	) ;
+
+CREATE TABLE persclienti (
+    	CNP CHAR(14) NOT NULL
+        		CONSTRAINT fk_persclienti_persoane REFERENCES persoane(CNP)
+				ON UPDATE CASCADE,
+    	CodCl SMALLINT NOT NULL
+        		CONSTRAINT fk_persclienti_clienti REFERENCES clienti(CodCl)
+			-- aici ON UPDATE CASCADE nu functioneaza, adica genereaza eroare !!!!!!! --
+	,
+    	Functie VARCHAR(25) NOT NULL
+        		CONSTRAINT ck_functie CHECK (SUBSTRING(Functie,1,1) =
+		UPPER(SUBSTRING(Functie,1,1))),
+    	CONSTRAINT pk_persclienti PRIMARY KEY (CNP, CodCl, Functie)
+    	) ;
+
+CREATE TABLE produse (
+    	CodPr SMALLINT IDENTITY
+        		CONSTRAINT pk_produse PRIMARY KEY
+        		CONSTRAINT ck_codpr CHECK (CodPr > 0),
+    	DenPr VARCHAR(30) NOT NULL CONSTRAINT ck_denpr
+        		CHECK (SUBSTRING(DenPr,1,1) = UPPER(SUBSTRING(DenPr,1,1))),
+    	UM VARCHAR(10) NOT NULL,
+    	Grupa VARCHAR(15) CONSTRAINT ck_produse_grupa
+        		CHECK (SUBSTRING(Grupa,1,1) = UPPER(SUBSTRING(Grupa,1,1))),
+    	ProcTVA NUMERIC(2,2) DEFAULT .19 NOT NULL
+    	) ;
+
+CREATE TABLE facturi (
+    	NrFact INTEGER
+        		CONSTRAINT pk_facturi PRIMARY KEY,
+    	DataFact SMALLDATETIME DEFAULT GETDATE() NOT NULL,
+        		CONSTRAINT ck_datafact CHECK (DataFact >= '2007-01-01'
+            			AND DataFact <= '2015-12-31'),
+    	CodCl SMALLINT NOT NULL CONSTRAINT fk_facturi_clienti 
+		REFERENCES clienti(CodCl) ON UPDATE CASCADE,
+    	Obs VARCHAR(50) 
+	) ;
+
+CREATE TABLE liniifact (
+   	 NrFact INTEGER CONSTRAINT fk_liniifact_facturi 
+		REFERENCES facturi(NrFact) ON UPDATE CASCADE,
+    	Linie TINYINT NOT NULL
+        		CONSTRAINT ck_linie CHECK (Linie > 0),
+    	CodPr SMALLINT NOT NULL CONSTRAINT fk_liniifact_produse
+		 REFERENCES produse(CodPr) ON UPDATE CASCADE,
+    	Cantitate NUMERIC(8) NOT NULL,
+    	PretUnit NUMERIC (9,2) NOT NULL,
+    	CONSTRAINT pk_liniifact PRIMARY KEY (NrFact,Linie)
+    	) ;
+
+CREATE TABLE incasari (
+    	CodInc BIGINT IDENTITY (1234,1)
+        		CONSTRAINT pk_incasari PRIMARY KEY,
+    	DataInc SMALLDATETIME DEFAULT GETDATE() NOT NULL
+        		CONSTRAINT ck_datainc CHECK (DataInc >= '2007-01-01' AND
+		DataInc <= '2015-12-31'),
+    	CodDoc CHAR(4) NOT NULL
+        		CONSTRAINT ck_coddoc CHECK(CodDoc=UPPER(LTRIM(CodDoc))),
+    	NrDoc VARCHAR(16) NOT NULL,
+    	DataDoc SMALLDATETIME DEFAULT GETDATE() - 7 NOT NULL
+        		CONSTRAINT ck_datadoc CHECK (DataDoc >= '2007-01-01'
+            			AND DataDoc <= '2015-12-31')
+    	) ;
+
+CREATE TABLE incasfact (
+    	CodInc BIGINT CONSTRAINT fk_incasfact_incasari 
+		REFERENCES incasari(CodInc) ON UPDATE CASCADE,
+    	NrFact INTEGER CONSTRAINT fk_incasfact_facturi 
+		REFERENCES facturi(NrFact) ON UPDATE CASCADE,
+    	Transa NUMERIC(11,2) NOT NULL,
+    	CONSTRAINT pk_incasfact PRIMARY KEY (CodInc, NrFact)
+     	) ;
+
+ALTER TABLE incasari ADD CONSTRAINT ck_date_incdoc CHECK (DataInc >= DataDoc) ;
+
+
+

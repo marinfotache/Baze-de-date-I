@@ -1,0 +1,20 @@
+ALTER TABLE distante ADD (Durata INTERVAL DAY TO SECOND )
+DELETE FROM distante ;
+INSERT INTO distante VALUES ('Iasi', 'Vaslui', 71, INTERVAL '1:25' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Iasi', 'Tg.Frumos', 53, INTERVAL '1:05' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Tg.Frumos', 'Roman', 40, INTERVAL '0:50' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Roman', 'Bacau', 41, INTERVAL '0:47' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Roman', 'Vaslui', 80, INTERVAL '1:50' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Vaslui', 'Birlad', 54, INTERVAL '0:53' HOUR TO MINUTE ) ;
+INSERT INTO distante VALUES ('Birlad', 'Tecuci', 48, INTERVAL '0:47' HOUR TO MINUTE) ;   
+INSERT INTO distante VALUES ('Tecuci', 'Tisita', 20, INTERVAL '0:18' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Tisita', 'Focsani', 13, INTERVAL '0:15' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Bacau', 'Adjud', 60, INTERVAL '0:50' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Bacau', 'Vaslui', 85, INTERVAL '2:05' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Adjud', 'Tisita', 32, INTERVAL '0:40' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Focsani', 'Galati', 80, INTERVAL '1:50' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Focsani', 'Braila', 86, INTERVAL '1:57' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Focsani', 'Rm.Sarat', 42, INTERVAL '0:50' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Rm.Sarat', 'Braila', 84, INTERVAL '1:55' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Braila', 'Galati', 11, INTERVAL '0:25' HOUR TO MINUTE) ;
+INSERT INTO distante VALUES ('Tecuci', 'Galati', 67, INTERVAL '1:09' HOUR TO MINUTE) ;

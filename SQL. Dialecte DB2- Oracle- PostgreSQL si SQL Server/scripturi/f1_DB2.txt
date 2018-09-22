@@ -1,0 +1,9 @@
+CREATE FUNCTION marin.f_codpr_liniefact (nrfact_ DECIMAL(8), linie_ SMALLINT) 
+	RETURNS DECIMAL(6) 
+	LANGUAGE SQL
+BEGIN ATOMIC
+	DECLARE v_codpr DECIMAL(6) ; 
+	SET v_codpr = (SELECT CodPr FROM liniifact WHERE NrFact=nrfact_ AND Linie=linie_) ; 
+	RETURN COALESCE(v_codpr,0) ; 
+END  
+@

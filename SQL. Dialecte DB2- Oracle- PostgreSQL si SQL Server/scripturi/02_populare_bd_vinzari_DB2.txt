@@ -1,0 +1,195 @@
+DELETE FROM incasfact ; 
+DELETE FROM incasari ; 
+DELETE FROM liniifact ;
+DELETE FROM facturi ; 
+DELETE FROM produse ; 
+DELETE FROM persclienti ;
+DELETE FROM persoane ; 
+DELETE FROM clienti ; 
+DELETE FROM coduri_postale ;
+DELETE FROM judete ;
+
+INSERT INTO judete VALUES  ('IS', 'Iasi', 'Moldova'), ('VN', 'Vrancea', 'Moldova'), 
+	('NT', 'Neamt', 'Moldova'), ('SV', 'Suceava', 'Moldova'), 
+	('VS', 'Vaslui', 'Moldova'), ('TM', 'Timis', 'Banat')  ;
+
+
+INSERT INTO coduri_postale VALUES ('700505', 'Iasi', 'IS'), ('700510', 'Iasi', 'IS'),
+	('700515', 'Iasi', 'IS'), ('701150', 'Pascani', 'IS'), ('706500', 'Vaslui', 'VS'), 
+ 	('706510', 'Vaslui', 'VS'), ('705300', 'Focsani', 'VN'), ('705310', 'Focsani', 'VN'),
+ 	('706400', 'Birlad', 'VS'), ('705800', 'Suceava', 'SV'), ('705550', 'Roman', 'NT'), 
+ 	('701900', 'Timisoara', 'TM') ;
+
+INSERT INTO persoane VALUES ('CNP1', 'Ioan', 'Vasile', 'I.L.Caragiale, 22', 'B', '700505', 
+	'123456', '987654', '094222222', NULL),
+	('CNP2', 'Vasile', 'Ion', NULL,	'B', '700505', '234567', '876543', '094222223', 'Ion@a.ro'),
+	('CNP3', 'Popovici', 'Ioana', 'V.Micle, Bl.I, Sc.B,Ap.2', 'F',
+    		'701150', '345678', NULL, '094222224', NULL) ;
+INSERT INTO persoane VALUES ('CNP4', 'Lazar', 'Caraion', 'M.Eminescu, 42', 'B',
+    		'706500', '456789', NULL, '094222225', NULL),
+	('CNP5', 'Iurea', 'Simion', 'I.Creanga, 44 bis', 'B', '706500', '567890', '543210', NULL, NULL),
+	('CNP6', 'Vasc', 'Simona', 'M.Eminescu, 13', 'F', '701150', NULL, '432109', '094222227', NULL),
+	('CNP7', 'Popa', 'Ioanid', 'I.Ion, Bl.H2, Sc.C, Ap.45', 'B', '701900', '789012', '321098', NULL, NULL),
+	('CNP8', 'Bogacs', 'Ildiko', 'I.V.Viteazu, 67', 'F', '705550', '890123', '210987', '094222229', NULL),
+	('CNP9', 'Ioan', 'Vasilica', 'Garii, Bl.B4, Sc.A, Ap.1', 'F','701900', '901234', '109876', 
+		'094222230', NULL) ;
+
+-- primul client:
+INSERT INTO clienti VALUES (DEFAULT, 'Client 1 SRL', 'R1001', 'Tranzitiei, 13 bis', 
+	'700505', NULL) ;
+-- liniile copil din tabelele PERSCLIENTI si FACTURI:
+INSERT INTO persclienti VALUES ('CNP1', IDENTITY_VAL_LOCAL(), 'Director general');
+INSERT INTO facturi (nrfact, datafact, codcl) VALUES 
+	(1111, '2007-08-01', IDENTITY_VAL_LOCAL()), (1115, '2007-08-02', IDENTITY_VAL_LOCAL()), 
+	(1117, '2007-08-03', IDENTITY_VAL_LOCAL()), (1118, '2007-08-04', IDENTITY_VAL_LOCAL()),
+	(1120, '2007-08-07', IDENTITY_VAL_LOCAL()), (2111, '2007-08-14', IDENTITY_VAL_LOCAL()),
+	(2115, '2007-08-15', IDENTITY_VAL_LOCAL()), (2117, '2007-08-16', IDENTITY_VAL_LOCAL()),
+ 	(2118, '2007-08-16', IDENTITY_VAL_LOCAL()), (3111, '2007-09-01', IDENTITY_VAL_LOCAL()),
+	(3115, '2007-09-02', IDENTITY_VAL_LOCAL()), (3117, '2007-09-10', IDENTITY_VAL_LOCAL()),
+ 	(3118, '2007-09-17', IDENTITY_VAL_LOCAL());
+
+-- al doilea client:
+INSERT INTO clienti (dencl, codfiscal, codpost, telefon)
+    	VALUES ('Client 2 SA', 'R1002', '700505', '0232212121') ;
+-- inregistrarile copil al celui de-al doilea client: 
+INSERT INTO persclienti VALUES ('CNP2', IDENTITY_VAL_LOCAL(), 'Director general'),  
+	('CNP3', IDENTITY_VAL_LOCAL(), 'Sef aprovizionare');
+INSERT INTO facturi (nrfact, datafact, codcl) VALUES (1113, '2007-08-01', IDENTITY_VAL_LOCAL()), 
+	(2113, '2007-08-14', IDENTITY_VAL_LOCAL()), (3113, '2007-09-02', IDENTITY_VAL_LOCAL());
+
+-- al treilea client:
+INSERT INTO clienti VALUES (DEFAULT, 'Client 3 SRL', 'R1003', 'Prosperitatii, 22', '706500','0235222222') ;
+-- inregistrarile copil al celui de-al treilea client: 
+INSERT INTO persclienti VALUES ('CNP4', IDENTITY_VAL_LOCAL(), 'Sef aprovizionare'),
+	('CNP5', IDENTITY_VAL_LOCAL(), 'Director financiar');
+INSERT INTO facturi (nrfact, datafact, codcl) VALUES (1119, '2007-08-07', IDENTITY_VAL_LOCAL()),
+	(2119, '2007-08-21', IDENTITY_VAL_LOCAL()), (3119, '2007-10-07', IDENTITY_VAL_LOCAL());
+
+-- al patrulea client:
+INSERT INTO clienti (dencl, codfiscal, adresa, codpost) VALUES ('Client 4', 'R1004', 'Sapientei, 56', '701150');
+-- inregistrarile copil al celui de-al patrulea client: 
+INSERT INTO persclienti VALUES ('CNP6', IDENTITY_VAL_LOCAL(), 'Director general');
+INSERT INTO facturi (nrfact, datafact, codcl) VALUES 
+	(1121, '2007-08-07', IDENTITY_VAL_LOCAL()), (2121, '2007-08-21', IDENTITY_VAL_LOCAL());
+
+-- al cincilea client:
+INSERT INTO clienti VALUES (DEFAULT, 'Client 5 SRL', 'R1005', NULL, '701900', '0256111111');
+-- inregistrarile copil al celui de-al cincilea client: 
+INSERT INTO persclienti VALUES ('CNP7', IDENTITY_VAL_LOCAL(), 'Sef aprovizionare');
+INSERT INTO facturi (nrfact, datafact, codcl, obs) VALUES 
+	(1112, '2007-08-01', IDENTITY_VAL_LOCAL(), 'Probleme cu transportul'),
+	(1122, '2007-08-07', IDENTITY_VAL_LOCAL(), NULL), (2112, '2007-08-14', IDENTITY_VAL_LOCAL(),'Probleme cu transportul'),
+	(2122, '2007-08-22', IDENTITY_VAL_LOCAL(), NULL), (3112, '2007-09-01', IDENTITY_VAL_LOCAL(), 'Probleme cu transportul');
+
+-- al saselea client:
+INSERT INTO clienti VALUES (DEFAULT, 'Client 6 SA', 'R1006', 'Pacientei, 33', '705550', NULL) ;
+-- inregistrarile copil al celui de-al saselea client: 
+INSERT INTO persclienti VALUES ('CNP8', IDENTITY_VAL_LOCAL(), 'Director financiar');
+INSERT INTO facturi (nrfact, datafact, codcl) VALUES (1114, '2007-08-01', IDENTITY_VAL_LOCAL());
+
+-- al saptelea client:
+INSERT INTO clienti VALUES (DEFAULT, 'Client 7 SRL', 'R1007', 'Victoria Capitalismului, 2', '701900', '0256121212') ;
+-- inregistrarile copil al celui de-al saptelea client: 
+INSERT INTO persclienti VALUES ('CNP9', IDENTITY_VAL_LOCAL(), 'Sef aprovizionare');
+INSERT INTO facturi (nrfact, datafact, codcl, obs) VALUES (1116, '2007-08-02', IDENTITY_VAL_LOCAL(), 'Pretul propus initial a fost modificat'),
+	(2116, '2007-08-15', IDENTITY_VAL_LOCAL(), 'Pretul propus initial a fost modificat'),
+	(3116, '2007-09-10', IDENTITY_VAL_LOCAL(), 'Pretul propus initial a fost modificat');
+
+
+-- primul produs:
+INSERT INTO produse VALUES (DEFAULT, 'Produs 1','buc', 'Tigari', .19) ;
+-- liniile in care apare primul produs
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES 
+	(1111, 1, IDENTITY_VAL_LOCAL(), 50, 1000), (1117, 2, IDENTITY_VAL_LOCAL(), 100, 950),
+	(1118, 2, IDENTITY_VAL_LOCAL(), 150, 930), (2111, 1, IDENTITY_VAL_LOCAL(), 57, 1000),
+	(2117, 2, IDENTITY_VAL_LOCAL(), 110, 950), (2118, 2, IDENTITY_VAL_LOCAL(), 120, 930),
+	(3111, 1, IDENTITY_VAL_LOCAL(), 57, 1000), (3117, 2, IDENTITY_VAL_LOCAL(), 110, 950),
+	(3118, 2, IDENTITY_VAL_LOCAL(), 120, 930) ;
+
+-- al doilea produs:
+INSERT INTO produse VALUES (DEFAULT, 'Produs 2','kg', 'Bere', 0.09) ;
+-- liniile in care apare al doilea produs	
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES 
+	(1111, 2, IDENTITY_VAL_LOCAL(), 75, 1050), (1112, 1, IDENTITY_VAL_LOCAL(), 80, 1030),
+ 	(1113, 1, IDENTITY_VAL_LOCAL(), 100, 975), (1114, 1, IDENTITY_VAL_LOCAL(), 70, 1070),
+ 	(1115, 1, IDENTITY_VAL_LOCAL(), 150, 925), (1116, 1, IDENTITY_VAL_LOCAL(), 125, 930),
+ 	(1117, 1, IDENTITY_VAL_LOCAL(), 100, 1000), (1118, 1, IDENTITY_VAL_LOCAL(), 30, 1100),
+ 	(1119, 1, IDENTITY_VAL_LOCAL(), 35, 1090), (1120, 1, IDENTITY_VAL_LOCAL(), 80, 1120),
+ 	(1121, 2, IDENTITY_VAL_LOCAL(), 100, 1050), (2111, 2, IDENTITY_VAL_LOCAL(), 79, 1050),
+ 	(2112, 1, IDENTITY_VAL_LOCAL(), 85, 1030), (2113, 1, IDENTITY_VAL_LOCAL(), 120, 975),
+ 	(2115, 1, IDENTITY_VAL_LOCAL(), 110, 925), (2116, 1, IDENTITY_VAL_LOCAL(), 135, 930),
+ 	(2117, 1, IDENTITY_VAL_LOCAL(), 150, 1000), (2118, 1, IDENTITY_VAL_LOCAL(), 39, 1100),
+	(2119, 1, IDENTITY_VAL_LOCAL(), 35, 1090), (2121, 2, IDENTITY_VAL_LOCAL(), 103, 1050),
+ 	(3111, 2, IDENTITY_VAL_LOCAL(), 79, 1050), (3112, 1, IDENTITY_VAL_LOCAL(), 85, 1030),
+ 	(3113, 1, IDENTITY_VAL_LOCAL(), 120, 975), (3115, 1, IDENTITY_VAL_LOCAL(), 110, 925),
+ 	(3116, 1, IDENTITY_VAL_LOCAL(), 135, 930), (3117, 1, IDENTITY_VAL_LOCAL(), 150, 1000),
+ 	(3118, 1, IDENTITY_VAL_LOCAL(), 39, 1100), (3119, 1, IDENTITY_VAL_LOCAL(), 35, 1090) ;
+
+
+-- al treilea produs:
+INSERT INTO produse VALUES (DEFAULT, 'Produs 3','kg', 'Bere', 0.19) ;
+-- liniile in care apare al treilea produs
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES 
+	(1112, 2, IDENTITY_VAL_LOCAL(), 40, 750), (1119, 2, IDENTITY_VAL_LOCAL(), 40, 700),
+ 	(2112, 2, IDENTITY_VAL_LOCAL(), 65, 750), (2119, 2, IDENTITY_VAL_LOCAL(), 40, 700),
+ 	(3112, 2, IDENTITY_VAL_LOCAL(), 65, 750), (3119, 2, IDENTITY_VAL_LOCAL(), 40, 700) ;
+
+
+-- al patrulea produs:
+INSERT INTO produse VALUES (DEFAULT, 'Produs 4','l', 'Dulciuri', .09) ;
+-- liniile in care apare al patrulea produs
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES 
+	(1114, 2, IDENTITY_VAL_LOCAL(), 30, 1705), (1119, 3, IDENTITY_VAL_LOCAL(), 50, 1410),
+ 	(2119, 3, IDENTITY_VAL_LOCAL(), 55, 1410), (3119, 3, IDENTITY_VAL_LOCAL(), 55, 1410) ;
+
+
+-- al cincilea produs:
+INSERT INTO produse VALUES (DEFAULT, 'Produs 5','buc', 'Tigari', .19) ;
+-- liniile in care apare al cincilea produs
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES 
+	(1111, 3, IDENTITY_VAL_LOCAL(), 500, 7060), (1114, 3, IDENTITY_VAL_LOCAL(), 700, 7064), 
+ 	(1119, 4, IDENTITY_VAL_LOCAL(), 750, 6300), (1121, 1, IDENTITY_VAL_LOCAL(), 550, 7064),
+ 	(2111, 3, IDENTITY_VAL_LOCAL(), 510, 7060), (2119, 4, IDENTITY_VAL_LOCAL(), 755, 6300),
+ 	(2121, 1, IDENTITY_VAL_LOCAL(), 550, 7064), (3111, 3, IDENTITY_VAL_LOCAL(), 510, 7060),
+ 	(3119, 4, IDENTITY_VAL_LOCAL(), 755, 6300) ;
+
+-- al saselea produs:
+INSERT INTO produse VALUES (DEFAULT, 'Produs 6','p250g', 'Cafea', .19) ;
+-- nu e nicio liniie in care sa apara al saselea produs
+
+-- prima incasare
+INSERT INTO incasari VALUES (DEFAULT, '2007-08-15', 'OP', '111', '2007-08-10' ) ;
+-- facturile pentru prima incasare
+INSERT INTO incasfact VALUES (IDENTITY_VAL_LOCAL(), 1111, 53996), (IDENTITY_VAL_LOCAL(), 1118, 101975) ;
+
+-- a doua incasare
+INSERT INTO incasari VALUES (DEFAULT, '2007-08-15', 'CHIT', '222', '2007-08-15') ;
+-- facturile pentru a doua incasare
+INSERT INTO incasfact VALUES (IDENTITY_VAL_LOCAL(), 1112, 125516) ;
+
+-- a treia incasare
+INSERT INTO incasari VALUES (DEFAULT, '2007-08-16', 'OP', '333', '2007-08-09') ;
+-- facturile pentru a treia incasare
+INSERT INTO incasfact VALUES (IDENTITY_VAL_LOCAL(), 1117, 9754), 
+	(IDENTITY_VAL_LOCAL(), 1118, 100000), (IDENTITY_VAL_LOCAL(), 1120, 7315) ;
+
+-- a patra incasare
+INSERT INTO incasari VALUES (DEFAULT, '2007-08-17', 'CEC', '444', '2007-08-10') ;
+-- facturile pentru a patra incasare
+INSERT INTO incasfact VALUES (IDENTITY_VAL_LOCAL(), 1117, 9754) ;
+
+-- a cincea incasare
+INSERT INTO incasari VALUES (DEFAULT, '2007-08-17', 'OP', '555', '2007-08-10') ;
+-- facturile pentru a cincea incasare
+INSERT INTO incasfact VALUES (IDENTITY_VAL_LOCAL(), 1113, 106275) ;
+
+-- a sasea incasare
+INSERT INTO incasari VALUES (DEFAULT, '2007-08-18', 'OP', '666', '2007-08-11') ;
+-- facturile pentru a sasea incasare
+INSERT INTO incasfact VALUES (IDENTITY_VAL_LOCAL(), 1117, 3696) ;
+
+
+COMMIT ;
+
+
+

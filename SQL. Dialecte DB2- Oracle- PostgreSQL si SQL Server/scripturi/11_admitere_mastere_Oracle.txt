@@ -1,0 +1,77 @@
+DROP TABLE candidati ;
+DROP TABLE mastere ;
+
+CREATE TABLE mastere (
+  spec VARCHAR2(4) PRIMARY KEY,
+  denspec VARCHAR2(40) NOT NULL,
+  NrLocuri NUMBER(3)
+  ) ;
+
+CREATE TABLE candidati (
+  IdCandidat NUMBER(6) NOT NULL PRIMARY KEY, 
+  numepren VARCHAR2(50) NOT NULL,
+  media_as NUMBER(4,2) NOT NULL CONSTRAINT ck_media_as CHECK (media_as BETWEEN 5 AND 10),
+  media_lic NUMBER(4,2) NOT NULL CONSTRAINT ck_media_lic CHECK (media_lic BETWEEN 6 AND 10),
+  spec1 VARCHAR2(4) NOT NULL REFERENCES mastere(spec),
+  spec2 VARCHAR2(4) REFERENCES mastere(spec),
+  spec3 VARCHAR2(4) REFERENCES mastere(spec),
+  spec4 VARCHAR2(4) REFERENCES mastere(spec),
+  spec5 VARCHAR2(4) REFERENCES mastere(spec),
+  spec6 VARCHAR2(4) REFERENCES mastere(spec),
+  CONSTRAINT ck_spec CHECK (
+    COALESCE(spec2, ' ') = COALESCE(spec2, spec3, ' ') AND
+    COALESCE(spec3, ' ') = COALESCE(spec3, spec4, ' ') AND
+    COALESCE(spec4, ' ') = COALESCE(spec4, spec5, ' ') AND
+    COALESCE(spec5, ' ') = COALESCE(spec5, spec6, ' ')   
+    )
+  	) ;
+
+INSERT INTO mastere VALUES ('SIA', 'Sisteme informationale pentru afaceri', 4) ;
+INSERT INTO mastere VALUES ('FAB', 'Finante-Asigurari-Banci', 6) ;
+INSERT INTO mastere VALUES ('CEA', 'Contabilitate, expertiza si audit', 6) ;
+INSERT INTO mastere VALUES ('MARK', 'Marketing', 5) ;
+INSERT INTO mastere VALUES ('EAI', 'Economie si afaceri internationale', 5) ;
+INSERT INTO mastere VALUES ('MRU', 'Managementul resurselor umane', 4) ;
+
+INSERT INTO candidati VALUES ( 1, 'Popescu I. Irina', 7.5, 9.50, 'FAB', 'MARK', 'EAI', 'MRU', NULL, NULL);
+INSERT INTO candidati VALUES ( 2, 'Babias D. Ecaterina', 8.5, 9.20, 'SIA', 'EAI', NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES ( 3, 'Strat P. Iulian', 7.35, 9.50, 'CEA', 'EAI', 'MRU', 'SIA', 'FAB', 'MARK');
+INSERT INTO candidati VALUES ( 4, 'Georgescu M. Honda', 8.5, 9.00, 'MRU', 'MARK', 'EAI', 'FAB', 'CEA', 'SIA');
+INSERT INTO candidati VALUES ( 5, 'Munteanu A. Optimista', 9.5, 9.50, 'SIA', 'CEA', 'FAB',  NULL, NULL, NULL);
+INSERT INTO candidati VALUES ( 6, 'Dumitriu F. Dura', 9.5, 10, 'EAI', NULL, NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES ( 7, 'Mesnita G. Plinutul', 10, 10,  'EAI', 'MARK', 'MRU',  NULL, NULL, NULL);
+INSERT INTO candidati VALUES ( 8, 'Greavu V. Doru', 9.25, 8.50,  'SIA', 'CEA', 'FAB',  NULL, NULL, NULL);
+INSERT INTO candidati VALUES ( 9, 'Baboi P. Iustina', 8.5, 8.50,  'SIA', NULL, NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (10, 'Postelnicu I. Irina', 9.5, 8.25,  'MARK', NULL, NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (11, 'Fotache H. Fanel', 9.75, 9.50,  'MRU', NULL, NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (12, 'Moscovici J. Cristina', 9.80, 9.30,  'CEA', 'SIA', 'FBA',  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (13, 'Rusu I. Vanda', 7.80, 9.10,  'FAB', 'CEA', 'MARK',  'MRU', NULL, NULL);
+INSERT INTO candidati VALUES (14, 'Spinu M. Algebra', 7.25, 9.00,  'SIA', 'CEA', 'FAB',  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (15, 'Sandovici I. Irina', 7.05, 7.50,  'MARK', 'MRU', 'EAI',  'CEA', NULL, NULL);
+INSERT INTO candidati VALUES (16, 'Plai V. Picior', 7.5, 7.90,  'EAI', 'SIA', 'CEA', 'FAB', NULL, NULL);
+INSERT INTO candidati VALUES (17, 'Ambuscada B. Cristina', 8.25, 9.50,  'SIA', 'CEA', 'FAB', 'EAI', NULL, NULL);
+INSERT INTO candidati VALUES (18, 'Pinda A. Axinia', 8.75, 9.00,  'SIA', 'FAB', 'CEA',  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (19, 'Planton V. Grigore', 9.25, 9.50,  'FAB', NULL, NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (20, 'Sergentu I. Zece',7.5, 9.50,  'FAB', 'CEA', NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (21, 'Ababei T. Marian-Vasile', 7.5, 9.50,  'CEA', 'MRU', NULL,  NULL, NULL, NULL);
+INSERT INTO candidati VALUES (22, 'Popistasu J. Maria', 7.5, 9.50,  'FAB', 'EAI', 'CEA', 'MRU', NULL, NULL);
+INSERT INTO candidati VALUES (23, 'Plop R. Robert', 7.5, 9.50, 'FAB', 'MARK', 'MRU', NULL, NULL, NULL);
+INSERT INTO candidati VALUES (24, 'Aflorei H. Crina',7.5, 9.50,  'EAI', 'SIA', NULL, NULL, NULL, NULL);
+INSERT INTO candidati VALUES (25, 'Afaunei P. Gina',7.5, 9.50,  'SIA', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO candidati VALUES (26, 'Vatamanu I. Alexandrina', 7.5, 9.50, 'MRU', 'MARK', 'EAI', NULL, NULL, NULL);
+INSERT INTO candidati VALUES (27, 'Lovin P. Marian',7.5, 9.50,  'MARK', 'MRU', NULL, NULL, NULL, NULL);
+INSERT INTO candidati VALUES (28, 'Antiteza W. Florin', 7.5, 9.50, 'EAI', 'MARK', 'MRU', NULL, NULL, NULL);
+INSERT INTO candidati VALUES (29, 'Prepelita V. Ion', 7.5, 9.50, 'EAI', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO candidati VALUES (30, 'Cioara X. Sanda', 7.5, 9.50, 'CEA', 'FAB', 'EAI', NULL, NULL, NULL);
+INSERT INTO candidati VALUES (31, 'Metafora Y. Vasile',7.5, 9.50,  'SIA', 'CEA', NULL, NULL, NULL, NULL);
+INSERT INTO candidati VALUES (32, 'Strasina R. Elvis', 7.5, 9.50, 'CEA', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO candidati VALUES (33, 'Durere V. Vasile', 7.5, 9.50, 'FAB', 'CEA', 'EAI', 'MARK', 'MRU', NULL);
+INSERT INTO candidati VALUES (34, 'Sedentaru L. Marius-Daniel',7.5, 9.50,  'MARK', 'MRU', 'EAI', NULL, NULL, NULL);
+INSERT INTO candidati VALUES (35, 'Zgircitu I. Daniel',7.5, 9.50,  'MRU', NULL, NULL, NULL, NULL, NULL);
+
+
+
+
+
+
+ 

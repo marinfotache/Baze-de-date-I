@@ -1,0 +1,20 @@
+
+INSERT INTO facturi (nrfact, datafact, codcl)   VALUES (4111, DATE'2007-10-01', 1001);
+INSERT INTO facturi (nrfact, datafact, codcl, obs) VALUES (4112, DATE'2007-10-01', 1005,
+        'Probleme cu transportul');
+INSERT INTO facturi (nrfact, datafact, codcl) VALUES (4113, DATE'2007-10-02', 1002);
+
+
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES (4111, 1, 1, 57, 1000) ;
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES (4111, 3, 2, 79, 1050) ;
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES (4111, 5, 5, 510, 7060) ;
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES (4112, 2, 2, 85, 1030) ;
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES (4112, 5, 3, 65, 750) ;
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES (4113, 2, 2, 120, 975) ;
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) VALUES (4113, 3, 1, 110, 925) ;
+
+
+commit ;
+
+
+

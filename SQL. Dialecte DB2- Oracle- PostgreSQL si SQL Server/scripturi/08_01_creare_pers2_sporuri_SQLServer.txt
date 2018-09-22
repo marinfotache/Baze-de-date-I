@@ -1,0 +1,23 @@
+DROP TABLE sporuri ;
+DROP TABLE personal2 ;
+
+CREATE TABLE personal2 (
+Marca NUMERIC(5) NOT NULL
+	CONSTRAINT pk_personal2 PRIMARY KEY,
+NumePren VARCHAR(40),
+DataNast SMALLDATETIME,
+Compart VARCHAR(20),
+MarcaSef NUMERIC(5) 
+	CONSTRAINT fk_personal2 REFERENCES personal2(Marca),
+SalTarifar NUMERIC(12,2)   ) ;
+
+CREATE TABLE sporuri ( 
+An NUMERIC(4) NOT NULL,
+Luna NUMERIC(2) NOT NULL,
+Marca NUMERIC(5) NOT NULL
+	CONSTRAINT fk_sporuri_pers2 REFERENCES personal2 (Marca),
+SporVechime NUMERIC(12,2),
+SporNoapte NUMERIC(12,2),
+SporCD NUMERIC(12,2),
+AlteSpor NUMERIC(12,2),
+CONSTRAINT pk_sporuri PRIMARY KEY (An,Luna,Marca)  ) ;

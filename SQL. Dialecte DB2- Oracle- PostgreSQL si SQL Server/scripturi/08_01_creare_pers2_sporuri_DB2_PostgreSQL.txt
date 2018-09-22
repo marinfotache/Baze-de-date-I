@@ -1,0 +1,24 @@
+--DROP TABLE sporuri ;
+--DROP TABLE personal2 ;
+
+CREATE TABLE personal2 (
+	marca NUMERIC(5) NOT NULL
+		CONSTRAINT pk_personal2 PRIMARY KEY,
+	numepren VARCHAR(40),
+	datanast DATE,
+	compart VARCHAR(20),
+	marcasef NUMERIC(5) 
+		CONSTRAINT fk_personal2 REFERENCES personal2(marca),
+	saltarifar NUMERIC(12,2)   ) ;
+
+CREATE TABLE sporuri ( 
+	an NUMERIC(4) NOT NULL,
+	luna NUMERIC(2) NOT NULL,
+	marca NUMERIC(5) NOT NULL
+		CONSTRAINT fk_sporuri_pers2 REFERENCES personal2 (marca),
+	sporvechime NUMERIC(12,2),
+	spornoapte NUMERIC(12,2),
+	sporcd NUMERIC(12,2),
+	altespor NUMERIC(12,2),
+	CONSTRAINT pk_sporuri PRIMARY KEY (an,luna,marca)  ) ;
+

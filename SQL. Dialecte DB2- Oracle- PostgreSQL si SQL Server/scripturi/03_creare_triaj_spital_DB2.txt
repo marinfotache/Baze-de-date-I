@@ -1,0 +1,45 @@
+DROP TABLE triaj ;
+DROP TABLE pacienti ;
+DROP TABLE garzi ;
+DROP TABLE doctori ;
+
+CREATE TABLE doctori (
+  iddoctor SMALLINT NOT NULL
+	GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 MINVALUE 1 NO MAXVALUE)
+	CONSTRAINT pk_doctori PRIMARY KEY,
+  numedoctor VARCHAR(50) NOT NULL,
+  specialitate VARCHAR(40),
+  datanasterii DATE
+  );
+
+CREATE TABLE garzi (
+  iddoctor SMALLINT NOT NULL REFERENCES doctori (iddoctor),
+  inceput_garda TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  sfirsit_garda TIMESTAMP ,
+  CONSTRAINT pk_garzi PRIMARY KEY (iddoctor, inceput_garda)
+  ) ;
+
+CREATE TABLE pacienti (
+  idpacient INTEGER NOT NULL 
+	GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 MINVALUE 1 NO MAXVALUE)
+	CONSTRAINT pk_pacienti PRIMARY KEY,
+  numepacient VARCHAR(60),
+  CNP NUMERIC(13),
+  adresa VARCHAR(100),
+  loc VARCHAR(30),
+  judet CHAR(2),
+  tara VARCHAR(30) DEFAULT 'Romania',
+  serie_nr_act_identitate VARCHAR(20)
+  ); 
+  
+CREATE TABLE triaj (
+  idexaminare BIGINT NOT NULL 
+	GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1 MINVALUE 1 NO MAXVALUE),
+  dataora_examinare TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  idpacient NUMERIC(10) NOT NULL CONSTRAINT fk_internari_pacienti
+    REFERENCES pacienti (idpacient),
+  simptome VARCHAR(500),
+  tratament_imediat VARCHAR(500),
+  sectie_destinatie VARCHAR(30)
+  );  
+

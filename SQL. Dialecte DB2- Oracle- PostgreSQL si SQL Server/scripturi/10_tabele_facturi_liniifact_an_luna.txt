@@ -1,0 +1,75 @@
+
+CREATE TABLE facturi_2007_1 LIKE facturi;
+CREATE TABLE facturi_2007_2 LIKE facturi;
+CREATE TABLE facturi_2007_3 LIKE facturi;
+CREATE TABLE facturi_2007_4 LIKE facturi;
+CREATE TABLE facturi_2007_5 LIKE facturi;
+CREATE TABLE facturi_2007_6 LIKE facturi;
+CREATE TABLE facturi_2007_7 LIKE facturi;
+CREATE TABLE facturi_2007_8 LIKE facturi;
+CREATE TABLE facturi_2007_9 LIKE facturi;
+CREATE TABLE facturi_2007_10 LIKE facturi;
+CREATE TABLE facturi_2007_11 LIKE facturi;
+CREATE TABLE facturi_2007_12 LIKE facturi;
+
+DELETE FROM facturi_2007_1 ;
+DELETE FROM facturi_2007_2 ;
+DELETE FROM facturi_2007_3 ;
+DELETE FROM facturi_2007_4 ;
+DELETE FROM facturi_2007_5 ;
+DELETE FROM facturi_2007_6 ;
+DELETE FROM facturi_2007_7 ;
+DELETE FROM facturi_2007_8 ;
+DELETE FROM facturi_2007_9 ;
+DELETE FROM facturi_2007_10 ;
+DELETE FROM facturi_2007_11 ;
+DELETE FROM facturi_2007_12 ;
+
+INSERT INTO facturi_2007_1  (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=1 ) ;
+INSERT INTO facturi_2007_2  (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=2 );
+INSERT INTO facturi_2007_3  (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=3 );
+INSERT INTO facturi_2007_4  (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=4 );
+INSERT INTO facturi_2007_5  (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=5 );
+INSERT INTO facturi_2007_6 (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=6 );
+INSERT INTO facturi_2007_7 (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=7 );
+INSERT INTO facturi_2007_8 (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=8 );
+INSERT INTO facturi_2007_9 (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=9 );
+INSERT INTO facturi_2007_10 (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=10 );
+INSERT INTO facturi_2007_11 (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=11 );
+INSERT INTO facturi_2007_12 (SELECT * FROM facturi WHERE YEAR(DataFact)=2007 AND MONTH(DataFact)=12 );
+
+CREATE TABLE liniifact_2007_1 LIKE liniifact;
+CREATE TABLE liniifact_2007_2 LIKE liniifact;
+CREATE TABLE liniifact_2007_3 LIKE liniifact;
+CREATE TABLE liniifact_2007_4 LIKE liniifact;
+CREATE TABLE liniifact_2007_5 LIKE liniifact;
+CREATE TABLE liniifact_2007_6 LIKE liniifact;
+CREATE TABLE liniifact_2007_7 LIKE liniifact;
+CREATE TABLE liniifact_2007_8 LIKE liniifact;
+CREATE TABLE liniifact_2007_9 LIKE liniifact;
+CREATE TABLE liniifact_2007_10 LIKE liniifact;
+CREATE TABLE liniifact_2007_11 LIKE liniifact;
+CREATE TABLE liniifact_2007_12 LIKE liniifact;
+
+INSERT INTO liniifact_2007_1 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_1)) ;
+INSERT INTO liniifact_2007_2 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_2)) ;
+INSERT INTO liniifact_2007_3 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_3)) ;
+INSERT INTO liniifact_2007_4 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_4)) ;
+INSERT INTO liniifact_2007_5 (SELECT * FROM liniifact 
+  		WHERE NrFact INT (SELECT NrFact FROM facturi_2007_5)) ;
+INSERT INTO liniifact_2007_6 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_6)) ;
+INSERT INTO liniifact_2007_7 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_7)) ;
+INSERT INTO liniifact_2007_8 (SELECT * FROM liniifact WHERE NrFact IN (SELECT NrFact FROM facturi_2007_8)) ;
+INSERT INTO liniifact_2007_9 (SELECT * FROM liniifact WHERE NrFact IN (SELECT NrFact FROM facturi_2007_9)) ;
+INSERT INTO liniifact_2007_10 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_10)) ;
+INSERT INTO liniifact_2007_11 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_10)) ;
+INSERT INTO liniifact_2007_12 (SELECT * FROM liniifact 
+  		WHERE NrFact IN (SELECT NrFact FROM facturi_2007_12)) ;

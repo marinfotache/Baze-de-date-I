@@ -1,0 +1,7 @@
+CREATE FUNCTION f_proctva2 ( codpr_ DECIMAL(6) ) 
+   RETURNS DECIMAL(2,2)
+   LANGUAGE SQL
+   NOT DETERMINISTIC
+   RETURN                                             
+       SELECT ProcTVA  FROM produse WHERE CodPr = codpr_ 
+@

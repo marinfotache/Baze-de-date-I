@@ -1,0 +1,23 @@
+CREATE FUNCTION INITCAP_ (textsursa VARCHAR(1000)) 
+	RETURNS VARCHAR(1000) LANGUAGE SQL 
+a: BEGIN ATOMIC  
+	DECLARE text_returnat VARCHAR(1000) ; 
+	DECLARE i_inceput_cuvint SMALLINT DEFAULT 1 ; 
+	DECLARE i SMALLINT DEFAULT 2 ; 
+	SET text_returnat = textsursa ; 
+	WHILE (i <= LENGTH(textsursa)) DO 
+		IF SUBSTR(textsursa, i, 1) IN (' ', '-', '.') OR i=LENGTH(textsursa) THEN 
+			IF i_inceput_cuvint > 1 THEN 
+				SET text_returnat = SUBSTR(text_returnat, 1, i_inceput_cuvint - 1) ; 
+			ELSE 
+				SET text_returnat = '' ; 
+			END IF ; 
+			SET text_returnat = text_returnat || UPPER(SUBSTR(textsursa, i_inceput_cuvint, 1)) || 
+				SUBSTR(textsursa, i_inceput_cuvint + 1, LENGTH(textsursa)- i_inceput_cuvint+1 ) ; 
+			SET i_inceput_cuvint = i + 1 ; 
+		END IF ; 
+		SET i = i + 1 ; 
+	END WHILE ; 
+	RETURN text_returnat ; 
+END a
+@ 

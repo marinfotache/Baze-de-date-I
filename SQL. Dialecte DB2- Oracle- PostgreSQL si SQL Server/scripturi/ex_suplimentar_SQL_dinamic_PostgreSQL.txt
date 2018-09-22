@@ -1,0 +1,365 @@
+
+DROP TYPE t_rute CASCADE ;
+CREATE TYPE t_rute AS ( 
+	plecare VARCHAR(20), 
+	sosire VARCHAR(20), 
+	ruta VARCHAR(500), 
+	km NUMERIC(5)
+	) ;
+
+
+
+
+CREATE OR REPLACE FUNCTION f_rute (plecare_ VARCHAR(30), sosire_ VARCHAR(30))
+  RETURNS SETOF t_rute AS
+$$
+DECLARE 
+	ruta1 VARCHAR(500) ;
+	ruta2 VARCHAR(500) ;
+	ruta3 VARCHAR(500) ;
+	ruta4 VARCHAR(500) ; 
+	km1 NUMERIC(5) ;
+	km2 NUMERIC(5) ;
+	km3 NUMERIC(5) ;
+	km4 NUMERIC(5) ;
+	rec t_rute%ROWTYPE ;
+	rec1 RECORD ;
+	rec2 RECORD ;
+	rec3 RECORD;
+	rec4 RECORD  ;
+
+	c_rute1 CURSOR (plecare_ VARCHAR) IS 
+		SELECT Loc1, Loc2, Distanta FROM distante WHERE Loc1=plecare_	UNION
+			SELECT Loc2, Loc1, Distanta FROM distante WHERE Loc2=plecare_ ;
+
+	c_rute2 CURSOR (Loc VARCHAR, ruta VARCHAR ) IS
+		SELECT Loc1, Loc2, Distanta FROM distante 
+		WHERE Loc1=Loc AND ruta NOT LIKE '%*' || Loc2 || '*%'
+			UNION
+		SELECT Loc2, Loc1, Distanta FROM distante 
+		WHERE Loc2=Loc AND ruta NOT LIKE '%*' || Loc1 || '*%' ;
+
+	c_rute3 CURSOR (Loc VARCHAR, ruta VARCHAR) IS 
+		SELECT Loc1, Loc2, Distanta FROM distante 
+		WHERE Loc1=Loc AND ruta NOT LIKE '%*' || Loc2 || '*%'
+				UNION
+		SELECT Loc2, Loc1, Distanta FROM distante 
+		WHERE Loc2=Loc AND ruta NOT LIKE '%*' || Loc1 || '*%' ;
+
+	c_rute4 CURSOR (Loc VARCHAR, ruta VARCHAR) IS 
+		SELECT Loc1, Loc2, Distanta FROM distante 
+		WHERE Loc1=Loc AND ruta NOT LIKE '%*' || Loc2 || '*%'
+			UNION
+		SELECT Loc2, Loc1, Distanta FROM distante 
+		WHERE Loc2=Loc AND ruta NOT LIKE '%*' || Loc1 || '*%' ;
+
+BEGIN
+	rec.plecare := plecare_ ;
+	rec.sosire := sosire_ ;
+
+	OPEN c_rute1 (plecare_) ;
+	FETCH c_rute1 INTO rec1 ;
+	WHILE FOUND LOOP
+		ruta1 := '*' || rec1.Loc1 || '*' || rec1.Loc2 || '*'  ;
+		km1 := rec1.distanta ;
+		IF rec1.Loc2 = sosire_ THEN 
+			-- ruta directa	
+			rec.ruta := ruta1  ;
+			rec.km := km1 ;				
+			RETURN NEXT rec ;
+		ELSE
+			-- rute printr-o localitate intermediara
+			OPEN c_rute2  (rec1.Loc2, ruta1 );
+			ruta2 := ruta1 ;
+			FETCH c_rute2 INTO rec2 ;
+			WHILE FOUND LOOP
+				ruta2 := ruta1 || rec2.Loc2 || '*' ;
+				km2 := km1 + rec2.distanta ;
+				IF rec2.Loc2 = sosire_ THEN 
+					rec.ruta := ruta2  ;
+					rec.km := km2  ;				
+					RETURN NEXT rec ;
+				ELSE
+					-- rute prin doua localitati intermediare
+					OPEN c_rute3  (rec2.Loc2, ruta2 );
+					ruta3 := ruta2 ;
+					FETCH c_rute3 INTO rec3 ;
+					WHILE FOUND LOOP
+						ruta3 := ruta2 || rec3.Loc2 || '*' ;
+						km3 := km2 + rec3.distanta ;
+						IF rec3.Loc2 = sosire_ THEN 
+							rec.ruta := ruta3  ;
+							rec.km := km3  ;				
+							RETURN NEXT rec ;
+						ELSE
+							-- rute prin trei localitati intermediare
+							OPEN c_rute4  (rec3.Loc2, ruta3 );
+							ruta4 := ruta3 ;
+							FETCH c_rute4 INTO rec4 ;
+							WHILE FOUND LOOP
+								ruta3 := ruta2 || rec3.Loc2 || '*' ;
+								km3 := km2 + rec3.distanta ;
+								IF rec3.Loc2 = sosire_ THEN 
+									rec.ruta := ruta3  ;
+									rec.km := km3  ;				
+									RETURN NEXT rec ;
+								ELSE
+									-- rute prin patru, cinci... localitati
+									-- intermediare; de continuat
+								END IF ;
+								FETCH c_rute4 INTO rec4 ;				
+							END LOOP ;
+							CLOSE c_rute4 ;
+						END IF ;
+						FETCH c_rute3 INTO rec3 ;				
+					END LOOP ;
+					CLOSE c_rute3 ;
+				END IF ;
+				FETCH c_rute2 INTO rec2 ;				
+			END LOOP ;
+			CLOSE c_rute2 ;
+		END IF ;
+		FETCH c_rute1 INTO rec1 ;
+	END LOOP ;
+	CLOSE c_rute1 ;	
+END ;
+$$ LANGUAGE 'plpgsql' ;
+
+
+
+
+
+SELECT * FROM f_rute ( CAST ('Birlad' AS VARCHAR(30)), 
+CAST ('Adjud' AS VARCHAR(30)))
+
+  
+
+
+--   SELECT * FROM f_rute ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Bacau' AS VARCHAR(30)))
+
+--   SELECT * FROM f_rute ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Roman' AS VARCHAR(30)))
+
+--   SELECT * FROM f_rute ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Vaslui' AS VARCHAR(30)))
+
+--select * from rute
+
+--   select * from DISTANTE
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+DROP TYPE t_c_rute CASCADE ;
+CREATE TYPE t_c_rute AS 
+	(nr SMALLINT, plecare VARCHAR(30), sosire VARCHAR(30)) ;
+
+
+CREATE OR REPLACE FUNCTION f_c_rute_nr  (plecare_ VARCHAR(30), sosire_ VARCHAR(30))
+		RETURNS SETOF t_c_rute AS 
+$$
+DECLARE 
+	recx t_c_rute ; 
+BEGIN
+	IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename LIKE 'c_rute%') THEN
+		EXECUTE 'CREATE LOCAL TEMPORARY TABLE c_rute (nr SMALLINT, 
+		plecare VARCHAR(30), sosire VARCHAR(30)) ' ;
+		INSERT INTO c_rute VALUES (1, plecare_, sosire_) ;
+		recx.nr := 1 ;
+	ELSE
+		UPDATE c_rute SET nr = nr + 1 ;
+	END IF ;
+	SELECT * INTO recx FROM c_rute ;
+	RETURN NEXT recx ;
+END ;
+$$LANGUAGE plpgsql  ;
+
+
+
+
+>>>>>>>>>>>> nu merge !!!!
+CREATE OR REPLACE FUNCTION f_rute2 (plecare_ VARCHAR(30), sosire_ VARCHAR(30), ruta_ VARCHAR(2000), km_ NUMERIC(5) )
+  RETURNS SETOF t_rute AS
+$$
+DECLARE 
+	v_ruta VARCHAR(2000) ;
+	v_km NUMERIC(5) ;
+	rec_return t_rute%ROWTYPE ;
+	rec RECORD ;
+	rec_c_rute t_c_rute ;
+	v_sir VARCHAR(2000) ;
+BEGIN 
+	rec_c_rute := f_c_rute_nr (plecare_, sosire_) ;
+	rec_return.plecare := rec_c_rute.plecare ;
+	rec_return.sosire := rec_c_rute.sosire ;
+--	FOR rec IN EXECUTE ' SELECT * FROM facturi WHERE DataFact BETWEEN DATE''' ||
+--			data_inceput || '''' || ' AND DATE''' || data_final || ''''  LOOP
+	IF ruta_ IS NULL THEN 
+		v_sir := ' SELECT Loc1, Loc2, Distanta FROM distante WHERE Loc1 = ''' || plecare_ || '''' ||
+		' UNION SELECT Loc2, Loc1, Distanta FROM distante WHERE Loc2 = ''' || plecare_  || '''' ;
+	ELSE
+		v_sir := ' SELECT Loc1, Loc2, Distanta FROM distante WHERE Loc1 = ''' || plecare_ || '''' || 
+		' AND ''' || ruta_ || ''' NOT LIKE ''' || '%*' || ''' || Loc2 || ''' || '*%' || '''' ||
+			' UNION SELECT Loc2, Loc1, Distanta FROM distante WHERE Loc2 = ''' || plecare_  || '''' ||
+		' AND ''' || ruta_ || ''' NOT LIKE ''' || '%*' || ''' || Loc1 || ''' || '*%' || '''' ;
+	END IF ;
+
+	raise notice 'v_sir%', v_sir ;
+	FOR rec IN EXECUTE v_sir LOOP
+		IF ruta_ IS NULL THEN 
+			v_ruta := '*' || rec.Loc1 || '*' || rec.Loc2 || '*' ;
+			v_km := rec.distanta ;
+		ELSE 	
+			v_ruta := ruta_ || rec.Loc2 || '*' ;
+			v_km := km_ + rec.distanta ;
+		END IF ;
+		rec_c_rute := f_c_rute_nr(rec.Loc1, rec.Loc2) ;
+		IF rec.Loc2 = rec_c_rute.sosire  THEN 
+			-- ruta directa	
+			rec_return.ruta := v_ruta ; 
+			rec_return.km := v_km  ;				
+			RETURN NEXT rec_return ;
+		ELSE
+			PERFORM f_rute2 (rec.Loc1, rec.Loc2, v_ruta, v_km);
+		END IF ;
+	END LOOP ;
+
+END ;
+$$ LANGUAGE 'plpgsql' ;
+
+
+
+-- SELECT * FROM f_rute2 ( CAST ('Birlad' AS VARCHAR(30)), CAST ('Adjud' AS VARCHAR(30)))
+ 
+--   SELECT * FROM f_rute2 ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Bacau' AS VARCHAR(30)))
+
+--   SELECT * FROM f_rute2 ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Roman' AS VARCHAR(30)))
+
+--   SELECT * FROM f_rute2 ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Vaslui' AS VARCHAR(30)), CAST (NULL AS VARCHAR(2000)), CAST (NULL AS NUMERIC(5)))
+
+--select * from rute
+
+--   select * from DISTANTE
+
+>>>>>>>>>>>>
+
+>>>>>>>>>>>>>>>>
+
+
+
+CREATE OR REPLACE FUNCTION f_init_rute  (plecare_ VARCHAR(30), sosire_ VARCHAR(30))
+	RETURNS t_c_rute AS 
+$$
+DECLARE 
+	recx t_c_rute ; 
+BEGIN
+	IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = 'c_init_rute') THEN
+		EXECUTE 'CREATE LOCAL TEMPORARY TABLE c_init_rute (nr SMALLINT, plecare VARCHAR(30), sosire VARCHAR(30)) ' ;
+		INSERT INTO c_init_rute VALUES (1, plecare_, sosire_) ;
+		recx.nr := 1 ;
+		EXECUTE 'CREATE LOCAL TEMPORARY TABLE tab_rute (plecare VARCHAR(20), sosire VARCHAR(20), ruta VARCHAR(500), km NUMERIC(5) ) ' ; 
+	ELSE
+		UPDATE c_init_rute SET nr = nr + 1 ;
+	END IF ;
+	SELECT * INTO recx FROM c_init_rute ;
+	RETURN recx ;
+END ;
+$$LANGUAGE plpgsql  ;
+
+
+
+CREATE OR REPLACE FUNCTION f_rute3 (plecare_ VARCHAR(30), sosire_ VARCHAR(30), ruta_ VARCHAR(2000), km_ NUMERIC(5) )
+  RETURNS VOID AS
+$$
+DECLARE 
+	v_ruta VARCHAR(2000) ;
+	v_km NUMERIC(5) ;
+	rec_return t_rute%ROWTYPE ;
+	rec RECORD ;
+	rec_c_rute t_c_rute ;
+	v_sir VARCHAR(2000) ;
+
+BEGIN 
+	rec_c_rute := f_init_rute (plecare_, sosire_) ;
+	rec_return.plecare := rec_c_rute.plecare ;
+	rec_return.sosire := rec_c_rute.sosire ;
+	IF ruta_ IS NULL THEN 
+		v_sir := ' SELECT Loc1, Loc2, Distanta FROM distante WHERE Loc1 = ''' || plecare_ || '''' ||
+		' UNION SELECT Loc2, Loc1, Distanta FROM distante WHERE Loc2 = ''' || plecare_  || '''' ;
+	ELSE
+		v_sir := ' SELECT Loc1, Loc2, Distanta FROM distante WHERE Loc1 = ''' || plecare_ || '''' || 
+		' AND ''' || ruta_ || ''' NOT LIKE ''' || '%*' || ''' || Loc2 || ''' || '*%' || '''' ||
+			' UNION SELECT Loc2, Loc1, Distanta FROM distante WHERE Loc2 = ''' || plecare_  || '''' ||
+		' AND ''' || ruta_ || ''' NOT LIKE ''' || '%*' || ''' || Loc1 || ''' || '*%' || '''' ;
+	END IF ;
+	raise notice 'v_sir%', v_sir ;
+	FOR rec IN EXECUTE v_sir LOOP
+		IF ruta_ IS NULL THEN 
+			v_ruta := '*' || rec.Loc1 || '*' || rec.Loc2 || '*' ;
+			v_km := rec.distanta ;
+		ELSE 	
+			v_ruta := ruta_ || rec.Loc2 || '*' ;
+			v_km := km_ + rec.distanta ;
+		END IF ;
+		rec_c_rute := f_init_rute(rec.Loc1, rec.Loc2) ;
+		IF rec.Loc2 = rec_c_rute.sosire  THEN 
+			-- ruta directa	
+			rec_return.ruta := v_ruta ; 
+			rec_return.km := v_km  ;				
+			--RETURN NEXT rec_return ;
+			INSERT INTO tab_rute VALUES (rec_c_rute.plecare, rec_c_rute.sosire, rec_return.ruta, rec_return.km ) ;
+		ELSE
+			PERFORM f_rute3 (rec.Loc1, rec.Loc2, v_ruta, v_km);
+		END IF ;
+	END LOOP ;
+
+END ;
+$$ LANGUAGE 'plpgsql' ;
+
+
+
+
+
+-- SELECT * FROM f_rute3 ( CAST ('Birlad' AS VARCHAR(30)), CAST ('Adjud' AS VARCHAR(30)), CAST (NULL AS VARCHAR(2000)), CAST (NULL AS NUMERIC(5)))
+-- SELECT * FROM tab_rute
+
+
+
+CREATE OR REPLACE FUNCTION f_rute4 (plecare_ VARCHAR(30), sosire_ VARCHAR(30) )
+  RETURNS SETOF t_rute AS
+$$
+DECLARE 
+	rec_rute t_rute%ROWTYPE ;
+BEGIN 
+	IF EXISTS (SELECT 1 FROM pg_tables WHERE tablename = 'c_init_rute') THEN
+		EXECUTE 'DROP TABLE c_init_rute ' ;
+	END IF ;
+	IF EXISTS (SELECT 1 FROM pg_tables WHERE tablename = 'tab_rute') THEN
+		EXECUTE 'DROP TABLE tab_rute ' ;
+	END IF ;
+	
+	PERFORM f_rute3 (plecare_, sosire_, CAST (NULL AS VARCHAR(2000)), CAST (NULL AS NUMERIC(5))) ;
+	FOR rec_rute IN (SELECT * FROM tab_rute) LOOP
+		RETURN NEXT rec_rute ;
+	END LOOP ;	
+END ;
+$$LANGUAGE plpgsql  ;
+ 
+
+
+-- SELECT * FROM f_rute3 ( CAST ('Birlad' AS VARCHAR(30)), CAST ('Adjud' AS VARCHAR(30)), CAST (NULL AS VARCHAR(2000)), CAST (NULL AS NUMERIC(5)))
+-- SELECT * FROM tab_rute
+ 
+--   SELECT * FROM f_rute4 ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Bacau' AS VARCHAR(30)))
+-- SELECT * FROM tab_rute
+
+--   SELECT * FROM f_rute2 ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Roman' AS VARCHAR(30)))
+-- SELECT * FROM tab_rute
+
+
+--   SELECT f_rute3 ( CAST ('Iasi' AS VARCHAR(30)), CAST ('Vaslui' AS VARCHAR(30)), CAST (NULL AS VARCHAR(2000)), CAST (NULL AS NUMERIC(5)))
+-- SELECT * FROM tab_rute
+
+
+--select * from rute
+
+--   select * from DISTANTE
+

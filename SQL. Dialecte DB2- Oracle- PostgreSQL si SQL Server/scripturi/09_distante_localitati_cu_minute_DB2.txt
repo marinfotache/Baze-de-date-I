@@ -1,0 +1,21 @@
+ALTER TABLE distante ADD Durata NUMERIC(5) ;
+
+DELETE FROM distante ;
+INSERT INTO distante VALUES ('Iasi', 'Vaslui', 71, 85  ) ;
+INSERT INTO distante VALUES ('Iasi', 'Tg.Frumos', 53, 65  ) ;
+INSERT INTO distante VALUES ('Tg.Frumos', 'Roman', 40, 50  ) ;
+INSERT INTO distante VALUES ('Roman', 'Bacau', 41, 47  ) ;
+INSERT INTO distante VALUES ('Roman', 'Vaslui', 80, 110  ) ;
+INSERT INTO distante VALUES ('Vaslui', 'Birlad', 54, 53   ) ;
+INSERT INTO distante VALUES ('Birlad', 'Tecuci', 48, 47  ) ;   
+INSERT INTO distante VALUES ('Tecuci', 'Tisita', 20, 18  ) ;
+INSERT INTO distante VALUES ('Tisita', 'Focsani', 13, 15  ) ;
+INSERT INTO distante VALUES ('Bacau', 'Adjud', 60, 50  ) ;
+INSERT INTO distante VALUES ('Bacau', 'Vaslui', 85, 125  ) ;
+INSERT INTO distante VALUES ('Adjud', 'Tisita', 32,  40  ) ;
+INSERT INTO distante VALUES ('Focsani', 'Galati', 80, 110  ) ;
+INSERT INTO distante VALUES ('Focsani', 'Braila', 86,  117  ) ;
+INSERT INTO distante VALUES ('Focsani', 'Rm.Sarat', 42, 50  ) ;
+INSERT INTO distante VALUES ('Rm.Sarat', 'Braila', 84, 115 ) ;
+INSERT INTO distante VALUES ('Braila', 'Galati', 11, 25  ) ;
+INSERT INTO distante VALUES ('Tecuci', 'Galati', 67, 69  ) ;

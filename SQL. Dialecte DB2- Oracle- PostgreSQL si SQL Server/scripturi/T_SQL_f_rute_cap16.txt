@@ -1,0 +1,127 @@
+IF OBJECT_ID (N'dbo.f_rute') IS NOT NULL
+    DROP FUNCTION dbo.f_rute ;
+GO
+CREATE FUNCTION dbo.f_rute (@plecare VARCHAR(20), @sosire VARCHAR(20))
+RETURNS @rute TABLE 
+	(
+	-- Atributele tabelei returnate
+    plecare VARCHAR(20), 
+    sosire VARCHAR(20), 
+    ruta VARCHAR(500), 
+    km NUMERIC(5)
+	)
+BEGIN
+	DECLARE @Loc1_1 VARCHAR(20) DECLARE @Loc2_1 VARCHAR(20) 
+	DECLARE @Loc1_2 VARCHAR(20) DECLARE @Loc2_2 VARCHAR(20) 
+	DECLARE @Loc1_3 VARCHAR(20) DECLARE @Loc2_3 VARCHAR(20) 
+	DECLARE @Loc1_4 VARCHAR(20) DECLARE @Loc2_4 VARCHAR(20) 
+
+	DECLARE @ruta1 VARCHAR(500) DECLARE @ruta2 VARCHAR(500) 
+	DECLARE @ruta3 VARCHAR(500) DECLARE @ruta4 VARCHAR(500) 
+ 
+	DECLARE @distanta NUMERIC(5) 	
+	DECLARE @km1 NUMERIC(5)	DECLARE @km2 NUMERIC(5)
+	DECLARE @km3 NUMERIC(5) DECLARE @km4 NUMERIC(5)
+	
+	DECLARE c_rute1 CURSOR FOR 
+			SELECT Loc1, Loc2, Distanta FROM distante WHERE Loc1=@plecare
+			UNION
+			SELECT Loc2, Loc1, Distanta FROM distante WHERE Loc2=@plecare 
+	OPEN c_rute1
+	FETCH NEXT FROM c_rute1 INTO @Loc1_1, @Loc2_1, @distanta
+	WHILE @@FETCH_STATUS = 0 BEGIN
+		SET @ruta1 = '*'+ @Loc1_1 + '*' + @Loc2_1 + '*'
+		SET @km1 = @distanta
+		BEGIN	
+			IF @Loc2_1 = @sosire 
+				-- ruta directa				
+				INSERT INTO @rute VALUES (@Loc1_1, @Loc2_1, @ruta1, @km1)
+			ELSE
+				-- rute printr-o localitate intermediara
+				BEGIN 
+					DECLARE c_rute2 CURSOR FOR 
+						SELECT Loc1, Loc2, Distanta FROM distante 
+						WHERE Loc1=@Loc2_1 AND @ruta1 NOT LIKE '%*'+Loc2+'*%'
+							UNION
+						SELECT Loc2, Loc1, Distanta FROM distante 
+						WHERE Loc2=@Loc2_1 AND @ruta1 NOT LIKE '%*'+Loc1+'*%'
+					OPEN c_rute2
+					SET @ruta2 = @ruta1
+					FETCH NEXT FROM c_rute2 INTO @Loc1_2, @Loc2_2, @distanta
+					WHILE @@FETCH_STATUS = 0 BEGIN
+						SET @ruta2 = @ruta1 + @Loc2_2 + '*'
+						SET @km2 = @km1 + @distanta
+						BEGIN
+							IF @Loc2_2 = @sosire
+								INSERT INTO @rute VALUES (@plecare, @sosire, @ruta2, @km2)
+							ELSE
+								-- rute prin doua localitati intermediare
+								BEGIN 
+									DECLARE c_rute3 CURSOR FOR 
+										SELECT Loc1, Loc2, Distanta FROM distante 
+										WHERE Loc1=@Loc2_2 AND @ruta2 NOT LIKE '%*'+Loc2+'*%'
+											UNION
+										SELECT Loc2, Loc1, Distanta FROM distante 
+										WHERE Loc2=@Loc2_2 AND @ruta2 NOT LIKE '%*'+Loc1+'*%'
+									OPEN c_rute3
+									SET @ruta3 = @ruta2
+									FETCH NEXT FROM c_rute3 INTO @Loc1_3, @Loc2_3, @distanta
+									WHILE @@FETCH_STATUS = 0 BEGIN
+										SET @ruta3 = @ruta2 + @Loc2_3 + '*'
+										SET @km3 = @km2 + @distanta
+										BEGIN
+											IF @Loc2_3 = @sosire
+												INSERT INTO @rute VALUES (@plecare, @sosire, @ruta3, @km3)
+											ELSE
+												-- rute prin trei localitati intermediare								
+												BEGIN
+													DECLARE c_rute4 CURSOR FOR 
+														SELECT Loc1, Loc2, Distanta FROM distante 
+														WHERE Loc1=@Loc2_3 AND @ruta3 NOT LIKE '%*'+Loc2+'*%'
+															UNION
+														SELECT Loc2, Loc1, Distanta FROM distante 
+														WHERE Loc2=@Loc2_3 AND @ruta3 NOT LIKE '%*'+Loc1+'*%'
+													OPEN c_rute4
+													SET @ruta4 = @ruta3
+													FETCH NEXT FROM c_rute4 INTO @Loc1_4, @Loc2_4, @distanta
+													WHILE @@FETCH_STATUS = 0 BEGIN
+														SET @ruta4 = @ruta3 + @Loc2_4 + '*'
+														SET @km4 = @km3 + @distanta
+														BEGIN
+															IF @Loc2_4 = @sosire
+																INSERT INTO @rute VALUES (@plecare, @sosire, @ruta4, @km4)
+														END
+														FETCH NEXT FROM c_rute4 INTO @Loc1_4, @Loc2_4, @distanta
+													END
+													CLOSE c_rute4
+													DEALLOCATE c_rute4
+												END
+										END
+										FETCH NEXT FROM c_rute3 INTO @Loc1_3, @Loc2_3, @distanta
+									END
+									CLOSE c_rute3
+									DEALLOCATE c_rute3
+								END		
+						END
+						FETCH NEXT FROM c_rute2 INTO @Loc1_2, @Loc2_2, @distanta
+					END
+					CLOSE c_rute2
+					DEALLOCATE c_rute2
+				END		
+			END
+			FETCH NEXT FROM c_rute1 INTO @Loc1_1, @Loc2_1, @distanta
+		END
+		CLOSE c_rute1
+		DEALLOCATE c_rute1
+	RETURN 
+END 
+
+--SELECT * FROM distante
+
+--SELECT Loc1, Loc2, Distanta FROM distante WHERE Loc1='Iasi'
+
+--SELECT * FROM [SQL2008].[dbo].[f_rute] ( 'Iasi','Vaslui')
+
+SELECT * FROM [SQL2008].[dbo].[f_rute] ( 'Iasi','Roman')
+
+

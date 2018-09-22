@@ -1,0 +1,38 @@
+DROP TABLE tFacturatCl ;
+DROP VIEW vFacturatCl ;
+
+CREATE GLOBAL TEMPORARY TABLE tFacturatCl  ON COMMIT PRESERVE ROWS AS (
+SELECT DenCl, SUM(Cantitate * PretUnit * (1+ProcTVA)) AS Facturat 
+FROM clienti C
+  INNER JOIN facturi F ON C.CodCl=F.CodCl 
+	INNER JOIN liniifact LF ON F.NrFact=LF.NrFact 
+	INNER JOIN produse P ON LF.CodPr=P.CodPr 
+GROUP BY DenCl ) ;
+
+SELECT * FROM tFacturatCl ORDER BY 1;
+
+CREATE VIEW vFacturatCl AS (
+SELECT DenCl, SUM(Cantitate * PretUnit * (1+ProcTVA)) AS Facturat 
+FROM clienti C
+  INNER JOIN facturi F ON C.CodCl=F.CodCl 
+	INNER JOIN liniifact LF ON F.NrFact=LF.NrFact 
+	INNER JOIN produse P ON LF.CodPr=P.CodPr 
+GROUP BY DenCl )
+WITH READ ONLY  ;
+
+SELECT * FROM vFacturatCl ORDER BY 1;
+
+DELETE FROM liniifact WHERE NrFact = 3120 ;
+DELETE FROM facturi WHERE NrFact = 3120 ;
+
+
+INSERT INTO facturi (nrfact, datafact, codcl)  VALUES (3120, DATE'2007-10-17', 1001);
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) 
+  VALUES (3120, 1, 1, 50, 1000) ;
+INSERT INTO liniifact (nrfact, linie, codpr, cantitate, pretunit) 
+  VALUES (3120, 2, 2, 75, 1050) ;
+
+
+SELECT * FROM tFacturatCl ORDER BY 1;
+
+SELECT * FROM vFacturatCl ORDER BY 1;
