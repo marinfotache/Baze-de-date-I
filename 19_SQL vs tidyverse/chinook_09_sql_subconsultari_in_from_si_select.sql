@@ -4,6 +4,11 @@
 --
 -- ultima actualizare: 2019-04-21
 
+library(tidyverse)
+library(lubridate)
+
+setwd('/Users/marinfotache/Google Drive/Baze de date 2019/Studii de caz/chinook')
+load("chinook.RData")
 
 --
 -- ############################################################################ 

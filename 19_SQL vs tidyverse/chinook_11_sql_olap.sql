@@ -194,8 +194,8 @@ ORDER BY 1,2
 
 
 -- ############################################################################ 
--- Luand in calcul numarul de piese, pe ce pozitie se gaste albumul `Machine Head` 
--- in ierarhia albumelor formatiei `Deep Purple`?
+-- Luand in calcul numarul de piese, pe ce pozitie se gaseste albumul 
+-- `Machine Head`  in ierarhia albumelor formatiei `Deep Purple`?
 -- ############################################################################ 
 
 WITH 
@@ -215,6 +215,7 @@ WITH
 SELECT rank__album
 FROM albums_ranking__deep_purple
 WHERE album_title = 'Machine Head'
+
 
 
 -- ############################################################################ 
