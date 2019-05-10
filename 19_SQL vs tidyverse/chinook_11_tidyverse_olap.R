@@ -556,7 +556,6 @@ temp <- invoice %>%
 ###
 ### tidyverse
 ### 
-
 temp <- invoice %>%
         mutate (year = lubridate::year(invoicedate), 
                 month = lubridate::month(invoicedate)) %>%
@@ -564,9 +563,12 @@ temp <- invoice %>%
         summarise (sales = sum(total)) %>%
         ungroup() %>%
         arrange(year, month) %>%
-        transmute (year, month, current_month__sales = sales, 
-                   previous_month__sales = lag(sales, default = 0), 
-                   difference = current_month__sales - previous_month__sales)
+        transmute (year, month, sales) %>%
+        group_by(year) %>%
+        mutate (current_month__sales = sales,
+                previous_month__sales = lag(sales, default = 0), 
+                difference = current_month__sales - previous_month__sales) %>%
+        ungroup()
 
 
 # # 
