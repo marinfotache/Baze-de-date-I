@@ -5,8 +5,6 @@
 -- ultima actualizare: 2019-04-23
 
 
-
-
 -- ############################################################################ 
 -- 		Care sunt celelalte albume ale artistului sau formatiei care a 
 --     				lansat albumul `Houses of the Holy` (reluare)

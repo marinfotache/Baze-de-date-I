@@ -1,8 +1,8 @@
 -- 						Interogari BD Chinook - IE si SPE:
 --
--- SQL 02: Joinctiuni interne
+-- SQL 02: Jonctiuni interne
 --
--- ultima actualizare: 2019-04-14
+-- ultima actualizare: 2019-10-05
 
 
 -- JOIN

@@ -126,9 +126,9 @@ WHERE invoicedate = (SELECT MIN(invoicedate)
 -- solutie ce evita functia MIN (prin operatorul ALL)
 SELECT *
 FROM invoice 
-WHERE invoicedate <= all (select distinct invoicedate
-					      from invoice
-					       order by invoicedate
+WHERE invoicedate <= ALL (SELECT DISTINCT invoicedate
+					      FROM invoice
+					      ORDER BY invoicedate
 					       )
 
 
@@ -139,7 +139,7 @@ WHERE invoicedate <= all (select distinct invoicedate
 SELECT *
 FROM invoice 
 WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND 
-	(SELECT MIN(invoicedate) + INTERVAL '7 DAYS' FROM invoice) 		
+	(SELECT MIN(invoicedate) + INTERVAL '6 DAYS' FROM invoice) 		
 
 
 -- ############################################################################ 
@@ -148,7 +148,7 @@ WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND
 SELECT *
 FROM invoice 
 WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND 
-	(SELECT MIN(invoicedate) + INTERVAL '1 MONTH' FROM invoice) 		
+	(SELECT MIN(invoicedate) + INTERVAL '1 MONTH' - INTERVAL '1 DAYS' FROM invoice) 		
 
 
 -- ############################################################################ 
@@ -156,14 +156,12 @@ WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND
 --    (adica prima luna IANUARIE sau APRILIE ...)
 -- ############################################################################ 
 
-
 -- solutie bazata pe o singura subconsultare
 SELECT *
 FROM invoice 
 WHERE EXTRACT (YEAR FROM invoicedate) || '-' || EXTRACT (MONTH FROM invoicedate) + 100 IN
 	(SELECT MIN(EXTRACT (YEAR FROM invoicedate) || '-' || 100 + EXTRACT (MONTH FROM invoicedate))
 	  FROM invoice)	
-
 
 -- solutie bazata pe trei subconsultari
 SELECT *
@@ -177,8 +175,6 @@ WHERE EXTRACT (YEAR FROM invoicedate) =
 					(SELECT MIN(EXTRACT (YEAR FROM invoicedate) )
 	  				 FROM invoice)	
 			 )
-
-
 
 
 -- ############################################################################ 
