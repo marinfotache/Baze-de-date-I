@@ -13,13 +13,13 @@ load("chinook.RData")
 # # 
 # # --
 # # -- ############################################################################ 
-# # -- 					Subconsultari in clauza WHERE 
+# # -- 				Subconsultari in clauza WHERE 
 # # -- ############################################################################ 
 # # --
 # # 
 # # -- ############################################################################ 
 # # -- 		Care sunt celelalte albume ale artistului sau formatiei care a 
-# # --     				lansat albumul `Houses of the Holy`
+# # --     			lansat albumul `Houses of the Holy`
 # # -- ############################################################################ 
 # # 
 # # 
@@ -97,6 +97,11 @@ temp <- album %>%
      filter (artistid %in% (album %>%
                               filter (title == 'Houses Of The Holy')) [['artistid']] )
                   
+# alt gen de referinta
+temp <- album %>%
+     inner_join(artist) %>%
+     filter (artistid %in% (album %>%
+                              filter (title == 'Houses Of The Holy')) [1,3] )
 
 
 # ... si inca una....
@@ -218,7 +223,7 @@ temp <- artist %>%
      
 # # 
 # # -- ############################################################################ 
-# # -- 				  Care sunt facturile din prima zi de vanzari?
+# # -- 		    Care sunt facturile din prima zi de vanzari?
 # # -- ############################################################################ 
 # # 
 # # 
@@ -344,7 +349,7 @@ temp <- invoice %>%
              
 
 # # -- ############################################################################ 
-# # -- 				Care sunt facturile din prima luna de vanzari?
+# # -- 			Care sunt facturile din prima luna de vanzari?
 # # -- ############################################################################ 
 # 
 # # 
@@ -384,8 +389,6 @@ temp <- invoice %>%
                pull(invoicedate))
      )
                   
-
-
 
 # # -- ############################################################################ 
 # # -- 		   Cate facturi s-au emis in prima luna calendaristica a vanzarilor ?
@@ -452,7 +455,6 @@ temp <- invoice %>%
                pull()) ) %>%
      filter (lubridate::month(invoicedate) == lubridate::month(min(invoicedate)))
      
-
 
 
 # # 

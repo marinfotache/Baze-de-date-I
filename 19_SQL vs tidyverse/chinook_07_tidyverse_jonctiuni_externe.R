@@ -1,5 +1,5 @@
 # 
-# # -- 				Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+# # -- 		nterogari tidyverse vs SQL - BD Chinook - IE si SPE:
 # # --
 # # -- 07: Jonctiuni externe
 # # --
@@ -80,27 +80,20 @@ temp <- artist %>%
 ### tidyverse
 ### 
 
-# solutie bazata pe `left_join` si `count`
+# solutie bazata pe `left_join` si `count` - solutie eronata (
+# cei care nu au nicun album apar cu 1 (datorita `count`-ului))
 temp <- artist %>%
      left_join(album) %>%
      count(name) %>%
      arrange(name)
 
 
-# solutie bazata pe `left_join`, `group_by` si `tally`
+# solutie corecta
 temp <- artist %>%
-     left_join(album) %>%
-     group_by(name) %>%
-     tally() %>%
-     arrange(name)
+        left_join(album) %>%
+        group_by(name) %>%
+        summarise(n = sum(if_else(is.na(title), 0, 1)))
 
-
-# solutie bazata pe `left_join`, `group_by` si `tally`
-temp <- artist %>%
-     left_join(album) %>%
-     group_by(name) %>%
-     summarise(n = n()) %>%
-     arrange(name)
 
 
 # # 
@@ -322,7 +315,7 @@ temp <-
 
 
 # -- ############################################################################ 
-# -- 						Probleme de rezolvat la curs/laborator/acasa
+# -- 			Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################ 
 # 
 # -- Obtineti un raport in care linii sunt asociate fiecarui artist,

@@ -13,7 +13,7 @@ load("chinook.RData")
 
 # 
 # # -- ############################################################################
-# # -- 				 Extrageti numarul albumelor fiecarui artist
+# # -- 			Extrageti numarul albumelor fiecarui artist
 # # -- ############################################################################
 # # 
 # # -- SQL
@@ -36,6 +36,9 @@ temp <- artist %>%
      ungroup() %>%
      arrange(artist_name)
 
+
+#getwd()
+#rio::export(temp, file = 'nr_albume_artist.xlsx', format = 'xlsx')
 
 # solutie bazata pe functia `count`  (nu mai necesara functia `ungroup`)
 temp <- artist %>%
@@ -189,7 +192,8 @@ temp <- bind_rows(
           rename(artist_name = name) %>%
           inner_join(album) %>%
           inner_join(track)  %>%
-          transmute (artist_name, title, track_name = 'Σ SUBTOTAL ON ALBUM }', milliseconds) %>%
+          transmute (artist_name, title, track_name = 'Σ SUBTOTAL ON ALBUM }', 
+                     milliseconds) %>%
           group_by(artist_name, title, track_name) %>%
           summarise(duration = trunc(sum(milliseconds / 1000)))  %>%
           ungroup(),
@@ -266,7 +270,8 @@ temp <- bind_rows(
                           mutate(year = lubridate::year(invoicedate)) %>%
                          filter( year == 2010) 
                      ) %>%
-     group_by(customer_name = paste(lastname, firstname), city, state, country, year) %>%
+     group_by(customer_name = paste(lastname, firstname), city, 
+              state, country, year) %>%
      summarise(sales = sum(total)) %>%
      ungroup(),
 
@@ -276,7 +281,8 @@ temp <- bind_rows(
                          mutate(year = lubridate::year(invoicedate)) %>%
                          filter( year == 2011) 
                      ) %>%
-     group_by(customer_name = paste(lastname, firstname), city, state, country, year) %>%
+     group_by(customer_name = paste(lastname, firstname), city, state, 
+              country, year) %>%
      summarise(sales = sum(total)) %>%
      ungroup(),
      
@@ -286,7 +292,8 @@ temp <- bind_rows(
                           mutate(year = lubridate::year(invoicedate)) %>%
                          filter( year == 2012) 
                      ) %>%
-     group_by(customer_name = paste(lastname, firstname), city, state, country, year) %>%
+     group_by(customer_name = paste(lastname, firstname), city, state, 
+              country, year) %>%
      summarise(sales = sum(total)) %>%
      ungroup()
 
