@@ -31,7 +31,7 @@ load("chinook.RData")
 ### tidyverse
 ### 
 
-# Solutie eronata!!! (aceasta sinta numara de cate ori apare fiecare valoare
+# Solutie eronata!!! (aceasta solutie numara de cate ori apare fiecare valoare
 # a `artistid` in data frame-ul `artist`)
 temp <- artist %>%
      count(artistid)
@@ -273,7 +273,7 @@ temp <- invoice %>%
 
 
 # -- ############################################################################ 
-# -- 					Probleme de rezolvat la curs/laborator/acasa
+# -- 			Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################ 
 # 
 # 

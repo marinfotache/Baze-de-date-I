@@ -2,14 +2,14 @@
 --
 -- SQL 02: Jonctiuni interne
 --
--- ultima actualizare: 2019-10-05
+-- ultima actualizare: 2020-02-26
 
 
 -- JOIN
 
--- ############################################################################ 
+-- ############################################################################
 -- 						Care sunt albumele formatiei `U2`
--- ############################################################################ 
+-- ############################################################################
 
 -- sol. 1 - NATURAL JOIN
 select *
@@ -22,20 +22,20 @@ from album inner join artist on album.artistid = artist.artistid
 where name = 'U2'
 
 
--- ############################################################################ 
+-- ############################################################################
 -- 		Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
--- ############################################################################ 
+-- ############################################################################
 
 -- sol. eronata care foloseste NATURAL JOIN
 select *
-from album 
+from album
 	natural join artist
 	natural join track
 where name = 'U2'
 
--- sol. corecta - folosind INNER JOIN 
+-- sol. corecta - folosind INNER JOIN
 select track.*
-from album 
+from album
 	natural join artist
 	inner join track on album.albumid = track.albumid
 where artist.name = 'U2' and title = 'Achtung Baby'
@@ -43,15 +43,15 @@ where artist.name = 'U2' and title = 'Achtung Baby'
 
 
 
--- ############################################################################ 
+-- ############################################################################
 -- 									AUTOJONCTIUNE
--- ############################################################################ 
+-- ############################################################################
 
 
--- ############################################################################ 
--- 			Care sunt celelalte albume ale formatiei care a lansat 
+-- ############################################################################
+-- 			Care sunt celelalte albume ale formatiei care a lansat
 -- 							albumul 'Achtung Baby'?
--- ############################################################################ 
+-- ############################################################################
 
 
 -- solutie care utilizeaza AUTO JOIN
@@ -62,9 +62,9 @@ WHERE album.title = 'Achtung Baby'
 
 
 
--- ############################################################################ 
+-- ############################################################################
 -- 						Probleme de rezolvat la curs/laborator/acasa
--- ############################################################################ 
+-- ############################################################################
 
 
 -- Afisare piesele si artistii din playlistul `Heavy Metal Classic`
@@ -75,9 +75,9 @@ WHERE album.title = 'Achtung Baby'
 
 
 
--- ############################################################################ 
+-- ############################################################################
 -- 						La ce intrebari raspund urmatoarele interogari ?
--- ############################################################################ 
+-- ############################################################################
 
 select name as artist_name, title as album_title
 from artist inner join album on artist.artistid = album.artistid
@@ -85,18 +85,12 @@ where name = title
 order by 1 ;
 
 
-select track.name as track_name, 
+select track.name as track_name,
 	title as album_title, artist.name as artist_name,
     milliseconds / 1000 as duration_seconds
-from track 
+from track
 		inner join album on track.albumid = album.albumid
-		inner join artist on album.artistid = artist.artistid  
+		inner join artist on album.artistid = artist.artistid
 where artist.name = 'U2'
 order by milliseconds desc
 limit 9
-
-
-
-
-
-

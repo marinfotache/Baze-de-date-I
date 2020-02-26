@@ -11,7 +11,7 @@
 
 -- ############################################################################ 
 -- Care sunt piesele de pe albumele formatiei `Black Sabbath`
--- carora nu se cunoaste compozitorul
+-- carora nu li se cunoaste compozitorul
 -- ############################################################################ 
 
 SELECT *
