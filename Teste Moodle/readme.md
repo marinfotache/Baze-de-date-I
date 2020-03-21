@@ -1,1 +1,1 @@
-Materiale necesare testelor Moodle
+Vă sugerez ca, înaintea de începerea testului Moodle, să deschideți, în pagini (tab-uri) separate ale browserului web, schema bazei de date și imaginile cu câteva înregistrări din fiecare tabelă. În felul acesta, vă obișnuiți cu baza de date și puteți înțelege cerințele testelor.
