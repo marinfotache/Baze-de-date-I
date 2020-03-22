@@ -19,5 +19,11 @@ https://1drv.ms/v/s!AgPvmBEDzTOSibUAE_zQuzc3CMUaeg?e=ydheXU
 5. Lansarea interogărilor `tidyverse` în `RStudio`
 https://1drv.ms/v/s!AgPvmBEDzTOSibUEiYNYUCEjl1isFg?e=uiNRqz
 
+6. Înțelegerea interogărilor SQL (1) - joncțiune
+https://1drv.ms/v/s!AgPvmBEDzTOSibUG_8zl5QP6-oVjRA?e=lnNgma
+
+
+
+
 
 
