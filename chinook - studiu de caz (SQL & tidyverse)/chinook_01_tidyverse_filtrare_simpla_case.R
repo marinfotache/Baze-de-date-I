@@ -30,7 +30,7 @@ con <- dbConnect(drv, dbname="chinook", user="postgres",
                  host = 'localhost', password="postgres")
 
 # Mac OS
-con <- dbConnect(drv, host='localhost', port='5432', dbname='IE2020',
+con <- dbConnect(drv, host='localhost', port='5432', dbname='chinook',
                  user='postgres', password='postgres')
 
 
@@ -41,7 +41,6 @@ tables <- dbGetQuery(con,
 tables
 
 
-View(daily_sales)
 
 ###  C. Importul tuturor tabelelor
 for (i in 1:nrow(tables)) {
@@ -66,9 +65,31 @@ dbUnloadDriver(drv)
 # # stergere obiecte inutile
 rm(con, drv, temp, i, tables, connection )
 
+
+#setwd('D:/chinook')
+setwd('/Users/marinfotache/Downloads/chinook')
 getwd()
+
 # salvare
 save.image(file = 'chinook.RData')
+
+# stergerea tuturor obiectelor din sesiunea curenta R
+rm(list = ls())
+
+
+############################################################################
+###       Incarcarea datelor salvate anterior in fisierul `.RData`       ###
+####        (foarte util pentru sesiunile de lucru in R urmatoare)       ###
+############################################################################
+setwd('/Users/marinfotache/Downloads/chinook')
+save.image(file = 'chinook.RData')
+
+
+
+############################################################################
+###                            Interogari tidyverse                      ###
+############################################################################
+
 
 
 
@@ -76,26 +97,6 @@ save.image(file = 'chinook.RData')
 # # --                   In ce ani s-au inregistrat vanzari?
 ############################################################################
 
-# # -- SQL
-# # -- prima notatie pentru ordonare (specificarea expresiei de calcul a atributului de ordonare)
-# # select distinct extract (year from invoicedate) as an
-# # from invoice
-# # order by extract (year from invoicedate)
-# #
-# # -- a doua notatie pentru ordonare (specificarea atributului (calculat) de ordonare)
-# # select distinct extract (year from invoicedate) as an
-# # from invoice
-# # order by an
-# #
-# # -- a treia notatie pentru ordonare (specificarea pozitiei in rezultat a atributului de ordonare)
-# # select distinct extract (year from invoicedate) as an
-# # from invoice
-# # order by 1
-# #
-
-
-###
-### tidyverse
 ###
 # Solutie 1 - `mutate`, `select`, `distinct`, `arrange`
 temp <- invoice %>%     # punctul de pornire: tabela/cadrul `invoice`
@@ -129,16 +130,6 @@ temp <- invoice %>%  # punctul de pornire: tabela/cadrul `invoice`
 # # --                     s-au inregistrat vanzari
 ############################################################################
 
-# # -- SQL
-# # select distinct extract (year from invoicedate) as an,
-# # 	extract (month from invoicedate) as luna
-# # from invoice
-# # order by 1,2
-# #
-# #
-
-###
-### tidyverse
 ###
 # Solutie 1 - `mutate`, `select`, `distinct`, `arrange`
 temp <- invoice %>%    # punctul de pornire: tabela/cadrul `invoice`
@@ -178,14 +169,6 @@ temp <- invoice %>%
 # # --          Care lungimea numelui pentru fiecare artist/formatie?
 ############################################################################
 
-# # -- SQL
-# # select artist.*, length(name) as lungime_nume
-# # from artist
-# #
-
-###
-### tidyverse
-###
 artist %>%
      mutate (lungime_nume = nchar(name)) -> temp
 
@@ -194,54 +177,21 @@ artist %>%
 # # -- Sa se afiseze artistii in ordinea descrescatoare a lungimii numelui
 ############################################################################
 
-# # -- SQL
-# # select artist.*, length(name) as lungime_nume
-# # from artist
-# # order by length(name) desc
-# #
-
-###
-### tidyverse
-###
 temp <- artist %>%
      mutate (lungime_nume = nchar(name)) %>%
      arrange(desc(lungime_nume))
 
 
-# #
 ############################################################################
 # # -- Sa se afiseze numele formatat al artistilor, conform urmatoarei cerinte:
-# # -- 1. pentru artistii cu numele lung de pana la 11 caractere, se afiseaza numele intreg
-# # -- 2. pentru artistii cu numele mai lung de 11 caracterese se extrag cinci
-# # --   caractere, se adauga `...` la mijloc si se finalizeaza cu ultimele cinci caractere
+# # -- 1. pentru artistii cu numele lung de pana la 11 caractere, 
+#         se afiseaza numele intreg
+# # -- 2. pentru artistii cu numele mai lung de 11 caracterere,
+#         se extrag cinci caractere, se adauga `...` la mijloc 
+#         si se finalizeaza cu ultimele cinci caractere
 ############################################################################
 
-# # -- SQL
-# # -- solutie bazata pe LEFT si RIGHT
-# # select artist.*,
-# # 	case
-# # 		when length(name) <= 11 then name
-# # 		else left(name, 5) || '...' || right(name, 5)
-# # 	end as nume_formatat,
-# # 	length(name) as lungime_nume
-# # from artist
-# #
-# # -- solutie bazata pe SUBSTRING
-# # select artist.*,
-# # 	case
-# # 		when length(name) <= 11 then name
-# # 		else substring(name, 1, 5) || '...' ||
-# # 			substring(name, length(name)-4, length(name))
-# # 		end as nume_formatat,
-# # 	length(name) as lungime_nume
-# # from artist
-# #
-
-###
-### tidyverse
-###
-
-# -- solutia bazata pe LEFT si RIGHT nu are echivalent in R
+# -- solutia bazata pe LEFT si RIGHT din SQL nu are echivalent in R
 
 # solutie ce foloseste functiile `substr` si `substring`
 temp <- artist %>%
@@ -262,49 +212,10 @@ temp <- artist %>%
 
 
 ############################################################################
-# # -- Care sunt artistii sau formatiile cu numele alcatuit dintr-un singur cuvant ?
-# # -- (adica numele nu contine niciun spatiu)
+# # -- Care sunt artistii sau formatiile cu numele alcatuit 
+# dintr-un singur cuvant ? (adica numele nu contine niciun spatiu)
 ############################################################################
 
-# #
-# # -- SQL
-# # -- solutie bazata pe operatorul `LIKE`
-# # select *
-# # from artist
-# # where name not like '% %'
-# #
-# # -- solutie bazata pe operatorii `LIKE` si CASE
-# # select *
-# # from artist
-# # where case when name like '% %' then false else true end
-# #
-# # -- soluție cu POSITION
-# # SELECT *
-# # FROM artist
-# # WHERE POSITION(' ' IN NAME) = 0
-# #
-# # -- soluție cu SPLIT_PART
-# # SELECT *,
-# # 	SPLIT_PART(name, ' ', 1) AS primul_cuvant,
-# # 	SPLIT_PART(name, ' ', 2) AS al_doilea_cuvant
-# # FROM artist
-# # WHERE SPLIT_PART(name, ' ', 2) = ''
-# #
-# # -- prima soluție cu REPLACE
-# # SELECT *, REPLACE(name, ' ', '') AS nume_fara_spatii
-# # FROM artist
-# # WHERE name = REPLACE(name, ' ', '')
-# #
-# # -- a doua soluție cu REPLACE
-# # SELECT *, REPLACE(name, ' ', '') AS nume_fara_spatii,
-# # 	LENGTH(name), LENGTH(REPLACE(name, ' ', ''))
-# # FROM artist
-# # WHERE LENGTH(name) = LENGTH(REPLACE(name, ' ', ''))
-# #
-# #
-
-###
-### tidyverse
 ###
 # solutie bazata pe `regular_expression` (`str_detect`)
 temp <- artist %>%
@@ -361,39 +272,10 @@ temp <- artist %>%
 
 
 ############################################################################
-# # -- Care sunt artistii sau formatiile cu numele alcatuit din cel putin doua cuvinte ?
-# # -- (adica numele contine cel putin singur spatiu)
+# # -- Care sunt artistii sau formatiile cu numele alcatuit din cel 
+#   putin doua cuvinte ? (adica numele contine cel putin singur spatiu)
 ############################################################################
 
-# #
-# # -- SQL
-# # -- solutie bazata pe operatorul `LIKE`
-# # select *
-# # from artist
-# # where name like '% %'
-# #
-# # -- soluție cu POSITION
-# # SELECT *, POSITION(' ' IN NAME)
-# # FROM artist
-# # WHERE POSITION(' ' IN NAME) > 0
-# #
-# # -- soluție cu SPLIT_PART
-# # SELECT *,
-# # 	SPLIT_PART(name, ' ', 1) AS primul_cuvant,
-# # 	SPLIT_PART(name, ' ', 2) AS al_doilea_cuvant
-# # FROM artist
-# # WHERE SPLIT_PART(name, ' ', 2) <> ''
-# #
-# # -- soluție cu REPLACE
-# # SELECT *, REPLACE(name, ' ', '') AS nume_fara_spatii,
-# # 	LENGTH(name), LENGTH(REPLACE(name, ' ', ''))
-# # FROM artist
-# # WHERE LENGTH(name) - LENGTH(REPLACE(name, ' ', '')) > 0
-# #
-
-###
-### tidyverse
-###
 
 temp <- artist %>%
      filter (str_detect(name, ' '))
@@ -420,33 +302,6 @@ temp <- artist %>%
 # # -- Care sunt artistii sau formatiile cu numele alcatuit din exact doua cuvinte ?
 # # -- (adica numele contine un singur spatiu)
 ############################################################################
-
-# #
-# # -- SQL
-# # -- solutie bazata pe operatorul `LIKE`
-# # select *
-# # from artist
-# # where name like '% %' and name not like '% % %'
-# #
-# # -- soluție cu SPLIT_PART
-# # SELECT *,
-# # 	SPLIT_PART(name, ' ', 1) AS primul_cuvant,
-# # 	SPLIT_PART(name, ' ', 2) AS al_doilea_cuvant,
-# # 	SPLIT_PART(name, ' ', 3) AS al_treilea_cuvant
-# # FROM artist
-# # WHERE SPLIT_PART(name, ' ', 2) <> '' and SPLIT_PART(name, ' ', 3) = ''
-# #
-# # -- soluție cu REPLACE
-# # SELECT *, REPLACE(name, ' ', '') AS nume_fara_spatii,
-# # 	LENGTH(name), LENGTH(REPLACE(name, ' ', ''))
-# # FROM artist
-# # WHERE LENGTH(name) - LENGTH(REPLACE(name, ' ', '')) = 1
-# #
-# #
-
-###
-### tidyverse
-###
 
 # solutie bazare pe `str_detect`
 temp <- artist %>%
