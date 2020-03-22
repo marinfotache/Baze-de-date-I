@@ -12,35 +12,10 @@ library(lubridate)
 setwd('/Users/marinfotache/Google Drive/Baze de date 2020/Studii de caz/chinook')
 load("chinook.RData")
 
-#
-# # -- JOIN
-# #
-# # -- ############################################################################
-# # -- 			Care sunt albumele formatiei `U2`
-# # -- ############################################################################
-# #
-# # # -- SQL
-#
-# # -- sol. 1 - NATURAL JOIN
-# # select *
-# # from album natural join artist
-# # where name = 'U2'
-# #
-# # -- sol. 2 - ECHI-JOIN
-# # select album.*, artist.name
-# # from album inner join artist on album.artistid = artist.artistid
-# # where name = 'U2'
-# #
+#############################################################################
+### 			               Care sunt albumele formatiei `U2`
+#############################################################################
 
-
-###
-### tidyverse
-###
-
-# -- sol. 1
-# select *
-# from album natural join artist
-# where name = 'U2'
 
 # sol 1.1 - NATURAL JOIN
 temp <- artist %>%
@@ -54,41 +29,15 @@ temp <- artist %>%
 
 
 # -- sol. 2
-# select album.*, artist.name
-# from album inner join artist on album.artistid = artist.artistid
-# where name = 'U2'
-
 temp <- artist %>%
      filter (name == 'U2') %>%
      inner_join(album, by = c('artistid' = 'artistid'))
 
 
 
-# # -- ############################################################################
-# # -- 		Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
-# # -- ############################################################################
-# #
-# # # -- SQL
-#
-# # -- sol. eronata care foloseste NATURAL JOIN
-# # select *
-# # from album
-# # 	natural join artist
-# # 	natural join track
-# # where name = 'U2'
-# #
-# # -- sol. corecta - folosind INNER JOIN
-# # select track.*
-# # from album
-# # 	natural join artist
-# # 	inner join track on album.albumid = track.albumid
-# # where artist.name = 'U2' and title = 'Achtung Baby'
-# #
-
-
-###
-### tidyverse
-###
+############################################################################
+### 	Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
+############################################################################
 
 # sol 0 - ERONATA!!!
 temp <- artist %>%
@@ -154,9 +103,9 @@ temp <- track %>%
      select(trackid:composer)
 
 
-# # -- ############################################################################
-# # --            #-- Care sunt piesele formatiei U2 vandute in anul 2013?
-# # -- ############################################################################
+############################################################################
+###            #-- Care sunt piesele formatiei U2 vandute in anul 2013?
+############################################################################
 temp <- track %>%
              inner_join(album) %>%
              transmute (track_name = name, trackid, album_title = title,
@@ -170,28 +119,29 @@ temp <- track %>%
              select (track_name, album_title) %>%
              arrange (track_name)
 
-# # -- ############################################################################
-# # --        In ce tari s-a vandut muzica formatiei `Led Zeppelin`
-# # -- ############################################################################
+
+############################################################################
+###          In ce tari s-a vandut muzica formatiei `Led Zeppelin`
+############################################################################
 temp <- artist %>%
-                     filter (name == 'Led Zeppelin') %>%
-                     select (artistid) %>%
-                     inner_join(album) %>%
-                     transmute (album_title = title, albumid) %>%
-                     inner_join(track) %>%
-                     transmute (track_name = name, album_title, trackid) %>%
-                     inner_join(invoiceline) %>%
-                     inner_join(invoice) %>%
-                     inner_join(customer) %>%
-                     distinct (country) %>%
-                     arrange(country)
+    filter (name == 'Led Zeppelin') %>%
+    select (artistid) %>%
+    inner_join(album) %>%
+    transmute (album_title = title, albumid) %>%
+    inner_join(track) %>%
+    transmute (track_name = name, album_title, trackid) %>%
+    inner_join(invoiceline) %>%
+    inner_join(invoice) %>%
+    inner_join(customer) %>%
+    distinct (country) %>%
+    arrange(country)
 
 
 
-# # -- ############################################################################
-# # --   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori, se
-# # --              numara bateristul `John Bonham`
-# # -- ############################################################################
+############################################################################
+###   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori, 
+###               se numara bateristul `John Bonham`
+############################################################################
 
 temp <- artist %>%
                      filter (name == 'Led Zeppelin') %>%
@@ -204,41 +154,17 @@ temp <- artist %>%
 
 
 
-# # -- ############################################################################
-# # -- 			                    AUTOJONCTIUNE
-# # -- ############################################################################
-# #
-# #
-# # -- ############################################################################
-# # --            Care sunt celelalte albume ale formatiei care a lansat
-# # --                             albumul 'Achtung Baby'?
-# # -- ############################################################################
-# #
-# # -- SQL
-#
-# # -- solutie care utilizeaza AUTO JOIN
-# # SELECT a2.*
-# # FROM album NATURAL JOIN artist
-# # 	INNER JOIN album a2 ON album.artistid = a2.artistid
-# # WHERE album.title = 'Achtung Baby'
-# #
-# # -- solutie care utilizeaza AUTO JOIN
-# # SELECT a2.*
-# # FROM album
-# # 	INNER JOIN artist ON album.artistid = artist.artistid AND
-# # 		album.title = 'Achtung Baby'
-# # 	INNER JOIN album a2 ON album.artistid = a2.artistid
-# #
-
+############################################################################
+### 			                    AUTOJONCTIUNE
+############################################################################
 ###
-### tidyverse
 ###
+############################################################################
+###            Care sunt celelalte albume ale formatiei care a lansat
+###                             albumul 'Achtung Baby'?
+############################################################################
 
-# -- solutie care utilizeaza AUTO JOIN
-# SELECT a2.*
-# FROM album NATURAL JOIN artist
-# 	INNER JOIN album a2 ON album.artistid = a2.artistid
-# WHERE album.title = 'Achtung Baby'
+# -- solutie care `emuleaza` AUTO JOIN-ul din SQL
 
 # sol 1 - NATURAL JOIN + select
 temp <- album %>%
@@ -255,14 +181,10 @@ temp <- album %>%
 
 
 
-# # -- #########################################################################
-# -- care este numele angajatului: lastname = 'Johnson' AND firstname = 'Steve'
-# # -- #########################################################################
-
-# SELECT sefi.*
-# FROM employee subordonati
-# 	INNER JOIN employee sefi ON subordonati.reportsto = sefi.employeeid
-# WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
+#########################################################################
+###   Care este numele angajatului: lastname = 'Johnson' AND 
+###         firstname = 'Steve'
+#########################################################################
 
 # sol . 1
 temp <- employee %>%
@@ -295,10 +217,10 @@ temp <- employee %>%
 #
 #
 # -- Care sunt piesele formatiei `Led Zeppelin` compuse de cel putin trei muzicieni?
-
-
+#
+#
 #-- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
 #--	`Robert Plant`
-
+#
 #-- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
 #--	nici `Robert Plant`, nici `Jimmy Page`
