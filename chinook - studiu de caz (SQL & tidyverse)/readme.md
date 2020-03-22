@@ -13,7 +13,11 @@ https://1drv.ms/v/s!AgPvmBEDzTOSibR6MiHulPoMzD0f2g?e=nWPfr1
 3. Importul în R din PostgreSQL a conținutului tabelelor din BD `chinook`
 https://1drv.ms/v/s!AgPvmBEDzTOSibR42YexzSuZAbm5wQ?e=DtRT9u
 
-4. Lansarea interogărilor SQL în pgAdmin
+4. Lansarea interogărilor SQL în `pgAdmin`
 https://1drv.ms/v/s!AgPvmBEDzTOSibUAE_zQuzc3CMUaeg?e=ydheXU
+
+5. Lansarea interogărilor `tidyverse` în `RStudio`
+https://1drv.ms/v/s!AgPvmBEDzTOSibUEiYNYUCEjl1isFg?e=uiNRqz
+
 
 
