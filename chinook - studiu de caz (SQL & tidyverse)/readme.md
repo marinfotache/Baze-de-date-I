@@ -22,6 +22,10 @@ https://1drv.ms/v/s!AgPvmBEDzTOSibUEiYNYUCEjl1isFg?e=uiNRqz
 6. Înțelegerea interogărilor SQL (1) - joncțiune
 https://1drv.ms/v/s!AgPvmBEDzTOSibUG_8zl5QP6-oVjRA?e=lnNgma
 
+7. Înțelegerea interogărilor `tidyverse` (1) - joncțiune
+https://1drv.ms/v/s!AgPvmBEDzTOSibUJ-fqM7oT9bsZS0Q?e=2YfFj1
+
+
 
 
 
