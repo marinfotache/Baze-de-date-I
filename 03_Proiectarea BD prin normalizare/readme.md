@@ -12,9 +12,9 @@ V-aș sugera să parcurgeți materialele bibliografice postate în următoarea s
 - PBD2005_Cap07_Surogate_Restrictii_Incluziuni.pdf:
 	- paragraful 7.1.1
 	- paragraful 7.1.2
-	- paragraful 7.3, fără codul PL/SQL din listinguri (cod pe care-l discutam abia la master)
+	- paragraful 7.3, fără codul PL/SQL din listinguri (cod pe care-l discutăm abia la master)
 	- paragraful 7.4, de asemenea, fără codul PL/SQL din listinguri
 - 03e_Metodologie_sinteza.pptx
 - 03f_Normalizare_Caz3_Catering_CuAnimatie.pptx
 
-Prezentările conțin și linkuri către tutoriale video pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
+Prezentările conțin și linkuri către tutoriale video (în limba română) pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
