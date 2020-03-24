@@ -17,4 +17,4 @@ V-aș sugera să parcurgeți materialele bibliografice postate în următoarea s
 - 03e_Metodologie_sinteza.pptx
 - 03f_Normalizare_Caz3_Catering_CuAnimatie.pptx
 
-Prezentările conțin și linkuri către tutoriale video pe care, de asemenea, vi le-aș recomanda!
+Prezentările conțin și linkuri către tutoriale video pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
