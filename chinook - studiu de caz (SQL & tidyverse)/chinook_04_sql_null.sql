@@ -2,7 +2,7 @@
 --
 -- SQL 04: Tratamentul (meta)valorilor NULL
 --
--- ultima actualizare: 2020-03-25
+-- ultima actualizare: 2020-03-26
 
 
 -- ############################################################################
@@ -41,8 +41,33 @@ WHERE artist.name = 'Black Sabbath' AND composer is null
 
 
 -- ############################################################################
+-- Sa se afiseze, sub forma de sir de caractere, orasele din care provin
+-- clientii (pentru a elimina confuziile, numele orasului trebuie concatenat
+-- cu statul si tara din care face parte orasul respectiv)
+-- ############################################################################
+
+-- solutie eronata !!!! De ce?
+SELECT DISTINCT city || ' - ' || state || ' - ' || country
+FROM customer
+
+-- comparati cu...
+SELECT DISTINCT city, state, country
+FROM customer
+
+
+
+-- ############################################################################
 -- 								COALESCE
 -- ############################################################################
+
+-- ############################################################################
+-- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
+--   la atributul `state`, in locul valorii NULL afisati `-`
+-- ############################################################################
+
+SELECT customerid, firstname, lastname, state, COALESCE(state, '-') as state2
+FROM customer
+
 
 -- ############################################################################
 -- Sa se afiseze, in ordine alfabetica, toate titlurile pieselor de pe
@@ -61,15 +86,20 @@ ORDER BY 1
 
 
 
+
 -- ############################################################################
 -- 						Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
--- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
---   la atributul `state`, in locul valorii NULL afisati `-`
-SELECT customerid, firstname, lastname, state, coalesce(state, '-') as state2
-FROM customer
 
+-- ############################################################################
+-- Sa se afiseze, sub forma de sir de caractere, orasele din care provin
+-- clientii (pentru a elimina confuziile, numele orasului trebuie concatenat
+-- cu statul si tara din care face parte orasul respectiv)
+
+
+
+-- ############################################################################
 -- Afisati toate facturile (tabela `invoice), completand eventualele valori NULL
 --   ale atributului `billingstate` cu valoarea tributului `billing city` de pe
 --   aceeasi linie
@@ -77,18 +107,57 @@ FROM customer
 
 
 
+-- ############################################################################
+-- 						Care sunt cerintele la care raspund urmatoarele interogari ?
+-- ############################################################################
+
+
+-- A.
+SELECT firstname, lastname, city,
+	COALESCE(state, country) AS state,
+	country
+FROM customer
+
+
+
+-- B.
+SELECT COUNT(city || ' - ' || state || ' - ' || country) AS n_of_cities
+FROM customer
+
+
+-- C.
+SELECT COUNT(city || ' - ' || coalesce(state, '-') || ' - ' || country) AS n_of_cities
+FROM customer
+ORDER BY 1
+
+
+
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+-- 					Explicati diferenta numarului de linii din rezultat pentru
+--							urmatoarele doua perechi de interogari
 -- ############################################################################
 
+-- A.
 
-
--- Care este diferenta (in privinta numarului de linii din rezultat) intre
--- urmatoarele doua interogari
-
-SELECT DISTINCT city, state, country
+SELECT city || ' - ' || state || ' - ' || country AS city_string
 FROM customer
--- ... si
-SELECT DISTINCT city || ' - ' || state || ' - ' || country
+ORDER BY 1
+-- 59 randuri
+
+SELECT city || ' - ' || coalesce(state, '-') || ' - ' || country AS city_string2
 FROM customer
+ORDER BY 1
+-- 59 randuri
+
+
+-- B.
+
+SELECT DISTINCT city || ' - ' || state || ' - ' || country AS city_string
+FROM customer
+ORDER BY 1
+-- 29 randuri
+
+SELECT DISTINCT city || ' - ' || coalesce(state, '-') || ' - ' || country AS city_string2
+FROM customer
+-- 53 randuri

@@ -2,7 +2,7 @@
 --
 -- 05: Functii agregat (count, count distinct, sum, avg, min, max) fara grupare
 --
--- ultima actualizare: 2020-03-25
+-- ultima actualizare: 2020-03-26
 
 
 
@@ -70,13 +70,6 @@ FROM album
 SELECT COUNT(DISTINCT country)
 FROM customer
 
-
--- ############################################################################
--- 					Din cate orase sunt clientii companiei?
--- ############################################################################
-
-SELECT COUNT(DISTINCT city || ' - ' || state || ' - ' || country)
-FROM customer
 
 
 -- ############################################################################
@@ -156,7 +149,7 @@ FROM invoice
 
 -- Cate piese sunt pe playlistul `Grunge`?
 
--- Cati subordonati are, in total (pe toate nivelurile) angajatul xxxxxx?
+-- Cati subordonati are, in total (pe toate nivelurile), angajatul xxxxxx?
 
 
 

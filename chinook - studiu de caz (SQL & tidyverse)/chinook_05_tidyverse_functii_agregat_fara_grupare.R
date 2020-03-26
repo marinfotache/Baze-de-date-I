@@ -2,7 +2,7 @@
 # --
 # -- 05: Functii agregat fara grupare
 # --
-#-- ultima actualizare: 2020-03-25
+#-- ultima actualizare: 2020-03-26
 #
 #
 library(tidyverse)
@@ -45,11 +45,12 @@ temp <- artist %>%
 # sol 1
 temp <- customer %>%
         filter(!is.na(fax)) %>%
-        tally()
-        
+        tally() 
+
+# sol 2
 temp <- customer %>%
         filter(!is.na(fax)) %>%
-        summarise(n_of_cust_with_faxes = n())
+        summarise(n_of_customers_with_faxes = n())
 
 
 
@@ -145,7 +146,6 @@ temp <- album %>%
 ############################################################################
 # # --      Care este durata medie a pieselor formatiei `Pink Floyd`
 # # --                     exprimata in minute si secunde
-
 ############################################################################
 
 # solutie bazata pe `summarise`, `mean` si `lubridate::seconds_to_period`
@@ -189,7 +189,5 @@ temp <- invoice %>%
 # -- Cate piese sunt pe playlistul `Grunge`?
 #
 # -- Cati subordonati are, in total (pe toate nivelurile) angajatul xxxxxx?
-# 
-# 
-
-
+#
+#

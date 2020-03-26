@@ -4,7 +4,7 @@
 # # -- 04: Tratamentul (meta)valorilor NA (echivalentul NULL din SQL)
 # # -- Atentie: valorile NULL au alt regim in limbajul R!!!!
 #
-# ultima actualizare: 2020-03-25
+# ultima actualizare: 2020-03-26
 # #
 library(tidyverse)
 library(lubridate)
@@ -18,7 +18,6 @@ load("chinook.RData")
 #                                       alt regim)
 # # -- ############################################################################
 # #
-# 
 
 ############################################################################
 ##               Care sunt clientii individuali (non-companii)
@@ -36,6 +35,16 @@ temp <- customer %>%
         filter (!is.na(company))
 
 
+#############################################################################
+##-- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
+##--   la atributul `state`, in locul valorii NULL, afisati `-`
+#############################################################################
+
+temp <- customer %>%
+    select (customerid:lastname, state) %>%
+    mutate(state2 = coalesce(state, '-'))
+
+
 
 
 # # -- ############################################################################
@@ -51,6 +60,15 @@ temp <- artist %>%
      inner_join(album) %>%
      inner_join(track) %>%
      select (name, composer) %>%
+     filter (is.na(composer))
+
+
+# a doua solutia bazata pe functia `is.na`
+temp <- artist %>%
+     filter (name == 'Black Sabbath') %>%
+     inner_join(album) %>%
+     inner_join(track, by = c('albumid' = 'albumid')) %>%
+     transmute (track_name = name.y, composer) %>%
      filter (is.na(composer))
 
 
@@ -85,16 +103,23 @@ temp <- artist %>%
 # -- 			Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
-#
-# -- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
-# --   la atributul `state`, in locul valorii NULL afisati `-`
+
+
+# ############################################################################
+# Sa se afiseze, sub forma de sir de caractere, orasele din care provin
+# clientii (pentru a elimina confuziile, numele orasului trebuie concatenat
+# cu statul si tara din care face parte orasul respectiv)
 
 temp <- customer %>%
-        select (customerid:lastname, state) %>%
-        mutate(state2 = coalesce(state, '-'))
+    select (city, state, country) %>%
+    mutate (city_string1 = paste(city, coalesce(state, '-'), country)) %>%
+    distinct(.)
+
+    
 
 
-#
+
+############################################################################
 # -- Afisati toate facturile (tabela `invoice), completand eventualele valori NULL
 # --   ale atributului `billingstate` cu valoarea tributului `billing city` de pe
 # --   aceeasi linie
