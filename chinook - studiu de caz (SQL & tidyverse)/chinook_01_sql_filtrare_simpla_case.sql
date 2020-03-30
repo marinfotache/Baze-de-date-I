@@ -246,8 +246,7 @@ FROM artist
 WHERE
 	regexp_match(name, '.* .*') IS NOT NULL -- name contains at least a space
 	AND
-	regexp_match(name, '.* .* .*') IS NULL  -- name DOES NOT containt two spaces
-
+	regexp_match(name, '.* .* .*') IS NULL  -- name DOES NOT contain two spaces
 
 
 -- soluție cu SPLIT_PART

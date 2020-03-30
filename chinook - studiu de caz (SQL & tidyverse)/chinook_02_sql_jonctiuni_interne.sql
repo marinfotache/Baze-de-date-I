@@ -45,6 +45,22 @@ from album
 	inner join track on album.albumid = track.albumid
 where artist.name = 'U2' and title = 'Achtung Baby'
 
+
+
+-- ############################################################################
+-- Care sunt piesele formatiei `Led Zeppelin` compuse de cel putin trei muzicieni?
+-- ############################################################################
+
+SELECT track.*
+FROM track
+	INNER JOIN album ON track.albumid = album.albumid
+	INNER JOIN artist ON album.artistid = artist.artistid
+WHERE artist.name = 'Led Zeppelin'	AND
+	(UPPER(composer) LIKE '%LED ZEPPELIN%'
+	OR
+	regexp_match(composer, '.*(/|,).*(/|,).*') IS NOT NULL  )
+
+
 -- ############################################################################
 -- 					Care sunt piesele formatiei U2 vandute in anul 2013?
 -- ############################################################################
@@ -100,14 +116,6 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 
 -- Afisare piesele si artistii din playlistul `Heavy Metal Classic`
 
--- Care sunt piesele formatiei `Led Zeppelin` la care, printre autori, se
---  numara bateristul `John Bonham`
-
--- Care sunt piesele formatiei `Led Zeppelin` compuse de cel putin trei muzicieni?
-
--- Care sunt piesele formatiei `Led Zeppelin` compuse (si) de `John Bonham`
-
-
 -- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
 --	`Robert Plant`
 
@@ -115,9 +123,18 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 --	nici `Robert Plant`, nici `Jimmy Page`
 
 
+
 -- ############################################################################
 -- 						La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
+
+--
+SELECT track.*
+FROM track
+	INNER JOIN album ON track.albumid = album.albumid
+	INNER JOIN artist ON album.artistid = artist.artistid
+WHERE artist.name = 'Led Zeppelin'	AND
+	(UPPER(composer) LIKE '%BONHAM%' OR 	UPPER(composer) LIKE '%LED ZEPPELIN%')
 
 
 --
