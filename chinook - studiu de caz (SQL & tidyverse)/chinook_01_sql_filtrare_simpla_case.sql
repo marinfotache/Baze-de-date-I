@@ -2,7 +2,7 @@
 --
 -- SQL 01: Filtrare simpla, regular expressions, structuri CASE
 --
--- ultima actualizare: 2020-02-26
+-- ultima actualizare: 2020-03-30
 
 
 -- ############################################################################
@@ -160,6 +160,13 @@ select *
 from artist
 where case when name like '% %' then false else true end
 
+
+-- solutie bazata pe operatorul `regexp_match` (regular expression)
+SELECT *, regexp_match(name, ' ')
+FROM artist
+WHERE regexp_match(name, ' ') IS NULL
+
+
 -- soluție cu POSITION
 SELECT *
 FROM artist
@@ -195,6 +202,13 @@ select *
 from artist
 where name like '% %'
 
+
+-- solutie bazata pe operatorul `regexp_match` (regular expression)
+SELECT *
+FROM artist
+WHERE regexp_match(name, ' ') IS NOT NULL
+
+
 -- soluție cu POSITION
 SELECT *, POSITION(' ' IN NAME)
 FROM artist
@@ -224,6 +238,17 @@ WHERE LENGTH(name) - LENGTH(REPLACE(name, ' ', '')) > 0
 select *
 from artist
 where name like '% %' and name not like '% % %'
+
+
+-- solutie bazata pe operatorul `regexp_match` (regular expression)
+SELECT *
+FROM artist
+WHERE
+	regexp_match(name, '.* .*') IS NOT NULL -- name contains at least a space
+	AND
+	regexp_match(name, '.* .* .*') IS NULL  -- name DOES NOT containt two spaces
+
+
 
 -- soluție cu SPLIT_PART
 SELECT *,
