@@ -25,7 +25,10 @@ https://1drv.ms/v/s!AgPvmBEDzTOSibUG_8zl5QP6-oVjRA?e=lnNgma
 7. Înțelegerea interogărilor `tidyverse` (1) - joncțiune
 https://1drv.ms/v/s!AgPvmBEDzTOSibUJ-fqM7oT9bsZS0Q?e=2YfFj1
 
-8. Înregistrarea (video) cursului din 26 martie (IE2) - valori NULL/NA și functii agregat
+8. Înregistrarea (video) cursului din 19 martie (recuperat pe 31 martie) (IE2) - joncțiuni interne, reuniune, intersecție, diferență
+https://transcripts.gotomeeting.com/#/s/181bf8a255d1208baa3347498cd8152efbbc8d3bf493d17846dab7b3e561ba40
+
+9. Înregistrarea (video) cursului din 26 martie (IE2) - valori NULL/NA și functii agregat
 https://transcripts.gotomeeting.com/#/s/75b9373aead17568c9f9c8a2f523660acd9ce7aee48d977b2d84ef8e53be2df5
 
 
