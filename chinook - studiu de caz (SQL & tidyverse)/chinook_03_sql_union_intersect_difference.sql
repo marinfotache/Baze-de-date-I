@@ -17,13 +17,6 @@
 -- ############################################################################
 
 -- solutie bazata pe OR (dubluri neeliminate)
-SELECT track.name
-FROM artist
-	INNER JOIN album ON artist.artistid = album.artistid
-	INNER JOIN track ON album.albumid = track.albumid
-WHERE artist.name = 'Iron Maiden' AND (title = 'Fear Of The Dark'
-	OR title = 'A Real Live One')
-ORDER BY 1
 
 -- solutie bazata pe OR (dubluri eliminate)
 SELECT DISTINCT track.name
@@ -50,9 +43,24 @@ WHERE artist.name = 'Iron Maiden' AND title = 'A Real Live One'
 ORDER BY 1
 
 
+-- solutie bazata pe UNION ALL (dubluri ne-eliminate)
+SELECT track.name
+FROM artist
+	INNER JOIN album ON artist.artistid = album.artistid
+	INNER JOIN track ON album.albumid = track.albumid
+WHERE artist.name = 'Iron Maiden' AND title = 'Fear Of The Dark'
+UNION ALL
+SELECT track.name
+FROM artist
+	INNER JOIN album ON artist.artistid = album.artistid
+	INNER JOIN track ON album.albumid = track.albumid
+WHERE artist.name = 'Iron Maiden' AND title = 'A Real Live One'
+ORDER BY 1
+
+
 
 -- ############################################################################
--- Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii direct ai
+-- Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii directi ai
 -- subordonatilor de ordinul 1) ai lui `Adams` (lastname) `Andrew` (firstname)
 -- ############################################################################
 

@@ -91,6 +91,34 @@ temp <- artist %>%
                 )
 
 
+
+###########################################
+# introd to semi_join
+
+# inner join (natural)
+temp <- album %>%
+    inner_join(artist)
+
+
+# semi join
+temp <- album %>%
+    semi_join(artist)
+
+
+# inner join (natural)
+temp <- artist %>%
+    inner_join(album)
+
+
+# semi join
+temp <- artist %>%
+    semi_join(album)
+
+###########################################
+
+
+
+
 # sol 6 - SEMI-JOIN
 temp <- track %>%
      semi_join(
@@ -120,6 +148,7 @@ temp <- track %>%
              arrange (track_name)
 
 
+
 ############################################################################
 ###          In ce tari s-a vandut muzica formatiei `Led Zeppelin`
 ############################################################################
@@ -144,12 +173,12 @@ temp <- artist %>%
 ############################################################################
 
 temp <- artist %>%
-                     filter (name == 'Led Zeppelin') %>%
-                     select (artistid) %>%
-                     inner_join(album) %>%
-                     transmute (album_title = title, albumid) %>%
-                     inner_join(track) %>%
-                     filter (str_detect(composer, 'Bonham'))
+      filter (name == 'Led Zeppelin') %>%
+      select (artistid) %>%
+      inner_join(album) %>%
+      transmute (album_title = title, albumid) %>%
+      inner_join(track) %>%
+      filter (str_detect(composer, 'Bonham'))
 
 
 
