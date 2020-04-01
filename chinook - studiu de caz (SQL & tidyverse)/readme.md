@@ -31,7 +31,8 @@ https://transcripts.gotomeeting.com/#/s/181bf8a255d1208baa3347498cd8152efbbc8d3b
 9. Înregistrarea (video) cursului din 26 martie (IE2) - valori NULL/NA și functii agregat
 https://transcripts.gotomeeting.com/#/s/75b9373aead17568c9f9c8a2f523660acd9ce7aee48d977b2d84ef8e53be2df5
 
-
+10. Înregistrarea (video) cursului din 1 aprilie (SPE2) - grupări
+https://transcripts.gotomeeting.com/#/s/3a0a2623212e10fe8d880107cb16ac50abc4329191eca6a89d769cb4f640afa7
 
 
 
