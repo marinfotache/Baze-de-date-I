@@ -37,3 +37,5 @@ https://transcripts.gotomeeting.com/#/s/3a0a2623212e10fe8d880107cb16ac50abc43291
 11. Înregistrarea (video) cursului din 8 aprilie (SPE2) - CASE, joncțiuni externe
 https://transcripts.gotomeeting.com/#/s/44debd4b83bb294bd4d6d341f4bf6ea07bccd77979f8933addd7ff1ce4d1d14a
 
+12. Înregistrarea (video) cursului din 9 aprilie (IE2) - recapitulare `tidyverse` - test 2
+https://transcripts.gotomeeting.com/#/s/2bd03383fe0be8f587c30ec24bb77523736e696732c82301264ef9f2fafbb399
