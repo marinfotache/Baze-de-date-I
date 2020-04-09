@@ -8,7 +8,7 @@
 library(tidyverse)
 library(lubridate)
 
-setwd('/Users/marinfotache/Google Drive/Baze de date 2019/Studii de caz/chinook')
+setwd('/Users/marinfotache/Google Drive/Baze de date 2020/Studii de caz/chinook')
 load("chinook.RData")
 
 
