@@ -324,6 +324,17 @@ temp <- artist %>%
 #
 #
 
+# Care sunt clientii cu un total al achizitiilor pe anul 2010 mai mare de 10 USD?
+# 
+temp <- customer %>%
+        inner_join(invoice) %>%
+        filter (year(invoicedate) == 2010) %>%
+        group_by(customer = paste(lastname, 
+                firstname, paste0('(', city, ')'))) %>%
+        summarise (cust_purchase = sum(total)) %>%
+        filter(cust_purchase > 10) %>%
+        arrange(customer)
+
 
 ############################################################################
 ## 	   La ce intrebari raspund urmatoarele interogari ?
@@ -347,6 +358,8 @@ invoice %>%
         mutate (year = lubridate::year(invoicedate)) %>%
         group_by(year) %>%
         summarise(n = n_distinct(customerid))
+
+
 
 
         

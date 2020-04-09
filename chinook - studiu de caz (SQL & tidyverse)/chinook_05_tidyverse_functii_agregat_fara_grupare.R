@@ -209,4 +209,5 @@ temp <- track %>%
         filter (milliseconds / 1000 > mean(milliseconds/1000))
 
 
+mean(track$milliseconds/1000)
 

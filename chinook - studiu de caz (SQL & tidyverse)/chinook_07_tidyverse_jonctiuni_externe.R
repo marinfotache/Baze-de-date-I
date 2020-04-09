@@ -14,7 +14,7 @@ load("chinook.RData")
 
 
 # # -- ############################################################################
-# # -- 		Care sunt artistii care, momentan, nu au niciun album preluat in BD?
+# # -- 	  Care sunt artistii care, momentan, nu au niciun album preluat in BD?
 # # -- ############################################################################
 
 # solutie bazata pe diferenta (`dplyr::setdiff`) si `semi_join`
@@ -38,7 +38,7 @@ temp <- artist %>%
      filter (is.na(albumid)) %>%
      arrange(name)
 
-
+347 + 71
 
 
 # # -- ############################################################################
@@ -67,7 +67,7 @@ temp <- artist %>%
         group_by(name) %>%
         summarise(n = sum(
                 case_when(
-                        is.na(title) ~ 0, 
+                        is.na(title) ~ 0,
                         TRUE ~ 1
                         )))
 
@@ -130,7 +130,8 @@ temp <- customer %>%
      select (customerid:lastname, city:country) %>%
           left_join(
                invoice %>%
-                    transmute(customerid, year = lubridate::year(lubridate::ymd(invoicedate)),
+                    transmute(customerid, 
+                              year = lubridate::year(lubridate::ymd(invoicedate)),
                               total) %>%
                     filter (year == 2010) %>%
                group_by(customerid, year) %>%
@@ -164,7 +165,8 @@ temp <- customer %>%
      select (customerid:lastname, city:country) %>%
           left_join(
                invoice %>%
-                    transmute(customerid, year = lubridate::year(lubridate::ymd(invoicedate)),
+                    transmute(customerid, 
+                              year = lubridate::year(lubridate::ymd(invoicedate)),
                               total) %>%
                     filter (year == 2010) %>%
                group_by(customerid, year) %>%
