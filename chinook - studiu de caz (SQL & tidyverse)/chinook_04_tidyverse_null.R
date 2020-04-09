@@ -41,12 +41,23 @@ temp <- customer %>%
 ##--   la atributul `state`, in locul valorii NULL, afisati `-`
 #############################################################################
 
+# solutie cu `if_else`
 temp <- customer %>%
     select (customerid:lastname, state) %>%
-    mutate(state2 = coalesce(state, '-'))
+    mutate(state2 = if_else(is.na(state), '-', state))
 
 
+# solutie cu `case_when`
+temp <- customer %>%
+    select (customerid:lastname, state) %>%
+    mutate(state2 = case_when(
+            is.na(state) ~ '-', 
+            TRUE ~ state))
 
+
+# solutie cu `coalesce` - vezi mai jos
+# 
+# 
 
 # # -- ############################################################################
 # # -- Care sunt piesele de pe albumele formatiei `Black Sabbath`
@@ -75,9 +86,19 @@ temp <- artist %>%
 
 
 # # -- ############################################################################
-# # -- 				  COALESCE
+# # --                               COALESCE
 # # -- ############################################################################
-# #
+
+#############################################################################
+##-- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
+##--   la atributul `state`, in locul valorii NULL, afisati `-`
+#############################################################################
+
+temp <- customer %>%
+    select (customerid:lastname, state) %>%
+    mutate(state2 = coalesce(state, '-'))
+
+
 # # -- ############################################################################
 # # -- Sa se afiseze, in ordine alfabetica, toate titlurile pieselor de pe
 # # -- albumele formatiei `Black Sabbath`, impreuna cu autorul (compozitor) lor;

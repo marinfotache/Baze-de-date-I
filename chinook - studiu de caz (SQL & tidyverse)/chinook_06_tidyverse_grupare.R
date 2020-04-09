@@ -323,3 +323,30 @@ temp <- artist %>%
 # -- Care este angajatul cu cei mai multi subordonati directi ? (de ordinul 1)
 #
 #
+
+
+############################################################################
+## 	   La ce intrebari raspund urmatoarele interogari ?
+############################################################################
+
+##
+invoice %>%
+        mutate (year = lubridate::year(invoicedate)) %>%
+        distinct(year) %>%
+        count()
+
+##
+invoice %>%
+        mutate (year = lubridate::year(invoicedate)) %>%
+        group_by(year) %>%
+        summarise(n = n())
+
+
+##
+invoice %>%
+        mutate (year = lubridate::year(invoicedate)) %>%
+        group_by(year) %>%
+        summarise(n = n_distinct(customerid))
+
+
+        

@@ -283,3 +283,28 @@ temp <-
 # --   iar coloanele fiecarui gen muzical (prima coloana va fi numele artistului);
 # --   calculati numarul de piese ale fiecarui artist pe fiecare gen muzical
 #
+
+
+
+
+############################################################################
+## 	   La ce intrebari raspund urmatoarele interogari ?
+############################################################################
+
+##
+temp <- artist %>%
+        filter(name == 'U2') %>%
+        select (artistid) %>%
+        inner_join(album) %>%
+        inner_join(track) %>%
+        select(-unitprice) %>%
+        rename (track_name = name, album_title = title) %>%
+        left_join(invoiceline) %>%
+        mutate(sales = coalesce(quantity * unitprice, 0)) %>%
+        group_by(track_name, album_title) %>%
+        summarise(sales = sum(sales)) %>%
+        arrange(album_title, track_name)
+        
+        
+
+

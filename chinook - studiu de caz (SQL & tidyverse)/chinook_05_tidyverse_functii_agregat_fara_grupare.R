@@ -190,4 +190,23 @@ temp <- invoice %>%
 #
 # -- Cati subordonati are, in total (pe toate nivelurile) angajatul xxxxxx?
 #
-#
+
+
+
+############################################################################
+## 	   La ce intrebari raspund urmatoarele interogari ?
+############################################################################
+
+
+##
+invoice %>%
+        summarise(first_day = min(invoicedate), last_day = max(invoicedate)) %>%
+        mutate (range = last_day - first_day) %>%
+        transmute(range)
+
+##
+temp <- track %>%
+        filter (milliseconds / 1000 > mean(milliseconds/1000))
+
+
+
