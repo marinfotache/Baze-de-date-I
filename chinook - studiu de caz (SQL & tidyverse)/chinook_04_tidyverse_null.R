@@ -1,11 +1,12 @@
-# # ####       -- 		Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
-#
-#
-# # -- 04: Tratamentul (meta)valorilor NA (echivalentul NULL din SQL)
-# # -- Atentie: valorile NULL au alt regim in limbajul R!!!!
-#
+################################################################################
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+################################################################################
+###        04: Tratamentul (meta)valorilor NA (echivalentul NULL din SQL)
+###             Atentie: valorile NULL au alt regim in limbajul R!!!!
+################################################################################
 # ultima actualizare: 2020-03-26
-# #
+
+
 library(tidyverse)
 library(lubridate)
 

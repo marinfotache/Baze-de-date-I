@@ -1,10 +1,10 @@
-# -- 		   Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
-# --
-# -- 05: Functii agregat fara grupare
-# --
-#-- ultima actualizare: 2020-03-26
-#
-#
+################################################################################
+###             Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+################################################################################
+###                     05: Functii agregat fara grupare
+################################################################################
+### ultima actualizare: 2020-03-26
+
 library(tidyverse)
 library(lubridate)
 

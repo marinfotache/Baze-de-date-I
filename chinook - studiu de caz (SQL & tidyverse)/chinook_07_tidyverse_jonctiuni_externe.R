@@ -1,10 +1,10 @@
-#
-# # -- 		Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
-# # --
-# # -- 07: Jonctiuni externe
-# # --
-# # -- ultima actualizare: 2020-04-08
-# #
+################################################################################
+###  		Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+################################################################################
+###                             07: Jonctiuni externe
+################################################################################
+### -- ultima actualizare: 2020-04-09
+
 library(tidyverse)
 library(lubridate)
 
@@ -46,28 +46,41 @@ temp <- artist %>%
 # # -- 			  fara albume, sa se afiseze `0`
 # # -- ############################################################################
 
-# solutie bazata pe `left_join` si `count` - solutie eronata (
-# cei care nu au nicun album apar cu 1 (datorita `count`-ului))
+# solutie bazata pe `left_join` si `count` - solutie eronata 
+# (cei care nu au nicun album apar cu 1 (datorita `count`-ului))
 temp <- artist %>%
      left_join(album) %>%
      count(name) %>%
      arrange(name)
 
 
-# solutie corecta
+# solutie corecta bazata pe `sum(if_else(...`
 temp <- artist %>%
         left_join(album) %>%
         group_by(name) %>%
         summarise(n = sum(if_else(is.na(title), 0, 1)))
 
 
+# solutie corecta bazata pe `sum(case_when(...`
+temp <- artist %>%
+        left_join(album) %>%
+        group_by(name) %>%
+        summarise(n = sum(
+                case_when(
+                        is.na(title) ~ 0, 
+                        TRUE ~ 1
+                        )))
+
+
 
 # #
 # # -- ############################################################################
 # # -- 	   Care sunt artistii care, momentan, nu au niciun album preluat in BD?
+#   --                                   (continuare)
 # # -- ############################################################################
 
-# solutia bazata pe `left_join` si `count` NU FUNCTIONEAZA!!!
+# asa cum am vazut mai sus, solutia bazata pe `left_join` si `count` 
+# NU FUNCTIONEAZA!!!
 temp <- artist %>%
      left_join(album) %>%
      count(name, na.rm = TRUE) %>%
@@ -95,7 +108,7 @@ temp <- artist %>%
      arrange(name)
 
 
-# ... insa poate fi adaptata
+# ... insa poate fi pusa la punct folosind ideea de mai sus (`sum(if_else...`)
 temp <- artist %>%
      left_join(album) %>%
      group_by(name) %>%
@@ -106,10 +119,64 @@ temp <- artist %>%
 
 
 
+############################################################################
+## 		Afisati, pentru fiecare client din baza de date,
+## 	  vanzarile pe anul 2010 (in raport trebuie inclusi si clientii
+##                 pentru care nu sunt vanzari in 2010)
+############################################################################
+
+# solutie bazata pe `if_else`
+temp <- customer %>%
+     select (customerid:lastname, city:country) %>%
+          left_join(
+               invoice %>%
+                    transmute(customerid, year = lubridate::year(lubridate::ymd(invoicedate)),
+                              total) %>%
+                    filter (year == 2010) %>%
+               group_by(customerid, year) %>%
+               summarise (sales = sum(total))
+          ) %>%
+     mutate(year = if_else(is.na(year), 2010, year), 
+            sales = if_else(is.na(sales), 0, sales))
+            
+
+# solutie bazata pe `case_when`
+temp <- customer %>%
+     select (customerid:lastname, city:country) %>%
+          left_join(
+               invoice %>%
+                    transmute(customerid, year = lubridate::year(lubridate::ymd(invoicedate)),
+                              total) %>%
+                    filter (year == 2010) %>%
+               group_by(customerid, year) %>%
+               summarise (sales = sum(total))
+          ) %>%
+     mutate(year = case_when(
+                is.na(year) ~ 2010, 
+                TRUE ~ year), 
+            sales = case_when(
+                is.na(sales) ~ 0, 
+                TRUE ~ sales))
+
+
+# solutie bazata pe `coalesce`
+temp <- customer %>%
+     select (customerid:lastname, city:country) %>%
+          left_join(
+               invoice %>%
+                    transmute(customerid, year = lubridate::year(lubridate::ymd(invoicedate)),
+                              total) %>%
+                    filter (year == 2010) %>%
+               group_by(customerid, year) %>%
+               summarise (sales = sum(total))
+          ) %>%
+     mutate(year = coalesce(year, 2010), sales = coalesce(sales, 0))
+
+
 
 # # -- ############################################################################
-# # -- 			Afisati, pentru fiecare client, pe trei linii separate,
-# # -- 					vanzarile pe anii 2010, 2011 si 2012
+# # -- 		Afisati, pentru fiecare client, pe trei linii separate,
+# # -- 		      vanzarile pe anii 2010, 2011 si 2012
 # # -- ############################################################################
 
 # solutie corecta & completa
@@ -164,8 +231,8 @@ temp <- bind_rows(
 
 
 # # -- ############################################################################
-# # -- 			Afisati, pentru fiecare client, pe coloane separate,
-# # -- 					vanzarile pe anii 2010, 2011 si 2012
+# # -- 		Afisati, pentru fiecare client, pe coloane separate,
+# # -- 			vanzarile pe anii 2010, 2011 si 2012
 # # -- ############################################################################
 
 

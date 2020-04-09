@@ -60,8 +60,8 @@ ORDER BY name
 
 
 -- ############################################################################
--- 			Afisati, pentru fiecare client din baza de date
--- 					vanzarile pe anul 2010 (in raport trebuie inclusi si clientii
+-- 			     Afisati, pentru fiecare client din baza de date,
+-- 			vanzarile pe anul 2010 (in raport trebuie inclusi si clientii
 --          pentru care nu sunt vanzari in 2010)
 -- ############################################################################
 

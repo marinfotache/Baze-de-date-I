@@ -1,9 +1,10 @@
-# -- 		Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
-# --
-# -- 01: Filtrare simpla, regular expressions, structuri CASE
-# --
+################################################################################
+###           Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+################################################################################
+###        01: Filtrare simpla, regular expressions, structuri CASE
+################################################################################
 # -- ultima actualizare: 2020-02-26
-#
+
 #install.packages('tidyverse')
 library(tidyverse)
 library(lubridate)

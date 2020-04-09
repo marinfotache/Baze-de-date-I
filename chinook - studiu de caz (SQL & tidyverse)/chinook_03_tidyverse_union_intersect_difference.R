@@ -1,10 +1,10 @@
-####       -- 		Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
-# # --
-# # -- 03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
-# # --
-# # -- ultima actualizare: 2020-03-10
-# #
-#install.packages('tidyverse')
+################################################################################
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+################################################################################
+###             03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
+################################################################################
+### ultima actualizare: 2020-03-10
+
 library(tidyverse)
 library(lubridate)
 

@@ -1,10 +1,10 @@
-# -- 		Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
-# --
-# -- 06: Grupare - group by, subtotaluri, having
-# --
-#-- ultima actualizare: 2020-03-31
+################################################################################
+### 	     Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+################################################################################
+###              06: Grupare - group by, subtotaluri, having
+################################################################################
+### ultima actualizare: 2020-03-31
 
-#
 #
 library(tidyverse)
 library(lubridate)

@@ -1,14 +1,12 @@
-####       -- 		Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
-# # --
-# # -- 02: Jonctiuni interne
-# # --
-# # -- ultima actualizare: 2020-03-22
-# #
-# #
-#install.packages('tidyverse')
+################################################################################
+###           Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+################################################################################
+###                         02: Jonctiuni interne
+################################################################################
+### ultima actualizare: 2020-03-22
+
 library(tidyverse)
 library(lubridate)
-
 setwd('/Users/marinfotache/Google Drive/Baze de date 2020/Studii de caz/chinook')
 load("chinook.RData")
 
