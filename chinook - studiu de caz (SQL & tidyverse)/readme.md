@@ -34,6 +34,6 @@ https://transcripts.gotomeeting.com/#/s/75b9373aead17568c9f9c8a2f523660acd9ce7ae
 10. Înregistrarea (video) cursului din 1 aprilie (SPE2) - grupări
 https://transcripts.gotomeeting.com/#/s/3a0a2623212e10fe8d880107cb16ac50abc4329191eca6a89d769cb4f640afa7
 
-
-
+11. Înregistrarea (video) cursului din 8 aprilie (SPE2) - CASE, joncțiuni externe
+https://transcripts.gotomeeting.com/#/s/44debd4b83bb294bd4d6d341f4bf6ea07bccd77979f8933addd7ff1ce4d1d14a
 
