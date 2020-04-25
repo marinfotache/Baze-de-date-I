@@ -1,7 +1,8 @@
 ################################################################################
-### 		          Interogari tidyverse - BD Chinook - IE si SPE:
+### 		    Interogari tidyverse - BD Chinook - IE si SPE:
 ################################################################################
-###   08: Subconsultari in clauzele WHERE si HAVING. Diviziune relationala (1)
+###   08: Subconsultari SQL in clauzele WHERE si HAVING si echivalentele
+###                  lor in `tidyverse`. Diviziune relationala (1)
 ################################################################################
 ### ultima actualizare: 2020-04-24
 
