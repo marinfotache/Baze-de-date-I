@@ -4,7 +4,7 @@
 ###   08: Subconsultari SQL in clauzele WHERE si HAVING si echivalentele
 ###                  lor in `tidyverse`. Diviziune relationala (1)
 ################################################################################
-### ultima actualizare: 2020-04-24
+### ultima actualizare: 2020-04-28
 
 
 library(tidyverse)
@@ -14,7 +14,7 @@ setwd('/Users/marinfotache/Google Drive/Baze de date 2020/Studii de caz/chinook'
 load("chinook.RData")
 
 ############################################################################
-## 		Echivalenta subconsultarilor SQL din clauza WHERE
+###         Echivalenta subconsultarilor SQL din clauza WHERE
 ############################################################################
 
 ############################################################################
@@ -22,7 +22,7 @@ load("chinook.RData")
 #     			lansat albumul `Houses of the Holy`
 ############################################################################
 
-# solutie echivalenta auto-jonctiunii, fara afisarea aristului,
+# solutie echivalenta auto-jonctiunii, fara afisarea artistului,
 # cu includerea albumului-ancora ('Houses Of The Holy')
 temp <- album %>%
      filter (title == 'Houses Of The Holy') %>%
@@ -104,7 +104,6 @@ temp <- track %>%
                               filter (title == 'Achtung Baby' & name == 'U2') %>%
                               pull(albumid)
                   )
-
 
 
 
@@ -597,9 +596,53 @@ temp <- artist %>%
 # #
 # # -- Care primul (sau primii) angajat(i) in companie?
 # #
-# # -- Care sunt artistii care au in baza de date mai multe albume decat formatia `Queen`?
+# # -- Care sunt artistii care au in baza de date mai multe albume decat 
+#       formatia `Queen`?
 # #
 # #
+
+
+
+
+############################################################################
+## 	   La ce intrebari raspund urmatoarele interogari ?
+############################################################################
+
+##
+temp <- customer %>%
+        group_by(country) %>%
+        summarise(n = n()) %>%
+        ungroup() %>%
+        mutate (n_brazil = if_else(country == 'Brazil', n, 0L)) %>%
+        mutate(n_brazil = max(n_brazil)) %>%
+        filter (n >= n_brazil)
+
+
+
+##
+temp <- invoice %>%
+        transmute(year = year(invoicedate), customerid) %>%
+        inner_join(customer) %>%
+        distinct(country, year) %>%
+        inner_join(
+                invoice %>%
+                        transmute(year = year(invoicedate), customerid) %>%
+                        inner_join(customer) %>%
+                        filter (country == 'Brazil') %>%
+                        select (year)) %>%
+        group_by(country) %>%
+        summarise(n = n_distinct(year)) %>%
+        ungroup() %>%
+        filter ( n %in%
+                        (invoice %>%
+                                transmute(year = year(invoicedate), customerid) %>%
+                                inner_join(customer) %>%
+                                filter (country == 'Brazil') %>%
+                                summarise (n = n_distinct(year))) [['n']]
+                         )        
+        
+
+
 
 
 
