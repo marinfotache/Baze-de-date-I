@@ -40,5 +40,8 @@ https://transcripts.gotomeeting.com/#/s/44debd4b83bb294bd4d6d341f4bf6ea07bccd779
 12. Înregistrarea (video) cursului din 9 aprilie (IE2) - recapitulare `tidyverse` - test 2
 https://transcripts.gotomeeting.com/#/s/2bd03383fe0be8f587c30ec24bb77523736e696732c82301264ef9f2fafbb399
 
-13. Înregistrarea (video) cursului din 29 aprilie (SPE) - subconsultări (1)
+13. Înregistrarea (video) cursului din 29 aprilie (SPE2) - subconsultări (1)
 https://transcripts.gotomeeting.com/#/s/a879a1925222540c2d3f3f692f209c4cd0781c7371b22bb1f236f9efdeea12fe
+
+12. Înregistrarea (video) cursului din 30 aprilie (IE2) - subconsultări (2)
+https://transcripts.gotomeeting.com/#/s/5f77033412b253655528890deb6e051035af97c654811ab8b06e39c2d9d499dd
