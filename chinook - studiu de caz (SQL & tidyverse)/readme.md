@@ -43,5 +43,5 @@ https://transcripts.gotomeeting.com/#/s/2bd03383fe0be8f587c30ec24bb77523736e6967
 13. Înregistrarea (video) cursului din 29 aprilie (SPE2) - subconsultări (1)
 https://transcripts.gotomeeting.com/#/s/a879a1925222540c2d3f3f692f209c4cd0781c7371b22bb1f236f9efdeea12fe
 
-12. Înregistrarea (video) cursului din 30 aprilie (IE2) - subconsultări (2)
+14. Înregistrarea (video) cursului din 30 aprilie (IE2) - subconsultări (2)
 https://transcripts.gotomeeting.com/#/s/5f77033412b253655528890deb6e051035af97c654811ab8b06e39c2d9d499dd
