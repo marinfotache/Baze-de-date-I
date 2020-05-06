@@ -25,6 +25,7 @@ FROM album album1
 	INNER JOIN  album album2 ON album1.artistid = album2.artistid
 ORDER BY 2
 
+
 -- solutie bazata pe auto-jonctiune, care exclude albumul 'Houses Of The Holy'
 SELECT album2.*, artist.name AS artist_name
 FROM album album1
@@ -120,8 +121,9 @@ WHERE artist.name = 'Iron Maiden' AND title = 'Fear Of The Dark'
 -- solutie bazata pe o subconsultare ce foloseste functia MIN
 SELECT *
 FROM invoice
-WHERE invoicedate = (SELECT MIN(invoicedate)
-					FROM invoice)
+WHERE invoicedate = (
+		SELECT MIN(invoicedate)
+		FROM invoice)
 
 -- solutie ce evita functia MIN (prin operatorul ALL)
 SELECT *
