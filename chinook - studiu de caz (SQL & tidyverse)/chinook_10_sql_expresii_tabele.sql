@@ -141,6 +141,55 @@ ORDER BY 1
 
 
 -- ############################################################################
+-- 			Afisati, pentru fiecare client, pe coloane separate,
+-- 					vanzarile pe anii 2010, 2011 si 2012 (reluare),
+--  			la care adaugati un rand pentru total general
+-- ############################################################################
+
+WITH
+	sales2010 AS (SELECT customerid, SUM(total) AS sales
+		 	 FROM invoice
+		 	 WHERE EXTRACT (YEAR FROM invoicedate) = 2010
+		 	 GROUP BY customerid),
+	sales2011 AS (SELECT customerid, SUM(total) AS sales
+		 	 FROM invoice
+		 	 WHERE EXTRACT (YEAR FROM invoicedate) = 2011
+		 	 GROUP BY customerid),
+	sales2012 AS (SELECT customerid, SUM(total) AS sales
+		 	 FROM invoice
+		 	 WHERE EXTRACT (YEAR FROM invoicedate) = 2012
+		 	 GROUP BY customerid),
+	sales2010_2012 AS
+			(
+			SELECT 'TOTAL', NULL, NULL, NULL,
+				(SELECT SUM(total)
+				 FROM invoice
+				 WHERE EXTRACT (YEAR FROM invoicedate) = 2010  ) as sales2010,
+				(SELECT SUM(total)
+				 FROM invoice
+				 WHERE EXTRACT (YEAR FROM invoicedate) = 2011  ) as sales2011,
+				(SELECT SUM(total)
+				 FROM invoice
+				 WHERE EXTRACT (YEAR FROM invoicedate) = 2012  ) as sales2012
+			)
+SELECT 1 AS ordine, x.*
+FROM
+	(SELECT lastname || ' ' || firstname AS customer_name,
+		city, state, country,
+		COALESCE(sales2011.sales, 0) AS sales2010,
+		COALESCE(sales2011.sales, 0) AS sales2011,
+		COALESCE(sales2012.sales, 0) AS sales2012
+	FROM customer
+		LEFT JOIN sales2010 ON customer.customerid = sales2010.customerid
+		LEFT JOIN sales2011 ON customer.customerid = sales2011.customerid
+		LEFT JOIN sales2012 ON customer.customerid = sales2012.customerid ) x
+UNION
+SELECT 2, sales2010_2012.*
+FROM sales2010_2012
+ORDER BY ordine, customer_name
+
+
+-- ############################################################################
 --  	Afisati ponderea fiecarei luni in vanzarile anului 2010 (reluare)
 -- ############################################################################
 
