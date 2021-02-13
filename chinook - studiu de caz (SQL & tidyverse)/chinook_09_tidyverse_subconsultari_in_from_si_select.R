@@ -9,7 +9,7 @@
 library(tidyverse)
 library(lubridate)
 
-setwd('/Users/marinfotache/Google Drive/Baze de date 2020/Studii de caz/chinook')
+setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
 
@@ -79,8 +79,6 @@ temp <- min(invoice$invoicedate) %>%
 # # -- 	   Care sunt facturile din prima saptamana de vanzari? (reluare)
 ############################################################################
 
-# toate solutile din scriptul anterior (`chinook_08_tidyverse...`) care nu 
-# folosesc `pull()` se apropie de logica de mai sus; 
 
 # ... solutie noua:
 temp <- seq(

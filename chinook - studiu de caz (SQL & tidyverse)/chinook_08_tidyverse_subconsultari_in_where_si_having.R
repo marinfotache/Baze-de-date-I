@@ -9,8 +9,7 @@
 
 library(tidyverse)
 library(lubridate)
-
-setwd('/Users/marinfotache/Google Drive/Baze de date 2020/Studii de caz/chinook')
+setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
 ############################################################################
@@ -30,7 +29,8 @@ temp <- album %>%
      inner_join(album)
 
 
-# solutie echivalenta auto-jonctiunii, cu afisarea aristului,
+
+# solutie echivalenta auto-jonctiunii, cu afisarea artistului,
 # si includerea albumului-ancora ('Houses Of The Holy')
 temp <- album %>%
      filter (title == 'Houses Of The Holy') %>%
@@ -319,7 +319,6 @@ temp <- employee %>%
 ###           Echivalenta subconsultarilor SQL din clauza HAVING
 ############################################################################
 
-
 ############################################################################
 ##    Care sunt albumele formatiei Led Zeppelin care au mai multe piese
 ##                  decat albumul `IV`
@@ -602,6 +601,100 @@ temp <- artist %>%
 # #
 
 
+##
+## Care sunt piesele formatiei `Led Zeppelin` mai lungi decat `Stairway to Heaven`
+##     de pe albumul `IV`
+## 
+
+## solutie echivalenta unei interogari SQL ce foloseste subconsultare in 
+## clauza WHERE
+temp <- artist %>%
+        filter (name == 'Led Zeppelin') %>%
+        select (artistid) %>%
+        inner_join(album) %>%
+        inner_join(track) %>%
+        filter (milliseconds > 
+                (
+                       track %>%
+                               filter (name == 'Stairway To Heaven') %>%
+                               inner_join(album) %>%
+                               filter (title == 'IV') %>%
+                               inner_join(artist %>%
+                                                  filter (name == 'Led Zeppelin') %>%
+                                                  select (artistid)) %>%
+                               select (milliseconds) %>%
+                               pull(milliseconds)
+                )        
+                        ) %>%
+        select (name, title, milliseconds) %>%
+        arrange(milliseconds)
+
+
+
+## solutie bazata pe crearea unei coloane ce contine valoarea de referinta
+temp <- artist %>%
+        filter (name == 'Led Zeppelin') %>%
+        select (artistid) %>%
+        inner_join(album) %>%
+        inner_join(track) %>%
+        mutate (milliseconds_stairway = 
+                        if_else(name == 'Stairway To Heaven' & title == 'IV', 
+                                milliseconds, 0L)) %>%
+        mutate (milliseconds_stairway = max(milliseconds_stairway)) %>%
+        filter (milliseconds > milliseconds_stairway) %>%
+        select (name, title, milliseconds) %>%
+        arrange(milliseconds)
+
+glimpse(track)
+
+
+
+##
+## Care sunt albumele formatiei `Led Zeppelin` mai lungi decat  albumul `IV`
+## 
+
+## solutie bazata pe crearea unei coloane ce contine valoarea de referinta
+temp <- artist %>%
+        filter (name == 'Led Zeppelin') %>%
+        select (artistid) %>%
+        inner_join(album) %>%
+        inner_join(track) %>%
+        group_by(title) %>%
+        summarise(album_duration = sum(milliseconds) / 1000) %>%
+        ungroup() %>%
+        mutate (duration_IV = if_else(title == 'IV', album_duration, 0)) %>%
+        mutate(duration_IV = max(duration_IV)) %>%
+        filter (album_duration > duration_IV) %>%
+        arrange(album_duration)
+
+
+
+## solutie echivalenta unei interogari SQL ce foloseste subconsultare in 
+## clauza HAVING
+temp <- artist %>%
+        filter (name == 'Led Zeppelin') %>%
+        select (artistid) %>%
+        inner_join(album) %>%
+        inner_join(track) %>%
+        group_by(title) %>%
+        summarise(album_duration = sum(milliseconds) / 1000) %>%
+        ungroup() %>%
+        filter(album_duration > 
+                       (      # "subconsultare" care furnizeaza durata albumului `IV`
+                        artist %>%
+                                filter (name == 'Led Zeppelin') %>%
+                                select (artistid) %>%
+                                inner_join(album) %>%
+                                filter (title == 'IV') %>%
+                                inner_join(track) %>%
+                                summarise(album_duration = sum(milliseconds) / 1000) %>%
+                                pull(album_duration)
+                       )
+                       )  %>%
+        arrange(album_duration)
+
+
+
 
 
 ############################################################################
@@ -616,6 +709,45 @@ temp <- customer %>%
         mutate (n_brazil = if_else(country == 'Brazil', n, 0L)) %>%
         mutate(n_brazil = max(n_brazil)) %>%
         filter (n >= n_brazil)
+
+
+# echivalent
+temp <- customer %>%
+        group_by(country) %>%
+        summarise(n = n()) %>%
+        ungroup() %>%
+        filter (n >= (
+                # subconsultare care furnizeaza numarul clientilor din `Brazil`
+                customer %>%
+                        filter (country == 'Brazil') %>%
+                        summarise (n = n()) %>%
+                        pull(n)
+        ))
+
+
+# Brazil trebuie exclusa din rezultat
+temp <- customer %>%
+        group_by(country) %>%
+        summarise(n = n()) %>%
+        ungroup() %>%
+        mutate (n_brazil = if_else(country == 'Brazil', n, 0L)) %>%
+        mutate(n_brazil = max(n_brazil)) %>%
+        filter (n >= n_brazil & country != 'Brazil')
+
+
+temp <- customer %>%
+        group_by(country) %>%
+        summarise(n = n()) %>%
+        ungroup() %>%
+        filter (n >= (
+                # subconsultare care furnizeaza numarul clientilor din `Brazil`
+                customer %>%
+                        filter (country == 'Brazil') %>%
+                        summarise (n = n()) %>%
+                        pull(n)
+        ) &  country != 'Brazil')
+
+
 
 
 
