@@ -4,6 +4,9 @@ Interogări SQL și tidyverse (R) pentru baza de date `chinook`.
 
 Linkuri către tutoriale video pentru lucrul cu BD `chinook` (este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie (pe calculatorul meu NU se aude sunetul la redarea directă pe OneDrive), de aceea vă recomand să descărcați video-tutoriale și să le vizionați cu `VLC Player` sau ceva similar):
 
+0. Explicații sumare despre schema bazei de date `chinook`: 
+https://1drv.ms/u/s!AgPvmBEDzTOSitoIaNVx3kQboMWJWA?e=kfO6fV
+
 1. Descărcarea (de pe GitHub) fișierelor necesare creării și interogării BD `chinook` (SQL și tidyverse)
 https://1drv.ms/v/s!AgPvmBEDzTOSibR5SGeJMSwR4rqCJA?e=tseYlJ
 
