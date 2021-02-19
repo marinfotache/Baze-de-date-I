@@ -3,6 +3,8 @@ Resurse necesare cursului `Baze de date I` (`Univ. Al.I.Cuza` Iași, `Facultatea
 
 Cea mai mare parte a interogărilor `SQL` și `tidyverse` discutate la curs sunt postate în secțiunea/directorul `chinook - studiu de caz (SQL & tidyverse)` (inclusiv linkuri către tutoriale video).
 
+Din februarie 2021 a fost adăugată secțiunea `covid - studiu de caz (SQL & tidyverse)`
+
 În secțiunea `Teste Moodle` sunt postate schema bazei de date `Rock` și câteva înregistrări din fiecare tabelă. 
 
 Pentru deprinderea/aprofundarea lucrului în limbajul R (tidyverse), vă recomand materialele postate în primele trei secțiuni/directoare de pe pagina:
