@@ -31,7 +31,7 @@ WITH temp AS (
     FROM covid
 	)
 SELECT *
-FROM temp
+FROM temp ;
 
 ALTER TABLE covid_new ADD PRIMARY KEY (country_code, report_date) ;
 
