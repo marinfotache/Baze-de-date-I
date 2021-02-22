@@ -1,8 +1,30 @@
 -- 						Interogari BD Chinook - IE si SPE:
 --
 -- SQL 01: Filtrare simpla, regular expressions, structuri CASE
---
--- ultima actualizare: 2020-03-30
+-- Functii/operatori/optiuni SQL utilizate (si prezente in subiectele de la testele Moodle urmatoare)
+--  	`EXTRACT` (year, month, ...)
+-- 		`CAST`
+-- 		`SUBSTRING`
+-- 		`REGEXP_REPLACE`
+-- 		`LENGTH`
+-- 		`CASE ... WHEN ...`
+-- 		`LIKE`
+-- 		`LENGTH`
+-- 		`IS NULL`
+-- 		`POSITION`
+-- 		`SPLIT_PART`
+-- 		`REPLACE`
+-- 		`regexp_match`
+
+-- `UPPER`, `LOWER`, ...
+-- `NOT` ...
+-- `IN` (lista de valori, nu sub-consultati)
+-- `TO_DATE` ...
+-- 	`SUBSTR`
+-- `LEFT`, `RIGHT`, ...
+
+
+-- ultima actualizare: 2021-02-22
 
 
 -- ############################################################################
@@ -89,16 +111,16 @@ order by 1,2
 -- 			Care este lungimea numelui pentru fiecare artist/formatie?
 -- ############################################################################
 
-select artist.*, length(name) as lungime_nume
+select artist.*, LENGTH(name) as lungime_nume
 from artist
 
 
 --
 -- Sa se afiseze artistii in ordinea descrescatoare a lungimii numelui
 --
-select artist.*, length(name) as lungime_nume
+select artist.*, LENGTH(name) as lungime_nume
 from artist
-order by length(name) desc
+order by LENGTH(name) desc
 
 
 
