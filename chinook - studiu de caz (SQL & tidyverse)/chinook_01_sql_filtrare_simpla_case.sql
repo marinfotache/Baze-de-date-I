@@ -162,7 +162,7 @@ from artist
 SELECT artist.*,
 	REGEXP_REPLACE(name,'(^.{5})(.+)(.{5}$)','\1...\3') as nume_formatat,
 	length(name) as lungime_nume
-from artist
+FROM artist
 
 
 

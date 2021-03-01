@@ -3,11 +3,29 @@
 ################################################################################
 ###        01: Filtrare simpla, regular expressions, structuri CASE
 ################################################################################
+### Functii/operatori/optiuni utilizate (si prezente in subiectele 
+###     de la testele Moodle urmatoare)
+### `year`, `month`, ... (din pachetul `lubridate`)
+### `nchar`
+### `case_when`
+### `if_else`
+### `substr`, `substring`
+### `str_detect`
+### `str_count`
+### `word`
+### `str_replace_all`
+### `str_remove_all`
+
+
+
 # -- ultima actualizare: 2020-02-26
 
 #install.packages('tidyverse')
 library(tidyverse)
 library(lubridate)
+
+
+
 
 
 ############################################################################
