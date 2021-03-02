@@ -1,27 +1,21 @@
-# Scripturi și tutoriale video - interogări SQL și tidyverse (R) pentru baza de date `chinook` și baza de date `covid`.
+# Scripturi și tutoriale video - interogări SQL și tidyverse (R) pentru bazele de date `chinook` și`covid`.
 
-În R (tidyverse), pentru rularea scripturilor de interogarea BD `chinook` nu e nevoie să importați datele din PostgreSQL, ci puteți încarca fișierul `chinook.RData` din acest director.
+În R (tidyverse), pentru rularea scripturilor de interogare a BD `chinook` nu e nevoie să importați datele din PostgreSQL, ci puteți încarca fișierul `chinook.RData` din această secțiune.
 
-Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie (pe calculatorul meu NU se aude sunetul la redarea directă pe OneDrive), de aceea vă recomand să descărcați video-tutoriale și să le vizionați cu `VLC Player` sau ceva similar):
+Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie (pe calculatorul meu NU se aude sunetul la redarea directă pe OneDrive). De aceea, vă recomand să descărcați video-tutoriale și să le vizionați cu `VLC Player` sau ceva similar.
 
 ### Video-tutoriale (vor fi actualizate săptămânal în perioada februarie-mai):
 
-#### 1. Explicații sumare despre schema bazei de date `chinook` și bd `rock` (înregistrare `Curs Baze de date CIG2 (2021-02-16) - schema chinook`): 
-  https://1drv.ms/u/s!AgPvmBEDzTOSitoIaNVx3kQboMWJWA?e=kfO6fV
+##### 1. Schemele bazelor de date `chinook` și `rock`
+- [Înregistrare Curs Baze de date 2021-02-16 CIG2](https://1drv.ms/v/s!AgPvmBEDzTOSitoIaNVx3kQboMWJWA?e=AauM6b)   
+- Înregistrări mai vechi:
+  - [descărcarea (de pe GitHub) fișierelor necesare creării și interogării BD `chinook` în SQL și tidyverse (înregistrare 2020-03-21)](https://1drv.ms/v/s!AgPvmBEDzTOSibR5SGeJMSwR4rqCJA?e=tseYlJ)
+  - [crearea și popularea tabelelor bd `chinook` în PostgreSQL (înregistrare 2020-03-21)](https://1drv.ms/v/s!AgPvmBEDzTOSibR6MiHulPoMzD0f2g?e=nWPfr1)
+  - [lansarea interogărilor SQL în `pgAdmin` (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUAE_zQuzc3CMUaeg?e=ydheXU)
 
 
-#### 2. Crearea bazei de date `chinook` (și bazei de date COVID) în PostgreSQL (pgAdmin)
 
-#####  2.1 Înregistrare `Curs Baze de date IE2 (2021-02-22)` - descărcare (de pe GitHub) fișiere, creare și populare BD `chinook` și `covid`, primele interogări SQL  
-  https://1drv.ms/v/s!AgPvmBEDzTOSitxnFsPiIxcDHqainw?e=WsyULH 
 
-#####  2.2 Înregistrări mai vechi:    
-######    2.2.a Descărcarea (de pe GitHub) fișierelor necesare creării și interogării BD `chinook` în SQL și tidyverse (înregistrare 2020-03-21):
- https://1drv.ms/v/s!AgPvmBEDzTOSibR5SGeJMSwR4rqCJA?e=tseYlJ
-######    2.2.b Crearea și popularea tabelelor în PostgreSQL (înregistrare 2020-03-21): 
- https://1drv.ms/v/s!AgPvmBEDzTOSibR6MiHulPoMzD0f2g?e=nWPfr1
-######   2.2.c Lansarea interogărilor SQL în `pgAdmin` (înregistrare 2020-03-22):
- https://1drv.ms/v/s!AgPvmBEDzTOSibUAE_zQuzc3CMUaeg?e=ydheXU
 
 
 
