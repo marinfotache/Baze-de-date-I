@@ -15,14 +15,11 @@ Video-tutoriale (vor fi actualizate săptămânal în perioada februarie-mai):
   2.1 Înregistrare `Curs Baze de date IE2 (2021-02-22)` - descărcare (de pe GitHub) fișiere, creare și populare BD `chinook` și `covid`, primele interogări SQL:
     https://1drv.ms/v/s!AgPvmBEDzTOSitxnFsPiIxcDHqainw?e=WsyULH 
 
-  2.2 Înregistrări mai vechi:
-    
+  2.2 Înregistrări mai vechi:    
     2.2.a Descărcarea (de pe GitHub) fișierelor necesare creării și interogării BD `chinook` în SQL și tidyverse (înregistrare 2020-03-21):
       https://1drv.ms/v/s!AgPvmBEDzTOSibR5SGeJMSwR4rqCJA?e=tseYlJ
-    
     2.2.b Crearea și popularea tabelelor în PostgreSQL (înregistrare 2020-03-21): 
       https://1drv.ms/v/s!AgPvmBEDzTOSibR6MiHulPoMzD0f2g?e=nWPfr1
-
     2.2.c Lansarea interogărilor SQL în `pgAdmin` (înregistrare 2020-03-22):
       https://1drv.ms/v/s!AgPvmBEDzTOSibUAE_zQuzc3CMUaeg?e=ydheXU
 
