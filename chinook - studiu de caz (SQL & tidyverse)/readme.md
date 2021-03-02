@@ -10,12 +10,12 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
   https://1drv.ms/u/s!AgPvmBEDzTOSitoIaNVx3kQboMWJWA?e=kfO6fV
 
 
-2. Crearea bazei de date `chinook` (și bazei de date COVID) în PostgreSQL (pgAdmin)
+#### 2. Crearea bazei de date `chinook` (și bazei de date COVID) în PostgreSQL (pgAdmin)
 
-  2.1 Înregistrare `Curs Baze de date IE2 (2021-02-22)` - descărcare (de pe GitHub) fișiere, creare și populare BD `chinook` și `covid`, primele interogări SQL:
+#####  2.1 Înregistrare `Curs Baze de date IE2 (2021-02-22)` - descărcare (de pe GitHub) fișiere, creare și populare BD `chinook` și `covid`, primele interogări SQL:
     https://1drv.ms/v/s!AgPvmBEDzTOSitxnFsPiIxcDHqainw?e=WsyULH 
 
-  2.2 Înregistrări mai vechi:    
+#####  2.2 Înregistrări mai vechi:    
     2.2.a Descărcarea (de pe GitHub) fișierelor necesare creării și interogării BD `chinook` în SQL și tidyverse (înregistrare 2020-03-21):
       https://1drv.ms/v/s!AgPvmBEDzTOSibR5SGeJMSwR4rqCJA?e=tseYlJ
     2.2.b Crearea și popularea tabelelor în PostgreSQL (înregistrare 2020-03-21): 
