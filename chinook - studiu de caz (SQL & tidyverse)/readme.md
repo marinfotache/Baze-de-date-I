@@ -8,6 +8,9 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
 
 ##### 1. Schemele bazelor de date `chinook` și `rock`
 - [Înregistrare Curs Baze de date 2021-02-16 CIG2](https://1drv.ms/v/s!AgPvmBEDzTOSitoIaNVx3kQboMWJWA?e=AauM6b)   
+
+##### 2. Crearea bazei de date `chinook` (și bazei de date `covid`) în PostgreSQL (pgAdmin)
+- [Înregistrare `Curs Baze de date 2021-02-22 (IE2)`](https://1drv.ms/v/s!AgPvmBEDzTOSitxnFsPiIxcDHqainw?e=WtiiA5)
 - Înregistrări mai vechi:
   - [descărcarea (de pe GitHub) fișierelor necesare creării și interogării BD `chinook` în SQL și tidyverse (înregistrare 2020-03-21)](https://1drv.ms/v/s!AgPvmBEDzTOSibR5SGeJMSwR4rqCJA?e=tseYlJ)
   - [crearea și popularea tabelelor bd `chinook` în PostgreSQL (înregistrare 2020-03-21)](https://1drv.ms/v/s!AgPvmBEDzTOSibR6MiHulPoMzD0f2g?e=nWPfr1)
@@ -15,10 +18,7 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
 
 
 
-
-
-
-
+-- -- 
 
 5. Lansarea interogărilor `tidyverse` în `RStudio` (înregistrare 2020-03-22):
 https://1drv.ms/v/s!AgPvmBEDzTOSibUEiYNYUCEjl1isFg?e=uiNRqz
