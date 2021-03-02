@@ -1,11 +1,14 @@
-Interogări SQL și tidyverse (R) pentru baza de date `chinook`.
+Interogări SQL și tidyverse (R) pentru baza de date `chinook` și baza de date `covid`.
 
 În R (tidyverse), pentru rularea scripturilor de interogarea BD `chinook` nu e nevoie să importați datele din PostgreSQL, ci puteți încarca fișierul `chinook.RData` din acest director.
 
-Linkuri către tutoriale video pentru lucrul cu BD `chinook` (este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie (pe calculatorul meu NU se aude sunetul la redarea directă pe OneDrive), de aceea vă recomand să descărcați video-tutoriale și să le vizionați cu `VLC Player` sau ceva similar):
+Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie (pe calculatorul meu NU se aude sunetul la redarea directă pe OneDrive), de aceea vă recomand să descărcați video-tutoriale și să le vizionați cu `VLC Player` sau ceva similar):
+
+Video-tutoriale (vor fi actualizate săptămânal în perioada februarie-mai):
 
 1. Explicații sumare despre schema bazei de date `chinook` și bd `rock` (înregistrare `Curs Baze de date CIG2 (2021-02-16) - schema chinook`): 
   https://1drv.ms/u/s!AgPvmBEDzTOSitoIaNVx3kQboMWJWA?e=kfO6fV
+
 
 2. Crearea bazei de date `chinook` (și bazei de date COVID) în PostgreSQL (pgAdmin)
 
