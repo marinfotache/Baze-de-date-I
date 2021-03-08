@@ -22,6 +22,7 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
   - [Lansarea interogărilor tidyverse în RStudio (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUEiYNYUCEjl1isFg?e=uiNRqz)
 
 #### 4. Interogări SQL și `tidyverse` (1)
+- [Înregistrare Curs Baze de date 2021-03-08 IE2](https://1drv.ms/u/s!AgPvmBEDzTOSit1op8PpdNxnpjFIYQ?e=YKLleZ): primele interogări `tidyverse`
 
 - Înregistrări mai vechi:
   - [Înțelegerea interogărilor SQL (1) - joncțiune (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUG_8zl5QP6-oVjRA?e=lnNgma)
