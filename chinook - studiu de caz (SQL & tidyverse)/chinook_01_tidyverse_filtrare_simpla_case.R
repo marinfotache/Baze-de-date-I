@@ -1,9 +1,11 @@
 ################################################################################
-###           Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###        01: Filtrare simpla, regular expressions, structuri CASE
 ################################################################################
-### Functii/operatori/optiuni utilizate (si prezente in subiectele 
+# -- ultima actualizare: 2021-03-08
+################################################################################
+### Functii/operatori/optiuni utilizate (si prezente in subiectele
 ###     de la testele Moodle urmatoare)
 ### `year`, `month`, ... (din pachetul `lubridate`)
 ### `nchar`
@@ -17,15 +19,10 @@
 ### `str_remove_all`
 
 
-
-# -- ultima actualizare: 2020-02-26
-
 #install.packages('tidyverse')
 library(tidyverse)
+#install.packages('lubridate')
 library(lubridate)
-
-
-
 
 
 ############################################################################
@@ -33,8 +30,6 @@ library(lubridate)
 ############################################################################
 setwd('/Users/marinfotache/Downloads/chinook')
 load(file = 'chinook.RData')
-
-
 
 ############################################################################
 ###                            Interogari tidyverse                      ###
@@ -94,6 +89,28 @@ temp <- invoice %>%    # punctul de pornire: tabela/cadrul `invoice`
                                 #  criteriul de balotaj e `month`
 
 
+# rezultat cu o singura coloana (atentie la ordonare!!!!)
+temp <- invoice %>%    
+     mutate (                                    
+          year = lubridate::year(invoicedate),
+          month = lubridate::month(invoicedate)
+          ) %>%
+     transmute (year_month = paste(year, month, sep = '-')) %>%
+     distinct(year_month) %>%
+     arrange(year_month)        
+        
+
+# ordonarea e acum corecta        
+temp <- invoice %>%    
+     mutate (                                    
+          year = lubridate::year(invoicedate),
+          month = lubridate::month(invoicedate)) %>%
+     arrange(year, month) %>%       
+     transmute (year_month = paste(year, month, sep = '-')) %>%
+     distinct(year_month) 
+        
+        
+
 
 # Solutie 2 - `transmute`, `distinct`, `arrange`
 temp <- invoice %>%
@@ -134,10 +151,10 @@ temp <- artist %>%
 
 ############################################################################
 # # -- Sa se afiseze numele formatat al artistilor, conform urmatoarei cerinte:
-# # -- 1. pentru artistii cu numele lung de pana la 11 caractere, 
+# # -- 1. pentru artistii cu numele lung de pana la 11 caractere,
 #         se afiseaza numele intreg
 # # -- 2. pentru artistii cu numele mai lung de 11 caracterere,
-#         se extrag cinci caractere, se adauga `...` la mijloc 
+#         se extrag cinci caractere, se adauga `...` la mijloc
 #         si se finalizeaza cu ultimele cinci caractere
 ############################################################################
 
@@ -156,15 +173,21 @@ temp <- artist %>%
      mutate (nume_formatat = case_when(
           nchar(name) <= 11 ~ name,
           TRUE ~ paste0(substr(name, 1, 5), '...',
-                        substr(name, nchar(name) -4, nchar(name))))
+                        substr(name, nchar(name) - 4, nchar(name))))
      )
 
 
+paste('a', 'b')
+paste('a', 'b', 'c', sep = '###')
+paste0('a', 'b', 'c')
+
+
 
 ############################################################################
-# # -- Care sunt artistii sau formatiile cu numele alcatuit 
-# dintr-un singur cuvant ? (adica numele nu contine niciun spatiu)
+# # -- Care sunt artistii sau formatiile cu numele alcatuit
+# dintr-un singur cuvant ? (adica numele NU contine niciun spatiu)
 ############################################################################
+
 
 ###
 # solutie bazata pe `regular_expression` (`str_detect`)
@@ -176,9 +199,11 @@ temp <- artist %>%
 temp <- artist %>%
      filter( if_else(str_detect(name, ' '), FALSE, TRUE))
 
+
 # alti separatori intre cuvinte
 temp <- artist %>%
-     filter( if_else(str_detect(name, ' |/|\\.'), FALSE, TRUE))
+     filter( if_else(str_detect(name, ' |/|\\.|\\-'), FALSE, TRUE))
+
 
 # solutie bazata pe `regular_expression` (`str_detect`) si `case_when`
 temp <- artist %>%
@@ -186,14 +211,18 @@ temp <- artist %>%
              str_detect(name, ' ') ~ FALSE,
              TRUE ~ TRUE))
 
+
 # solutie bazata pe numararea spatiilor
 temp <- artist %>%
      mutate (nr_spatii = str_count(name, ' ')) %>%
      filter (nr_spatii == 0)
 
+
 #... varianta fara `mutate`
 temp <- artist %>%
      filter (str_count(name, ' ') == 0)
+
+
 
 # echivalent SPLIT_PART din SQL vom folosi functia `word`
 temp <- artist %>%
@@ -202,6 +231,7 @@ temp <- artist %>%
           al_doilea_cuvant = word(name, 2)
             ) %>%
      filter (is.na(al_doilea_cuvant))
+
 
 # solutie cu `str_replace_all` (echivalenta solutiei cu REPLACE din SQL)
 temp <- artist %>%
@@ -222,7 +252,7 @@ temp <- artist %>%
 
 
 ############################################################################
-# # -- Care sunt artistii sau formatiile cu numele alcatuit din cel 
+# # -- Care sunt artistii sau formatiile cu numele alcatuit din cel
 #   putin doua cuvinte ? (adica numele contine cel putin singur spatiu)
 ############################################################################
 
@@ -233,6 +263,7 @@ temp <- artist %>%
 # solutie bazata pe numararea spatiilor
 temp <- artist %>%
      filter (str_count(name, ' ') > 0)
+
 
 # echivalent SPLIT_PART din SQL vom folosi functia `word`
 temp <- artist %>%

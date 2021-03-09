@@ -1,5 +1,5 @@
 ################################################################################
-###           Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###                         02: Jonctiuni interne
 ################################################################################
@@ -166,7 +166,7 @@ temp <- artist %>%
 
 
 ############################################################################
-###   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori, 
+###   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori,
 ###               se numara bateristul `John Bonham`
 ############################################################################
 
@@ -209,7 +209,7 @@ temp <- album %>%
 
 
 #########################################################################
-###   Care este numele angajatului: lastname = 'Johnson' AND 
+###   Care este numele angajatului: lastname = 'Johnson' AND
 ###         firstname = 'Steve'
 #########################################################################
 
