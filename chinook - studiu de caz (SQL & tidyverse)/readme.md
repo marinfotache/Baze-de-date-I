@@ -17,7 +17,8 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
   - [lansarea interogărilor SQL în `pgAdmin` (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUAE_zQuzc3CMUaeg?e=ydheXU)
 
 #### 3. R/RStudio - instalarea pachetelor, încărcarea datelor, primele interogări `tidyverse`
-- [Înregistrare Curs Baze de date 2021-03-01 IE2](https://1drv.ms/u/s!AgPvmBEDzTOSit1IWqrgDpNBVAjfWw?e=Gnacwa)
+- [Înregistrare Curs Baze de date 2021-03-01 IE2](https://1drv.ms/u/s!AgPvmBEDzTOSit1IWqrgDpNBVAjfWw?e=Gnacwa): utilizare R/RStudio, instalare pachete, ...
+- [Înregistrare Curs Baze de date 2021-03-02 CIG2](https://1drv.ms/v/s!AgPvmBEDzTOSit1nwOFArzZExPslZQ?e=tTpt6w): utilizare R/RStudio, instalare pachete, ...
 - Înregistrări mai vechi:
   - [Lansarea interogărilor tidyverse în RStudio (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUEiYNYUCEjl1isFg?e=uiNRqz)
 
@@ -28,4 +29,3 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
   - [Înțelegerea interogărilor SQL (1) - joncțiune (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUG_8zl5QP6-oVjRA?e=lnNgma)
   - [Înțelegerea interogărilor `tidyverse` (1) - joncțiune (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUJ-fqM7oT9bsZS0Q?e=2YfFj1)
   - [Joncțiuni interne, reuniune, intersecție, diferență (înregistrare Curs Baze de date 2020-03-19/31 IE2](https://1drv.ms/v/s!AgPvmBEDzTOSibgwS8QZcO1xRb5JbQ?e=j007Qs)
-
