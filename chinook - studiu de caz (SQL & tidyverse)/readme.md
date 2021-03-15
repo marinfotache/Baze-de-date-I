@@ -16,9 +16,10 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
   - [crearea și popularea tabelelor bd `chinook` în PostgreSQL (înregistrare 2020-03-21)](https://1drv.ms/v/s!AgPvmBEDzTOSibR6MiHulPoMzD0f2g?e=nWPfr1)
   - [lansarea interogărilor SQL în `pgAdmin` (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUAE_zQuzc3CMUaeg?e=ydheXU)
 
-#### 3. R/RStudio - instalarea pachetelor, încărcarea datelor, primele interogări `tidyverse`
+#### 3. R/RStudio - instalarea pachetelor, încărcarea datelor, sintaxa interogărilor `tidyverse`
 - [Înregistrare Curs Baze de date 2021-03-01 IE2](https://1drv.ms/u/s!AgPvmBEDzTOSit1IWqrgDpNBVAjfWw?e=Gnacwa): utilizare R/RStudio, instalare pachete, ...
 - [Înregistrare Curs Baze de date 2021-03-02 CIG2](https://1drv.ms/v/s!AgPvmBEDzTOSit1nwOFArzZExPslZQ?e=tTpt6w): utilizare R/RStudio, instalare pachete, ...
+- [Tutorial import tabele PostgreSQL (versiuni anterioare Pg 13) în R](https://1drv.ms/v/s!AgPvmBEDzTOSit5l4-Z4bhGzSn0iwQ?e=nVbOfu): pachetul `RPostgreSQL`
 - Înregistrări mai vechi:
   - [Lansarea interogărilor tidyverse în RStudio (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUEiYNYUCEjl1isFg?e=uiNRqz)
 
