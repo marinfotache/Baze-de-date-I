@@ -16,7 +16,7 @@ rm(list = ls())
 
 
 ############################################################################
-# # --    Pas 1: Exportati fiecare din table din Pg13 ca fisier `.csv`
+# # --    Pas 1: Exportati fiecare tabela din Pg13 ca fisier `.csv`
 ### vezi tutorialul video de la adresa 
 ### https://1drv.ms/u/s!AgPvmBEDzTOSit5mOwPM5StvNvJHRg?e=fNlvHu
 
