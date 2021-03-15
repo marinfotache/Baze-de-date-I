@@ -18,7 +18,7 @@ rm(list = ls())
 ############################################################################
 # # --    Pas 1: Exportati fiecare din table din Pg13 ca fisier `.csv`
 ### vezi tutorialul video de la adresa 
-### 
+### https://1drv.ms/u/s!AgPvmBEDzTOSit5mOwPM5StvNvJHRg?e=fNlvHu
 
 
 ############################################################################
@@ -30,7 +30,6 @@ setwd('/Users/marinfotache/Downloads/chinook')
 
 # nu e este nevoie de niciun pachet aditional, intrucat citirea
 #  fisierelor `.csv` o facem cu pachetul `readr` care e parte din tidyverse
-
 
 artist <- read_csv('artist.csv')
 album <- read_csv('album.csv')
