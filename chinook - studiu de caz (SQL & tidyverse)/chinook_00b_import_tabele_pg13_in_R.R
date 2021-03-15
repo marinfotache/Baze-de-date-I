@@ -24,29 +24,38 @@ rm(list = ls())
 ############################################################################
 # # --  Pas 2. Importati fiecare fisier `.csv` ca un `data frame` 
 
-# nu e este nevoie de niciu pas aditional, intrucat 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#setwd('D:/chinook')
+# setam directorul curent pe folderul in care se afla fisierele `.csv`
 setwd('/Users/marinfotache/Downloads/chinook')
-getwd()
+
+
+# nu e este nevoie de niciun pachet aditional, intrucat citirea
+#  fisierelor `.csv` o facem cu pachetul `readr` care e parte din tidyverse
+
+
+artist <- read_csv('artist.csv')
+album <- read_csv('album.csv')
+genre <- read_csv('genre.csv')
+mediatype <- read_csv('mediatype.csv')
+playlist <- read_csv('playlist.csv')
+track <- read_csv('track.csv')
+playlisttrack <- read_csv('playlisttrack.csv')
+employee <- read_csv('employee.csv')
+customer <- read_csv('customer.csv')
+invoice <- read_csv('invoice.csv')
+invoiceline <- read_csv('invoiceline.csv')
+
+
+
+############################################################################
+# # --  Pas 3. Salvam toate cadrele de date (data frame) ca un singur 
+#                         fisier `.rdata`
+
+# este valabila si solutia `save.image...`, insa vom folosi comanda `save...`
 
 # salvare
-save.image(file = 'chinook.RData')
+save(artist, album, genre, mediatype, playlist, track, playlisttrack, 
+     employee, customer, invoice, invoiceline, 
+     file = 'chinook2.RData')
 
 # stergerea tuturor obiectelor din sesiunea curenta R
 rm(list = ls())

@@ -69,7 +69,7 @@ dbUnloadDriver(drv)
 ###  sesiunea curenta ca fisier .writeData
 
 # # stergere obiecte inutile
-rm(con, drv, temp, i, tables, connection)
+rm(con, drv, temp, i, tables, connection, chinook__pg_to_neo4j)
 
 
 #setwd('D:/chinook')
