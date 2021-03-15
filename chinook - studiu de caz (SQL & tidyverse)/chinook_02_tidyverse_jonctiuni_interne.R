@@ -102,6 +102,10 @@ temp <- album %>%
 temp <- album %>%
     semi_join(artist)
 
+temp <- album %>%
+    inner_join(artist) %>%
+    select(albumid:artistid)
+
 
 # inner join (natural)
 temp <- artist %>%
@@ -205,6 +209,18 @@ temp <- album %>%
      filter (title == 'Achtung Baby') %>%
      inner_join(album, by = c('artistid' = 'artistid')) %>%
      transmute(artistid, albumid = albumid.y, title = title.y)
+
+
+
+############################################################################
+## 			Care sunt celelalte piese de pe albumul pe care apare piesa
+## 							 'For Those About To Rock (We Salute You)'?
+############################################################################
+
+temp <- track %>%
+    inner_join(track, by = c('albumid' = 'albumid') ) %>%
+    filter (name.y == 'For Those About To Rock (We Salute You)') %>%
+    select (trackid.x:unitprice.x)
 
 
 

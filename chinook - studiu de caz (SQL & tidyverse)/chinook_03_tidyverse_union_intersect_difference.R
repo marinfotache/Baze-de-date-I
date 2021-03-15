@@ -1,5 +1,5 @@
 ################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###             03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
 ################################################################################
@@ -86,10 +86,10 @@ temp <- artist %>%
 # # -- ############################################################################
 # -- Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii direct ai subordonatilor de ordinul 1)
 # -- ai lui `Adams` (lastname) `Andrew` (firstname)
-# 
+#
 
 # solutie bazata pe `union`
-temp <- 
+temp <-
         # subordonatii de ordinul I
         employee %>%
                 filter (lastname == 'Adams' & firstname == 'Andrew') %>%
@@ -100,11 +100,11 @@ temp <-
                 employee %>%
                         filter (lastname == 'Adams' & firstname == 'Andrew') %>%
                         transmute (boss_employeeid = employeeid) %>%
-                        inner_join(employee, by = c('boss_employeeid' = 'reportsto')) %>% 
+                        inner_join(employee, by = c('boss_employeeid' = 'reportsto')) %>%
                         transmute (first_order_subordinates_id = employeeid) %>%
                         inner_join(employee, by = c('first_order_subordinates_id' = 'reportsto')) %>%
                         select (-first_order_subordinates_id)
-        )        
+        )
 
 
 
@@ -124,9 +124,9 @@ temp <- bind_rows(
                 transmute (first_order_subordinates_id = employeeid) %>%
                 inner_join(employee, by = c('first_order_subordinates_id' = 'reportsto')) %>%
                 select (-first_order_subordinates_id)
-        )        
-        
-        
+        )
+
+
 
 
 
@@ -175,7 +175,7 @@ temp <- dplyr::intersect(
 
 
 # solutie corecta bazata pe `intersect`
-# 
+#
 # de vazut ce e in neregula !!!
 temp <- artist %>%
           filter (name == 'Iron Maiden') %>%
@@ -293,14 +293,14 @@ temp <- track %>%
 
 
 # -- ############################################################################
-# -- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, 
+# -- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori,
 # -- nu apare, nici `Robert Plant`, nici `Jimmy Page`
 # -- ############################################################################
 temp <- artist %>%
         filter (name == 'Led Zeppelin') %>%
         transmute(artistid, artist_name = name) %>%
         inner_join(album) %>%
-        inner_join(track) %>% 
+        inner_join(track) %>%
         anti_join(
                 artist %>%
                 filter (name == 'Led Zeppelin') %>%

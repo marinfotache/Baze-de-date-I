@@ -77,7 +77,7 @@ ORDER BY 1 ;
 
 
 -- ############################################################################
--- 								AUTOJONCTIUNE
+-- 								            AUTOJONCTIUNE
 -- ############################################################################
 
 
@@ -91,6 +91,34 @@ SELECT a2.*
 FROM album NATURAL JOIN artist
 	INNER JOIN album a2 ON album.artistid = a2.artistid
 WHERE album.title = 'Achtung Baby'
+
+
+-- ############################################################################
+-- 			Care sunt celelalte piese de pe albumul pe care apare piesa
+-- 							 'For Those About To Rock (We Salute You)'?
+-- ############################################################################
+
+-- solutie care utilizeaza AUTO JOIN
+SELECT track1.*
+FROM track track1
+	INNER JOIN track track2 ON track1.albumid = track2.albumid
+WHERE track2.name = 'For Those About To Rock (We Salute You)'
+
+
+
+-- ############################################################################
+-- 	   Care sunt clientii din aceeasi tara ca si clientul `Robert Brown`
+-- ############################################################################
+select customer1.*
+from customer customer1
+	inner join customer customer2 on customer1.country = customer2.country
+where customer2.firstname = 'Robert' and customer2.lastname = 'Brown'
+
+-- sau
+select customer2.*
+from customer customer1
+	inner join customer customer2 on customer1.country = customer2.country
+where customer1.firstname = 'Robert' and customer1.lastname = 'Brown'
 
 
 
