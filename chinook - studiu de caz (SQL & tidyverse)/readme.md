@@ -27,8 +27,8 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
 - [Înregistrare Curs Baze de date 2021-03-08 IE2](https://1drv.ms/u/s!AgPvmBEDzTOSit1op8PpdNxnpjFIYQ?e=YKLleZ): primele interogări `tidyverse`
 - [Înțelegerea interogărilor SQL (1) - joncțiune (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUG_8zl5QP6-oVjRA?e=lnNgma)
 - [Înțelegerea interogărilor `tidyverse` (1) - joncțiune (înregistrare 2020-03-22)](https://1drv.ms/v/s!AgPvmBEDzTOSibUJ-fqM7oT9bsZS0Q?e=2YfFj1)
-- [Joncțiuni, auto-joncțiuni (înregistrare Curs Baze de date 2021-03-15 IE2](https://1drv.ms/v/s!AgPvmBEDzTOSibgwS8QZcO1xRb5JbQ?e=j007Qs)
-- [Joncțiuni interne, reuniune, intersecție, diferență (înregistrare Curs Baze de date 2020-03-19/31 IE2](https://1drv.ms/v/s!AgPvmBEDzTOSibgwS8QZcO1xRb5JbQ?e=j007Qs)
+- [Joncțiuni, auto-joncțiuni (înregistrare Curs Baze de date 2021-03-15 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSibgwS8QZcO1xRb5JbQ?e=j007Qs)
+- [Joncțiuni interne, reuniune, intersecție, diferență (înregistrare Curs Baze de date 2020-03-19/31 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSibgwS8QZcO1xRb5JbQ?e=j007Qs)
 
 #### 5. Interogări SQL și `tidyverse` (2)
 - [Valori NULL/NA, funcții-agregat (înregistrare Curs Baze de date 2020-03-26 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSibgx4cNAV8WpxFEtuQ?e=ej2Xs4)
