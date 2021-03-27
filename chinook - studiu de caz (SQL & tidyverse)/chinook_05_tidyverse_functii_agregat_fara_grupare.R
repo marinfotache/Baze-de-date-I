@@ -1,5 +1,5 @@
 ################################################################################
-###             Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###                     05: Functii agregat fara grupare
 ################################################################################
@@ -45,7 +45,7 @@ temp <- artist %>%
 # sol 1
 temp <- customer %>%
         filter(!is.na(fax)) %>%
-        tally() 
+        tally()
 
 # sol 2
 temp <- customer %>%
@@ -210,4 +210,3 @@ temp <- track %>%
 
 
 mean(track$milliseconds/1000)
-

@@ -1,5 +1,5 @@
 ################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE si SPE)
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###        04: Tratamentul (meta)valorilor NA (echivalentul NULL din SQL)
 ###             Atentie: valorile NULL au alt regim in limbajul R!!!!
@@ -51,13 +51,13 @@ temp <- customer %>%
 temp <- customer %>%
     select (customerid:lastname, state) %>%
     mutate(state2 = case_when(
-            is.na(state) ~ '-', 
+            is.na(state) ~ '-',
             TRUE ~ state))
 
 
 # solutie cu `coalesce` - vezi mai jos
-# 
-# 
+#
+#
 
 # # -- ############################################################################
 # # -- Care sunt piesele de pe albumele formatiei `Black Sabbath`
@@ -137,7 +137,7 @@ temp <- customer %>%
     mutate (city_string1 = paste(city, coalesce(state, '-'), country)) %>%
     distinct(.)
 
-    
+
 
 
 

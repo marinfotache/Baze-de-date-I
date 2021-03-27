@@ -1,5 +1,5 @@
 ################################################################################
-###  		Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###                             07: Jonctiuni externe
 ################################################################################
@@ -46,7 +46,7 @@ temp <- artist %>%
 # # -- 			  fara albume, sa se afiseze `0`
 # # -- ############################################################################
 
-# solutie bazata pe `left_join` si `count` - solutie eronata 
+# solutie bazata pe `left_join` si `count` - solutie eronata
 # (cei care nu au nicun album apar cu 1 (datorita `count`-ului))
 temp <- artist %>%
      left_join(album) %>%
@@ -79,7 +79,7 @@ temp <- artist %>%
 #   --                                   (continuare)
 # # -- ############################################################################
 
-# asa cum am vazut mai sus, solutia bazata pe `left_join` si `count` 
+# asa cum am vazut mai sus, solutia bazata pe `left_join` si `count`
 # NU FUNCTIONEAZA!!!
 temp <- artist %>%
      left_join(album) %>%
@@ -130,16 +130,16 @@ temp <- customer %>%
      select (customerid:lastname, city:country) %>%
           left_join(
                invoice %>%
-                    transmute(customerid, 
+                    transmute(customerid,
                               year = lubridate::year(lubridate::ymd(invoicedate)),
                               total) %>%
                     filter (year == 2010) %>%
                group_by(customerid, year) %>%
                summarise (sales = sum(total))
           ) %>%
-     mutate(year = if_else(is.na(year), 2010, year), 
+     mutate(year = if_else(is.na(year), 2010, year),
             sales = if_else(is.na(sales), 0, sales))
-            
+
 
 # solutie bazata pe `case_when`
 temp <- customer %>%
@@ -153,10 +153,10 @@ temp <- customer %>%
                summarise (sales = sum(total))
           ) %>%
      mutate(year = case_when(
-                is.na(year) ~ 2010, 
-                TRUE ~ year), 
+                is.na(year) ~ 2010,
+                TRUE ~ year),
             sales = case_when(
-                is.na(sales) ~ 0, 
+                is.na(sales) ~ 0,
                 TRUE ~ sales))
 
 
@@ -165,7 +165,7 @@ temp <- customer %>%
      select (customerid:lastname, city:country) %>%
           left_join(
                invoice %>%
-                    transmute(customerid, 
+                    transmute(customerid,
                               year = lubridate::year(lubridate::ymd(invoicedate)),
                               total) %>%
                     filter (year == 2010) %>%
@@ -223,7 +223,7 @@ temp <- bind_rows(
           ) %>%
      mutate(year = coalesce(year, 2012), sales = coalesce(sales, 0))
      ) %>%
-     transmute(customer_name = paste(lastname, firstname), city, state, 
+     transmute(customer_name = paste(lastname, firstname), city, state,
                country, year, sales) %>%
      arrange(customer_name, city, state, country, year)
 
@@ -306,7 +306,3 @@ temp <- artist %>%
         group_by(track_name, album_title) %>%
         summarise(sales = sum(sales)) %>%
         arrange(album_title, track_name)
-        
-        
-
-

@@ -1,5 +1,5 @@
 ################################################################################
-### 	     Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###              06: Grupare - group by, subtotaluri, having
 ################################################################################
@@ -24,14 +24,14 @@ temp <- artist %>%
      group_by(artist_name = name) %>%
      summarise(n_of_albums = n()) %>%
 #     ungroup() %>%
-     arrange(artist_name) 
+     arrange(artist_name)
 
 # ordonare dupa numarul de albume
 temp <- artist %>%
      inner_join(album) %>%
      group_by(artist_name = name) %>%
      summarise(n_of_albums = n()) %>%
-     arrange(desc(n_of_albums)) 
+     arrange(desc(n_of_albums))
 
 
 # solutie bazata pe functia `count`  (nu mai necesara functia `ungroup`)
@@ -117,7 +117,7 @@ for (i in 1:2000)
 
 # solutia:
 temp <- bind_rows(
-        
+
      # rand principal din rezultat
      artist %>%
           rename(artist_name = name) %>%
@@ -325,11 +325,11 @@ temp <- artist %>%
 #
 
 # Care sunt clientii cu un total al achizitiilor pe anul 2010 mai mare de 10 USD?
-# 
+#
 temp <- customer %>%
         inner_join(invoice) %>%
         filter (year(invoicedate) == 2010) %>%
-        group_by(customer = paste(lastname, 
+        group_by(customer = paste(lastname,
                 firstname, paste0('(', city, ')'))) %>%
         summarise (cust_purchase = sum(total)) %>%
         filter(cust_purchase > 10) %>%
@@ -358,8 +358,3 @@ invoice %>%
         mutate (year = lubridate::year(invoicedate)) %>%
         group_by(year) %>%
         summarise(n = n_distinct(customerid))
-
-
-
-
-        
