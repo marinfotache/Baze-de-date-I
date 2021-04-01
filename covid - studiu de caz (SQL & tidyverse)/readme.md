@@ -1,6 +1,6 @@
 # Scripturi și tutoriale video - interogări SQL și tidyverse (R) pentru baza de date `covid`
 
-## BD conține informații despre 14 țări privind epidemia COVID-19 in perioada 01.01.2020 - 23.03.2021
+## Baza de date conține informații despre 14 țări privind epidemia COVID-19 in perioada 01.01.2020 - 23.03.2021
 
 În R (tidyverse), pentru rularea scripturilor de interogare a BD `covid` nu e nevoie să importați datele din PostgreSQL, ci puteți încarca unul dintre fișierele `.RData` din această secțiune.
 
