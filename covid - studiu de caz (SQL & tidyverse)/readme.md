@@ -8,6 +8,11 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
 
 ### Video-tutoriale (vor fi actualizate săptămânal în perioada martie-mai):
 
-#### 1. Crearea și actualizarea bazei de date `covid` în PostgreSQL (pgAdmin); interogări SQL și tidyverse (1)
+#### 1. Crearea și actualizarea bazei de date `covid` în PostgreSQL (pgAdmin); interogări SQL și tidyverse pentru testul/tema 1
 - [Înregistrare Curs Baze de date 2021-03-22 IE2 - jonctiune, autojonctiune](https://1drv.ms/v/s!AgPvmBEDzTOSit8Sg6HW1Yao_F6dJQ?e=e9Qa4a)
+
+#### 2. Interogări SQL și tidyverse pentru testul/tema 2
 - [Înregistrare Curs Baze de date 2021-03-30 CIG2 - actualizare BD COVID, functii agregat, grupari, jonctiuni externe](https://1drv.ms/v/s!AgPvmBEDzTOSiuENBJbqWxJC6EqDyQ?e=JC7FCg)
+
+#### 3. Interogări SQL și tidyverse pentru testul/tema 3
+- [Înregistrare Curs Baze de date 2021-04-05 IE2 - subconsultari in WHERE si HAVING; echivalențe tidyverse](https://1drv.ms/u/s!AgPvmBEDzTOSiuEtjqqdm39QXwjd4A?e=d2vVdf)
