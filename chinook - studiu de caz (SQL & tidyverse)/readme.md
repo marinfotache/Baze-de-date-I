@@ -39,5 +39,5 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
 #### 6. Interogări SQL și `tidyverse` (3)
 - [Subconsultări (1) - WHERE și HAVING (înregistrare Curs Baze de date 2020-04-30 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSicEgYR6T3tc6FKZR1w?e=S36fBa)
 - [Subconsultări (2) - WHERE, HAVING, diviziune (înregistrare Curs Baze de date 2020-04-29 SPE2)](https://1drv.ms/v/s!AgPvmBEDzTOSicEi6FoXT0PN4F44oA?e=RG8NRF)
-- [Subconsultări (3) - `subconsultări` în tidyverse (înregistrare Curs Baze de date 2020-05-06 SPE2)](https://1drv.ms/v/s!AgPvmBEDzTOSicFSFSMgCtRtpk8ePw?e=5TBCbi)
+- [Subconsultări (3) - `subconsultări` în `tidyverse` (înregistrare Curs Baze de date 2020-05-06 SPE2)](https://1drv.ms/v/s!AgPvmBEDzTOSicFSFSMgCtRtpk8ePw?e=5TBCbi)
 - [Subconsultări (4) - FROM, expresii-tabelă, diviziune (înregistrare Curs Baze de date 2020-05-07 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSicFYSVWz67d_Vvx_bg?e=cJfixR)
