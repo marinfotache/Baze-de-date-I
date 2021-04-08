@@ -33,7 +33,7 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
 #### 5. Interogări SQL și `tidyverse` (2)
 - [Valori NULL/NA, funcții-agregat (înregistrare Curs Baze de date 2020-03-26 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSibgx4cNAV8WpxFEtuQ?e=ej2Xs4)
 - [Grupări (înregistrare Curs Baze de date 2020-04-01 SPE2)](https://1drv.ms/v/s!AgPvmBEDzTOSibgymaBsvIcuW5XBsA?e=N3CbYZ)
-- [Joncțiuni externe (înregistrare Curs Baze de date 2020-04-08 SPE2)](https://1drv.ms/v/s!AgPvmBEDzTOSit5raaC4m4HJX7HJ2Q?e=krlBY7)
+- [Joncțiuni externe (înregistrare Curs Baze de date 2020-04-08 SPE2)](https://1drv.ms/v/s!AgPvmBEDzTOSibpEZ9P2bbilqbWl2Q?e=Q1m9YI)
 - [Recapitulare interogări pentru Testul 2 SQL/tidyverse (înregistrare Curs Baze de date 2020-04-09 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSibor-10d569CT8vxzw?e=yq2TCY)
 
 #### 6. Interogări SQL și `tidyverse` (3)
