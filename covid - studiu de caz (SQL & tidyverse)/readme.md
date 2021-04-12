@@ -17,3 +17,4 @@ Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie
 #### 3. Interogări SQL și tidyverse pentru testul/tema 3
 - [Înregistrare Curs Baze de date 2021-04-05 IE2 - subconsultari in WHERE si HAVING; echivalențe tidyverse](https://1drv.ms/u/s!AgPvmBEDzTOSiuEtjqqdm39QXwjd4A?e=d2vVdf)
 - [Înregistrare Curs Baze de date 2021-04-06 CIG2 - alte subconsultari in WHERE si HAVING; echivalențe tidyverse](https://1drv.ms/v/s!AgPvmBEDzTOSiuExnBdMMM_PXkX84A?e=oxkXMP)
+- [Înregistrare Curs Baze de date 2021-04-12 IE2 - subconsultari HAVING si FROM; expresii-tabele](https://1drv.ms/v/s!AgPvmBEDzTOSiuFvJpeV4Dhsr-HsnQ?e=3EqWIP)
