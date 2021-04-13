@@ -31,6 +31,7 @@ library(lubridate)
 setwd('/Users/marinfotache/Downloads/chinook')
 load(file = 'chinook.RData')
 
+
 ############################################################################
 ###                            Interogari tidyverse                      ###
 ############################################################################
@@ -309,7 +310,57 @@ temp <- artist %>%
 
 
 
+############################################################################
+# # --      Care sunt primii trei ani in care s-au inregistrat vanzari?
+############################################################################
 
+# sol 1 - `head`
+temp <- invoice %>%     # punctul de pornire: tabela/cadrul `invoice`
+     transmute (year = lubridate::year(invoicedate)) %>%   #  coloana `year`
+     distinct(year) %>%  # se elimina dublurile
+     arrange(year)  %>%     # se ordoneaza rezultatul dupa valorile atributului `year`
+     head(3)                # echivalentul lui LIMIT 3 din SQL
+
+
+# sol 2 - `tail`
+temp <- invoice %>%     # punctul de pornire: tabela/cadrul `invoice`
+     transmute (year = lubridate::year(invoicedate)) %>%   #  coloana `year`
+     distinct(year) %>%  # se elimina dublurile
+     arrange(desc(year))  %>%     # se ordoneaza rezultatul dupa valorile atributului `year`
+     tail(3) %>%               # echivalentul lui LIMIT 3 din SQL
+     arrange(year) 
+
+
+# sol 3 - `slice`
+temp <- invoice %>%     
+     transmute (year = lubridate::year(invoicedate)) %>%   
+     distinct(year) %>%  
+     arrange(desc(year))  %>%     
+     slice((nrow(.)-2):nrow(.)) %>%               
+     arrange(year) 
+
+
+# sol 4 - filtrare ce foloseste `rownum()`
+temp <- invoice %>%     
+     transmute (year = lubridate::year(invoicedate)) %>%   
+     distinct(year) %>%  
+     arrange(year) %>%
+     filter (row_number() <= 3)
+
+
+
+# sol 5 - `top_n`
+temp <- invoice %>%     
+     transmute (year = lubridate::year(invoicedate)) %>%   
+     distinct(year) %>%  
+     top_n(-3, year)        
+
+
+
+#
+#
+#
+#
 #
 #
 # -- ############################################################################

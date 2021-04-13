@@ -287,6 +287,18 @@ WHERE LENGTH(name) - LENGTH(REPLACE(name, ' ', '')) = 1
 
 
 
+-- ############################################################################
+-- 										Care sunt primii trei ani s-au inregistrat vanzari?
+-- ############################################################################
+
+-- prima notatie pentru ordonare (specificarea expresiei de calcul a atributului de ordonare)
+select distinct extract (year from invoicedate) as an
+from invoice
+order by extract (year from invoicedate)
+limit 3
+
+
+
 
 -- ############################################################################
 -- 						Probleme de rezolvat la curs/laborator/acasa
