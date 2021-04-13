@@ -2,7 +2,7 @@
 --
 -- 08: Subconsultari IN clauzele WHERE si HAVING. Diviziune relationala (1)
 --
--- ultima actualizare: 2020-04-23
+-- ultima actualizare: 2021-04-12
 
 
 --
@@ -188,11 +188,12 @@ WHERE EXTRACT (YEAR FROM invoicedate) =
 -- conectorul dintre interogarea principale si subconsultare este in
 SELECT *
 FROM invoice
-WHERE invoicedate IN (SELECT distinct invoicedate
-					   FROM invoice
-					   ORDER BY invoicedate
-					   LIMIT 10
-					   )
+WHERE invoicedate IN (
+	SELECT distinct invoicedate
+	FROM invoice
+	ORDER BY invoicedate
+	LIMIT 10
+	)
 
 -- aceeasi solutie, insa cu FETCH
 SELECT *
@@ -220,7 +221,7 @@ FROM invoice
 WHERE invoicedate <=  (SELECT distinct invoicedate
 					   FROM invoice
 					   ORDER BY invoicedate
-					   offset 9
+					   OFFSET 9
 					   LIMIT 1
 					   )
 
@@ -269,10 +270,10 @@ FROM album
 WHERE artist.name = 'Led Zeppelin'
 GROUP BY title
 HAVING COUNT(*) > (SELECT COUNT(*)
-					 FROM album
-					  	NATURAL JOIN artist
-						INNER JOIN track ON album.albumid = track.albumid
-					 WHERE artist.name = 'Led Zeppelin' AND title = 'IV')
+                   FROM album
+					  	            NATURAL JOIN artist
+						              INNER JOIN track ON album.albumid = track.albumid
+					         WHERE artist.name = 'Led Zeppelin' AND title = 'IV')
 ORDER BY 1
 
 

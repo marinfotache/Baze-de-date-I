@@ -3,7 +3,7 @@
 ################################################################################
 ###                     05: Functii agregat fara grupare
 ################################################################################
-### ultima actualizare: 2020-03-26
+### ultima actualizare: 2021-03-30
 
 library(tidyverse)
 library(lubridate)
@@ -163,19 +163,60 @@ temp <- album %>%
 # # --                   In ce zi a fost prima vanzare?
 ############################################################################
 
+# solutie cu functia `min`
 temp <- invoice %>%
-     summarise(first_day = min(invoicedate))
+    summarise(first_day = min(invoicedate))
 
+
+# solutie cu optiunea `head`
+temp <- invoice %>%
+    arrange (invoicedate) %>%
+    head(1)  %>%
+    transmute (first_day = invoicedate)
+    
+# solutie cu optiunea `tail`
+temp <- invoice %>%
+    arrange (desc(invoicedate)) %>%
+    tail(1)  %>%
+    transmute (first_day = invoicedate)
+
+
+# solutie cu optiunea `top` (atentie la `-1`!!!)
+temp <- invoice %>%
+    distinct(invoicedate) %>%
+    top_n (-1, invoicedate) %>%
+    transmute (first_day = invoicedate)
+    
 
 
 ############################################################################
 # # --                        In ce zi a fost ultima vanzare?
 ############################################################################
 
-
 temp <- invoice %>%
-     summarise(first_day = max(invoicedate))
+     summarise(last_day = max(invoicedate))
 
+
+# solutie cu optiunea `head`
+temp <- invoice %>%
+    arrange (desc(invoicedate)) %>%
+    head(1)  %>%
+    transmute (last_day = invoicedate)
+    
+
+# solutie cu optiunea `tail`
+temp <- invoice %>%
+    arrange (invoicedate) %>%
+    tail(1)  %>%
+    transmute (last_day = invoicedate)
+
+
+# solutie cu optiunea `top_n` 
+temp <- invoice %>%
+    distinct(invoicedate) %>%
+    top_n (1, invoicedate) %>%
+    transmute (first_day = invoicedate)
+    
 
 
 

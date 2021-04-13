@@ -2,7 +2,7 @@
 --
 -- 09: Subconsultari in clauzele FROM si SELECT. Diviziune relationala (2)
 --
--- ultima actualizare: 2020-04-25
+-- ultima actualizare: 2021-04-12
 
 --
 -- ############################################################################

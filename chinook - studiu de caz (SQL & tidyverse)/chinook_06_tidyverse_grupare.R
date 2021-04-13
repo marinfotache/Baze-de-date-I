@@ -48,6 +48,41 @@ temp <- artist %>%
      ungroup()
 
 
+# # -- ############################################################################
+# # -- 		    Care este artistul cu cel mai mare numar de albume?
+# # -- ############################################################################
+
+# solutie cu `head`
+temp <- artist %>%
+     inner_join(album) %>%
+     group_by(artist_name = name) %>%
+     summarise( n_of_albums = n()) %>%
+     ungroup() %>%
+     arrange(desc(n_of_albums)) %>%
+     head(1)
+
+
+# solutie cu `tail`
+temp <- artist %>%
+     inner_join(album) %>%
+     group_by(artist_name = name) %>%
+     summarise( n_of_albums = n()) %>%
+     ungroup() %>%
+     arrange(n_of_albums) %>%
+     tail(1)
+
+
+
+# solutie cu `top`
+temp <- artist %>%
+     inner_join(album) %>%
+     group_by(artist_name = name) %>%
+     summarise( n_of_albums = n()) %>%
+     ungroup() %>%
+     top_n(1, n_of_albums)                
+        
+
+
 
 # # -- ############################################################################
 # # -- 	  Extrageti durata totala a pieselor (in minute) pentru fiecare artist

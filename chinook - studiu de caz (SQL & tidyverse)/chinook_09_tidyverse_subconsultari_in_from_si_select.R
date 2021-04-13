@@ -1,5 +1,5 @@
 ################################################################################
-###             Interogari tidyverse vs SQL - BD Chinook - IE si SPE:
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ### 09: Subconsultari SQL in clauzele FROM si SELECT. Diviziune relationala (2)
 ###                     Echivalente in `tidyverse`
@@ -56,15 +56,15 @@ temp <- artist %>%
           filter (title == 'A Real Live One') %>%
           select (albumid) %>%
           inner_join(track) %>%
-          select (name)               
+          select (name)
           )
-     
+
 
 ############################################################################
 ## 	    Care sunt facturile din prima zi de vanzari? (reluare)
 ############################################################################
 
-# toate solutile din scriptul anterior (`chinook_08_tidyverse...`) care nu 
+# toate solutile din scriptul anterior (`chinook_08_tidyverse...`) care nu
 # folosesc `pull()` se apropie de logica SQL din scriptul `chinook_09_sql...`
 
 # ...incercam si o solutie noua
@@ -83,7 +83,7 @@ temp <- min(invoice$invoicedate) %>%
 # ... solutie noua:
 temp <- seq(
           min(trunc(invoice$invoicedate)),
-          (min(trunc(invoice$invoicedate)) + 
+          (min(trunc(invoice$invoicedate)) +
                  lubridate::period(days = 7)),
           by = 'day') %>%
      enframe() %>%
@@ -96,10 +96,10 @@ temp <- seq(
 
 ############################################################################
 ##     Care sunt albumele formatiei Led Zeppelin care au mai multe piese
-##                      decat albumul `IV` (reluare) 
+##                      decat albumul `IV` (reluare)
 ############################################################################
 
-# intrucat theta-jonctiunea nu e posibila in tidyverse, ramanem la cele 
+# intrucat theta-jonctiunea nu e posibila in tidyverse, ramanem la cele
 # doua solutii din scriptul precedent (cea de mai jos este a doua)
 temp <- artist %>%
      inner_join(album) %>%
@@ -116,7 +116,7 @@ temp <- artist %>%
 
 
 ############################################################################
-##             Afisati, pentru fiecare client, pe coloane separate, 
+##             Afisati, pentru fiecare client, pe coloane separate,
 ##                 vanzarile pe anii 2010, 2011 si 2012 (reluare)
 ############################################################################
 
@@ -128,7 +128,7 @@ temp <- invoice %>%
      summarise(sales = sum(total)) %>%
      ungroup() %>%
      inner_join(customer %>%
-                     transmute (customerid, customer_name = paste(lastname, firstname), 
+                     transmute (customerid, customer_name = paste(lastname, firstname),
                                 state, country)) %>%
      spread(year, sales, fill = 0) %>%
      arrange(customer_name)
@@ -150,10 +150,10 @@ temp <- 1:12 %>%
                summarise (monthly_sales = sum(total)) %>%
                ungroup()
      ) %>%
-     mutate (sales_2010 = sum(monthly_sales), 
+     mutate (sales_2010 = sum(monthly_sales),
              month_share = round(monthly_sales / sales_2010,2))
-     
-     
+
+
 
 
 ############################################################################
@@ -180,7 +180,7 @@ temp <- dplyr::setdiff(
           ) %>%
           select (-foo) %>%
           anti_join(
-               artist %>%               
+               artist %>%
                     rename(artist_name = name ) %>%
                     inner_join(album) %>%
                     inner_join(track) %>%
@@ -191,13 +191,13 @@ temp <- dplyr::setdiff(
                     filter (country ==  'United Kingdom') %>%
                     distinct(artist_name, city)
           )   %>%
-     transmute(artist_name)     
+     transmute(artist_name)
      )
 
-     
+
 
 ############################################################################
-##    Care sunt artistii `vanduti` in toti anii (adica, in fiecare an) din 
+##    Care sunt artistii `vanduti` in toti anii (adica, in fiecare an) din
 ##                         intervalul 2009-2012
 ############################################################################
 
@@ -216,7 +216,7 @@ temp <- dplyr::setdiff(
           ) %>%
           select (-foo) %>%
           anti_join(
-               artist %>%               
+               artist %>%
                     rename(artist_name = name ) %>%
                     inner_join(album) %>%
                     inner_join(track) %>%
@@ -227,7 +227,7 @@ temp <- dplyr::setdiff(
                     inner_join(
                          2009:2012 %>%
                               enframe() %>%
-                              transmute (year = value) 
+                              transmute (year = value)
                               ) %>%
                     distinct(artist_name, year)
           ) %>%
@@ -237,17 +237,17 @@ temp <- dplyr::setdiff(
 
 
 ############################################################################
-##     Care sunt artistii pentru care au fost vanzari macar (cel putin) 
+##     Care sunt artistii pentru care au fost vanzari macar (cel putin)
 ##       in toti anii in care s-au vandut piese ale formatiei `Queen`
 ############################################################################
 
-# solutie mai apropiata de logica `non-divizionala` 
+# solutie mai apropiata de logica `non-divizionala`
 temp <- artist %>%                                      #---------------------
-     filter (name == 'Queen') %>%                       #        
+     filter (name == 'Queen') %>%                       #
      select (artistid) %>%                              #
      inner_join(album) %>%                              #   here we get the
      inner_join(track) %>%                              #  all the sales
-     select (-unitprice) %>%                            #  years for 
+     select (-unitprice) %>%                            #  years for
      inner_join(invoiceline) %>%                        #  artist/band
      inner_join(invoice) %>%                            #  `Queen`
      mutate (year = lubridate::year(invoicedate)) %>%   #
@@ -255,16 +255,16 @@ temp <- artist %>%                                      #---------------------
      mutate (n_of_years_queen = n()) %>%    # add a column with the number of years for `Queen`
      inner_join(
           artist %>%                                   #-------------------
-               rename (artist_name  = name) %>%        #  
+               rename (artist_name  = name) %>%        #
                inner_join(album) %>%                   #  here we get
                inner_join(track) %>%                   #  all the sales years
                select (-unitprice) %>%                 #    for each artist,
-               inner_join(invoiceline) %>%             #  i.e. 
+               inner_join(invoiceline) %>%             #  i.e.
                inner_join(invoice) %>%                 #  all distinct
                mutate (year =                          #  values
                     lubridate::year(invoicedate)) %>%  #  (artist_name, year)
                distinct (artist_name, year)            #-------------------
-     )  %>% 
+     )  %>%
           # at this point, we have all (artist_name, year) combinations,
           # but only for "Queen years";
           #    next, we'll compute the number of years for each artist
@@ -273,65 +273,63 @@ temp <- artist %>%                                      #---------------------
      tally() %>%
      ungroup() %>%
      filter (n == n_of_years_queen)
-     
-     
 
 
-# solutie apropiata de logica diviziunii relationale 
-temp <- artist %>%                                      
-     rename (artist_name = name) %>%                              
-     inner_join(album) %>%                              
-     inner_join(track) %>%                             
-     select (-unitprice) %>%                          
-     inner_join(invoiceline) %>%                      
-     inner_join(invoice) %>%                            
-     mutate (year = lubridate::year(invoicedate)) %>%   
+
+
+# solutie apropiata de logica diviziunii relationale
+temp <- artist %>%
+     rename (artist_name = name) %>%
+     inner_join(album) %>%
+     inner_join(track) %>%
+     select (-unitprice) %>%
+     inner_join(invoiceline) %>%
+     inner_join(invoice) %>%
+     mutate (year = lubridate::year(invoicedate)) %>%
      distinct (artist_name, year)  %>%
      arrange (artist_name, year)  %>%
      inner_join(
-          artist %>%                                      
-          filter (name == 'Queen') %>%                          
-          select (artistid) %>%                              
-          inner_join(album) %>%                              
-          inner_join(track) %>%                             
-          select (-unitprice) %>%                          
-          inner_join(invoiceline) %>%                      
-          inner_join(invoice) %>%                            
-          mutate (year = lubridate::year(invoicedate)) %>%   
-          distinct (year)         
+          artist %>%
+          filter (name == 'Queen') %>%
+          select (artistid) %>%
+          inner_join(album) %>%
+          inner_join(track) %>%
+          select (-unitprice) %>%
+          inner_join(invoiceline) %>%
+          inner_join(invoice) %>%
+          mutate (year = lubridate::year(invoicedate)) %>%
+          distinct (year)
      ) %>%
      group_by(artist_name) %>%
      summarise (years = paste(year, collapse = '|')) %>%
      ungroup() %>%
-     
+
      inner_join(
 
-               artist %>%                                      
-                    filter (name == 'Queen') %>%                          
-                    select (artistid) %>%                              
-                    inner_join(album) %>%                              
-                    inner_join(track) %>%                             
-                    select (-unitprice) %>%                          
-                    inner_join(invoiceline) %>%                      
-                    inner_join(invoice) %>%                            
-                    mutate (year = lubridate::year(invoicedate)) %>%   
-                    distinct (year)  %>% 
+               artist %>%
+                    filter (name == 'Queen') %>%
+                    select (artistid) %>%
+                    inner_join(album) %>%
+                    inner_join(track) %>%
+                    select (-unitprice) %>%
+                    inner_join(invoiceline) %>%
+                    inner_join(invoice) %>%
+                    mutate (year = lubridate::year(invoicedate)) %>%
+                    distinct (year)  %>%
                     arrange(year) %>%
                     summarise (years = paste(year, collapse = '|'))
-          
-     )     
-     
-     
-     
-     
+
+     )
+
+
+
+
 ############################################################################
 ###   Echivalente `tidyverse` ale subconsultarilor SQL in clauza SELECT
 ############################################################################
 
 ####
 #### Logica  `tidyverse` nu se pliaza pe problematica subconsultarilor din SQL;
-####      in schimb, toate problemele care in SQL se folosesc subconsultari, 
+####      in schimb, toate problemele care in SQL se folosesc subconsultari,
 ####      cu sau fara corelare, au solutii in `tidyverse`
-####       
-
-
+####

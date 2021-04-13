@@ -2,7 +2,7 @@
 --
 -- 06: Grupare - group by, subtotaluri, having
 --
--- ultima actualizare: 2020-04-04
+-- ultima actualizare: 2021-03-31
 
 
 -- ############################################################################
@@ -13,6 +13,19 @@ SELECT name AS artist_name, COUNT(*) as n_of_albums
 FROM artist NATURAL JOIN album
 GROUP BY name
 ORDER BY 1
+
+
+
+-- ############################################################################
+-- 				 Care este artistul cu cel mai mare numar de albume?
+-- ############################################################################
+
+SELECT name AS artist_name, COUNT(*) as n_of_albums
+FROM artist NATURAL JOIN album
+GROUP BY name
+ORDER BY 2 DESC
+LIMIT 1
+
 
 
 -- ############################################################################

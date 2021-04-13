@@ -1,5 +1,5 @@
 ################################################################################
-### 		    Interogari tidyverse - BD Chinook - IE si SPE:
+###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
 ################################################################################
 ###   08: Subconsultari SQL in clauzele WHERE si HAVING si echivalentele
 ###                  lor in `tidyverse`. Diviziune relationala (1)
@@ -229,7 +229,7 @@ temp <- invoice %>%
 # prima solutie bazata pe un predicat similar `between`
 temp <- invoice %>%
      filter (invoicedate >= min(invoicedate) &
-                  invoicedate <=  min(invoicedate) + 
+                  invoicedate <=  min(invoicedate) +
                         lubridate::period(months = 1)
                   )
 
@@ -325,7 +325,7 @@ temp <- employee %>%
 ############################################################################
 
 
-# solutie care `mimeaza` o subconsultare ce contine numarul pieselor de 
+# solutie care `mimeaza` o subconsultare ce contine numarul pieselor de
 #       pe albumul `IV`
 temp <- artist %>%
      inner_join(album) %>%
@@ -420,7 +420,7 @@ temp <- artist %>%
 ############################################################################
 
 
-# solutie care compara, pentru fiecare album, numarul de piese de pe album 
+# solutie care compara, pentru fiecare album, numarul de piese de pe album
 #       cu numarul de piese vandute
 temp <- artist %>%                      # se extrage numarul de piese de pe fiecare album
      rename(artist_name = name ) %>%
@@ -541,7 +541,7 @@ temp <- artist %>%
 
 
 ############################################################################
-###   Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' 
+###   Care sunt artistii `vanduti` in toate orasele din 'United Kingdom'
 ###                 din care provin clientii
 ############################################################################
 
@@ -595,7 +595,7 @@ temp <- artist %>%
 # #
 # # -- Care primul (sau primii) angajat(i) in companie?
 # #
-# # -- Care sunt artistii care au in baza de date mai multe albume decat 
+# # -- Care sunt artistii care au in baza de date mai multe albume decat
 #       formatia `Queen`?
 # #
 # #
@@ -604,16 +604,16 @@ temp <- artist %>%
 ##
 ## Care sunt piesele formatiei `Led Zeppelin` mai lungi decat `Stairway to Heaven`
 ##     de pe albumul `IV`
-## 
+##
 
-## solutie echivalenta unei interogari SQL ce foloseste subconsultare in 
+## solutie echivalenta unei interogari SQL ce foloseste subconsultare in
 ## clauza WHERE
 temp <- artist %>%
         filter (name == 'Led Zeppelin') %>%
         select (artistid) %>%
         inner_join(album) %>%
         inner_join(track) %>%
-        filter (milliseconds > 
+        filter (milliseconds >
                 (
                        track %>%
                                filter (name == 'Stairway To Heaven') %>%
@@ -624,7 +624,7 @@ temp <- artist %>%
                                                   select (artistid)) %>%
                                select (milliseconds) %>%
                                pull(milliseconds)
-                )        
+                )
                         ) %>%
         select (name, title, milliseconds) %>%
         arrange(milliseconds)
@@ -637,8 +637,8 @@ temp <- artist %>%
         select (artistid) %>%
         inner_join(album) %>%
         inner_join(track) %>%
-        mutate (milliseconds_stairway = 
-                        if_else(name == 'Stairway To Heaven' & title == 'IV', 
+        mutate (milliseconds_stairway =
+                        if_else(name == 'Stairway To Heaven' & title == 'IV',
                                 milliseconds, 0L)) %>%
         mutate (milliseconds_stairway = max(milliseconds_stairway)) %>%
         filter (milliseconds > milliseconds_stairway) %>%
@@ -651,7 +651,7 @@ glimpse(track)
 
 ##
 ## Care sunt albumele formatiei `Led Zeppelin` mai lungi decat  albumul `IV`
-## 
+##
 
 ## solutie bazata pe crearea unei coloane ce contine valoarea de referinta
 temp <- artist %>%
@@ -669,7 +669,7 @@ temp <- artist %>%
 
 
 
-## solutie echivalenta unei interogari SQL ce foloseste subconsultare in 
+## solutie echivalenta unei interogari SQL ce foloseste subconsultare in
 ## clauza HAVING
 temp <- artist %>%
         filter (name == 'Led Zeppelin') %>%
@@ -679,7 +679,7 @@ temp <- artist %>%
         group_by(title) %>%
         summarise(album_duration = sum(milliseconds) / 1000) %>%
         ungroup() %>%
-        filter(album_duration > 
+        filter(album_duration >
                        (      # "subconsultare" care furnizeaza durata albumului `IV`
                         artist %>%
                                 filter (name == 'Led Zeppelin') %>%
@@ -771,10 +771,4 @@ temp <- invoice %>%
                                 inner_join(customer) %>%
                                 filter (country == 'Brazil') %>%
                                 summarise (n = n_distinct(year))) [['n']]
-                         )        
-        
-
-
-
-
-
+                         )

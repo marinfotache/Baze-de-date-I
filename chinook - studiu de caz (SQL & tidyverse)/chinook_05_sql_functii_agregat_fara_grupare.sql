@@ -2,7 +2,7 @@
 --
 -- 05: Functii agregat (count, count distinct, sum, avg, min, max) fara grupare
 --
--- ultima actualizare: 2020-03-26
+-- ultima actualizare: 2021-03-15
 
 
 
@@ -128,6 +128,15 @@ SELECT MIN(invoicedate) AS prima_zi
 FROM invoice
 
 
+-- solutie fara MIN
+SELECT invoicedate AS prima_zi
+FROM invoice
+ORDER BY invoicedate
+LIMIT 1
+
+
+
+
 -- ############################################################################
 -- 						In ce zi a fost ultima vanzare?
 -- ############################################################################
@@ -135,6 +144,11 @@ FROM invoice
 SELECT MAX(invoicedate) AS prima_zi
 FROM invoice
 
+-- solutie fara MAX
+SELECT invoicedate AS prima_zi
+FROM invoice
+ORDER BY invoicedate DESC
+LIMIT 1
 
 
 
