@@ -14,7 +14,7 @@ load("chinook.RData")
 
 #
 # # -- ############################################################################
-# # -- 			Extrageti numarul albumelor fiecarui artist
+# # --                Extrageti numarul albumelor fiecarui artist
 # # -- ############################################################################
 
 # solutie bazata pe `group_by` si `summarise`  (este recomandabil sa "de-grupam"
@@ -344,6 +344,37 @@ temp <- artist %>%
      arrange(artist_name)
 
 
+
+#-- ############################################################################
+#-- 	        Solutii tidyverse care nu au echivalent "direct" in SQL
+#                        (in SQL necesita functiii OLAP)
+#-- ############################################################################
+
+################################################################################
+#       Extrageti primele trei piese ale fiecarui album al formatiei U2
+################################################################################
+
+# solutie cu `top_n`
+temp <- artist %>%
+        filter (name == 'U2') %>%
+        inner_join(album) %>%
+        transmute (artist_name = name, album_title = title, albumid) %>%
+        inner_join(track) %>%
+        arrange(artist_name, album_title, albumid, trackid) %>%
+        group_by(artist_name, album_title, albumid) %>%
+        top_n(-3, trackid) %>%
+        ungroup()
+
+
+# solutie cu `slice`
+temp <- artist %>%
+        filter (name == 'U2') %>%
+        inner_join(album) %>%
+        transmute (artist_name = name, album_title = title, albumid) %>%
+        inner_join(track) %>%
+        arrange(artist_name, album_title, albumid, trackid) %>%
+        group_by(artist_name, album_title, albumid) %>%
+        slice(1:3)
 
 #
 #
