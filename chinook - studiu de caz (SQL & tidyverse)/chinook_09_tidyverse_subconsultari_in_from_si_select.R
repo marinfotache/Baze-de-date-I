@@ -4,7 +4,7 @@
 ### 09: Subconsultari SQL in clauzele FROM si SELECT. Diviziune relationala (2)
 ###                     Echivalente in `tidyverse`
 ################################################################################
-### ultima actualizare: 2020-04-25
+### ultima actualizare: 2021-04-17
 
 library(tidyverse)
 library(lubridate)

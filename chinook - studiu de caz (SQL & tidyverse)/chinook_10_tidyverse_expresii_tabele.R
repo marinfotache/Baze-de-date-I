@@ -3,7 +3,7 @@
 ################################################################################
 ###       10: Expresii tabele in SQL. Echivalente in `tidyverse`
 ################################################################################
-# # -- ultima actualizare: 2020-04-25
+# # -- ultima actualizare: 2021-04-17
 
 library(tidyverse)
 library(lubridate)
