@@ -4,13 +4,13 @@
 --
 -- 13: Pivotare in SQL (PostgreSQL)
 --
--- ultima actualizare: 2020-05-06
+-- ultima actualizare: 2021-04-17
 
 
 
 -- ############################################################################
--- 			Afisati, pentru fiecare client, pe coloane separate,
--- 					vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--             Afisati, pentru fiecare client, pe coloane separate,
+--                vanzarile pe anii 2010, 2011 si 2012 (reluare)
 -- ############################################################################
 
 -- solutie bazata pe subconsultari in clauza FROM

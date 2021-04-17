@@ -4,7 +4,7 @@
 --
 -- 11: Optiuni OLAP
 --
--- ultima actualizare: 2020-04-25
+-- ultima actualizare: 2021-04-17
 
 
 
@@ -73,8 +73,8 @@ ORDER BY artist_name, title, 3
 
 
 -- ############################################################################
--- 				Afisati topul albumelor lansate de formatia Queen,
---   					dupa numarul de piese continute
+--              Afisati topul albumelor lansate de formatia Queen,
+--                      dupa numarul de piese continute
 -- ############################################################################
 
 
@@ -119,8 +119,8 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 					Care este albumul (sau albumele) formatiei Queen
---   					cu cele mai multe piese? (reluare)
+--             Care este albumul (sau albumele) formatiei Queen
+--                    cu cele mai multe piese? (reluare)
 -- ############################################################################
 
 -- solutie bazata pe functia RANK()
@@ -196,8 +196,8 @@ ORDER BY 1,2
 
 
 -- ############################################################################
--- Luand in calcul numarul de piese, pe ce pozitie se gaseste albumul
--- `Machine Head`  in ierarhia albumelor formatiei `Deep Purple`?
+--      Luand in calcul numarul de piese, pe ce pozitie se gaseste albumul
+--       `Machine Head`  in ierarhia albumelor formatiei `Deep Purple`?
 -- ############################################################################
 
 WITH
@@ -221,7 +221,7 @@ WHERE album_title = 'Machine Head'
 
 
 -- ############################################################################
--- 	  Extrageti, pentru fiecare an, topul celor mai bine vandute trei piese
+--    Extrageti, pentru fiecare an, topul celor mai bine vandute trei piese
 -- ############################################################################
 
 
@@ -253,8 +253,8 @@ ORDER BY year, rank_of_the_track
 
 
 -- ############################################################################
--- 	  Pentru fiecare luna cu vanzari, afisati cresterea sau scaderea valorii
---    vanzarilor, comparativ cu luna precedenta
+--    Pentru fiecare luna cu vanzari, afisati cresterea sau scaderea valorii
+--                 vanzarilor, comparativ cu luna precedenta
 -- ############################################################################
 
 WITH
@@ -301,8 +301,6 @@ SELECT year, month, sales as current_month__sales,
 	sales - COALESCE(LAG (sales, 1) OVER (PARTITION BY year ORDER BY month), 0) AS difference
 FROM monthly_sales
 ORDER BY year, month
-
-
 
 
 

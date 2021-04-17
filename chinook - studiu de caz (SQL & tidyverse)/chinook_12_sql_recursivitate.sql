@@ -4,7 +4,7 @@
 --
 -- 12: SQL recursive
 --
--- ultima actualizare: 2020-05-06
+-- ultima actualizare: 2021-04-17
 
 
 -- ############################################################################
@@ -121,12 +121,12 @@ GROUP BY albumid, album_title, artist_name
 
 
 -- ############################################################################
---   		    B. Interogari recursive pentru probleme `recursive`
+--            B. Interogari recursive pentru probleme `recursive`
 -- ############################################################################
 
 
 -- ############################################################################
--- 				Afisati nivelul ierarhic al fiecarui angajat
+--                 Afisati nivelul ierarhic al fiecarui angajat
 --                   (incepand cu 0 de la `General Manager`)
 -- ############################################################################
 
@@ -148,8 +148,8 @@ ORDER BY hierarchical_level DESC
 
 
 -- ############################################################################
--- 	  Pentru fiecare angajat, afisati subordonarea sa ierarhica, incepand
---         cu `General Manager`)
+--     Pentru fiecare angajat, afisati subordonarea sa ierarhica, incepand
+--                         cu `General Manager`
 -- ############################################################################
 
 
@@ -177,7 +177,7 @@ ORDER BY 2
 
 
 -- ############################################################################
--- 	               Extrageti toti sefii angajatei 'Jane Peacock'
+--               Extrageti toti sefii angajatei 'Jane Peacock'
 -- ############################################################################
 
 
@@ -204,7 +204,7 @@ ORDER BY hierarchical_level
 
 
 -- ############################################################################
--- 	             Extrageti toti subordonatii (directi si indirecti) ai
+--             Extrageti toti subordonatii (directi si indirecti) ai
 --                        angajatei 'Nancy Edwards'
 -- ############################################################################
 
