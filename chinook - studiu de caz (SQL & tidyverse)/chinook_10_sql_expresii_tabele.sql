@@ -4,12 +4,12 @@
 --
 -- 10: Expresii tabele
 --
--- ultima actualizare: 2021-04-12
+-- ultima actualizare: 2021-04-17
 
 
 -- ############################################################################
--- 		Care sunt celelalte albume ale artistului sau formatiei care a
---     				lansat albumul `Houses of the Holy` (reluare)
+--       Care sunt celelalte albume ale artistului sau formatiei care a
+--               lansat albumul `Houses of the Holy` (reluare)
 -- ############################################################################
 
 -- solutie cu o expresie-tabela
@@ -111,8 +111,8 @@ HAVING COUNT(*) > (SELECT nr_piese FROM nr_piese_IV)
 
 
 -- ############################################################################
--- 			Afisati, pentru fiecare client, pe coloane separate,
--- 					vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--             Afisati, pentru fiecare client, pe coloane separate,
+--                vanzarile pe anii 2010, 2011 si 2012 (reluare)
 -- ############################################################################
 
 -- solutie bazata pe jonctiunea externa a tabelei `customer` cu trei expresii-tabela
@@ -143,9 +143,9 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 			Afisati, pentru fiecare client, pe coloane separate,
--- 					vanzarile pe anii 2010, 2011 si 2012 (reluare),
---  			la care adaugati un rand pentru total general
+--             Afisati, pentru fiecare client, pe coloane separate,
+--               vanzarile pe anii 2010, 2011 si 2012 (reluare),
+--                la care adaugati un rand pentru total general
 -- ############################################################################
 
 WITH
@@ -192,7 +192,7 @@ ORDER BY ordine, customer_name
 
 
 -- ############################################################################
---  	Afisati ponderea fiecarei luni in vanzarile anului 2010 (reluare)
+--    Afisati ponderea fiecarei luni in vanzarile anului 2010 (reluare)
 -- ############################################################################
 
 -- solutie bazata pe trei expresii tabela
@@ -219,8 +219,8 @@ FROM all_months
 
 
 -- ############################################################################
--- 					Care este albumul (sau albumele) formatiei Queen
---   					cu cele mai multe piese? (reluare)
+--             Care este albumul (sau albumele) formatiei Queen
+--                  cu cele mai multe piese? (reluare)
 -- ############################################################################
 
 -- solutie bazata pe doua expresii tabela `inlantuite`
@@ -245,14 +245,14 @@ ORDER BY 1
 
 --
 -- ############################################################################
--- 						Diviziune relationala (3)
+--                          Diviziune relationala (3)
 -- ############################################################################
 --
 
 
 -- ############################################################################
--- 	 Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
---  					care provin clientii (reluare)
+--   Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
+--                  care provin clientii (reluare)
 -- ############################################################################
 
 -- solutie bazata pe expresii-tabela

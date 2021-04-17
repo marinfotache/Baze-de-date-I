@@ -8,7 +8,7 @@
 
 --
 -- ############################################################################
--- 							          Subconsultari in clauza FROM
+--                      Subconsultari in clauza FROM
 -- ############################################################################
 --
 
@@ -58,7 +58,7 @@ FROM
 
 
 -- ############################################################################
--- 				  Care sunt facturile din prima zi de vanzari? (reluare)
+--          Care sunt facturile din prima zi de vanzari? (reluare)
 -- ############################################################################
 
 -- solutie bazata pe o subconsultare in clauza FROM
@@ -70,7 +70,7 @@ FROM invoice NATURAL JOIN
 
 
 -- ############################################################################
--- 			Care sunt facturile din prima saptamana de vanzari? (reluare)
+--      Care sunt facturile din prima saptamana de vanzari? (reluare)
 -- ############################################################################
 
 -- o solutie  bazata pe o subconsultare in clauza FROM care, la randul sau,
@@ -149,7 +149,7 @@ ORDER BY 1
 
 
 -- ############################################################################
---  		Afisati ponderea fiecarei luni in vanzarile anului 2010
+--         Afisati ponderea fiecarei luni in vanzarile anului 2010
 -- ############################################################################
 
 -- solutia afiseaza toate lunile anului, chiar si cele fara vanzari
@@ -173,8 +173,8 @@ FROM
 
 
 -- ############################################################################
--- 					Care este albumul (sau albumele) formatiei Queen
---   					cu cele mai multe piese? (reluare)
+--             Care este albumul (sau albumele) formatiei Queen
+--                  cu cele mai multe piese? (reluare)
 -- ############################################################################
 
 
@@ -207,7 +207,7 @@ ORDER BY 1
 
 --
 -- ############################################################################
--- 						     Diviziune relationala (2)
+--                     Diviziune relationala (2)
 -- ############################################################################
 --
 
@@ -386,7 +386,7 @@ WHERE artist_name || ' - ' || year NOT IN (
 
 --
 -- ############################################################################
--- 							      Subconsultari in clauza SELECT
+--                      Subconsultari in clauza SELECT
 -- ############################################################################
 --
 
@@ -409,7 +409,7 @@ FROM
 
 --
 -- ############################################################################
--- 							Subconsultari CORELATE in clauza SELECT
+--                Subconsultari CORELATE in clauza SELECT
 -- ############################################################################
 --
 
@@ -428,8 +428,8 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 			Afisati, pentru fiecare client, pe coloane separate,
--- 					vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--            Afisati, pentru fiecare client, pe coloane separate,
+--              vanzarile pe anii 2010, 2011 si 2012 (reluare)
 -- ############################################################################
 
 
@@ -447,7 +447,7 @@ ORDER BY 1, 2, 3, 4
 
 
 -- ############################################################################
---    Afisati ponderea fiecarei luni in vanzarile anului din care face parte
+--   Afisati ponderea fiecarei luni in vanzarile anului din care face parte
 -- ############################################################################
 SELECT year, month, monthly_sales,
 	(SELECT SUM(total) FROM invoice
@@ -470,7 +470,7 @@ ORDER BY 1, 2
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--             La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 select *
