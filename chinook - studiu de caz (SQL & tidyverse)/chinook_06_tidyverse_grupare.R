@@ -3,7 +3,7 @@
 ################################################################################
 ###              06: Grupare - group by, subtotaluri, having
 ################################################################################
-### ultima actualizare: 2020-03-31
+### ultima actualizare: 2021-03-31
 
 #
 library(tidyverse)
@@ -348,7 +348,7 @@ temp <- artist %>%
 #
 #
 # -- ############################################################################
-# -- 			Probleme de rezolvat la curs/laborator/acasa
+# --                Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
 # -- Afisati numarul de piese din fiecare tracklist

@@ -3,7 +3,7 @@
 ################################################################################
 ###                             07: Jonctiuni externe
 ################################################################################
-### -- ultima actualizare: 2020-04-09
+### -- ultima actualizare: 2021-04-02
 
 library(tidyverse)
 library(lubridate)
@@ -278,7 +278,7 @@ temp <-
 
 
 # -- ############################################################################
-# -- 			Probleme de rezolvat la curs/laborator/acasa
+# --                Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
 # -- Obtineti un raport in care linii sunt asociate fiecarui artist,

@@ -89,7 +89,6 @@ temp <- customer %>%
 
 
 
-#
 ############################################################################
 # # --              Din cate orase sunt clientii companiei?
 ############################################################################
@@ -116,8 +115,8 @@ temp <- album %>%
 
 
 ############################################################################
-# #            -- Care este durata medie (in secunde) a pieselor
-# #            -- de pe albumul `Achtung Baby` al formatiei `U2`
+# #              Care este durata medie (in secunde) a pieselor
+# #               de pe albumul `Achtung Baby` al formatiei `U2`
 ############################################################################
 
 # solutie bazata pe `summarise` si `mean`
@@ -160,7 +159,7 @@ temp <- album %>%
 
 
 ############################################################################
-# # --                   In ce zi a fost prima vanzare?
+# # --                  In ce zi a fost prima vanzare?
 ############################################################################
 
 # solutie cu functia `min`
@@ -186,7 +185,27 @@ temp <- invoice %>%
     distinct(invoicedate) %>%
     top_n (-1, invoicedate) %>%
     transmute (first_day = invoicedate)
+
+
+# solutie cu `slice`
+temp <- invoice %>%     
+    distinct(invoicedate) %>%
+    arrange(invoicedate)  %>%     
+    slice(1) 
     
+
+# alta solutie cu `slice`
+temp <- invoice %>%     
+    distinct(invoicedate) %>%
+    arrange(desc(invoicedate))  %>%     
+     slice(nrow(.)) 
+
+
+# solutie cu filtrare ce foloseste `rownum()`
+temp <- invoice %>%     
+    distinct(invoicedate) %>%
+    arrange(invoicedate)  %>%     
+    filter (row_number() <= 1)
 
 
 ############################################################################
@@ -221,7 +240,7 @@ temp <- invoice %>%
 
 
 # -- ############################################################################
-# -- 			Probleme de rezolvat la curs/laborator/acasa
+# --                Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
 #
