@@ -3,7 +3,7 @@
 ################################################################################
 ###             03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
 ################################################################################
-### ultima actualizare: 2020-03-10
+### ultima actualizare: 2021-03-10
 
 library(tidyverse)
 library(lubridate)
@@ -84,7 +84,8 @@ temp <- artist %>%
 
 
 # # -- ############################################################################
-# -- Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii direct ai subordonatilor de ordinul 1)
+# -- Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii direct ai 
+# -- subordonatilor de ordinul 1)
 # -- ai lui `Adams` (lastname) `Andrew` (firstname)
 #
 
@@ -132,7 +133,7 @@ temp <- bind_rows(
 
 
 # # -- ############################################################################
-# # -- 				INTERSECT
+# # --                                  INTERSECT
 # # -- ############################################################################
 # #
 
@@ -246,8 +247,6 @@ temp <- track %>%
 # # -- Care sunt piesele formatiei 'Iron Maiden' de pe albumul `Fear Of The Dark`
 # # -- 				care NU apar si pe albumul `A Real Live One`
 # # -- ############################################################################
-# #
-# # -- SQL
 
 
 # solutie bazata pe `setdiff` (exchivalentul EXCEPT)
@@ -321,7 +320,7 @@ temp <- artist %>%
 
 #
 # -- ############################################################################
-# -- 		Probleme de rezolvat la curs/laborator/acasa
+# --                Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
 #

@@ -38,7 +38,6 @@ load(file = 'chinook.RData')
 
 
 
-
 ############################################################################
 # # --                   In ce ani s-au inregistrat vanzari?
 ############################################################################
@@ -364,7 +363,7 @@ temp <- invoice %>%
 #
 #
 # -- ############################################################################
-# -- 			Probleme de rezolvat la curs/laborator/acasa
+# --                Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
 # -- Extrageti numele de utilizator de pe contul de e-mail al fiecarui angajat

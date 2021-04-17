@@ -3,7 +3,7 @@
 ################################################################################
 ###                         02: Jonctiuni interne
 ################################################################################
-### ultima actualizare: 2020-03-22
+### ultima actualizare: 2021-03-12
 
 library(tidyverse)
 library(lubridate)
@@ -11,7 +11,7 @@ setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
 #############################################################################
-### 			               Care sunt albumele formatiei `U2`
+###                Care sunt albumele formatiei `U2`
 #############################################################################
 
 
@@ -134,7 +134,7 @@ temp <- track %>%
 
 
 ############################################################################
-###            #-- Care sunt piesele formatiei U2 vandute in anul 2013?
+###          Care sunt piesele formatiei U2 vandute in anul 2013?
 ############################################################################
 temp <- track %>%
              inner_join(album) %>%
@@ -186,7 +186,7 @@ temp <- artist %>%
 
 
 ############################################################################
-### 			                    AUTOJONCTIUNE
+###                         AUTOJONCTIUNE
 ############################################################################
 ###
 ###
@@ -213,8 +213,8 @@ temp <- album %>%
 
 
 ############################################################################
-## 			Care sunt celelalte piese de pe albumul pe care apare piesa
-## 							 'For Those About To Rock (We Salute You)'?
+##      Care sunt celelalte piese de pe albumul pe care apare piesa
+##                'For Those About To Rock (We Salute You)'?
 ############################################################################
 
 temp <- track %>%
@@ -225,8 +225,8 @@ temp <- track %>%
 
 
 #########################################################################
-###   Care este numele angajatului: lastname = 'Johnson' AND
-###         firstname = 'Steve'
+###       Care este numele angajatului: lastname = 'Johnson' AND
+###                    firstname = 'Steve'
 #########################################################################
 
 # sol . 1
@@ -252,7 +252,7 @@ temp <- employee %>%
 
 #
 # -- ############################################################################
-# -- 		         Probleme de rezolvat la curs/laborator/acasa
+# --                Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
 #

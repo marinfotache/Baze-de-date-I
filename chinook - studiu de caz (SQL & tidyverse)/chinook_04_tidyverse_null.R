@@ -4,7 +4,7 @@
 ###        04: Tratamentul (meta)valorilor NA (echivalentul NULL din SQL)
 ###             Atentie: valorile NULL au alt regim in limbajul R!!!!
 ################################################################################
-# ultima actualizare: 2020-03-26
+# ultima actualizare: 2021-03-15
 
 
 library(tidyverse)
@@ -122,7 +122,7 @@ temp <- artist %>%
 #
 #
 # -- ############################################################################
-# -- 			Probleme de rezolvat la curs/laborator/acasa
+# --                Probleme de rezolvat la curs/laborator/acasa
 # -- ############################################################################
 #
 
