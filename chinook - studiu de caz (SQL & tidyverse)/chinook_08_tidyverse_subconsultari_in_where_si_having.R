@@ -4,7 +4,7 @@
 ###   08: Subconsultari SQL in clauzele WHERE si HAVING si echivalentele
 ###                  lor in `tidyverse`. Diviziune relationala (1)
 ################################################################################
-### ultima actualizare: 2020-04-28
+### ultima actualizare: 2021-04-15
 
 
 library(tidyverse)
@@ -192,6 +192,11 @@ temp <- invoice %>%
      top_n(-1, invoicedate)
 
 
+# solutie care foloseste `slice`
+temp <- invoice %>%
+     arrange(invoicedate) %>%
+     slice(1)
+
 
 ############################################################################
 ## 	    Care sunt facturile din prima saptamana de vanzari?
@@ -287,6 +292,7 @@ temp <- invoice %>%
      inner_join(
           invoice %>%
                distinct(invoicedate) %>%
+               arrange(invoicedate) %>%
                top_n(-10)
      )
 
@@ -296,11 +302,21 @@ temp <- invoice %>%
      filter (invoicedate %in%
           (invoice %>%
                distinct(invoicedate) %>%
+               arrange(invoicedate) %>%
                head(10) %>%
                pull()
           )
      )
 
+
+#  solutie bazata pe `slice`
+temp <- invoice %>%
+     inner_join(
+          invoice %>%
+               distinct(invoicedate) %>%
+               arrange(invoicedate) %>%
+               slice(1:10)
+     )
 
 
 ############################################################################

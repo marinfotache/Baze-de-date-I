@@ -1,8 +1,10 @@
--- 						Interogari BD Chinook - IE si SPE:
+-- ############################################################################
+-- 						Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- SQL 02: Jonctiuni interne
 --
--- ultima actualizare: 2020-03-07
+-- ultima actualizare: 2021-03-07
 
 
 -- JOIN

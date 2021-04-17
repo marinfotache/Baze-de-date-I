@@ -1,5 +1,6 @@
--- 						Interogari BD Chinook - IE si SPE:
---
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 -- SQL 01: Filtrare simpla, regular expressions, structuri CASE
 -- Functii/operatori/optiuni SQL utilizate (si prezente in subiectele de la testele Moodle urmatoare)
 --  	`EXTRACT` (year, month, ...)
@@ -28,7 +29,7 @@
 
 
 -- ############################################################################
--- 										In ce ani s-au inregistrat vanzari?
+--                    In ce ani s-au inregistrat vanzari?
 -- ############################################################################
 
 -- prima notatie pentru ordonare (specificarea expresiei de calcul a atributului de ordonare)
@@ -108,7 +109,7 @@ order by 1,2
 
 
 -- ############################################################################
--- 			Care este lungimea numelui pentru fiecare artist/formatie?
+--         Care este lungimea numelui pentru fiecare artist/formatie?
 -- ############################################################################
 
 select artist.*, LENGTH(name) as lungime_nume
@@ -288,7 +289,7 @@ WHERE LENGTH(name) - LENGTH(REPLACE(name, ' ', '')) = 1
 
 
 -- ############################################################################
--- 										Care sunt primii trei ani s-au inregistrat vanzari?
+--            Care sunt primii trei ani s-au inregistrat vanzari?
 -- ############################################################################
 
 -- prima notatie pentru ordonare (specificarea expresiei de calcul a atributului de ordonare)
@@ -301,7 +302,7 @@ limit 3
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 -- Extrageti numele de utilizator de pe contul de e-mail al fiecarui angajat
@@ -311,7 +312,7 @@ limit 3
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--              La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 

@@ -1,8 +1,10 @@
--- 						Interogari BD Chinook - IE si SPE:
+-- ############################################################################
+-- 						Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- SQL 03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
 --
--- ultima actualizare: 2020-03-10
+-- ultima actualizare: 2021-03-10
 
 
 
@@ -252,3 +254,5 @@ WHERE playlist.name = 'Music'
 -- ############################################################################
 -- 						La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
+
+-- (interogarile vor scrise "in direct", in timpul cursului)
