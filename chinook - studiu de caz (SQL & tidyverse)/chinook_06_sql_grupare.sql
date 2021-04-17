@@ -1,4 +1,6 @@
--- 						Interogari SQL BD Chinook - IE si SPE:
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- 06: Grupare - group by, subtotaluri, having
 --
@@ -222,7 +224,7 @@ ORDER BY artist.name
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 -- Afisati numarul de piese din fiecare tracklist
@@ -235,7 +237,7 @@ ORDER BY artist.name
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 select country, count(*) as n_of_cust

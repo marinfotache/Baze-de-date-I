@@ -1,5 +1,5 @@
 -- ############################################################################
--- 						Interogari BD Chinook - IE, CIG si SPE:
+--                Interogari BD Chinook - IE, CIG si SPE:
 -- ############################################################################
 --
 -- SQL 03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
@@ -215,7 +215,7 @@ WHERE artist.name = 'Led Zeppelin' AND
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 
@@ -252,7 +252,7 @@ WHERE playlist.name = 'Music'
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 -- (interogarile vor scrise "in direct", in timpul cursului)

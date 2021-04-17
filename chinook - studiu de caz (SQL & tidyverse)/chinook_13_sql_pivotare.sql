@@ -116,7 +116,7 @@ SELECT * FROM crosstab(
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 
@@ -128,5 +128,5 @@ SELECT * FROM crosstab(
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################

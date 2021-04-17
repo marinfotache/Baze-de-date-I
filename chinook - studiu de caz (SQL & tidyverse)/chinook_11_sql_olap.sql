@@ -1,4 +1,6 @@
--- 						Interogari SQL BD Chinook - IE si SPE:
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- 11: Optiuni OLAP
 --
@@ -306,13 +308,14 @@ ORDER BY year, month
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
+-- ...
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 

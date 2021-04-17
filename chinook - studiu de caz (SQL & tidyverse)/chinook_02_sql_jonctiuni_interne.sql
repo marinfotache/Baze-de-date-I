@@ -64,7 +64,7 @@ WHERE artist.name = 'Led Zeppelin'	AND
 
 
 -- ############################################################################
--- 					Care sunt piesele formatiei U2 vandute in anul 2013?
+--          Care sunt piesele formatiei U2 vandute in anul 2013?
 -- ############################################################################
 
 SELECT track.name as track_name, title as album_title
@@ -85,7 +85,7 @@ ORDER BY 1 ;
 
 -- ############################################################################
 -- 			Care sunt celelalte albume ale formatiei care a lansat
--- 							albumul 'Achtung Baby'?
+--                    albumul 'Achtung Baby'?
 -- ############################################################################
 
 -- solutie care utilizeaza AUTO JOIN
@@ -97,7 +97,7 @@ WHERE album.title = 'Achtung Baby'
 
 -- ############################################################################
 -- 			Care sunt celelalte piese de pe albumul pe care apare piesa
--- 							 'For Those About To Rock (We Salute You)'?
+--              'For Those About To Rock (We Salute You)'?
 -- ############################################################################
 
 -- solutie care utilizeaza AUTO JOIN
@@ -139,7 +139,7 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 -- In ce tari s-a vandut muzica formatiei `Led Zeppelin`
@@ -155,7 +155,7 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 --

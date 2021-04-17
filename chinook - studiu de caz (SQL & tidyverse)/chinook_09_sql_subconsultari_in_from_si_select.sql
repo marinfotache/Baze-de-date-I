@@ -1,4 +1,6 @@
--- 						Interogari SQL BD Chinook - IE si SPE:
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- 09: Subconsultari in clauzele FROM si SELECT. Diviziune relationala (2)
 --
@@ -468,7 +470,7 @@ ORDER BY 1, 2
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 select *

@@ -1,4 +1,6 @@
--- 						Interogari SQL BD Chinook - IE si SPE:
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- 07: Jonctiuni externe
 --
@@ -171,8 +173,9 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
+
 
 -- Obtineti un raport in care linii sunt asociate fiecarui artist,
 --   iar coloanele fiecarui gen muzical (prima coloana va fi numele artistului);
@@ -181,7 +184,7 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 --

@@ -1,4 +1,6 @@
--- 						Interogari SQL BD Chinook - IE si SPE:
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- 12: SQL recursive
 --
@@ -228,7 +230,7 @@ ORDER BY hierarchical_level
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 
@@ -240,5 +242,5 @@ ORDER BY hierarchical_level
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################

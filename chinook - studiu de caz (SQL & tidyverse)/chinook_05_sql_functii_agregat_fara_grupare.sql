@@ -1,4 +1,6 @@
--- 						Interogari SQL - BD Chinook - IE si SPE:
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- 05: Functii agregat (count, count distinct, sum, avg, min, max) fara grupare
 --
@@ -155,7 +157,7 @@ LIMIT 1
 
 
 -- ############################################################################
--- 					Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 
@@ -169,7 +171,7 @@ LIMIT 1
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 select min(birthdate)

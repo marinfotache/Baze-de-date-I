@@ -1,5 +1,5 @@
 -- ############################################################################
--- 						Interogari BD Chinook - IE, CIG si SPE:
+--                Interogari BD Chinook - IE, CIG si SPE:
 -- ############################################################################
 --
 -- SQL 04: Tratamentul (meta)valorilor NULL
@@ -90,7 +90,7 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 

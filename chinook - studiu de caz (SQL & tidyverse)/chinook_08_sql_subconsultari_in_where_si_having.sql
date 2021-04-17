@@ -1,4 +1,6 @@
--- 						Interogari SQL BD Chinook - IE si SPE:
+-- ############################################################################
+--                Interogari BD Chinook - IE, CIG si SPE:
+-- ############################################################################
 --
 -- 08: Subconsultari IN clauzele WHERE si HAVING. Diviziune relationala (1)
 --
@@ -509,7 +511,7 @@ HAVING string_agg(DISTINCT city, '|' ORDER BY city) = (
 
 
 -- ############################################################################
--- 						Probleme de rezolvat la curs/laborator/acasa
+--               Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
 
 -- Care primul (sau primii) angajat(i) in companie?
@@ -520,7 +522,7 @@ HAVING string_agg(DISTINCT city, '|' ORDER BY city) = (
 
 
 -- ############################################################################
--- 						La ce intrebari raspund urmatoarele interogari ?
+--          La ce intrebari raspund urmatoarele interogari ?
 -- ############################################################################
 
 
