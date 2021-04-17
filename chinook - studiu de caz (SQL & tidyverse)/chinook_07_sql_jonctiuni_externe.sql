@@ -8,7 +8,7 @@
 
 
 -- ############################################################################
--- 		Care sunt artistii care, momentan, nu au niciun album preluat in BD?
+--    Care sunt artistii care, momentan, nu au niciun album preluat in BD?
 -- ############################################################################
 
 -- solutie bazata pe diferenta
@@ -49,7 +49,7 @@ ORDER BY name
 
 
 -- ############################################################################
--- 		Care sunt artistii care, momentan, nu au niciun album preluat in BD?
+--     Care sunt artistii care, momentan, nu au niciun album preluat in BD?
 -- ############################################################################
 
 -- solutie bazata pe grupare
@@ -62,9 +62,9 @@ ORDER BY name
 
 
 -- ############################################################################
--- 			     Afisati, pentru fiecare client din baza de date,
--- 			vanzarile pe anul 2010 (in raport trebuie inclusi si clientii
---          pentru care nu sunt vanzari in 2010)
+--             Afisati, pentru fiecare client din baza de date,
+--        vanzarile pe anul 2010 (in raport trebuie inclusi si clientii
+--                 pentru care nu sunt vanzari in 2010)
 -- ############################################################################
 
 -- solutie bazata pe LEFT JOIN si CASE
@@ -88,8 +88,8 @@ GROUP BY lastname || ' ' || firstname, city, state, country
 
 
 -- ############################################################################
--- 			Afisati, pentru fiecare client, pe trei linii separate,
--- 					vanzarile pe anii 2010, 2011 si 2012
+--            Afisati, pentru fiecare client, pe trei linii separate,
+--                  vanzarile pe anii 2010, 2011 si 2012
 -- ############################################################################
 
 
@@ -119,8 +119,8 @@ ORDER BY customer_name, year
 
 
 -- ############################################################################
--- 			Afisati, pentru fiecare client, pe coloane separate,
--- 					vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--              Afisati, pentru fiecare client, pe coloane separate,
+--                 vanzarile pe anii 2010, 2011 si 2012 (reluare)
 -- ############################################################################
 
 -- solutia urmatoare este eronata !!!!! (trebuie folosite subconsultari in

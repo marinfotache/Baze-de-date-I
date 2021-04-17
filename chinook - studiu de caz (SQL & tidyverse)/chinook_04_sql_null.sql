@@ -8,11 +8,11 @@
 
 
 -- ############################################################################
--- 									IS NULL
+--                                     IS NULL
 -- ############################################################################
 
 -- ############################################################################
--- Care sunt clientii individuali (non-companii)
+--             Care sunt clientii individuali (non-companii)
 -- ############################################################################
 
 SELECT *
@@ -30,8 +30,8 @@ WHERE company IS NOT NULL
 
 
 -- ############################################################################
--- Care sunt piesele de pe albumele formatiei `Black Sabbath`
--- carora nu li se cunoaste compozitorul
+--       Care sunt piesele de pe albumele formatiei `Black Sabbath`
+--                   carora nu li se cunoaste compozitorul
 -- ############################################################################
 
 SELECT *
@@ -110,7 +110,7 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 						Care sunt cerintele la care raspund urmatoarele interogari ?
+--        Care sunt cerintele la care raspund urmatoarele interogari ?
 -- ############################################################################
 
 
@@ -136,8 +136,8 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 					Explicati diferenta numarului de linii din rezultat pentru
---							urmatoarele doua perechi de interogari
+--          Explicati diferenta numarului de linii din rezultat pentru
+--                 urmatoarele doua perechi de interogari
 -- ############################################################################
 
 -- A.

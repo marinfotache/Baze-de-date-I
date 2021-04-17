@@ -9,13 +9,13 @@
 
 --
 -- ############################################################################
--- 							Subconsultari IN clauza WHERE
+--                         Subconsultari IN clauza WHERE
 -- ############################################################################
 --
 
 -- ############################################################################
--- 		Care sunt celelalte albume ale artistului sau formatiei care a
---     				lansat albumul `Houses of the Holy`
+--        Care sunt celelalte albume ale artistului sau formatiei care a
+--                   lansat albumul `Houses of the Holy`
 -- ############################################################################
 
 
@@ -63,7 +63,7 @@ ORDER BY 2
 
 
 -- ############################################################################
--- 		Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
+--      Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
 -- ############################################################################
 
 
@@ -96,9 +96,9 @@ WHERE albumid IN  (SELECT albumid
 
 
 -- ############################################################################
--- 			Care sunt piesele comune (cu acelasi titlu) de pe
--- 			albumele `Fear Of The Dark` si `A Real Live One`
--- 					ale formatiei 'Iron Maiden' (reluare)
+--               Care sunt piesele comune (cu acelasi titlu) de pe
+--                albumele `Fear Of The Dark` si `A Real Live One`
+--                  ale formatiei 'Iron Maiden' (reluare)
 -- ############################################################################
 
 -- solutie bazata pe subconsultare in clauza WHERE
@@ -117,7 +117,7 @@ WHERE artist.name = 'Iron Maiden' AND title = 'Fear Of The Dark'
 
 
 -- ############################################################################
--- 				  Care sunt facturile din prima zi de vanzari?
+--               Care sunt facturile din prima zi de vanzari?
 -- ############################################################################
 
 -- solutie bazata pe o subconsultare ce foloseste functia MIN
@@ -138,7 +138,7 @@ WHERE invoicedate <= ALL (SELECT DISTINCT invoicedate
 
 
 -- ############################################################################
--- 				Care sunt facturile din prima saptamana de vanzari?
+--           Care sunt facturile din prima saptamana de vanzari?
 -- ############################################################################
 SELECT *
 FROM invoice
@@ -147,7 +147,7 @@ WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND
 
 
 -- ############################################################################
--- 				Care sunt facturile din prima luna de vanzari?
+--            Care sunt facturile din prima luna de vanzari?
 -- ############################################################################
 SELECT *
 FROM invoice
@@ -156,8 +156,8 @@ WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND
 
 
 -- ############################################################################
--- 		   Cate facturi s-au emis in prima luna calendaristica a vanzarilor ?
---    (adica prima luna IANUARIE sau APRILIE ...)
+--     Cate facturi s-au emis in prima luna calendaristica a vanzarilor ?
+--              (adica prima luna IANUARIE sau APRILIE ...)
 -- ############################################################################
 
 -- solutie bazata pe o singura subconsultare
@@ -182,7 +182,7 @@ WHERE EXTRACT (YEAR FROM invoicedate) =
 
 
 -- ############################################################################
--- 		   Cate facturi s-au emis in primele 10 zile cu vanzari ?
+--            Cate facturi s-au emis in primele 10 zile cu vanzari ?
 -- ############################################################################
 
 -- solutie bazata pe o subconsultare in clauza WHERE care prezinta LIMIT si
@@ -230,7 +230,7 @@ WHERE invoicedate <=  (SELECT distinct invoicedate
 
 
 -- ############################################################################
--- 		      Care sunt cei mai vechi cinci angajati ai companiei?
+--        Care sunt cei mai vechi cinci angajati ai companiei?
 -- ############################################################################
 
 -- solutia bazata pe LIMIT extrage un rezultat incomplet
@@ -255,13 +255,13 @@ ORDER BY hiredate
 
 --
 -- ############################################################################
--- 							Subconsultari IN clauza HAVING
+--                       Subconsultari IN clauza HAVING
 -- ############################################################################
 --
 
 -- ############################################################################
--- 		Care sunt albumele formatiei Led Zeppelin care au mai multe piese
---                  decat albumul `IV`
+--      Care sunt albumele formatiei Led Zeppelin care au mai multe piese
+--                            decat albumul `IV`
 -- ############################################################################
 
 -- solutie bazata pe o subsonsultare in clauza HAVING
@@ -281,8 +281,8 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 		Care este albumul (sau albumele) formatiei Queen
---   					cu cele mai multe piese?
+--            Care este albumul (sau albumele) formatiei Queen
+--                      cu cele mai multe piese?
 -- ############################################################################
 
 -- solutie bazata pe `>= ALL`

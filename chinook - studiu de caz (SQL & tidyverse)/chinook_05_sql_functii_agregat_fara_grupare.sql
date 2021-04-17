@@ -9,7 +9,7 @@
 
 
 -- ############################################################################
--- 					Cati artisti sunt in baza de date?
+--                    Cati artisti sunt in baza de date?
 -- ############################################################################
 
 SELECT COUNT(*) AS nr_artisti
@@ -21,7 +21,7 @@ FROM artist
 
 
 -- ############################################################################
--- 					Cate piese sunt in baza de date?
+--                 Cate piese sunt in baza de date?
 -- ############################################################################
 
 -- solutie corecta
@@ -66,7 +66,7 @@ FROM album
 
 
 -- ############################################################################
--- 					Din cate tari sunt clientii companiei?
+--                Din cate tari sunt clientii companiei?
 -- ############################################################################
 
 SELECT COUNT(DISTINCT country)
@@ -75,7 +75,7 @@ FROM customer
 
 
 -- ############################################################################
--- 			Cate secunde are albumul `Achtung Baby` al formatiei `U2`
+--        Cate secunde are albumul `Achtung Baby` al formatiei `U2`
 -- ############################################################################
 
 SELECT SUM(milliseconds) / 1000 AS duration_seconds
@@ -87,8 +87,8 @@ WHERE artist.name = 'U2' AND title = 'Achtung Baby'
 
 
 -- ############################################################################
--- 				Care este durata medie (in secunde) a pieselor
--- 				de pe albumul `Achtung Baby` al formatiei `U2`
+--               Care este durata medie (in secunde) a pieselor
+--               de pe albumul `Achtung Baby` al formatiei `U2`
 -- ############################################################################
 
 SELECT ROUND(AVG(milliseconds / 1000)) AS duration_seconds
@@ -99,7 +99,7 @@ WHERE artist.name = 'U2' AND title = 'Achtung Baby'
 
 
 -- ############################################################################
--- 				Care este durata medie a pieselor formatiei `U2`
+--           Care este durata medie a pieselor formatiei `U2`
 -- ############################################################################
 
 SELECT ROUND(AVG(milliseconds / 1000)) AS duration_seconds
@@ -123,7 +123,7 @@ WHERE artist.name = 'Pink Floyd'
 
 
 -- ############################################################################
--- 						In ce zi a fost prima vanzare?
+--                      In ce zi a fost prima vanzare?
 -- ############################################################################
 
 SELECT MIN(invoicedate) AS prima_zi
@@ -140,7 +140,7 @@ LIMIT 1
 
 
 -- ############################################################################
--- 						In ce zi a fost ultima vanzare?
+--                       In ce zi a fost ultima vanzare?
 -- ############################################################################
 
 SELECT MAX(invoicedate) AS prima_zi

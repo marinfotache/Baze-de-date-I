@@ -8,7 +8,7 @@
 
 
 -- ############################################################################
--- 				 Extrageti numarul albumelor fiecarui artist
+--               Extrageti numarul albumelor fiecarui artist
 -- ############################################################################
 
 SELECT name AS artist_name, COUNT(*) as n_of_albums
@@ -19,7 +19,7 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 				 Care este artistul cu cel mai mare numar de albume?
+--           Care este artistul cu cel mai mare numar de albume?
 -- ############################################################################
 
 SELECT name AS artist_name, COUNT(*) as n_of_albums
@@ -31,7 +31,7 @@ LIMIT 1
 
 
 -- ############################################################################
--- 	   Extrageti durata totala a pieselor (in minute) pentru fiecare artist
+--     Extrageti durata totala a pieselor (in minute) pentru fiecare artist
 -- ############################################################################
 
 SELECT artist.name AS artist_name,
@@ -44,7 +44,7 @@ ORDER BY artist.name
 
 
 -- ############################################################################
--- 	         Extrageti numărul de clienți, pe țări
+--                   Extrageti numărul de clienți, pe țări
 -- ############################################################################
 
 
@@ -115,8 +115,8 @@ ORDER BY 1, 2, 3
 
 
 -- ############################################################################
---               Afisati, pentru fiecare client, pe trei linii separate,
---                       vanzarile pe anii 2010, 2011 si 2012
+--             Afisati, pentru fiecare client, pe trei linii separate,
+--                     vanzarile pe anii 2010, 2011 si 2012
 -- ############################################################################
 
 -- solutie incompleta (nu se afiseaza anii in care clientul respectiv nu
