@@ -70,6 +70,25 @@ ORDER BY artist_name, title, 3
 
 
 
+-- ############################################################################
+--         Extrageti primele trei piese de pe fiecare album al formatiei U2
+-- ############################################################################
+
+-- solutie cu ROW_NUMBER()
+WITH t AS (
+	SELECT artist.name AS artist_name,
+		title AS album_title,
+		ROW_NUMBER() OVER (PARTITION BY artist.name, title ORDER BY trackid) AS track_no,
+		track.name AS track_name
+	FROM artist NATURAL JOIN album INNER JOIN track ON album.albumid = track.albumid
+	WHERE artist.name = 'U2'
+	)
+SELECT *
+FROM t
+WHERE track_no <= 3
+ORDER BY 1, 2, 3
+
+
 
 
 -- ############################################################################

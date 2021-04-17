@@ -3,7 +3,7 @@
 ################################################################################
 ###                             11: Optiuni OLAP
 ################################################################################
-### ultima actualizare: 2020-04-25
+### ultima actualizare: 2021-04-17
 #
 
 library(tidyverse)
@@ -89,6 +89,36 @@ temp <- artist %>%
      ungroup() %>%
      transmute (artist_name, album_title = title, track_no, track_name = name) %>%
      arrange(artist_name, album_title, track_no)
+
+
+
+################################################################################
+#       Extrageti primele trei piese ale fiecarui album al formatiei U2
+################################################################################
+# solutii preluate din scriptul `chinook_05_tidyverse_functii_... .R`
+
+# solutie cu `top_n`
+temp <- artist %>%
+        filter (name == 'U2') %>%
+        inner_join(album) %>%
+        transmute (artist_name = name, album_title = title, albumid) %>%
+        inner_join(track) %>%
+        arrange(artist_name, album_title, albumid, trackid) %>%
+        group_by(artist_name, album_title, albumid) %>%
+        top_n(-3, trackid) %>%
+        ungroup()
+
+
+# solutie cu `slice`
+temp <- artist %>%
+        filter (name == 'U2') %>%
+        inner_join(album) %>%
+        transmute (artist_name = name, album_title = title, albumid) %>%
+        inner_join(track) %>%
+        arrange(artist_name, album_title, albumid, trackid) %>%
+        group_by(artist_name, album_title, albumid) %>%
+        slice(1:3) %>%
+        ungroup()
 
 
 
@@ -257,6 +287,8 @@ temp <- invoice %>%
                 previous_month__sales = lag(sales, default = 0),
                 difference = current_month__sales - previous_month__sales) %>%
         ungroup()
+
+
 
 
 ############################################################################
