@@ -4,7 +4,7 @@
 --
 -- 08: Subconsultari IN clauzele WHERE si HAVING. Diviziune relationala (1)
 --
--- ultima actualizare: 2021-04-12
+-- ultima actualizare: 2021-04-17
 
 
 --
@@ -127,14 +127,24 @@ WHERE invoicedate = (
 		SELECT MIN(invoicedate)
 		FROM invoice)
 
+
 -- solutie ce evita functia MIN (prin operatorul ALL)
 SELECT *
 FROM invoice
-WHERE invoicedate <= ALL (SELECT DISTINCT invoicedate
-					      FROM invoice
-					      ORDER BY invoicedate
+WHERE invoicedate <= ALL (
+		SELECT DISTINCT invoicedate
+		FROM invoice
+		ORDER BY invoicedate
 					       )
 
+-- alta solutie ce evita functia MIN (prin operatorul LIMIT)
+SELECT *
+FROM invoice
+WHERE invoicedate = (
+		SELECT DISTINCT invoicedate
+		FROM invoice
+		ORDER BY invoicedate
+		LIMIT 1		)
 
 
 -- ############################################################################
@@ -233,13 +243,13 @@ WHERE invoicedate <=  (SELECT distinct invoicedate
 --        Care sunt cei mai vechi cinci angajati ai companiei?
 -- ############################################################################
 
--- solutia bazata pe LIMIT extrage un rezultat incomplet
+-- solutia bazata pe LIMIT extrage un rezultat incomplet!!!!
 SELECT *
 FROM employee
 ORDER BY hiredate
 LIMIT 5
 
--- solutia pentru rezultatul complet e bazata pe LIMIT si o subconsultare
+-- solutie corecta - subconsultare & LIMIT
 SELECT *
 FROM employee
 WHERE hiredate IN (
@@ -251,6 +261,17 @@ WHERE hiredate IN (
 ORDER BY hiredate
 
 
+-- solutie corecta - subconsultare, OFFSET & LIMIT
+SELECT *
+FROM employee
+WHERE hiredate <= (
+					SELECT hiredate
+					FROM employee
+					ORDER BY hiredate
+	        OFFSET 4
+					LIMIT 1
+					)
+ORDER BY hiredate
 
 
 --
@@ -264,7 +285,7 @@ ORDER BY hiredate
 --                            decat albumul `IV`
 -- ############################################################################
 
--- solutie bazata pe o subsonsultare in clauza HAVING
+-- solutie bazata pe o subconsultare in clauza HAVING
 SELECT title, COUNT(*) AS n_of_tracks
 FROM album
 	NATURAL JOIN artist
@@ -361,7 +382,7 @@ ORDER BY 2 DESC
 
 --
 -- ############################################################################
--- 				             Diviziune relationala (1)
+--                       Diviziune relationala (1)
 -- ############################################################################
 --
 
@@ -471,8 +492,8 @@ HAVING string_agg(DISTINCT country, '|' ORDER BY country)  IN (
 
 
 -- ############################################################################
--- 	 Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
---  					care provin clientii
+--    Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
+--                          care provin clientii
 -- ############################################################################
 
 --
