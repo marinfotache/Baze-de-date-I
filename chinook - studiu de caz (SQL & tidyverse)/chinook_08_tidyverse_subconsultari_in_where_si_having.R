@@ -160,7 +160,7 @@ temp <- invoice %>%
      inner_join(
           invoice %>%
                arrange(invoicedate) %>%
-               head (1) %>%
+               head (1) %>%                 # echivalent al lui LIMIT din SQL
                select (invoicedate)
      )
 

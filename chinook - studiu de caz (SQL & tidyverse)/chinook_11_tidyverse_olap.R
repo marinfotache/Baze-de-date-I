@@ -151,6 +151,7 @@ temp <- artist %>%
         mutate (album_rank = dense_rank(desc(n_of_tracks)))
 
 
+
 ############################################################################
 ##             Care este albumul (sau albumele) formatiei Queen
 ##                   cu cele mai multe piese? (reluare)
@@ -205,6 +206,7 @@ temp <- artist %>%
         mutate(rank__overall = dense_rank(desc(n_of_tracks))) %>%
         transmute (artist_name, album_title = title, n_of_tracks, rank__artist, rank__overall) %>%
         arrange(artist_name, album_title)
+
 
 
 ############################################################################
