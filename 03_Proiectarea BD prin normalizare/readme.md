@@ -11,7 +11,7 @@ Pentru tutorialele video de pe OneDrive, nu uitați că playerul implicit s-ar p
 - [PBD2005_Cap03_1FN.pdf (întreg capitolul)](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/PBD2005_Cap03_1FN.pdf)
 - [PBD2005_Cap04_2FN.pdf (întreg capitolul)](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/PBD2005_Cap04_2FN.pdf)
 - [03c_FormeNormale_Descompunere_vs_Sinteza. Doua cazuri practice.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03c_FormeNormale_Descompunere_vs_Sinteza.%20Doua%20cazuri%20practice.pptx)
-- [PBD2005_Cap05_3NF_BCNF.pdf] (https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/PBD2005_Cap05_3NF_BCNF.pdf)
+- [PBD2005_Cap05_3NF_BCNF.pdf](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/PBD2005_Cap05_3NF_BCNF.pdf)
 - [03d_Descompunere_vs_Sinteza_Caz3.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03d_Descompunere_vs_Sinteza_Caz3.pptx)
 - [PBD2005_Cap06_4NF_5NF (paragrafele 6.1 si 6.2)](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/PBD2005_Cap06_4NF_5NF.pdf)
 - [PBD2005_Cap07_Surogate_Restrictii_Incluziuni.pdf:](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/PBD2005_Cap07_Surogate_Restrictii_Incluziuni.pdf)
