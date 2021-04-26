@@ -19,7 +19,7 @@ Pentru tutorialele video de pe OneDrive, nu uitați că playerul implicit s-ar p
 	- paragraful 7.1.2
 	- paragraful 7.3, fără codul PL/SQL din listinguri (cod pe care o să-l discutăm abia la master)
 	- paragraful 7.4, de asemenea, fără codul PL/SQL din listinguri
-- [03e_Metodologie_sinteza.pptx] (https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03e_Metodologie_sinteza.pptx)
+- [03e_Metodologie_sinteza.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03e_Metodologie_sinteza.pptx)
 - [03f_Normalizare_Caz3_Catering_CuAnimatie.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03f_Normalizare_Caz3_Catering_CuAnimatie.pptx)
 
 Prezentările conțin și linkuri către tutoriale video (în limba română) pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
