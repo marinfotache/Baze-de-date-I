@@ -23,3 +23,8 @@ Pentru tutorialele video de pe OneDrive, nu uitați că playerul implicit s-ar p
 - [03f_Normalizare_Caz3_Catering_CuAnimatie.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03f_Normalizare_Caz3_Catering_CuAnimatie.pptx)
 
 Prezentările conțin și linkuri către tutoriale video (în limba română) pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
+
+
+#### Rezolvarea unui exemplu de subiect pentru testul de normalizare (2021)
+
+- [Calendar multi-confesional - partea I (curs BD 2021-05-17 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSi6JUVfrHHM_fr4FTRw?e=TskXDh)
