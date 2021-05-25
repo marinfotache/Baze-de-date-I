@@ -95,6 +95,28 @@ GROUP BY albumid, albumname, artistname
 ORDER BY 1
 
 
+-- album track list - ver. 2.2
+WITH RECURSIVE h (albumid, album_title, artist_name, trackno, track_list) AS (
+	SELECT albumid, album_title, artist_name, 1, CAST ('1:' || track_name AS VARCHAR(1000))
+	FROM track_numbers
+	WHERE trackno = 1
+			UNION ALL
+	SELECT h.albumid, h.album_title, h.artist_name, h.trackno + 1,
+		CAST (h.track_list || '; ' || h.trackno + 1 || ':' || track_numbers.track_name AS VARCHAR(1000))
+	FROM track_numbers INNER JOIN h ON track_numbers.albumid = h.albumid AND track_numbers.trackno = h.trackno + 1),
+track_numbers AS (
+	SELECT trackid, track.name as track_name, album.albumid, title as album_title, artist.name as artist_name,
+		row_number() OVER (PARTITION BY album.albumid ORDER BY trackid) AS trackNo
+	FROM track
+		INNER JOIN album ON track.albumid = album.albumid
+		INNER JOIN artist ON album.artistid = artist.artistid
+	ORDER BY artist_name, album_title, album.albumid, trackid
+)
+SELECT albumid, album_title, artist_name, max(trackno) AS n_of_tracks, MAX(track_list) AS track_list
+FROM h
+GROUP BY albumid, album_title, artist_name
+ORDER BY 1
+
 
 
 -- solutie mai simpla, care, in loc de recursivitate, foloseste gruparea si
