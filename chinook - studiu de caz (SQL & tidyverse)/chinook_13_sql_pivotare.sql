@@ -16,7 +16,7 @@
 -- solutie bazata pe subconsultari in clauza FROM
 SELECT lastname || ' ' || firstname AS customer_name,
 	city, state, country,
-	COALESCE(sales2010.sales, 0) AS sales2010,
+	COALESCE(sales2011.sales, 0) AS sales2010,
 	COALESCE(sales2011.sales, 0) AS sales2011,
 	COALESCE(sales2012.sales, 0) AS sales2012
 FROM customer
@@ -57,7 +57,7 @@ WITH
 		 	 GROUP BY customerid)
 SELECT lastname || ' ' || firstname AS customer_name,
 	city, state, country,
-	COALESCE(sales2010.sales, 0) AS sales2010,
+	COALESCE(sales2011.sales, 0) AS sales2010,
 	COALESCE(sales2011.sales, 0) AS sales2011,
 	COALESCE(sales2012.sales, 0) AS sales2012
 FROM customer

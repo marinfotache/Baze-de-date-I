@@ -29,6 +29,7 @@ library(lubridate)
 ###       Incarcarea datelor salvate anterior in fisierul `.RData`       ###
 ############################################################################
 setwd('/Users/marinfotache/Downloads/chinook')
+setwd('/Users/marinfotache/OneDrive/Baze de date 2021/Studii de caz/chinook')
 load(file = 'chinook.RData')
 
 

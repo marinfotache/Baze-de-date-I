@@ -14,7 +14,6 @@ library(tidyverse)
 rm(list = ls())
 
 
-
 ############################################################################
 # # --    Pas 1: Exportati fiecare tabela din Pg13 ca fisier `.csv`
 ### vezi tutorialul video de la adresa 
