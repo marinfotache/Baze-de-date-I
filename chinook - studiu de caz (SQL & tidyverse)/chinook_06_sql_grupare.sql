@@ -9,14 +9,16 @@
 --        Studiu de caz: Interogări SQL pentru baza de date `chinook`
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
--- 					SQL06: Grupare - group by, subtotaluri, filtrare grupuri (HAVING)
+-- 					SQL06: Grupare - GROP BY, subtotaluri, filtrare grupuri (HAVING)
 -- 					SQL06: GROUP BY, subtotals, group filters (HAVING)
 -- ############################################################################
 -- ultima actualizare / last update: 2022-03-12
 
 
 -- ############################################################################
---               Extrageti numarul albumelor fiecarui artist
+--              Extrageți numărul albumelor lansate de fiecare artist
+-- ############################################################################
+--              Display the number of albums released by each artist
 -- ############################################################################
 
 SELECT name AS artist_name, COUNT(*) as n_of_albums
@@ -29,6 +31,8 @@ ORDER BY 1
 -- ############################################################################
 --           Care este artistul cu cel mai mare numar de albume?
 -- ############################################################################
+--           Find the artist that released the largest number of albums
+-- ############################################################################
 
 SELECT name AS artist_name, COUNT(*) as n_of_albums
 FROM artist NATURAL JOIN album
@@ -39,7 +43,9 @@ LIMIT 1
 
 
 -- ############################################################################
---     Extrageti durata totala a pieselor (in minute) pentru fiecare artist
+--     Extrageți durata totală a pieselor (în minute) pentru fiecare artist
+-- ############################################################################
+-- Compute the total duration (in minutes) of the tracks released by each artist
 -- ############################################################################
 
 SELECT artist.name AS artist_name,
@@ -51,17 +57,14 @@ GROUP BY artist.name
 ORDER BY artist.name
 
 
--- ############################################################################
---                   Extrageti numărul de clienți, pe țări
--- ############################################################################
-
-
-
 
 -- ############################################################################
---       Extrageti durata totala a pieselor (in minute) pentru fiecare
---            album al fiecarui artist, cu afisare de tipul HH:MI:SS
---                    (durata in minute si secunde)
+--       Extrageți durata totală a pieselor (în minute) pentru fiecare
+--            album al fiecarui artist, cu afișare de tipul HH:MI:SS
+--                    (durata în minute și secunde)
+-- ############################################################################
+--   Display the total duration (in the HH:MI:SS format) of each album
+--    released by each artist
 -- ############################################################################
 
 SELECT artist.name AS artist_name, title AS album_title,
@@ -75,9 +78,9 @@ ORDER BY artist.name, title
 
 
 -- ############################################################################
---      Afisati toate piesele de pe toate albumele tuturor artistilor;
--- Calculati durata in minute si secunde la nivel de album si la nivel de artist,
---                    precum si un total general
+--      Afișati toate piesele de pe toate albumele tuturor artiștilor;
+-- Calculați subtotaluri cu durata în minute și secunde la nivel de album
+--   și la nivel de artist, precum si un total general
 -- ############################################################################
 
 -- solutie bazata pe grupare si pe UNION
@@ -229,11 +232,18 @@ ORDER BY artist.name
 
 
 
-
+-- ############################################################################
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
+-- ############################################################################
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                   Extrageti numărul de clienți, pe țări
 -- ############################################################################
+--                   Extrageti numărul de clienți, pe țări
+-- ############################################################################
+
 
 -- Afisati numarul de piese din fiecare tracklist
 

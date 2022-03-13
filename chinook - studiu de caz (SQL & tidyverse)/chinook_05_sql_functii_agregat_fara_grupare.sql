@@ -10,13 +10,15 @@
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
 -- 					SQL05: Functii agregat (count, count distinct, ...) fara grupare
--- 					SQL05: Aggregate functions wothout gruping
+-- 					SQL05: Aggregate functions without gruping
 -- ############################################################################
 -- ultima actualizare / last update: 2022-03-12
 
 
 -- ############################################################################
---                    Cati artisti sunt in baza de date?
+--                    Câți artiști sunt în baza de date?
+-- ############################################################################
+--                How many artists are stored in the database?
 -- ############################################################################
 
 SELECT COUNT(*) AS nr_artisti
@@ -28,7 +30,9 @@ FROM artist
 
 
 -- ############################################################################
---                 Cate piese sunt in baza de date?
+--                 Cate piese sunt stocate în baza de date?
+-- ############################################################################
+--                 How many tracks are stored in the database?
 -- ############################################################################
 
 -- solutie corecta
@@ -45,7 +49,9 @@ FROM track
 
 
 -- ############################################################################
--- 				Cati clienti au fax?
+-- 				                     Câți clienți au fax?
+-- ############################################################################
+-- 				                  How many customers have fax?
 -- ############################################################################
 
 -- sol. 1 (cu filtrarea inregistrarilor)
@@ -60,7 +66,9 @@ FROM customer
 
 
 -- ############################################################################
--- 				Pentru cati artisti exista macar un album in BD?
+-- 				Pentru câți artiști există măcar un album in baza de date?
+-- ############################################################################
+-- 				         How many artist released at least an album?
 -- ############################################################################
 
 -- solutie eronata!!!
@@ -73,7 +81,9 @@ FROM album
 
 
 -- ############################################################################
---                Din cate tari sunt clientii companiei?
+--                Din câte țări sunt clienții companiei?
+-- ############################################################################
+--                In how many contries originate the customers?
 -- ############################################################################
 
 SELECT COUNT(DISTINCT country)
@@ -83,6 +93,9 @@ FROM customer
 
 -- ############################################################################
 --        Cate secunde are albumul `Achtung Baby` al formatiei `U2`
+-- ############################################################################
+--     Compute the total duration (in seconds) of the album `Achtung Baby`
+--  released by `U2`
 -- ############################################################################
 
 SELECT SUM(milliseconds) / 1000 AS duration_seconds
@@ -94,8 +107,11 @@ WHERE artist.name = 'U2' AND title = 'Achtung Baby'
 
 
 -- ############################################################################
---               Care este durata medie (in secunde) a pieselor
---               de pe albumul `Achtung Baby` al formatiei `U2`
+--               Care este durata medie (în secunde) a pieselor
+--               de pe albumul `Achtung Baby` al formației `U2`
+-- ############################################################################
+--    Compute the average duration (in seconds) of the tracks included
+--               on the album `Achtung Baby` released by `U2`
 -- ############################################################################
 
 SELECT ROUND(AVG(milliseconds / 1000)) AS duration_seconds
@@ -106,7 +122,10 @@ WHERE artist.name = 'U2' AND title = 'Achtung Baby'
 
 
 -- ############################################################################
---           Care este durata medie a pieselor formatiei `U2`
+--           Care este durata medie a pieselor formației `U2`
+-- ############################################################################
+--    Compute the average duration (in seconds) of the tracks
+--               released by `U2`
 -- ############################################################################
 
 SELECT ROUND(AVG(milliseconds / 1000)) AS duration_seconds
@@ -117,8 +136,11 @@ WHERE artist.name = 'U2'
 
 
 -- ############################################################################
--- 			Care este durata medie a pieselor formatiei `Pink Floyd`,
---                     exprimata in minute si secunde
+-- 			Care este durata medie a pieselor formației `Pink Floyd`,
+--                     exprimatî în minute și secunde
+-- ############################################################################
+--    Compute the average duration (in minutes and seconds) of the tracks
+--               released by `Pink Floyd`
 -- ############################################################################
 
 SELECT ROUND(AVG(milliseconds / 1000)) * interval '1 sec' AS duration_mins_secs
@@ -130,7 +152,9 @@ WHERE artist.name = 'Pink Floyd'
 
 
 -- ############################################################################
---                      In ce zi a fost prima vanzare?
+--                      În ce zi a fost prima vanzare?
+-- ############################################################################
+--                      Find the date of the fist sale.
 -- ############################################################################
 
 SELECT MIN(invoicedate) AS prima_zi
@@ -149,6 +173,8 @@ LIMIT 1
 -- ############################################################################
 --                       In ce zi a fost ultima vanzare?
 -- ############################################################################
+--                          Find the last sales date
+-- ############################################################################
 
 SELECT MAX(invoicedate) AS prima_zi
 FROM invoice
@@ -164,7 +190,9 @@ LIMIT 1
 
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
 -- ############################################################################
 
 
