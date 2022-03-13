@@ -20,7 +20,9 @@
 -- ############################################################################
 
 -- ############################################################################
---             Care sunt clientii individuali (non-companii)
+--             Care sunt clienții individuali (non-companii)
+-- ############################################################################
+--             Extract the individual (non-companies) customers
 -- ############################################################################
 
 SELECT *
@@ -29,8 +31,11 @@ WHERE company IS NULL
 
 
 --############################################################################
---##               Care sunt clientii care reprezinta companii
+--##               Care sunt clienții care reprezintă companii
 -- ############################################################################
+--##               Which are the customers representing companies?
+-- ############################################################################
+
 SELECT *
 FROM customer
 WHERE company IS NOT NULL
@@ -38,9 +43,12 @@ WHERE company IS NOT NULL
 
 
 -- ############################################################################
---       Care sunt piesele de pe albumele formatiei `Black Sabbath`
---                   carora nu li se cunoaste compozitorul
+--       Care sunt piesele de pe albumele formației `Black Sabbath`
+--                   cărora nu li se cunoaște compozitorul
 -- ############################################################################
+--  Extract the tracks released by `Black Sabbath` whose composers are unknown
+-- ############################################################################
+
 
 SELECT *
 FROM artist
@@ -51,9 +59,12 @@ WHERE artist.name = 'Black Sabbath' AND composer is null
 
 
 -- ############################################################################
--- Sa se afiseze, sub forma de sir de caractere, orasele din care provin
--- clientii (pentru a elimina confuziile, numele orasului trebuie concatenat
--- cu statul si tara din care face parte orasul respectiv)
+-- Să se afișeze, sub formă de șir de caractere, orașele din care provin
+-- clienții (pentru a elimina confuziile, numele orașului trebuie concatenat
+-- cu statul și tara din care face parte orașul respectiv)
+-- ############################################################################
+--   Extract, as strings, the cities of the customers (the string will contain
+-- the city name concatenated with its state and country)
 -- ############################################################################
 
 -- solutie eronata !!!! De ce?
@@ -71,8 +82,12 @@ FROM customer
 -- ############################################################################
 
 -- ############################################################################
--- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
---   la atributul `state`, in locul valorii NULL afisati `-`
+-- Afișați clienții în ordinea țărilor; pentru cei din țări non-federative,
+--   la atributul `state`, în locul valorii NULL, afișati `-`
+-- ############################################################################
+-- Display customers ordered by their countries. For customers in
+-- non-federative countries, the NULL value of attribute `state` will be
+--   replaces with hyphen (`-`)
 -- ############################################################################
 
 SELECT customerid, firstname, lastname, state, COALESCE(state, '-') as state2
@@ -80,9 +95,13 @@ FROM customer
 
 
 -- ############################################################################
--- Sa se afiseze, in ordine alfabetica, toate titlurile pieselor de pe
--- albumele formatiei `Black Sabbath`, impreuna cu autorul (compozitor) lor;
--- acolo unde compozitorul nu este specificat (NULL), sa se afiseze
+-- Să se afișeze, în ordine alfabetică, toate titlurile pieselor de pe
+-- albumele formației `Black Sabbath`, împreuna cu autorii (compozitorii) lor;
+-- acolo unde compozitorul nu este specificat (NULL), să se afișeze
+-- `COMPOZITOR NECUNOSCUT`
+-- ############################################################################
+-- Dispay alphabeticaly the names of the names released by `Black Sabbath` and
+-- theirs composers; whenever the composes is unknown, replace NULL with
 -- `COMPOZITOR NECUNOSCUT`
 -- ############################################################################
 
@@ -98,7 +117,9 @@ ORDER BY 1
 
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
 -- ############################################################################
 
 
