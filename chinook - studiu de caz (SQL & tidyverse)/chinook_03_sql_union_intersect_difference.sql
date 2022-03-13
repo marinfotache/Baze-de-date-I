@@ -21,11 +21,13 @@
 -- ############################################################################
 
 -- ############################################################################
--- 			Care sunt piesele care apar pe doua discuri ale formatiei
--- 				'Iron Maiden', `Fear Of The Dark` si `A Real Live One`
+-- 			Care sunt piesele care apar pe două discuri ale formației
+-- 				'Iron Maiden', `Fear Of The Dark` și `A Real Live One`
+-- ############################################################################
+-- 			Extract the tracks included on two of the albums releases by
+-- 				'Iron Maiden' - `Fear Of The Dark` and `A Real Live One`
 -- ############################################################################
 
--- solutie bazata pe OR (dubluri neeliminate)
 
 -- solutie bazata pe OR (dubluri eliminate)
 SELECT DISTINCT track.name
@@ -72,6 +74,9 @@ ORDER BY 1
 -- Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii directi ai
 -- subordonatilor de ordinul 1) ai lui `Adams` (lastname) `Andrew` (firstname)
 -- ############################################################################
+-- Extract first-order and second-order subordinates of
+--    `Adams` (lastname) `Andrew` (firstname)
+-- ############################################################################
 
 -- subordonatii de ordinul 1
 SELECT subordonati1.*
@@ -96,6 +101,10 @@ WHERE sefi.lastname = 'Adams' AND sefi.firstname = 'Andrew'
 -- 			Care sunt piesele comune (cu acelasi titlu) de pe
 -- 			albumele `Fear Of The Dark` si `A Real Live One`
 -- 					ale formatiei 'Iron Maiden'
+-- ############################################################################
+-- 			Extract the tracks (track name) included on both `Fear Of The Dark` and
+--  `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
+--      both albums)
 -- ############################################################################
 
 -- solutie ERONATA 1 !!!
@@ -155,6 +164,9 @@ FROM artist artist1
 -- Care sunt piesele formatiei 'Iron Maiden' de pe albumul `Fear Of The Dark`
 -- 				care NU apar si pe albumul `A Real Live One`
 -- ############################################################################
+-- Extract the tracks released by 'Iron Maiden' which were inluded on the
+-- album `Fear Of The Dark` but not included on the album `A Real Live One`
+-- ############################################################################
 
 SELECT track.name
 FROM artist
@@ -172,6 +184,9 @@ WHERE artist.name = 'Iron Maiden' AND title = 'A Real Live One'
 -- ############################################################################
 -- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori,
 --           nu apare nici `Robert Plant`, nici `Jimmy Page`
+-- ############################################################################
+-- Extract the tracks released by `Led Zeppelin` whose composers are neither
+--           `Robert Plant` nor `Jimmy Page`
 -- ############################################################################
 
 -- sol 1
@@ -222,7 +237,9 @@ WHERE artist.name = 'Led Zeppelin' AND
 
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
 -- ############################################################################
 
 
