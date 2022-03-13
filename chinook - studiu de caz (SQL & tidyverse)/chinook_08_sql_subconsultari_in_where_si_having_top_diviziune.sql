@@ -1,10 +1,20 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
--- 08: Subconsultari IN clauzele WHERE si HAVING. Diviziune relationala (1)
---
--- ultima actualizare: 2021-04-17
+
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL08: Subconsultări (necorelate) în WHERE și HAVING.
+--								Diviziune relațională (1)
+-- 					SQL08: (Non-correlated) subqueries included in WHERE and HAVING.
+--								Relational division (1)
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
 
 
 --
@@ -544,7 +554,9 @@ HAVING string_agg(DISTINCT city, '|' ORDER BY city) = (
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 

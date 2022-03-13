@@ -1,10 +1,18 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
--- 06: Grupare - group by, subtotaluri, having
---
--- ultima actualizare: 2021-03-31
+
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL06: Grupare - group by, subtotaluri, filtrare grupuri (HAVING)
+-- 					SQL06: GROUP BY, subtotals, group filters (HAVING)
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
 
 
 -- ############################################################################
@@ -237,7 +245,9 @@ ORDER BY artist.name
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 select country, count(*) as n_of_cust

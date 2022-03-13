@@ -1,11 +1,18 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
--- 07: Jonctiuni externe
---
--- ultima actualizare: 2020-04-07
 
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL07: Jonctiuni externe (OUTER JOIN)
+-- 					SQL07: OUTER JOINs
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
 
 -- ############################################################################
 --    Care sunt artistii care, momentan, nu au niciun album preluat in BD?
@@ -184,7 +191,9 @@ ORDER BY 1
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 --

@@ -1,8 +1,24 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
--- SQL 01: Filtrare simpla, regular expressions, structuri CASE
--- Functii/operatori/optiuni SQL utilizate (si prezente in subiectele de la testele Moodle urmatoare)
+
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL01: Filtrare simpla, regular expressions, structuri CASE
+-- 					SQL01: One-table filters, regular expressions, CASE structures
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
+
+
+-- Funcții/operatori/opțiuni SQL utilizate în acest script (și prezente
+--      în subiectele de la testele Moodle următoare)
+-- Some SQL features in this scrip (and subsequent Moodle quizzes)
+
 --  	`EXTRACT` (year, month, ...)
 -- 		`CAST`
 -- 		`SUBSTRING`
@@ -25,49 +41,50 @@
 -- `LEFT`, `RIGHT`, ...
 
 
--- ultima actualizare: 2021-02-22
 
 
 -- ############################################################################
---                    In ce ani s-au inregistrat vanzari?
+--                    În ce ani s-au înregistrat vânzări?
+-- ############################################################################
+--                    Extract the years when sales occurred
 -- ############################################################################
 
--- prima notatie pentru ordonare (specificarea expresiei de calcul a atributului de ordonare)
+-- prima notație pentru ordonare (specificarea expresiei de calcul a atributului de ordonare)
 select distinct extract (year from invoicedate) as an
 from invoice
 order by extract (year from invoicedate)
 
--- a doua notatie pentru ordonare (specificarea atributului (calculat) de ordonare)
+-- a doua notație pentru ordonare (specificarea atributului (calculat) de ordonare)
 select distinct extract (year from invoicedate) as an
 from invoice
 order by an
 
--- a treia notatie pentru ordonare (specificarea pozitiei in rezultat a atributului de ordonare)
+-- a treia notație pentru ordonare (specificarea poziției atributului de ordonare în rezultat)
 select distinct extract (year from invoicedate) as an
 from invoice
 order by 1
 
--- a patra varianta - bazata pe SUBSTRING:
--- stiind ca formatul datei este `2019-10-01`, pastram numai primele patru caractere din data,
---    care reprezinta anul;
--- prin functia cast, convertim datele calendaristice in siruri de caractere si, in final,
---  exprimam rezultatul (anul calendaristic) ca numar intreg
+-- a patra varianta - bazată pe SUBSTRING:
+-- știind că formatul datei este `2019-10-01`, păstrăm numai primele patru caractere din dată,
+--    care reprezintă anul;
+-- prin funcția `cast`, convertim datele calendaristice în șiruri de caractere și, în final,
+--  exprimăm rezultatul (anul calendaristic) ca număr întreg
 select distinct cast (SUBSTRING(cast (invoicedate as character(10)), 1, 4) as integer) as an
 from invoice
 order by 1
 
 
--- a cincea varianta - bazata pe `regular expression` (extrage primele patru cifre):
+-- a cincea variantă - bazată pe `regular expression` (extrage primele patru cifre):
 select distinct cast (SUBSTRING(cast (invoicedate as character(10)), '[0-9]{4}') as integer) as an
 from invoice
 order by 1
 
 
--- a sasea varianta - bazata tot pe `regular expression`:
--- stiind ca formatul datei este `2019-10-01`, inlocuim toate caracterele, incepand cu prima cratima (`-`)
---   cu "nimic"; astfel, pastram numai primele patru caractere din data, care reprezinta anul;
--- prin functia cast, convertim datele calendaristice in siruri de caractere si, in final,
---  exprimam rezultatul (anul calendaristic) ca numar intreg
+-- a șasea variantă - bazată tot pe `regular expression`:
+-- știind că formatul datei este `2019-10-01`, înlocuim toate caracterele, începând cu prima cratimă (`-`)
+--   cu "nimic"; astfel, păstrăm numai primele patru caractere din dată, care reprezintă anul;
+-- prin funcția `cast`, convertim datele calendaristice în șiruri de caractere și, în final,
+--  exprimăm rezultatul (anul calendaristic) ca număr întreg
 select distinct cast (REGEXP_REPLACE(cast (invoicedate as character(10)), '\-.*', '') as integer) as an
 from invoice
 order by 1
@@ -77,17 +94,19 @@ order by 1
 
 
 -- ############################################################################
---  Extrageti lunile calendaristice (si anii) in care s-au inregistrat vanzari
+--  Extrageți lunile calendaristice (și anii) în care s-au înregistrat vânzări
+-- ############################################################################
+--  Extract the months (and their years) with sales
 -- ############################################################################
 
--- prima varianta - folosind functiile `year` si `month`
+-- prima variantă - folosind funcțiile `year` și `month`
 select distinct extract (year from invoicedate) as an,
 	extract (month from invoicedate) as luna
 from invoice
 order by 1,2
 
--- a doua varianta - bazata pe SUBSTRING:
--- (stiind ca formatul datei este `2019-10-01`)
+-- a doua variantă - bazată pe SUBSTRING:
+-- (știind că formatul datei este `2019-10-01`)
 select distinct
 	cast (SUBSTRING(cast (invoicedate as character(10)), 1, 4) as integer) as an,
 	cast (SUBSTRING(cast (invoicedate as character(10)), 6, 2) as integer) as luna
@@ -96,9 +115,9 @@ order by 1,2
 
 
 ---
--- a treia varianta - bazata SUBSTRING si pe `regular expression`:
--- anul este determinat folosind un sablon (pattern) care extrage primul grup de patru cifre ('[0-9]{4}')
--- luna este determinata folosind un sablon care extrage primul grup de doua cifre care succede
+-- a treia variantă - bazată SUBSTRING și pe `regular expression`:
+-- anul este determinat folosind un șablon (pattern) care extrage primul grup de patru cifre ('[0-9]{4}')
+-- luna este determinată folosind un șablon care extrage primul grup de două cifre care succede
 --  unei cratime '\-([0-9]{2})'; `\` este un `escape character`
 select distinct
 	cast (SUBSTRING(cast (invoicedate as character(10)), '[0-9]{4}') as integer) as an,
@@ -109,16 +128,21 @@ order by 1,2
 
 
 -- ############################################################################
---         Care este lungimea numelui pentru fiecare artist/formatie?
+-- Care este lungimea numelui pentru fiecare artist/formatie?
+-- ############################################################################
+-- Extract the lenght (the number of characters) for each artist/band's name
 -- ############################################################################
 
 select artist.*, LENGTH(name) as lungime_nume
 from artist
 
 
---
--- Sa se afiseze artistii in ordinea descrescatoare a lungimii numelui
---
+-- ############################################################################
+--     Să se afișeze artiștii în ordinea descrescătoare a lungimii numelui
+-- ############################################################################
+--     Display artists/bands ordering (descending) them on their name's lenght
+-- ############################################################################
+
 select artist.*, LENGTH(name) as lungime_nume
 from artist
 order by LENGTH(name) desc
@@ -126,12 +150,18 @@ order by LENGTH(name) desc
 
 
 -- ############################################################################
--- Sa se afiseze numele formatat al artistilor, conform urmatoarei cerinte:
--- 1. pentru artistii cu numele lung de pana la 10 caractere,
---		se afiseaza numele intreg
--- 2. pentru artistii cu numele mai lung de 10 caractere se extrag cinci
---   	caractere, se adauga `...` la mijloc si se finalizeaza cu
+-- Să se afișeze numele formatat al artiștilor, conform următoarei cerințe:
+-- 1. pentru artiștii cu numele lung de până la 10 caractere,
+--		se afișează numele întreg
+-- 2. pentru artiștii cu numele mai lung de 10 caractere se extrag cinci
+--   	caractere, se adaugă `...` la mijloc și se finalizează cu
 -- 		ultimele cinci caractere
+-- ############################################################################
+-- Display the shortened name of the artists with the followihg rules:
+-- 1. names shorter than 11 characters will be fully displayed
+-- 2. names longer than 10 characters will be truncated:
+--   	extract first 5 characters, concatenate with `...`, and then concatenate
+-- 		with the last 5 characters from the name
 -- ############################################################################
 
 -- solutie 1 - bazata pe LEFT si RIGHT
@@ -169,8 +199,10 @@ FROM artist
 
 
 -- ############################################################################
--- Care sunt artistii sau formatiile cu numele alcatuit dintr-un singur cuvant?
--- 					(adica numele nu contine niciun spatiu)
+-- Care sunt artiștii/formațiile cu numele alcătuit dintr-un singur cuvânt?
+-- 					(adică numele lor nu conține niciun spațiu)
+-- ############################################################################
+-- Extract single-word-ed artist names (names containing no white space)
 -- ############################################################################
 
 -- solutie bazata pe operatorul `LIKE`
@@ -216,8 +248,10 @@ WHERE LENGTH(name) = LENGTH(REPLACE(name, ' ', ''))
 
 
 -- ############################################################################
--- Care sunt artistii sau formatiile cu numele alcatuit din
--- cel putin doua cuvinte? (adica numele contine cel putin un singur spatiu)
+-- Care sunt artiștii/formatiile cu numele alcătuit din cel puțin
+--       două cuvinte? (numele lor conține cel puțin un spațiu)
+-- ############################################################################
+-- Extract multi-word-ed artist names (names containing at least one whitespace)
 -- ############################################################################
 
 -- solutie bazata pe operatorul `LIKE`
@@ -253,8 +287,10 @@ WHERE LENGTH(name) - LENGTH(REPLACE(name, ' ', '')) > 0
 
 
 -- ############################################################################
--- Care sunt artistii sau formatiile cu numele alcatuit din exact doua cuvinte?
--- (adica numele contine un singur spatiu)
+-- Care sunt artiștii/formațiile cu numele alcătuit din exact două cuvinte?
+--         (adică numele lor conține un singur spațiu)
+-- ############################################################################
+-- Extract two-word-ed artist names (names containing a single whitespace)
 -- ############################################################################
 
 -- solutie bazata pe operatorul `LIKE`
@@ -291,6 +327,8 @@ WHERE LENGTH(name) - LENGTH(REPLACE(name, ' ', '')) = 1
 -- ############################################################################
 --            Care sunt primii trei ani s-au inregistrat vanzari?
 -- ############################################################################
+--            Extract first sales years
+-- ############################################################################
 
 -- prima notatie pentru ordonare (specificarea expresiei de calcul a atributului de ordonare)
 select distinct extract (year from invoicedate) as an
@@ -304,15 +342,30 @@ limit 3
 -- ############################################################################
 --                Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
+--                To be completed during lectures/labs or at home
+-- ############################################################################
 
+
+-- ############################################################################
 -- Extrageti numele de utilizator de pe contul de e-mail al fiecarui angajat
+-- ############################################################################
+-- Extract the usernames from the employees' e-mail addresses
+-- ############################################################################
 
+
+-- ############################################################################
 -- Extrageti toate serverele de e-mail  (ex. `gmail.com`) ale clientilor
+-- ############################################################################
+-- Extract the e-mail servers  (e.g., `gmail.com`) from customers'
+--     e-mail addresses
+-- ############################################################################
 
 
 
 -- ############################################################################
---              La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 

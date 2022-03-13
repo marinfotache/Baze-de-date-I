@@ -1,10 +1,18 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
--- 10: Expresii tabele
---
--- ultima actualizare: 2021-04-17
+
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL10: Expresii tabele
+-- 					SQL10: Common Table Expressions
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
 
 
 -- ############################################################################
@@ -285,7 +293,9 @@ ORDER BY 1 ;
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 

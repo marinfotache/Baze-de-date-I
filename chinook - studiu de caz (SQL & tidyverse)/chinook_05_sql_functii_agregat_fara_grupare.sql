@@ -1,11 +1,18 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
--- 05: Functii agregat (count, count distinct, sum, avg, min, max) fara grupare
---
--- ultima actualizare: 2021-03-15
 
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL05: Functii agregat (count, count distinct, ...) fara grupare
+-- 					SQL05: Aggregate functions wothout gruping
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
 
 
 -- ############################################################################
@@ -171,7 +178,9 @@ LIMIT 1
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 select min(birthdate)

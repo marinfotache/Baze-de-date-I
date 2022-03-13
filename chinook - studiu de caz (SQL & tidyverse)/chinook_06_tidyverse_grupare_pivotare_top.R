@@ -335,6 +335,7 @@ temp <- invoice %>%
      summarise(total = sum(total)) %>%
      ungroup() %>%
      mutate(year = paste0('sales', year)) %>%   # vrem sa in antet sa apara `salesxxxx`
+     arrange (customer_name, year) %>%
      pivot_wider(names_from = year, values_from = total, values_fill = 0)
 
 

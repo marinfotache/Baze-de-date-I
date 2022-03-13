@@ -1,11 +1,19 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
--- 11: Optiuni OLAP
---
--- ultima actualizare: 2021-04-17
 
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL11: Opțiuni OLAP
+-- 					SQL11: OLAP features
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
+--
 
 
 -- ############################################################################
@@ -332,9 +340,10 @@ ORDER BY year, month
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
 -- ############################################################################
-
+--           For what requiremens the following queries provide the result?
+-- ############################################################################
 
 
 select track.*, row_number() OVER (PARTITION BY albumid ORDER BY trackid) AS trackNo

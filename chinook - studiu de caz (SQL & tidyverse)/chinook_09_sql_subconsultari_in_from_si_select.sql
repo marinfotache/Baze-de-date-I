@@ -1,7 +1,22 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
+
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL09: Subconsultări în clauzele FROM și SELECT.
+--								Diviziune relațională (2)
+-- 					SQL09: Subqueries included in FROM and SELECT.
+--								Relational division (2)
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
+
+
 -- 09: Subconsultari in clauzele FROM si SELECT. Diviziune relationala (2)
 --
 -- ultima actualizare: 2021-04-12
@@ -470,7 +485,9 @@ ORDER BY 1, 2
 
 
 -- ############################################################################
---             La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 select *

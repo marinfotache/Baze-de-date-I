@@ -1,13 +1,19 @@
 -- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
+-- Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+-- Facultatea de Economie si Administrarea Afacerilor / Faculty of
+--          Economics and Business Administration
+-- Colectivul de Informatică Economică / Dept. of Business Information Systems
 -- ############################################################################
---
--- SQL 02: Jonctiuni interne
---
--- ultima actualizare: 2021-03-07
 
+-- ############################################################################
+--        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+--        Case study: SQL Queries for `chinook` database
+-- ############################################################################
+-- 					SQL02: Joncțiuni interne
+-- 					SQL02: INNER JOINs
+-- ############################################################################
+-- ultima actualizare / last update: 2022-03-12
 
--- JOIN
 
 -- ############################################################################
 --                   Care sunt albumele formatiei `U2`
@@ -155,7 +161,9 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 
 
 -- ############################################################################
---          La ce intrebari raspund urmatoarele interogari ?
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 --
