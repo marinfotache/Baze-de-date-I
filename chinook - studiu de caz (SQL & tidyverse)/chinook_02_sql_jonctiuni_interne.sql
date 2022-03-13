@@ -164,7 +164,9 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
 -- ############################################################################
 
 -- In ce tari s-a vandut muzica formatiei `Led Zeppelin`
