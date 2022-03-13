@@ -16,7 +16,9 @@
 
 
 -- ############################################################################
---                   Care sunt albumele formatiei `U2`
+--                   Care sunt albumele formației `U2`
+-- ############################################################################
+--                   Extract the albums released by the band `U2`
 -- ############################################################################
 
 -- sol. 1 - NATURAL JOIN
@@ -38,6 +40,8 @@ where name = 'U2'
 -- ############################################################################
 -- 		Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
 -- ############################################################################
+-- 	 Extract the tracks included on the album `Achtung Baby` released by `U2`
+-- ############################################################################
 
 -- sol. eronata care foloseste NATURAL JOIN
 select *
@@ -56,7 +60,10 @@ where artist.name = 'U2' and title = 'Achtung Baby'
 
 
 -- ############################################################################
--- Care sunt piesele formatiei `Led Zeppelin` compuse de cel putin trei muzicieni?
+-- Care sunt piesele formației `Led Zeppelin` compuse de cel puțin 3 muzicieni?
+-- ############################################################################
+-- Extract the tracks released by the band `Led Zeppelin` authored by at least
+--   3 musicians
 -- ############################################################################
 
 SELECT track.*
@@ -70,7 +77,9 @@ WHERE artist.name = 'Led Zeppelin'	AND
 
 
 -- ############################################################################
---          Care sunt piesele formatiei U2 vandute in anul 2013?
+--          Care sunt piesele formației `U2` vândute în anul 2013?
+-- ############################################################################
+--          Which of the tracks released by `U2` were sold during 2013?
 -- ############################################################################
 
 SELECT track.name as track_name, title as album_title
@@ -85,13 +94,15 @@ ORDER BY 1 ;
 
 
 -- ############################################################################
--- 								            AUTOJONCTIUNE
+-- 								         AUTOJONCTIUNE / SELF-JOIN
 -- ############################################################################
 
 
 -- ############################################################################
 -- 			Care sunt celelalte albume ale formatiei care a lansat
 --                    albumul 'Achtung Baby'?
+-- ############################################################################
+--   Extract all the albums of the band who released the album 'Achtung Baby'?
 -- ############################################################################
 
 -- solutie care utilizeaza AUTO JOIN
@@ -105,6 +116,9 @@ WHERE album.title = 'Achtung Baby'
 -- 			Care sunt celelalte piese de pe albumul pe care apare piesa
 --              'For Those About To Rock (We Salute You)'?
 -- ############################################################################
+-- 			Which are the other tracks on the same album as the track
+--               'For Those About To Rock (We Salute You)'?
+-- ############################################################################
 
 -- solutie care utilizeaza AUTO JOIN
 SELECT track1.*
@@ -117,6 +131,9 @@ WHERE track2.name = 'For Those About To Rock (We Salute You)'
 -- ############################################################################
 -- 	   Care sunt clientii din aceeasi tara ca si clientul `Robert Brown`
 -- ############################################################################
+-- 	   Extract customers from the same country as customer `Robert Brown`
+-- ############################################################################
+
 select customer1.*
 from customer customer1
 	inner join customer customer2 on customer1.country = customer2.country
@@ -131,11 +148,13 @@ where customer1.firstname = 'Robert' and customer1.lastname = 'Brown'
 
 
 -- ############################################################################
--- 	Care este numele angajatului: lastname = 'Johnson' AND firstname = 'Steve'
+-- 	Care este șeful angajatului cu numele (lastname) 'Johnson'
+--      și prenummele (firstname) 'Steve'
+-- ############################################################################
+-- 	Display the boss of the employee whose lastname is 'Johnson' and
+--      the firstname is 'Steve'
 -- ############################################################################
 
-
--- care este numele angajatului: lastname = 'Johnson' AND firstname = 'Steve'
 SELECT sefi.*
 FROM employee subordonati
 	INNER JOIN employee sefi ON subordonati.reportsto = sefi.employeeid
