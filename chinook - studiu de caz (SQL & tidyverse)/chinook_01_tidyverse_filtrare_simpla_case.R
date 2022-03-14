@@ -1,12 +1,24 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###        01: Filtrare simpla, regular expressions, structuri CASE
-################################################################################
-# -- ultima actualizare: 2021-03-08
-################################################################################
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări tidyverse pentru baza de date `chinook`
+##        Case study: tidyverse queries for `chinook` database
+##############################################################################
+## 		tidyverse01: Filtrare simpla, regular expressions, structuri CASE
+## 		tidyverse01: Data frame filters, regular expressions, CASE structures
+##############################################################################
+## ultima actualizare / last update: 2022-03-14
+
+##############################################################################
 ### Functii/operatori/optiuni utilizate (si prezente in subiectele
 ###     de la testele Moodle urmatoare)
+### Some `tidyverse` functions in this script (and subsequent Moodle quizzes)
+
 ### `year`, `month`, ... (din pachetul `lubridate`)
 ### `nchar`
 ### `case_when`
@@ -17,6 +29,7 @@
 ### `word`
 ### `str_replace_all`
 ### `str_remove_all`
+##############################################################################
 
 
 #install.packages('tidyverse')
@@ -28,19 +41,26 @@ library(lubridate)
 ############################################################################
 ###       Incarcarea datelor salvate anterior in fisierul `.RData`       ###
 ############################################################################
+###                Load data previously saved in `.RData` file           ###
+############################################################################
+
 setwd('/Users/marinfotache/Downloads/chinook')
 setwd('/Users/marinfotache/OneDrive/Baze de date 2021/Studii de caz/chinook')
 load(file = 'chinook.RData')
 
 
 ############################################################################
-###                            Interogari tidyverse                      ###
+###                          Interogări `tidyverse`                      ###
+############################################################################
+###                           `tidyverse` queries                        ###
 ############################################################################
 
 
 
 ############################################################################
-# # --                   In ce ani s-au inregistrat vanzari?
+##                    În ce ani s-au înregistrat vânzări?
+############################################################################
+##                    Extract the years when sales occurred
 ############################################################################
 
 ###
@@ -70,11 +90,12 @@ temp <- invoice %>%  # punctul de pornire: tabela/cadrul `invoice`
      arrange(year)  # se ordoneaza rezultatul dupa valorile atributului `year`
 
 
+##############################################################################
+## Extrageți lunile calendaristice (și anii) în care s-au înregistrat vânzări
+##############################################################################
+##              Extract the months (and their years) with sales
+##############################################################################
 
-############################################################################
-# # --          Extrageti lunile calendaristice (si anii) in care
-# # --                     s-au inregistrat vanzari
-############################################################################
 
 ###
 # Solutie 1 - `mutate`, `select`, `distinct`, `arrange`
@@ -91,26 +112,26 @@ temp <- invoice %>%    # punctul de pornire: tabela/cadrul `invoice`
 
 
 # rezultat cu o singura coloana (atentie la ordonare!!!!)
-temp <- invoice %>%    
-     mutate (                                    
+temp <- invoice %>%
+     mutate (
           year = lubridate::year(invoicedate),
           month = lubridate::month(invoicedate)
           ) %>%
      transmute (year_month = paste(year, month, sep = '-')) %>%
      distinct(year_month) %>%
-     arrange(year_month)        
-        
+     arrange(year_month)
 
-# ordonarea e acum corecta        
-temp <- invoice %>%    
-     mutate (                                    
+
+# ordonarea e acum corecta
+temp <- invoice %>%
+     mutate (
           year = lubridate::year(invoicedate),
           month = lubridate::month(invoicedate)) %>%
-     arrange(year, month) %>%       
+     arrange(year, month) %>%
      transmute (year_month = paste(year, month, sep = '-')) %>%
-     distinct(year_month) 
-        
-        
+     distinct(year_month)
+
+
 
 
 # Solutie 2 - `transmute`, `distinct`, `arrange`
@@ -133,33 +154,43 @@ temp <- invoice %>%
 
 
 
-############################################################################
-# # --          Care lungimea numelui pentru fiecare artist/formatie?
-############################################################################
+##############################################################################
+##  Care este lungimea numelui pentru fiecare artist/formatie?
+##############################################################################
+##  Extract the lenght (the number of characters) for each artist/band's name
+##############################################################################
 
 artist %>%
      mutate (lungime_nume = nchar(name)) -> temp
 
 
-############################################################################
-# # -- Sa se afiseze artistii in ordinea descrescatoare a lungimii numelui
-############################################################################
+##############################################################################
+##    Să se afișeze artiștii în ordinea descrescătoare a lungimii numelui
+##############################################################################
+##    Display artists/bands ordering (descending) them on their name's lenght
+##############################################################################
 
 temp <- artist %>%
      mutate (lungime_nume = nchar(name)) %>%
      arrange(desc(lungime_nume))
 
 
-############################################################################
-# # -- Sa se afiseze numele formatat al artistilor, conform urmatoarei cerinte:
-# # -- 1. pentru artistii cu numele lung de pana la 11 caractere,
-#         se afiseaza numele intreg
-# # -- 2. pentru artistii cu numele mai lung de 11 caracterere,
-#         se extrag cinci caractere, se adauga `...` la mijloc
-#         si se finalizeaza cu ultimele cinci caractere
-############################################################################
+##############################################################################
+## Să se afișeze numele formatat al artiștilor, conform următoarei cerințe:
+## 1. pentru artiștii cu numele lung de până la 10 caractere,
+##		se afișează numele întreg
+##2. pentru artiștii cu numele mai lung de 10 caractere se extrag cinci
+##  	caractere, se adaugă `...` la mijloc și se finalizează cu
+##		ultimele cinci caractere
+##############################################################################
+##Display the shortened name of the artists with the followihg rules:
+##1. names shorter than 11 characters will be fully displayed
+##2. names longer than 10 characters will be truncated:
+##  	extract first 5 characters, concatenate with `...`, and then concatenate
+##		with the last 5 characters from the name
+##############################################################################
 
-# -- solutia bazata pe LEFT si RIGHT din SQL nu are echivalent in R
+# ## solutia bazata pe LEFT si RIGHT din tidyverse nu are echivalent in R
 
 # solutie ce foloseste functiile `substr` si `substring`
 temp <- artist %>%
@@ -184,10 +215,12 @@ paste0('a', 'b', 'c')
 
 
 
-############################################################################
-# # -- Care sunt artistii sau formatiile cu numele alcatuit
-# dintr-un singur cuvant ? (adica numele NU contine niciun spatiu)
-############################################################################
+##############################################################################
+##  Care sunt artiștii/formațiile cu numele alcătuit dintr-un singur cuvânt?
+##					(adică numele lor nu conține niciun spațiu)
+##############################################################################
+##  Extract single-word-ed artist names (names containing no white space)
+##############################################################################
 
 
 ###
@@ -225,7 +258,7 @@ temp <- artist %>%
 
 
 
-# echivalent SPLIT_PART din SQL vom folosi functia `word`
+# echivalent SPLIT_PART din tidyverse vom folosi functia `word`
 temp <- artist %>%
      mutate(
           primul_cuvant = word(name, 1),
@@ -234,7 +267,7 @@ temp <- artist %>%
      filter (is.na(al_doilea_cuvant))
 
 
-# solutie cu `str_replace_all` (echivalenta solutiei cu REPLACE din SQL)
+# solutie cu `str_replace_all` (echivalenta solutiei cu REPLACE din tidyverse)
 temp <- artist %>%
      filter (name == str_replace_all(name, ' ', ''))
 
@@ -252,10 +285,12 @@ temp <- artist %>%
 
 
 
-############################################################################
-# # -- Care sunt artistii sau formatiile cu numele alcatuit din cel
-#   putin doua cuvinte ? (adica numele contine cel putin singur spatiu)
-############################################################################
+##############################################################################
+##      Care sunt artiștii/formatiile cu numele alcătuit din cel puțin
+##            două cuvinte? (numele lor conține cel puțin un spațiu)
+##############################################################################
+## Extract multi-word-ed artist names (names containing at least one whitespace)
+##############################################################################
 
 
 temp <- artist %>%
@@ -266,7 +301,7 @@ temp <- artist %>%
      filter (str_count(name, ' ') > 0)
 
 
-# echivalent SPLIT_PART din SQL vom folosi functia `word`
+# echivalent SPLIT_PART din tidyverse vom folosi functia `word`
 temp <- artist %>%
      mutate(
           primul_cuvant = word(name, 1),
@@ -279,17 +314,18 @@ temp <- artist %>%
 
 
 
-# #
-############################################################################
-# # -- Care sunt artistii sau formatiile cu numele alcatuit din exact doua cuvinte ?
-# # -- (adica numele contine un singur spatiu)
-############################################################################
+##############################################################################
+##  Care sunt artiștii/formațiile cu numele alcătuit din exact două cuvinte?
+##           (adică numele lor conține un singur spațiu)
+##############################################################################
+##  Extract two-word-ed artist names (names containing a single whitespace)
+##############################################################################
 
 # solutie bazare pe `str_detect`
 temp <- artist %>%
      filter (str_detect(name, ' ') & !str_detect(name, ' .* '))
 
-# echivalent SPLIT_PART din SQL vom folosi functia `word`
+# echivalent SPLIT_PART din tidyverse vom folosi functia `word`
 temp <- artist %>%
      mutate(
           primul_cuvant = word(name, 1),
@@ -299,27 +335,29 @@ temp <- artist %>%
      filter (!is.na(al_doilea_cuvant) & is.na(al_treilea_cuvant))
 
 
-# -- soluție cu REPLACE
+# ## soluție cu REPLACE
 temp <- artist %>%
      filter (nchar(name) == nchar(str_replace_all(name, ' ', '')) + 1)
 
 
-# solutie fara echivalent in SQL-Pg, bazata pe numararea spatiilor
+# solutie fara echivalent in tidyverse-Pg, bazata pe numararea spatiilor
 temp <- artist %>%
      filter (str_count(name, ' ') == 1)
 
 
 
-############################################################################
-# # --      Care sunt primii trei ani in care s-au inregistrat vanzari?
-############################################################################
+##############################################################################
+##           Care sunt primii trei ani s-au inregistrat vanzari?
+##############################################################################
+##           Extract first sales years
+##############################################################################
 
 # sol 1 - `head`
 temp <- invoice %>%     # punctul de pornire: tabela/cadrul `invoice`
      transmute (year = lubridate::year(invoicedate)) %>%   #  coloana `year`
      distinct(year) %>%  # se elimina dublurile
      arrange(year)  %>%     # se ordoneaza rezultatul dupa valorile atributului `year`
-     head(3)                # echivalentul lui LIMIT 3 din SQL
+     head(3)                # echivalentul lui LIMIT 3 din tidyverse
 
 
 # sol 2 - `tail`
@@ -327,47 +365,61 @@ temp <- invoice %>%     # punctul de pornire: tabela/cadrul `invoice`
      transmute (year = lubridate::year(invoicedate)) %>%   #  coloana `year`
      distinct(year) %>%  # se elimina dublurile
      arrange(desc(year))  %>%     # se ordoneaza rezultatul dupa valorile atributului `year`
-     tail(3) %>%               # echivalentul lui LIMIT 3 din SQL
-     arrange(year) 
+     tail(3) %>%               # echivalentul lui LIMIT 3 din tidyverse
+     arrange(year)
 
 
 # sol 3 - `slice`
-temp <- invoice %>%     
-     transmute (year = lubridate::year(invoicedate)) %>%   
-     distinct(year) %>%  
-     arrange(desc(year))  %>%     
-     slice((nrow(.)-2):nrow(.)) %>%               
-     arrange(year) 
+temp <- invoice %>%
+     transmute (year = lubridate::year(invoicedate)) %>%
+     distinct(year) %>%
+     arrange(desc(year))  %>%
+     slice((nrow(.)-2):nrow(.)) %>%
+     arrange(year)
 
 
 # sol 4 - filtrare ce foloseste `rownum()`
-temp <- invoice %>%     
-     transmute (year = lubridate::year(invoicedate)) %>%   
-     distinct(year) %>%  
+temp <- invoice %>%
+     transmute (year = lubridate::year(invoicedate)) %>%
+     distinct(year) %>%
      arrange(year) %>%
      filter (row_number() <= 3)
 
 
 
 # sol 5 - `top_n`
-temp <- invoice %>%     
-     transmute (year = lubridate::year(invoicedate)) %>%   
-     distinct(year) %>%  
-     top_n(-3, year)        
+temp <- invoice %>%
+     transmute (year = lubridate::year(invoicedate)) %>%
+     distinct(year) %>%
+     top_n(-3, year)
 
 
 
-#
-#
-#
-#
-#
-#
-# -- ############################################################################
-# --                Probleme de rezolvat la curs/laborator/acasa
-# -- ############################################################################
-#
-# -- Extrageti numele de utilizator de pe contul de e-mail al fiecarui angajat
-#
-# -- Extrageti toate serverele de e-mail  (ex. `gmail.com`) ale clientilor
-#
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
+
+
+##############################################################################
+## Extrageti numele de utilizator de pe contul de e-mail al fiecarui angajat
+##############################################################################
+## Extract the usernames from the employees' e-mail addresses
+##############################################################################
+
+
+##############################################################################
+##  Extrageti toate serverele de e-mail  (ex. `gmail.com`) ale clientilor
+##############################################################################
+##  Extract the e-mail servers  (e.g., `gmail.com`) from customers'
+##    e-mail addresses
+##############################################################################
+
+
+
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################
