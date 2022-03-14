@@ -22,11 +22,11 @@ setwd('/Users/marinfotache/OneDrive/Baze de date 2022/Studii de caz/chinook')
 load("chinook.RData")
 
 
--- ############################################################################
---              Extrageți numărul albumelor lansate de fiecare artist
--- ############################################################################
---              Display the number of albums released by each artist
--- ############################################################################
+##############################################################################
+##             Extrageți numărul albumelor lansate de fiecare artist
+##############################################################################
+##             Display the number of albums released by each artist
+##############################################################################
 
 # solutie bazata pe `group_by` si `summarise`  (este recomandabil sa "de-grupam"
 # inregistrarile dupa `summarise` daca interogarea se continua cu alte operatiuni)
@@ -59,11 +59,11 @@ temp <- artist %>%
      ungroup()
 
 
--- ############################################################################
---           Care este artistul cu cel mai mare numar de albume?
--- ############################################################################
---           Find the artist that released the largest number of albums
--- ############################################################################
+##############################################################################
+##          Care este artistul cu cel mai mare numar de albume?
+##############################################################################
+##          Find the artist that released the largest number of albums
+##############################################################################
 
 # solutie cu `head`
 temp <- artist %>%
@@ -97,11 +97,11 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---     Extrageți durata totală a pieselor (în minute) pentru fiecare artist
--- ############################################################################
--- Compute the total duration (in minutes) of the tracks released by each artist
--- ############################################################################
+##############################################################################
+##    Extrageți durata totală a pieselor (în minute) pentru fiecare artist
+##############################################################################
+##Compute the total duration (in minutes) of the tracks released by each artist
+##############################################################################
 
 # solutie bazata pe `group_by` si `summarise`  (este recomandabil sa "de-grupam"
 # inregistratile dupa `summarise`)
@@ -116,14 +116,14 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---       Extrageți durata totală a pieselor (în minute) pentru fiecare
---            album al fiecărui artist, cu afișare de tipul HH:MI:SS
---                    (durata în minute și secunde)
--- ############################################################################
---   Display the total duration (in the HH:MI:SS format) of each album
---    released by each artist
--- ############################################################################
+##############################################################################
+##      Extrageți durata totală a pieselor (în minute) pentru fiecare
+##           album al fiecărui artist, cu afișare de tipul HH:MI:SS
+##                   (durata în minute și secunde)
+##############################################################################
+##  Display the total duration (in the HH:MI:SS format) of each album
+##   released by each artist
+##############################################################################
 temp <- artist %>%
      rename(artist_name = name) %>%
      inner_join(album) %>%
@@ -136,11 +136,11 @@ temp <- artist %>%
      arrange(artist_name, title)
 
 
--- ############################################################################
--- 	         Extrageti numărul de clienți, pe țări
--- ############################################################################
--- 	         Compute the number of customers in each country
--- ############################################################################
+##############################################################################
+##	         Extrageti numărul de clienți, pe țări
+##############################################################################
+##	         Compute the number of customers in each country
+##############################################################################
 
 # sort by country name
 temp <- customer %>%
@@ -157,15 +157,15 @@ temp <- customer %>%
 
 
 
--- ############################################################################
---      Afișati toate piesele de pe toate albumele tuturor artiștilor;
--- Calculați subtotaluri cu durata în minute și secunde la nivel de album
---   și la nivel de artist, precum si un total general
--- ############################################################################
---      Display a report with the tracks on each album of every artist;
--- include a sub-total with the duration (in minutes and seconds) of each album,
---    another subtotal on artist level, and a grand total
--- ############################################################################
+##############################################################################
+##     Afișati toate piesele de pe toate albumele tuturor artiștilor;
+##Calculați subtotaluri cu durata în minute și secunde la nivel de album
+##  și la nivel de artist, precum si un total general
+##############################################################################
+##     Display a report with the tracks on each album of every artist;
+##include a sub-total with the duration (in minutes and seconds) of each album,
+##   another subtotal on artist level, and a grand total
+##############################################################################
 
 
 # afisam codurile UTF pentru a selecta un simbol pentru subtotaluri
@@ -223,13 +223,13 @@ temp <- bind_rows(
 
 
 
--- ############################################################################
---             Afișati, pentru fiecare client, pe trei linii separate,
---                     vânzările pe anii 2010, 2011 și 2012
--- ############################################################################
---             Display, for each customer, on three different rows,
---                     the total sales on 2010, 2011 și 2012
--- ############################################################################
+##############################################################################
+##            Afișati, pentru fiecare client, pe trei linii separate,
+##                    vânzările pe anii 2010, 2011 și 2012
+##############################################################################
+##            Display, for each customer, on three different rows,
+##                    the total sales on 2010, 2011 și 2012
+##############################################################################
 
 # solutie corecta, dar incompleta
 temp <- bind_rows(
@@ -295,13 +295,13 @@ temp <- bind_rows(
 
 
 
--- ############################################################################
---                 Afișați, pentru fiecare client, pe coloane separate,
---                       vânzările pe anii 2010, 2011 și 2012
--- ############################################################################
---             Display, for each customer, on three different columns,
---                     the total sales on 2010, 2011 și 2012
--- ############################################################################
+##############################################################################
+##                Afișați, pentru fiecare client, pe coloane separate,
+##                      vânzările pe anii 2010, 2011 și 2012
+##############################################################################
+##            Display, for each customer, on three different columns,
+##                    the total sales on 2010, 2011 și 2012
+##############################################################################
 
 # solutie 1 - bazate pe sum(if_else...)
 temp <- invoice %>%
@@ -347,13 +347,13 @@ temp <- invoice %>%
 
 
 
--- ############################################################################
---                 Afișați, pentru fiecare client, pe coloane separate,
---                       vânzările pentru toți anii!
--- ############################################################################
---             Display, for each customer, on  different columns,
---                     the total sales on each year
--- ############################################################################
+##############################################################################
+##                Afișați, pentru fiecare client, pe coloane separate,
+##                      vânzările pentru toți anii!
+##############################################################################
+##            Display, for each customer, on  different columns,
+##                    the total sales on each year
+##############################################################################
 
 
 # solutia urmatoare functioneaza identic, indiferent de numarul anilor din BD
@@ -371,13 +371,13 @@ temp <- invoice %>%
 
 
 
--- ############################################################################
---             Extrageți artiștii cu o durată totală a pieselor
---                         mai mare de 100 de minute
--- ############################################################################
---      Find the artists with a total duration of their tracks larger
---                              than 100 minutes
--- ############################################################################
+##############################################################################
+##            Extrageți artiștii cu o durată totală a pieselor
+##                        mai mare de 100 de minute
+##############################################################################
+##     Find the artists with a total duration of their tracks larger
+##                             than 100 minutes
+##############################################################################
 
 # in tidyverse nu e nicio diferenta in WHERE si HAVING...
 temp <- artist %>%
@@ -392,13 +392,13 @@ temp <- artist %>%
 
 
 
-#-- ############################################################################
-#-- 	        Solutii tidyverse care nu au echivalent "direct" in SQL
+###############################################################################
+###	        Solutii tidyverse care nu au echivalent "direct" in SQL
 #                        (in SQL necesita functiii OLAP)
-#-- ############################################################################
-#-- 	        tidyverse solutions with no "direct" equivalent in SQL
+###############################################################################
+###	        tidyverse solutions with no "direct" equivalent in SQL
 #                        (in SQL they need OLAP functions)
-#-- ############################################################################
+###############################################################################
 
 ################################################################################
 ##       Extrageti primele trei piese ale fiecarui album al formatiei U2
@@ -430,17 +430,17 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---                Probleme de rezolvat la curs/laborator/acasa
--- ############################################################################
---                To be completed during lectures/labs or at home
--- ############################################################################
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
 #
-# -- Afisati numarul de piese din fiecare tracklist
+# ##Afisati numarul de piese din fiecare tracklist
 #
-# -- Care este cel mai vandut gen muzical?
+# ##Care este cel mai vandut gen muzical?
 #
-# -- Care este angajatul cu cei mai multi subordonati directi ? (de ordinul 1)
+# ##Care este angajatul cu cei mai multi subordonati directi ? (de ordinul 1)
 #
 #
 
@@ -457,11 +457,11 @@ temp <- customer %>%
 
 
 
--- ############################################################################
---              La ce întrebări răspund următoarele interogări ?
--- ############################################################################
---           For what requiremens the following queries provide the result?
--- ############################################################################
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################
 
 ##
 invoice %>%
