@@ -169,7 +169,23 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 --                To be completed during lectures/labs or at home
 -- ############################################################################
 
--- In ce tari s-a vandut muzica formatiei `Led Zeppelin`
+
+--############################################################################
+--###          În ce țări s-a vândut muzica formației `Led Zeppelin`?
+--############################################################################
+--###          Find the countries where `Led Zeppelin` tracks were sold
+--############################################################################
+
+
+/*
+############################################################################
+##   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori,
+##               se numara bateristul `John Bonham`
+############################################################################
+##   List the tracks released by `Led Zeppelin` having `John Bonham`
+##               as one of the composers
+############################################################################
+*/
 
 -- Afisare piesele si artistii din playlistul `Heavy Metal Classic`
 

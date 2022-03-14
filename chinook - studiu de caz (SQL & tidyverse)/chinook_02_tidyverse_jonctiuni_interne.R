@@ -1,18 +1,31 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###                         02: Jonctiuni interne
-################################################################################
-### ultima actualizare: 2021-03-12
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+##        Case study: SQL Queries for `chinook` database
+##############################################################################
+## 			tidyverse02: Joncțiuni interne
+## 			tidyverse02: INNER JOINs
+##############################################################################
+## ultima actualizare / last update: 2022-03-14
+
 
 library(tidyverse)
 library(lubridate)
 setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
-#############################################################################
-###                Care sunt albumele formatiei `U2`
-#############################################################################
+
+##############################################################################
+##                  Care sunt albumele formației `U2`
+##############################################################################
+##                  Extract the albums released by the band `U2`
+##############################################################################
 
 
 # sol 1.1 - NATURAL JOIN
@@ -26,16 +39,18 @@ temp <- artist %>%
      filter (name == 'U2')
 
 
-# -- sol. 2
+# ##sol. 2
 temp <- artist %>%
      filter (name == 'U2') %>%
      inner_join(album, by = c('artistid' = 'artistid'))
 
 
+##############################################################################
+##		Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
+##############################################################################
+##	 Extract the tracks included on the album `Achtung Baby` released by `U2`
+##############################################################################
 
-############################################################################
-### 	Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
-############################################################################
 
 # sol 0 - ERONATA!!!
 temp <- artist %>%
@@ -119,8 +134,6 @@ temp <- artist %>%
 ###########################################
 
 
-
-
 # sol 6 - SEMI-JOIN
 temp <- track %>%
      semi_join(
@@ -133,9 +146,12 @@ temp <- track %>%
      select(trackid:composer)
 
 
-############################################################################
-###          Care sunt piesele formatiei U2 vandute in anul 2013?
-############################################################################
+
+##############################################################################
+##         Care sunt piesele formației `U2` vândute în anul 2013?
+##############################################################################
+##         Which of the tracks released by `U2` were sold during 2013?
+##############################################################################
 temp <- track %>%
              inner_join(album) %>%
              transmute (track_name = name, trackid, album_title = title,
@@ -152,8 +168,11 @@ temp <- track %>%
 
 
 ############################################################################
-###          In ce tari s-a vandut muzica formatiei `Led Zeppelin`
+##          În ce țări s-a vândut muzica formației `Led Zeppelin`?
 ############################################################################
+##          Find the countries where `Led Zeppelin` tracks were sold
+############################################################################
+
 temp <- artist %>%
     filter (name == 'Led Zeppelin') %>%
     select (artistid) %>%
@@ -170,9 +189,13 @@ temp <- artist %>%
 
 
 ############################################################################
-###   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori,
-###               se numara bateristul `John Bonham`
+##   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori,
+##               se numara bateristul `John Bonham`
 ############################################################################
+##   List the tracks released by `Led Zeppelin` having `John Bonham`
+##               as one of the composers
+############################################################################
+
 
 temp <- artist %>%
       filter (name == 'Led Zeppelin') %>%
@@ -186,16 +209,17 @@ temp <- artist %>%
 
 
 ############################################################################
-###                         AUTOJONCTIUNE
-############################################################################
-###
-###
-############################################################################
-###            Care sunt celelalte albume ale formatiei care a lansat
-###                             albumul 'Achtung Baby'?
+### 								         AUTOJONCTIUNE / SELF-JOIN
 ############################################################################
 
-# -- solutie care `emuleaza` AUTO JOIN-ul din SQL
+##############################################################################
+##			Care sunt celelalte albume ale formatiei care a lansat
+##                   albumul 'Achtung Baby'?
+##############################################################################
+##  Extract all the albums of the band who released the album 'Achtung Baby'?
+##############################################################################
+
+# ##solutie care `emuleaza` AUTO JOIN-ul din SQL
 
 # sol 1 - NATURAL JOIN + select
 temp <- album %>%
@@ -212,10 +236,13 @@ temp <- album %>%
 
 
 
-############################################################################
-##      Care sunt celelalte piese de pe albumul pe care apare piesa
-##                'For Those About To Rock (We Salute You)'?
-############################################################################
+##############################################################################
+##			Care sunt celelalte piese de pe albumul pe care apare piesa
+##             'For Those About To Rock (We Salute You)'?
+##############################################################################
+##			Which are the other tracks on the same album as the track
+##              'For Those About To Rock (We Salute You)'?
+##############################################################################
 
 temp <- track %>%
     inner_join(track, by = c('albumid' = 'albumid') ) %>%
@@ -224,10 +251,13 @@ temp <- track %>%
 
 
 
-#########################################################################
-###       Care este numele angajatului: lastname = 'Johnson' AND
-###                    firstname = 'Steve'
-#########################################################################
+##############################################################################
+##	Care este șeful angajatului cu numele (lastname) 'Johnson'
+##     și prenummele (firstname) 'Steve'
+##############################################################################
+##	Display the boss of the employee whose lastname is 'Johnson' and
+##     the firstname is 'Steve'
+##############################################################################
 
 # sol . 1
 temp <- employee %>%
@@ -251,19 +281,25 @@ temp <- employee %>%
 
 
 #
-# -- ############################################################################
-# --                Probleme de rezolvat la curs/laborator/acasa
-# -- ############################################################################
+# ##############################################################################
+# ##               Probleme de rezolvat la curs/laborator/acasa
+# ##############################################################################
 #
 #
-# -- Afisare piesele si artistii din playlistul `Heavy Metal Classic`
+# ##Afisare piesele si artistii din playlistul `Heavy Metal Classic`
 #
 #
-# -- Care sunt piesele formatiei `Led Zeppelin` compuse de cel putin trei muzicieni?
+# ##Care sunt piesele formatiei `Led Zeppelin` compuse de cel putin trei muzicieni?
 #
 #
-#-- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
+###Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
 #--	`Robert Plant`
 #
-#-- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
+###Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
 #--	nici `Robert Plant`, nici `Jimmy Page`
+
+##############################################################################
+##	   Care sunt clientii din aceeasi tara ca si clientul `Robert Brown`
+##############################################################################
+##	   Extract customers from the same country as customer `Robert Brown`
+##############################################################################
