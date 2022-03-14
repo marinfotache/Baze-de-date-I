@@ -9,7 +9,7 @@
 --        Studiu de caz: Interogări SQL pentru baza de date `chinook`
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
--- 					SQL06: Grupare - GROP BY, subtotaluri, filtrare grupuri (HAVING)
+-- 					SQL06: Grupare, subtotaluri, filtrare grupuri (HAVING)
 -- 					SQL06: GROUP BY, subtotals, group filters (HAVING)
 -- ############################################################################
 -- ultima actualizare / last update: 2022-03-12
@@ -60,7 +60,7 @@ ORDER BY artist.name
 
 -- ############################################################################
 --       Extrageți durata totală a pieselor (în minute) pentru fiecare
---            album al fiecarui artist, cu afișare de tipul HH:MI:SS
+--            album al fiecărui artist, cu afișare de tipul HH:MI:SS
 --                    (durata în minute și secunde)
 -- ############################################################################
 --   Display the total duration (in the HH:MI:SS format) of each album
@@ -82,6 +82,11 @@ ORDER BY artist.name, title
 -- Calculați subtotaluri cu durata în minute și secunde la nivel de album
 --   și la nivel de artist, precum si un total general
 -- ############################################################################
+--      Display a report with the tracks on each album of every artist;
+-- include a sub-total with the duration (in minutes and seconds) of each album,
+--    another subtotal on artist level, and a grand total
+-- ############################################################################
+
 
 -- solutie bazata pe grupare si pe UNION
 SELECT artist.name AS artist_name, title AS album_title, track.name as track_name,
@@ -126,8 +131,11 @@ ORDER BY 1, 2, 3
 
 
 -- ############################################################################
---             Afisati, pentru fiecare client, pe trei linii separate,
---                     vanzarile pe anii 2010, 2011 si 2012
+--             Afișati, pentru fiecare client, pe trei linii separate,
+--                     vânzările pe anii 2010, 2011 și 2012
+-- ############################################################################
+--             Display, for each customer, on three different rows,
+--                     the total sales on 2010, 2011 și 2012
 -- ############################################################################
 
 -- solutie incompleta (nu se afiseaza anii in care clientul respectiv nu
@@ -173,8 +181,11 @@ ORDER BY 1, 2, 3, 4, 5
 
 
 -- ############################################################################
---                 Afisati, pentru fiecare client, pe coloane separate,
---                       vanzarile pe anii 2010, 2011 si 2012
+--                 Afișați, pentru fiecare client, pe coloane separate,
+--                       vânzările pe anii 2010, 2011 și 2012
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012
 -- ############################################################################
 
 -- solutie bazata pe jonctiune interna, grupare si CASE
@@ -189,8 +200,11 @@ ORDER BY 1
 
 
 -- ############################################################################
---                 Afisati, pentru fiecare client, pe coloane separate,
---                       vanzarile pentru toti anii!
+--                 Afișați, pentru fiecare client, pe coloane separate,
+--                       vânzările pentru toți anii!
+-- ############################################################################
+--             Display, for each customer, on  different columns,
+--                     the total sales on each year
 -- ############################################################################
 
 -- in SQL solutia nu poate fi generalizata, asa ca:
@@ -215,8 +229,11 @@ ORDER BY 1
 
 
 -- ############################################################################
---             Extrageti artistii cu o durata totala a pieselor
+--             Extrageți artiștii cu o durată totală a pieselor
 --                         mai mare de 100 de minute
+-- ############################################################################
+--      Find the artists with a total duration of their tracks larger
+--                              than 100 minutes
 -- ############################################################################
 
 -- solutie bazata pe HAVING
