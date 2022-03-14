@@ -1,9 +1,19 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###             03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
-################################################################################
-### ultima actualizare: 2021-03-10
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+##        Case study: SQL Queries for `chinook` database
+##############################################################################
+## 			tidyverse03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
+## 			tidyverse03: Ansemble operators: (UNION, INTERSECT, EXCEPT)
+##############################################################################
+## ultima actualizare / last update: 2022-03-14
+
 
 library(tidyverse)
 library(lubridate)
@@ -11,17 +21,19 @@ library(lubridate)
 setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
-#
-# #
-# #
-# # -- ############################################################################
-# # -- 					UNION
-# # -- ############################################################################
-# #
-# # -- ############################################################################
-# # -- 		Care sunt piesele care apar pe doua discuri ale formatiei
-# # -- 		    'Iron Maiden', `Fear Of The Dark` si `A Real Live One`
-# # -- ############################################################################
+
+###############################################################################
+###                                      UNION
+###############################################################################
+
+
+##############################################################################
+##			Care sunt piesele care apar pe două discuri ale formației
+##				'Iron Maiden', `Fear Of The Dark` și `A Real Live One`
+##############################################################################
+##			Extract the tracks included on two of the albums releases by
+##				'Iron Maiden' - `Fear Of The Dark` and `A Real Live One`
+##############################################################################
 
 # solutia urmatoare nu elimina dublurile
 temp <- artist %>%
@@ -83,11 +95,13 @@ temp <- artist %>%
      arrange(name)
 
 
-# # -- ############################################################################
-# -- Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii direct ai 
-# -- subordonatilor de ordinul 1)
-# -- ai lui `Adams` (lastname) `Andrew` (firstname)
-#
+##############################################################################
+## Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii directi ai
+## subordonatilor de ordinul 1) ai lui `Adams` (lastname) `Andrew` (firstname)
+##############################################################################
+##Extract first-order and second-order subordinates of
+##   `Adams` (lastname) `Andrew` (firstname)
+##############################################################################
 
 # solutie bazata pe `union`
 temp <-
@@ -131,11 +145,19 @@ temp <- bind_rows(
 
 
 
+##############################################################################
+##                                INTERSECT
+##############################################################################
 
-# # -- ############################################################################
-# # --                                  INTERSECT
-# # -- ############################################################################
-# #
+##############################################################################
+##			Care sunt piesele comune (cu acelasi titlu) de pe
+##			albumele `Fear Of The Dark` si `A Real Live One`
+##					ale formatiei 'Iron Maiden'
+##############################################################################
+##			Extract the tracks (track name) included on both `Fear Of The Dark` and
+## `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
+##     both albums)
+##############################################################################
 
 # solutie eronata 1 !!! (AND)
 temp <- artist %>%
@@ -196,7 +218,7 @@ temp <- artist %>%
                         )
 
 
-# -- solutie bazata de auto-join
+# ##solutie bazata de auto-join
 temp <- artist %>%
           filter (name == 'Iron Maiden') %>%
           select (-name) %>%
@@ -239,14 +261,17 @@ temp <- track %>%
 
 
 
-# # -- ############################################################################
-# # -- 				    EXCEPT
-# # -- ############################################################################
-# #
-# # -- ############################################################################
-# # -- Care sunt piesele formatiei 'Iron Maiden' de pe albumul `Fear Of The Dark`
-# # -- 				care NU apar si pe albumul `A Real Live One`
-# # -- ############################################################################
+##############################################################################
+##                                 EXCEPT
+##############################################################################
+
+##############################################################################
+## Care sunt piesele formatiei 'Iron Maiden' de pe albumul `Fear Of The Dark`
+##				care NU apar si pe albumul `A Real Live One`
+##############################################################################
+## Extract the tracks released by 'Iron Maiden' which were inluded on the
+##  album `Fear Of The Dark` but not included on the album `A Real Live One`
+##############################################################################
 
 
 # solutie bazata pe `setdiff` (exchivalentul EXCEPT)
@@ -291,10 +316,14 @@ temp <- track %>%
 
 
 
-# -- ############################################################################
-# -- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori,
-# -- nu apare, nici `Robert Plant`, nici `Jimmy Page`
-# -- ############################################################################
+##############################################################################
+##  Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori,
+##          nu apare nici `Robert Plant`, nici `Jimmy Page`
+##############################################################################
+##  Extract the tracks released by `Led Zeppelin` whose composers are neither
+##          `Robert Plant` nor `Jimmy Page`
+##############################################################################
+
 temp <- artist %>%
         filter (name == 'Led Zeppelin') %>%
         transmute(artistid, artist_name = name) %>%
@@ -318,22 +347,30 @@ temp <- artist %>%
 
 
 
+
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
 #
-# -- ############################################################################
-# --                Probleme de rezolvat la curs/laborator/acasa
-# -- ############################################################################
 #
+# Afisare piesele (si artistii) comune playlisturilor `Heavy Metal Classic` si `Music`
 #
-# -- Afisare piesele (si artistii) comune playlisturilor `Heavy Metal Classic` si `Music`
+# Care sunt piesele formatiei `Led Zeppelin` compuse numai de `Robert Plant`
 #
-# -- Care sunt piesele formatiei `Led Zeppelin` compuse numai de `Robert Plant`
+# Care sunt piesele formatiei `Led Zeppelin` compuse, impreuna, de `Robert Plant` si
+#  `Jimmy Page`, cu sau fara alti colegi/muzicieni?
 #
-# -- Care sunt piesele formatiei `Led Zeppelin` compuse, impreuna, de `Robert Plant` si
-# --  `Jimmy Page`, cu sau fara alti colegi/muzicieni?
+# Care sunt piesele formatiei `Led Zeppelin` compuse, impreuna, de `Robert Plant` si
+#  `Jimmy Page`, fara alti colegi/muzicieni?
 #
-# -- Care sunt piesele formatiei `Led Zeppelin` compuse, impreuna, de `Robert Plant` si
-# --  `Jimmy Page`, fara alti colegi/muzicieni?
+# Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
+# 	`Robert Plant`
 #
-# -- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
-# --	`Robert Plant`
-#
+
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################
