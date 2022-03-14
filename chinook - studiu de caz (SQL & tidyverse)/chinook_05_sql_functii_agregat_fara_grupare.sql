@@ -9,7 +9,7 @@
 --        Studiu de caz: Interogări SQL pentru baza de date `chinook`
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
--- 					SQL05: Functii agregat (count, count distinct, ...) fara grupare
+-- 					SQL05: Funcții agregat (count, count distinct, ...) fără grupare
 -- 					SQL05: Aggregate functions without gruping
 -- ############################################################################
 -- ultima actualizare / last update: 2022-03-12
@@ -66,7 +66,7 @@ FROM customer
 
 
 -- ############################################################################
--- 				Pentru câți artiști există măcar un album in baza de date?
+-- 				Pentru câți artiști există măcar un album în baza de date?
 -- ############################################################################
 -- 				         How many artist released at least an album?
 -- ############################################################################
@@ -92,7 +92,7 @@ FROM customer
 
 
 -- ############################################################################
---        Cate secunde are albumul `Achtung Baby` al formatiei `U2`
+--        Câte secunde are albumul `Achtung Baby` al formației `U2`?
 -- ############################################################################
 --     Compute the total duration (in seconds) of the album `Achtung Baby`
 --  released by `U2`
@@ -137,7 +137,7 @@ WHERE artist.name = 'U2'
 
 -- ############################################################################
 -- 			Care este durata medie a pieselor formației `Pink Floyd`,
---                     exprimatî în minute și secunde
+--                     exprimată în minute și secunde
 -- ############################################################################
 --    Compute the average duration (in minutes and seconds) of the tracks
 --               released by `Pink Floyd`
@@ -152,9 +152,9 @@ WHERE artist.name = 'Pink Floyd'
 
 
 -- ############################################################################
---                      În ce zi a fost prima vanzare?
+--                      În ce zi a fost prima vânzare?
 -- ############################################################################
---                      Find the date of the fist sale.
+--                      Find the date of the first sale.
 -- ############################################################################
 
 SELECT MIN(invoicedate) AS prima_zi
@@ -169,9 +169,8 @@ LIMIT 1
 
 
 
-
 -- ############################################################################
---                       In ce zi a fost ultima vanzare?
+--                       În ce dată a fost ultima vanzare?
 -- ############################################################################
 --                          Find the last sales date
 -- ############################################################################
@@ -195,6 +194,12 @@ LIMIT 1
 --                To be completed during lectures/labs or at home
 -- ############################################################################
 
+
+--############################################################################
+--##               Din cate orașe sunt clienții companiei?
+--############################################################################
+--##             In how many cities originate the customers?
+--############################################################################
 
 -- Care este data primei angajari in companie
 

@@ -1,9 +1,18 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###                     05: Functii agregat fara grupare
-################################################################################
-### ultima actualizare: 2021-03-30
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+##        Case study: SQL Queries for `chinook` database
+##############################################################################
+## 	  tidyverse05: Funcții agregat (count, count distinct, ...) fără grupare
+## 		tidyverse05: Aggregate functions without gruping
+##############################################################################
+## ultima actualizare / last update: 2022-03-14
 
 library(tidyverse)
 library(lubridate)
@@ -12,9 +21,11 @@ setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
 
-############################################################################
-# #                 Cati artisti sunt in baza de date?
-############################################################################
+##############################################################################
+##                   Câți artiști sunt în baza de date?
+##############################################################################
+##               How many artists are stored in the database?
+##############################################################################
 
 # Solutie eronata!!! (aceasta solutie numara de cate ori apare fiecare valoare
 # a `artistid` in data frame-ul `artist`)
@@ -38,9 +49,11 @@ temp <- artist %>%
 
 
 
-############################################################################
-### 				Cati clienti au fax?
-############################################################################
+##############################################################################
+##				                     Câți clienți au fax?
+##############################################################################
+##				                  How many customers have fax?
+##############################################################################
 
 # sol 1
 temp <- customer %>%
@@ -55,9 +68,11 @@ temp <- customer %>%
 
 
 
-############################################################################
-# #  --        Pentru cati artisti exista macar un album in BD?
-############################################################################
+##############################################################################
+##				Pentru câți artiști există măcar un album în baza de date?
+##############################################################################
+##				         How many artist released at least an album?
+##############################################################################
 
 
 # solutie bazata pe `n_distinct`
@@ -78,9 +93,11 @@ temp <- artist %>%
 
 
 
-############################################################################
-# # --                   Din cate tari sunt clientii companiei?
-############################################################################
+##############################################################################
+##               Din câte țări sunt clienții companiei?
+##############################################################################
+##               In how many contries originate the customers?
+##############################################################################
 
 # solutie bazata pe `n_distinct`
 temp <- customer %>%
@@ -90,7 +107,9 @@ temp <- customer %>%
 
 
 ############################################################################
-# # --              Din cate orase sunt clientii companiei?
+##               Din cate orașe sunt clienții companiei?
+############################################################################
+##             In how many cities originate the customers?
 ############################################################################
 
 # solutie bazata pe `n_distinct`
@@ -100,9 +119,12 @@ temp <- customer %>%
 
 
 
-############################################################################
-# # --      Cate secunde are albumul `Achtung Baby` al formatiei `U2`
-############################################################################
+##############################################################################
+##       Câte secunde are albumul `Achtung Baby` al formației `U2`?
+##############################################################################
+##    Compute the total duration (in seconds) of the album `Achtung Baby`
+## released by `U2`
+##############################################################################
 
 # solutie bazata pe `summarise` si `sum`
 temp <- album %>%
@@ -114,10 +136,13 @@ temp <- album %>%
 
 
 
-############################################################################
-# #              Care este durata medie (in secunde) a pieselor
-# #               de pe albumul `Achtung Baby` al formatiei `U2`
-############################################################################
+##############################################################################
+##              Care este durata medie (în secunde) a pieselor
+##              de pe albumul `Achtung Baby` al formației `U2`
+##############################################################################
+##   Compute the average duration (in seconds) of the tracks included
+##              on the album `Achtung Baby` released by `U2`
+##############################################################################
 
 # solutie bazata pe `summarise` si `mean`
 temp <- album %>%
@@ -129,9 +154,12 @@ temp <- album %>%
 
 
 
-############################################################################
-# # --         Care este durata medie a pieselor formatiei `U2`
-############################################################################
+##############################################################################
+##          Care este durata medie a pieselor formației `U2`
+##############################################################################
+##   Compute the average duration (in seconds) of the tracks
+##              released by `U2`
+##############################################################################
 
 # solutie bazata pe `summarise` si `mean`
 temp <- album %>%
@@ -142,10 +170,13 @@ temp <- album %>%
 
 
 
-############################################################################
-# # --      Care este durata medie a pieselor formatiei `Pink Floyd`
-# # --                     exprimata in minute si secunde
-############################################################################
+##############################################################################
+##			Care este durata medie a pieselor formației `Pink Floyd`,
+##                    exprimată în minute și secunde
+##############################################################################
+##   Compute the average duration (in minutes and seconds) of the tracks
+##              released by `Pink Floyd`
+##############################################################################
 
 # solutie bazata pe `summarise`, `mean` si `lubridate::seconds_to_period`
 temp <- album %>%
@@ -157,10 +188,11 @@ temp <- album %>%
 
 
 
-
-############################################################################
-# # --                  In ce zi a fost prima vanzare?
-############################################################################
+##############################################################################
+##                     În ce zi a fost prima vânzare?
+##############################################################################
+##                     Find the date of the first sale.
+##############################################################################
 
 # solutie cu functia `min`
 temp <- invoice %>%
@@ -172,7 +204,7 @@ temp <- invoice %>%
     arrange (invoicedate) %>%
     head(1)  %>%
     transmute (first_day = invoicedate)
-    
+
 # solutie cu optiunea `tail`
 temp <- invoice %>%
     arrange (desc(invoicedate)) %>%
@@ -188,29 +220,32 @@ temp <- invoice %>%
 
 
 # solutie cu `slice`
-temp <- invoice %>%     
+temp <- invoice %>%
     distinct(invoicedate) %>%
-    arrange(invoicedate)  %>%     
-    slice(1) 
-    
+    arrange(invoicedate)  %>%
+    slice(1)
+
 
 # alta solutie cu `slice`
-temp <- invoice %>%     
+temp <- invoice %>%
     distinct(invoicedate) %>%
-    arrange(desc(invoicedate))  %>%     
-     slice(nrow(.)) 
+    arrange(desc(invoicedate))  %>%
+     slice(nrow(.))
 
 
 # solutie cu filtrare ce foloseste `rownum()`
-temp <- invoice %>%     
+temp <- invoice %>%
     distinct(invoicedate) %>%
-    arrange(invoicedate)  %>%     
+    arrange(invoicedate)  %>%
     filter (row_number() <= 1)
 
 
-############################################################################
-# # --                        In ce zi a fost ultima vanzare?
-############################################################################
+
+##############################################################################
+##                      În ce dată a fost ultima vanzare?
+##############################################################################
+##                         Find the last sales date
+##############################################################################
 
 temp <- invoice %>%
      summarise(last_day = max(invoicedate))
@@ -221,7 +256,7 @@ temp <- invoice %>%
     arrange (desc(invoicedate)) %>%
     head(1)  %>%
     transmute (last_day = invoicedate)
-    
+
 
 # solutie cu optiunea `tail`
 temp <- invoice %>%
@@ -230,32 +265,42 @@ temp <- invoice %>%
     transmute (last_day = invoicedate)
 
 
-# solutie cu optiunea `top_n` 
+# solutie cu optiunea `top_n`
 temp <- invoice %>%
     distinct(invoicedate) %>%
     top_n (1, invoicedate) %>%
     transmute (first_day = invoicedate)
-    
 
 
 
-# -- ############################################################################
-# --                Probleme de rezolvat la curs/laborator/acasa
-# -- ############################################################################
+
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
+
 #
+##############################################################################
+##                Cate piese sunt stocate în baza de date?
+##############################################################################
+##                How many tracks are stored in the database?
+##############################################################################
+
+# ##Care este data primei angajari in companie
 #
-# -- Care este data primei angajari in companie
+# ##Cate piese sunt pe playlistul `Grunge`?
 #
-# -- Cate piese sunt pe playlistul `Grunge`?
-#
-# -- Cati subordonati are, in total (pe toate nivelurile) angajatul xxxxxx?
+# ##Cati subordonati are, in total (pe toate nivelurile) angajatul xxxxxx?
 #
 
 
 
-############################################################################
-## 	   La ce intrebari raspund urmatoarele interogari ?
-############################################################################
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################
 
 
 ##
