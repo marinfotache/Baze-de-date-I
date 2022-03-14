@@ -1,10 +1,19 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###        04: Tratamentul (meta)valorilor NA (echivalentul NULL din SQL)
-###             Atentie: valorile NULL au alt regim in limbajul R!!!!
-################################################################################
-# ultima actualizare: 2021-11-08
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+##        Case study: SQL Queries for `chinook` database
+##############################################################################
+## 			tidyverse04: Tratamentul valorilor lipsă
+## 			tidyverse04: Missing values (NA) treatment (in R NULLs are not NAs!!!)
+##############################################################################
+## ultima actualizare / last update: 2022-03-14
+
 
 
 library(tidyverse)
@@ -13,57 +22,38 @@ library(lubridate)
 setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
-# #
-# # -- ############################################################################
-# # -- 				IS NULL NU EXISTA IN R (exista, dar are
-#                                       alt regim)
-# # -- ############################################################################
-# #
 
-############################################################################
-##               Care sunt clientii individuali (non-companii)
-############################################################################
+##############################################################################
+###                                    is.na()
+##############################################################################
+
+##############################################################################
+##            Care sunt clienții individuali (non-companii)
+##############################################################################
+##            Extract the individual (non-companies) customers
+##############################################################################
 
 temp <- customer %>%
         filter (is.na(company))
 
 
-############################################################################
-##               Care sunt clientii care reprezinta companii
-############################################################################
+##############################################################################
+##               Care sunt clienții care reprezintă companii
+##############################################################################
+##               Which are the customers representing companies?
+##############################################################################
 
 temp <- customer %>%
         filter (!is.na(company))
 
 
-#############################################################################
-##-- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
-##--   la atributul `state`, in locul valorii NULL, afisati `-`
-#############################################################################
 
-# solutie cu `if_else`
-temp <- customer %>%
-    select (customerid:lastname, state) %>%
-    mutate(state2 = if_else(is.na(state), '-', state))
-
-
-# solutie cu `case_when`
-temp <- customer %>%
-    select (customerid:lastname, state) %>%
-    mutate(state2 = case_when(
-            is.na(state) ~ '-',
-            TRUE ~ state))
-
-
-# solutie cu `coalesce` - vezi mai jos
-#
-#
-
-# # -- ############################################################################
-# # -- Care sunt piesele de pe albumele formatiei `Black Sabbath`
-# # -- carora nu li se cunoaste compozitorul
-# # -- ############################################################################
-# #
+##############################################################################
+##      Care sunt piesele de pe albumele formației `Black Sabbath`
+##                  cărora nu li se cunoaște compozitorul
+##############################################################################
+## Extract the tracks released by `Black Sabbath` whose composers are unknown
+##############################################################################
 
 # solutia bazata pe functia `is.na`
 temp <- artist %>%
@@ -84,28 +74,69 @@ temp <- artist %>%
      filter (is.na(composer))
 
 
+##############################################################################
+##   Să se afișeze, sub formă de șir de caractere, orașele din care provin
+## clienții (pentru a elimina confuziile, numele orașului trebuie concatenat
+## cu statul și tara din care face parte orașul respectiv)
+##############################################################################
+##  Extract, as strings, the cities of the customers (the string will contain
+## the city name concatenated with its state and country)
+##############################################################################
 
-# # -- ############################################################################
-# # --                               COALESCE
-# # -- ############################################################################
+
 
 #############################################################################
-##-- Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
-##--   la atributul `state`, in locul valorii NULL, afisati `-`
+##  Afisati clientii in ordinea tarilor; pentru cei din tari non-federative,
+##  la atributul `state`, in locul valorii NULL, afisati `-`
 #############################################################################
+
+# solutie cu `if_else`
+temp <- customer %>%
+    select (customerid:lastname, state) %>%
+    mutate(state2 = if_else(is.na(state), '-', state))
+
+
+# solutie cu `case_when`
+temp <- customer %>%
+    select (customerid:lastname, state) %>%
+    mutate(state2 = case_when(
+            is.na(state) ~ '-',
+            TRUE ~ state))
+
+
+# solutie cu `coalesce` - vezi mai jos
+#
+#
+
+
+##############################################################################
+###                               COALESCE
+##############################################################################
+
+##############################################################################
+## Afișați clienții în ordinea țărilor; pentru cei din țări non-federative,
+##   la atributul `state`, în locul valorii NULL, afișati `-`
+##############################################################################
+## Display customers ordered by their countries. For customers in
+##  non-federative countries, the NULL value of attribute `state` will be
+##   replaces with hyphen (`-`)
+##############################################################################
 
 temp <- customer %>%
     select (customerid:lastname, state) %>%
     mutate(state2 = coalesce(state, '-'))
 
 
-# # -- ############################################################################
-# # -- Sa se afiseze, in ordine alfabetica, toate titlurile pieselor de pe
-# # -- albumele formatiei `Black Sabbath`, impreuna cu autorul (compozitor) lor;
-# # -- acolo unde compozitorul nu este specificat (NULL), sa se afiseze
-# # -- `COMPOZITOR NECUNOSCUT`
-# # -- ############################################################################
-# #
+##############################################################################
+## Să se afișeze, în ordine alfabetică, toate titlurile pieselor de pe
+##  albumele formației `Black Sabbath`, împreuna cu autorii (compozitorii) lor;
+##  acolo unde compozitorul nu este specificat (NULL), să se afișeze
+##  `COMPOZITOR NECUNOSCUT`
+##############################################################################
+## Dispay alphabeticaly the names of the names released by `Black Sabbath` and
+##  theirs composers; whenever the composes is unknown, replace NULL with
+##  `COMPOZITOR NECUNOSCUT`
+##############################################################################
 
 # solutie bazata pe functia `coalesce`
 temp <- artist %>%
@@ -119,12 +150,12 @@ temp <- artist %>%
 
 
 
-#
-#
-# -- ############################################################################
-# --                Probleme de rezolvat la curs/laborator/acasa
-# -- ############################################################################
-#
+
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
 
 
 # ############################################################################
@@ -142,7 +173,15 @@ temp <- customer %>%
 
 
 ############################################################################
-# -- Afisati toate facturile (tabela `invoice), completand eventualele valori NULL
-# --   ale atributului `billingstate` cu valoarea tributului `billing city` de pe
-# --   aceasi linie
+# ##Afisati toate facturile (tabela `invoice), completand eventualele valori NULL
+# ##  ale atributului `billingstate` cu valoarea tributului `billing city` de pe
+# ##  aceasi linie
 #
+
+
+
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################

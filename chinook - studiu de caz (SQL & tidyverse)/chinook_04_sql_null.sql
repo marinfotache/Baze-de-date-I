@@ -34,7 +34,7 @@ WHERE company IS NULL
 --##               Care sunt clienții care reprezintă companii
 -- ############################################################################
 --##               Which are the customers representing companies?
--- ############################################################################
+--############################################################################
 
 SELECT *
 FROM customer
