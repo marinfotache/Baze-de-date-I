@@ -10,14 +10,17 @@
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
 -- 					SQL10: Expresii tabele
--- 					SQL10: Common Table Expressions
+-- 					SQL10: Common Table Expressions (CTE)
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2022-03-15
 
 
 -- ############################################################################
---       Care sunt celelalte albume ale artistului sau formatiei care a
---               lansat albumul `Houses of the Holy` (reluare)
+--        Care sunt celelalte albume ale artistului sau formației care a
+--                   lansat albumul `Houses of the Holy` (reluare)
+-- ############################################################################
+--        List the other albums of the artist/band that released
+--                     the album `Houses of the Holy`  (reprise)
 -- ############################################################################
 
 -- solutie cu o expresie-tabela
@@ -35,7 +38,10 @@ FROM album NATURAL JOIN artist_anchor
 -- 			albumele `Fear Of The Dark` si `A Real Live One`
 -- 					ale formatiei 'Iron Maiden' (reluare)
 -- ############################################################################
-
+-- 			Extract the tracks (track name) included on both `Fear Of The Dark` and
+--  `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
+--      both albums) (reprise)
+-- ############################################################################
 
 -- solutie cu doua expresii-tabela si jonctiune naturala
 WITH tracks_1 AS (
@@ -96,8 +102,11 @@ FROM common_tracks
 
 
 -- ############################################################################
--- 		Care sunt albumele formatiei Led Zeppelin care au mai multe piese
---                  decat albumul `IV` (reluare)
+--      Care sunt albumele formației Led Zeppelin care au mai multe piese
+--                            decât albumul `IV`? (reluare)
+-- ############################################################################
+--      List the albums released by Led Zeppelin with more tracks than
+--                            the album `IV` (reprise)
 -- ############################################################################
 
 -- solutie bazata pe o expresie tabela
@@ -118,9 +127,13 @@ HAVING COUNT(*) > (SELECT nr_piese FROM nr_piese_IV)
 
 
 
+
 -- ############################################################################
---             Afisati, pentru fiecare client, pe coloane separate,
---                vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--               Afișați, pentru fiecare client, pe coloane separate,
+--                     vânzările pe anii 2010, 2011 și 2012 (5)
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012  (5)
 -- ############################################################################
 
 -- solutie bazata pe jonctiunea externa a tabelei `customer` cu trei expresii-tabela
@@ -151,9 +164,12 @@ ORDER BY 1
 
 
 -- ############################################################################
---             Afisati, pentru fiecare client, pe coloane separate,
---               vanzarile pe anii 2010, 2011 si 2012 (reluare),
---                la care adaugati un rand pentru total general
+--               Afișați, pentru fiecare client, pe coloane separate,
+--                vânzările pe anii 2010, 2011 și 2012
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012;
+--             add a grand total row
 -- ############################################################################
 
 WITH
@@ -199,8 +215,11 @@ FROM sales2010_2012
 ORDER BY ordine, customer_name
 
 
+
 -- ############################################################################
---    Afisati ponderea fiecarei luni in vanzarile anului 2010 (reluare)
+--  Calculați ponderea fiecărei luni calendaristice în vânzările anului 2010 (r)
+-- ############################################################################
+--         Find the share (percentage) of each month for the 2010 sales (r)
 -- ############################################################################
 
 -- solutie bazata pe trei expresii tabela
@@ -227,8 +246,11 @@ FROM all_months
 
 
 -- ############################################################################
---             Care este albumul (sau albumele) formatiei Queen
---                  cu cele mai multe piese? (reluare)
+--              Care este albumul (sau albumele) formației Queen
+--                       cu cele mai multe piese? (reluare)
+-- ############################################################################
+--                List the album (or albums) released by `Queen`
+--                  having the largest number of tracks (reprise)
 -- ############################################################################
 
 -- solutie bazata pe doua expresii tabela `inlantuite`
@@ -251,16 +273,19 @@ ORDER BY 1
 
 
 
---
 -- ############################################################################
---                          Diviziune relationala (3)
+--                       Diviziune relațională (3)
 -- ############################################################################
---
+--                         Relational division (3)
+-- ############################################################################
 
 
 -- ############################################################################
---   Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
---                  care provin clientii (reluare)
+--    Care sunt artiștii cu vânzări în toate orașele din 'United Kingdom' din
+--                          care provin clienții (reluare)
+-- ############################################################################
+--    Find the artist with sales in all the 'United Kingdom' cities where is
+--                          at least one customer (reprise)
 -- ############################################################################
 
 -- solutie bazata pe expresii-tabela
@@ -289,6 +314,16 @@ WHERE artist_name || ' - ' || city NOT IN (
 	FROM artists__cities_uk )
 ORDER BY 1 ;
 
+
+
+
+-- ############################################################################
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
+-- ############################################################################
+
+-- ...
 
 
 

@@ -143,11 +143,11 @@ ORDER BY customer_name, year
 
 
 -- ############################################################################
---                 Afișați, pentru fiecare client, pe coloane separate,
---                       vânzările pe anii 2010, 2011 și 2012 (2)
+--               Afișați, pentru fiecare client, pe coloane separate,
+--                     vânzările pe anii 2010, 2011 și 2012 (3)
 -- ############################################################################
 --             Display, for each customer, on three different columns,
---                     the total sales on 2010, 2011 și 2012  (2)
+--                     the total sales on 2010, 2011 și 2012  (3)
 -- ############################################################################
 
 -- solutia urmatoare este eronata !!!!! (trebuie folosite subconsultari in

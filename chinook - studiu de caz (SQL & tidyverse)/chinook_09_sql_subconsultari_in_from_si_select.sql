@@ -14,22 +14,23 @@
 -- 					SQL09: Subqueries included in FROM and SELECT.
 --								Relational division (2)
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2022-03-15
 
-
--- 09: Subconsultari in clauzele FROM si SELECT. Diviziune relationala (2)
---
--- ultima actualizare: 2021-04-12
 
 --
 -- ############################################################################
---                      Subconsultari in clauza FROM
+--                      Subconsultări în clauza FROM
+-- ############################################################################
+--                  Subqueries included on clause FROM
 -- ############################################################################
 --
 
 -- ############################################################################
--- 		Care sunt celelalte albume ale artistului sau formatiei care a
---     				lansat albumul `Houses of the Holy` (reluare)
+--        Care sunt celelalte albume ale artistului sau formației care a
+--                   lansat albumul `Houses of the Holy` (reluare)
+-- ############################################################################
+--        List the other albums of the artist/band that released
+--                     the album `Houses of the Holy`  (reprise)
 -- ############################################################################
 
 -- solutie bazata pe o subconsultare in clauza FROM, care include albumul
@@ -51,7 +52,10 @@ FROM (
 -- 			albumele `Fear Of The Dark` si `A Real Live One`
 -- 					ale formatiei 'Iron Maiden' (reluare)
 -- ############################################################################
-
+-- 			Extract the tracks (track name) included on both `Fear Of The Dark` and
+--  `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
+--      both albums) (reprise)
+-- ############################################################################
 
 -- solutie noua, bazata pe subconsultare in clauza FROM
 SELECT *
@@ -73,7 +77,9 @@ FROM
 
 
 -- ############################################################################
---          Care sunt facturile din prima zi de vanzari? (reluare)
+--             Care sunt facturile din prima zi de vânzări? (reluare)
+-- ############################################################################
+--          Extract invoices issued in the first day with sales (reprise)
 -- ############################################################################
 
 -- solutie bazata pe o subconsultare in clauza FROM
@@ -85,7 +91,9 @@ FROM invoice NATURAL JOIN
 
 
 -- ############################################################################
---      Care sunt facturile din prima saptamana de vanzari? (reluare)
+--        Care sunt facturile din prima săptămână de vânzări? (reluare)
+-- ############################################################################
+--     List invoices issued in the first week since the sales begun (reprise)
 -- ############################################################################
 
 -- o solutie  bazata pe o subconsultare in clauza FROM care, la randul sau,
@@ -104,8 +112,11 @@ FROM invoice
 
 
 -- ############################################################################
--- 		Care sunt albumele formatiei Led Zeppelin care au mai multe piese
---                  decat albumul `IV` (reluare)
+--      Care sunt albumele formației Led Zeppelin care au mai multe piese
+--                            decât albumul `IV`? (reluare)
+-- ############################################################################
+--      List the albums released by Led Zeppelin with more tracks than
+--                            the album `IV` (reprise)
 -- ############################################################################
 
 -- solutie care transforma grupurile in tupluri (inregistrari) si
@@ -129,9 +140,13 @@ ORDER BY 1
 
 
 
+
 -- ############################################################################
--- 			Afisati, pentru fiecare client, pe coloane separate,
--- 					vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--               Afișați, pentru fiecare client, pe coloane separate,
+--                     vânzările pe anii 2010, 2011 și 2012 (3)
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012  (3)
 -- ############################################################################
 
 -- solutie bazata pe subconsultari in clauza FROM
@@ -164,7 +179,9 @@ ORDER BY 1
 
 
 -- ############################################################################
---         Afisati ponderea fiecarei luni in vanzarile anului 2010
+--   Calculați ponderea fiecărei luni calendaristice în vânzările anului 2010
+-- ############################################################################
+--         Find the share (percentage) of each month for the 2010 sales
 -- ############################################################################
 
 -- solutia afiseaza toate lunile anului, chiar si cele fara vanzari
@@ -188,8 +205,11 @@ FROM
 
 
 -- ############################################################################
---             Care este albumul (sau albumele) formatiei Queen
---                  cu cele mai multe piese? (reluare)
+--              Care este albumul (sau albumele) formației Queen
+--                       cu cele mai multe piese? (reluare)
+-- ############################################################################
+--                List the album (or albums) released by `Queen`
+--                  having the largest number of tracks (reprise)
 -- ############################################################################
 
 
@@ -220,16 +240,19 @@ ORDER BY 1
 
 
 
---
 -- ############################################################################
---                     Diviziune relationala (2)
+--                       Diviziune relațională (2)
 -- ############################################################################
---
+--                         Relational division (2)
+-- ############################################################################
 
 
 -- ############################################################################
--- 	 Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
---  					care provin clientii (reluare)
+--    Care sunt artiștii cu vânzări în toate orașele din 'United Kingdom' din
+--                          care provin clienții (reluare)
+-- ############################################################################
+--    Find the artist with sales in all the 'United Kingdom' cities where is
+--                          at least one customer (reprise)
 -- ############################################################################
 
 
@@ -260,8 +283,11 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 	 Care sunt artistii `vanduti` in toate tarile din urmatorul set:
+-- 	 Care sunt artiștii cu vânzări în toate țările din urmatorul set:
 --  ('USA', 'France', 'United Kingdom', 'Spain') (reluare)
+-- ############################################################################
+-- 	 Find the artists with sales in ALL of the countries from the following set:
+--  ('USA', 'France', 'United Kingdom', 'Spain') (reprise)
 -- ############################################################################
 
 -- o alta solutie `non-divizionala`
@@ -302,8 +328,10 @@ WHERE artist_name || ' - ' || country NOT IN (
 
 
 -- ############################################################################
--- 	 Care sunt artistii `vanduti` in toti anii (adica, in fiecare an) din
+-- 	 Care sunt artiștii cu vânzări în toți anii (adică, în fiecare an) din
 --                        intervalul 2009-2012
+-- ############################################################################
+-- 	 Find the artists with sales all ALL years in 2009-2012 range
 -- ############################################################################
 
 
@@ -330,8 +358,10 @@ WHERE artist_name || ' - ' || year NOT IN (
 
 
 -- ############################################################################
--- 	 Care sunt artistii pentru care au fost vanzari macar (cel putin)
---          in toti anii in care s-au vandut piese ale formatiei `Queen`
+-- 	 Care sunt artiștii pentru care au fost vânzări măcar (cel puțin)
+--          în toți anii în care s-au vândut piese ale formației `Queen`
+-- ############################################################################
+-- 	 Find the artists with sales in at least all the sales years of `Queen`
 -- ############################################################################
 
 -- solutie `non-divizionala` :
@@ -399,15 +429,17 @@ WHERE artist_name || ' - ' || year NOT IN (
 
 
 
---
 -- ############################################################################
---                      Subconsultari in clauza SELECT
+--                      Subconsultări incluse în clauza SELECT
 -- ############################################################################
---
+--                      Subqueries included in SELECT clause
+-- ############################################################################
 
 
 -- ############################################################################
---  		Afisati ponderea fiecarei luni in vanzarile anului 2010
+--   Calculați ponderea fiecărei luni calendaristice în vânzările anului 2010
+-- ############################################################################
+--         Find the share (percentage) of each month for the 2010 sales
 -- ############################################################################
 
 SELECT month, monthly_sales,
@@ -424,13 +456,16 @@ FROM
 
 --
 -- ############################################################################
---                Subconsultari CORELATE in clauza SELECT
+--                Subconsultări CORELATE în clauza SELECT
 -- ############################################################################
---
+--                Correlated subqueries included in SELECT clase
+-- ############################################################################
 
 
 -- ############################################################################
--- 				 Extrageti numarul albumelor fiecarui artist (reluare)
+--        Extrageți numărul albumelor lansate de fiecare artist (reluare)
+-- ############################################################################
+--        Display the number of albums released by each artist (reprise)
 -- ############################################################################
 
 -- solutie fara jonctiune si fara grupare
@@ -440,13 +475,13 @@ FROM artist
 ORDER BY 1
 
 
-
-
 -- ############################################################################
---            Afisati, pentru fiecare client, pe coloane separate,
---              vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--               Afișați, pentru fiecare client, pe coloane separate,
+--                     vânzările pe anii 2010, 2011 și 2012 (4)
 -- ############################################################################
-
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012  (4)
+-- ############################################################################
 
 -- solutie fara jonctiune si fara grupare
 SELECT lastname || ' ' || firstname AS customer_name, city, state, country,
@@ -461,9 +496,14 @@ ORDER BY 1, 2, 3, 4
 
 
 
+
 -- ############################################################################
---   Afisati ponderea fiecarei luni in vanzarile anului din care face parte
+--   Calculați ponderea fiecărei luni calendaristice în vânzările anului său
 -- ############################################################################
+--  Find the share (percentage) of each month for the total sales of its year
+-- ############################################################################
+
+
 SELECT year, month, monthly_sales,
 	(SELECT SUM(total) FROM invoice
 	 WHERE EXTRACT (YEAR FROM invoicedate) = x.year ) AS sales_year,
@@ -482,7 +522,13 @@ ORDER BY 1, 2
 
 
 
+-- ############################################################################
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
+-- ############################################################################
 
+-- ...
 
 -- ############################################################################
 --              La ce întrebări răspund următoarele interogări ?

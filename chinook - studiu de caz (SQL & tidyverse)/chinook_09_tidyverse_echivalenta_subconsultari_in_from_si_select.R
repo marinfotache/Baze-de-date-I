@@ -1,10 +1,21 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-### 09: Subconsultari SQL in clauzele FROM si SELECT. Diviziune relationala (2)
-###                     Echivalente in `tidyverse`
-################################################################################
-### ultima actualizare: 2021-11-08
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări tidyverse pentru baza de date `chinook`
+##        Case study: tidyverse queries for `chinook` database
+##############################################################################
+## 			tidyverse09:  Echivalențe `tidyverse` ale subconsultărilor SQL
+##             incluse în clauzele FROM si SELECT. Diviziune relationala (2)
+## 			tidyverse09: `tidyverse` equivalent solutions for SQL subqueries
+##             included in FROM and SELECTT. Relational division (2)
+##############################################################################
+## ultima actualizare / last update: 2022-03-15
+
 
 library(tidyverse)
 library(lubridate)
@@ -15,14 +26,19 @@ load("chinook.RData")
 
 
 ############################################################################
-###     Echivalente `tidyverse` ale subconsultarilor SQL in clauza FROM
+###     Echivalențe `tidyverse` ale subconsultarilor SQL în clauza FROM
+############################################################################
+###   `tidyverse` equivalents of SQL subqueries included in FROM clause
 ############################################################################
 
 
-############################################################################
-##      Care sunt celelalte albume ale artistului sau formatiei care a
-##             lansat albumul `Houses of the Holy` (reluare)
-############################################################################
+##############################################################################
+##       Care sunt celelalte albume ale artistului sau formației care a
+##                  lansat albumul `Houses of the Holy` (reluare)
+##############################################################################
+##       List the other albums of the artist/band that released
+##                    the album `Houses of the Holy`  (reprise)
+##############################################################################
 
 # solutie preluata din scriptul anterior (care emuleaza logica interogarii SQL de mai sus)
 temp <- album %>%
@@ -33,11 +49,15 @@ temp <- album %>%
 
 
 
-############################################################################
-##             Care sunt piesele comune (cu acelasi titlu) de pe
-## 	           albumele `Fear Of The Dark` si `A Real Live One`
-## 		       ale formatiei 'Iron Maiden' (reluare)
-############################################################################
+##############################################################################
+##			Care sunt piesele comune (cu acelasi titlu) de pe
+##			albumele `Fear Of The Dark` si `A Real Live One`
+##					ale formatiei 'Iron Maiden' (reluare)
+##############################################################################
+##			Extract the tracks (track name) included on both `Fear Of The Dark` and
+## `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
+##     both albums) (reprise)
+##############################################################################
 
 # o solutie relativ apropiata logicii SQL din scriptul `chinook_09_sql...`
 temp <- artist %>%
@@ -60,9 +80,12 @@ temp <- artist %>%
           )
 
 
-############################################################################
-## 	    Care sunt facturile din prima zi de vanzari? (reluare)
-############################################################################
+##############################################################################
+##            Care sunt facturile din prima zi de vânzări? (reluare)
+##############################################################################
+##         Extract invoices issued in the first day with sales (reprise)
+##############################################################################
+
 
 # toate solutile din scriptul anterior (`chinook_08_tidyverse...`) care nu
 # folosesc `pull()` se apropie de logica SQL din scriptul `chinook_09_sql...`
@@ -75,9 +98,11 @@ temp <- min(invoice$invoicedate) %>%
 
 
 
-############################################################################
-# # -- 	   Care sunt facturile din prima saptamana de vanzari? (reluare)
-############################################################################
+##############################################################################
+##       Care sunt facturile din prima săptămână de vânzări? (reluare)
+##############################################################################
+##    List invoices issued in the first week since the sales begun (reprise)
+##############################################################################
 
 
 # ... solutie noua:
@@ -93,11 +118,13 @@ temp <- seq(
 
 
 
-
-############################################################################
-##     Care sunt albumele formatiei Led Zeppelin care au mai multe piese
-##                      decat albumul `IV` (reluare)
-############################################################################
+##############################################################################
+##     Care sunt albumele formației Led Zeppelin care au mai multe piese
+##                           decât albumul `IV`? (reluare)
+##############################################################################
+##     List the albums released by Led Zeppelin with more tracks than
+##                           the album `IV` (reprise)
+##############################################################################
 
 # intrucat theta-jonctiunea nu e posibila in tidyverse, ramanem la cele
 # doua solutii din scriptul precedent (cea de mai jos este a doua)
@@ -115,10 +142,13 @@ temp <- artist %>%
 
 
 
-############################################################################
-##             Afisati, pentru fiecare client, pe coloane separate,
-##                 vanzarile pe anii 2010, 2011 si 2012 (reluare)
-############################################################################
+##############################################################################
+##              Afișați, pentru fiecare client, pe coloane separate,
+##                    vânzările pe anii 2010, 2011 și 2012 (3)
+##############################################################################
+##            Display, for each customer, on three different columns,
+##                    the total sales on 2010, 2011 și 2012  (3)
+##############################################################################
 
 # solutia cea mai eleganta se bazeaza pe `pivot_wider`
 temp <- invoice %>%
@@ -135,9 +165,11 @@ temp <- invoice %>%
 
 
 
-############################################################################
-##         Afisati ponderea fiecarei luni in vanzarile anului 2010
-############################################################################
+##############################################################################
+##  Calculați ponderea fiecărei luni calendaristice în vânzările anului 2010
+##############################################################################
+##        Find the share (percentage) of each month for the 2010 sales
+##############################################################################
 
 temp <- 1:12 %>%
      enframe() %>%
@@ -156,14 +188,20 @@ temp <- 1:12 %>%
 
 
 
-############################################################################
-###                       Diviziune relationala (2)
-############################################################################
+##############################################################################
+##                      Diviziune relațională (2)
+##############################################################################
+##                        Relational division (2)
+##############################################################################
 
-############################################################################
-##  Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
-##                care provin clientii (reluare)
-############################################################################
+
+##############################################################################
+##   Care sunt artiștii cu vânzări în toate orașele din 'United Kingdom' din
+##                         care provin clienții (reluare)
+##############################################################################
+##   Find the artist with sales in all the 'United Kingdom' cities where is
+##                         at least one customer (reprise)
+##############################################################################
 
 # o solutie care transpune logica diviziunii relationale
 temp <- dplyr::setdiff(
@@ -196,10 +234,12 @@ temp <- dplyr::setdiff(
 
 
 
-############################################################################
-##    Care sunt artistii `vanduti` in toti anii (adica, in fiecare an) din
-##                         intervalul 2009-2012
-############################################################################
+##############################################################################
+##	 Care sunt artiștii cu vânzări în toți anii (adică, în fiecare an) din
+##                       intervalul 2009-2012
+##############################################################################
+##	 Find the artists with sales all ALL years in 2009-2012 range
+##############################################################################
 
 # o solutie care transpune logica diviziunii relationale
 temp <- dplyr::setdiff(
@@ -236,10 +276,12 @@ temp <- dplyr::setdiff(
 
 
 
-############################################################################
-##     Care sunt artistii pentru care au fost vanzari macar (cel putin)
-##       in toti anii in care s-au vandut piese ale formatiei `Queen`
-############################################################################
+##############################################################################
+##	 Care sunt artiștii pentru care au fost vânzări măcar (cel puțin)
+##         în toți anii în care s-au vândut piese ale formației `Queen`
+##############################################################################
+##	 Find the artists with sales in at least all the sales years of `Queen`
+##############################################################################
 
 # solutie mai apropiata de logica `non-divizionala`
 temp <- artist %>%                                      #---------------------
@@ -323,13 +365,51 @@ temp <- artist %>%
 
 
 
-
-############################################################################
-###   Echivalente `tidyverse` ale subconsultarilor SQL in clauza SELECT
-############################################################################
+##############################################################################
+##      Echivalente `tidyverse` ale subconsultarilor SQL in clauza SELECT
+##############################################################################
+##     `tidyverse` equivalents of SQL Subqueries included in SELECT clause
+##############################################################################
 
 ####
 #### Logica  `tidyverse` nu se pliaza "direct" pe problematica subconsultarilor din SQL;
 ####      in schimb, toate problemele care in SQL se folosesc subconsultari,
 ####      cu sau fara corelare, au solutii in `tidyverse`
 ####
+
+
+
+
+
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
+
+
+
+##############################################################################
+##             Care este albumul (sau albumele) formației Queen
+##                      cu cele mai multe piese? (reluare)
+##############################################################################
+##               List the album (or albums) released by `Queen`
+##                 having the largest number of tracks (reprise)
+##############################################################################
+
+
+##############################################################################
+##	 Care sunt artiștii cu vânzări în toate țările din urmatorul set:
+## ('USA', 'France', 'United Kingdom', 'Spain') (reluare)
+##############################################################################
+##	 Find the artists with sales in ALL of the countries from the following set:
+## ('USA', 'France', 'United Kingdom', 'Spain') (reprise)
+##############################################################################
+
+
+
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################

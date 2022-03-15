@@ -199,6 +199,7 @@ GROUP BY lastname || ' ' || firstname, city, state, country
 ORDER BY 1
 
 
+
 -- ############################################################################
 --                 Afișați, pentru fiecare client, pe coloane separate,
 --                       vânzările pentru toți anii!
