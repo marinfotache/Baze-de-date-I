@@ -1,9 +1,19 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###                             07: Jonctiuni externe
-################################################################################
-### -- ultima actualizare: 2021-04-02
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări SQL pentru baza de date `chinook`
+##        Case study: SQL Queries for `chinook` database
+##############################################################################
+## 			tidyverse07: Joncțiuni externe (OUTER JOIN)
+## 			tidyverse07: Outer joins
+##############################################################################
+## ultima actualizare / last update: 2022-03-15
+
 
 library(tidyverse)
 library(lubridate)
@@ -13,9 +23,11 @@ load("chinook.RData")
 
 
 
-# # -- ############################################################################
-# # -- 	  Care sunt artistii care, momentan, nu au niciun album preluat in BD?
-# # -- ############################################################################
+-- ############################################################################
+--    Care sunt artiștii care, momentan, nu au niciun album preluat în BD?
+-- ############################################################################
+--    Extract the artist with no album stored currently in the database
+-- ############################################################################
 
 # solutie bazata pe diferenta (`dplyr::setdiff`) si `semi_join`
 temp <- dplyr::setdiff(
@@ -40,10 +52,13 @@ temp <- artist %>%
 
 
 
-# # -- ############################################################################
-# # -- Extrageti numarul albumelor fiecarui artist; pentru artistii (actualmente)
-# # -- 			  fara albume, sa se afiseze `0`
-# # -- ############################################################################
+-- ############################################################################
+--  Extrageți numărul albumelor fiecarui artist; pentru artiștii (actualmente)
+-- 					fără albume, să se afișeze `0`
+-- ############################################################################
+--  Display the number of albums for each artist; when the artist has no
+--    albums, display 0
+-- ############################################################################
 
 # solutie bazata pe `left_join` si `count` - solutie eronata
 # (cei care nu au nicun album apar cu 1 (datorita `count`-ului))
@@ -72,11 +87,11 @@ temp <- artist %>%
 
 
 
-# #
-# # -- ############################################################################
-# # -- 	   Care sunt artistii care, momentan, nu au niciun album preluat in BD?
-#   --                                   (continuare)
-# # -- ############################################################################
+-- ############################################################################
+--    Care sunt artiștii care, momentan, nu au niciun album preluat în BD? (2)
+-- ############################################################################
+--    Extract the artist with no album stored currently in the database (2)
+-- ############################################################################
 
 # asa cum am vazut mai sus, solutia bazata pe `left_join` si `count`
 # NU FUNCTIONEAZA!!!
@@ -118,11 +133,14 @@ temp <- artist %>%
 
 
 
-############################################################################
-## 		Afisati, pentru fiecare client din baza de date,
-## 	  vanzarile pe anul 2010 (in raport trebuie inclusi si clientii
-##                 pentru care nu sunt vanzari in 2010)
-############################################################################
+-- ############################################################################
+--             Afisați, pentru TOȚI clienții din baza de date,
+--        vânzările pe anul 2010 (în raport trebuie incluși și clienții
+--                 pentru care nu sunt vânzari în 2010)
+-- ############################################################################
+--         List sales on 2010 for ALL customers, including those with
+--     no sales (of course, for those without sales, zero must be displayed)
+-- ############################################################################
 
 # solutie bazata pe `if_else`
 temp <- customer %>%
@@ -175,10 +193,13 @@ temp <- customer %>%
 
 
 
-# # -- ############################################################################
-# # -- 		Afisati, pentru fiecare client, pe trei linii separate,
-# # -- 		      vanzarile pe anii 2010, 2011 si 2012
-# # -- ############################################################################
+-- ############################################################################
+--             Afișati, pentru fiecare client, pe trei linii separate,
+--                     vânzările pe anii 2010, 2011 și 2012 (2)
+-- ############################################################################
+--             Display, for each customer, on three different rows,
+--                     the total sales on 2010, 2011 și 2012 (2)
+-- ############################################################################
 
 # solutie corecta & completa
 temp <- bind_rows(
@@ -228,13 +249,13 @@ temp <- bind_rows(
 
 
 
-
-
-
-# # -- ############################################################################
-# # -- 		Afisati, pentru fiecare client, pe coloane separate,
-# # -- 			vanzarile pe anii 2010, 2011 si 2012
-# # -- ############################################################################
+-- ############################################################################
+--                 Afișați, pentru fiecare client, pe coloane separate,
+--                       vânzările pe anii 2010, 2011 și 2012 (2)
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012  (2)
+-- ############################################################################
 
 
 # solutie bazata pe jonctiune externa
@@ -276,9 +297,11 @@ temp <-
 
 
 
-# -- ############################################################################
-# --                Probleme de rezolvat la curs/laborator/acasa
-# -- ############################################################################
+-- ############################################################################
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
+-- ############################################################################
 #
 # -- Obtineti un raport in care linii sunt asociate fiecarui artist,
 # --   iar coloanele fiecarui gen muzical (prima coloana va fi numele artistului);
@@ -288,9 +311,11 @@ temp <-
 
 
 
-############################################################################
-## 	   La ce intrebari raspund urmatoarele interogari ?
-############################################################################
+-- ############################################################################
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
+-- ############################################################################
 
 ##
 temp <- artist %>%

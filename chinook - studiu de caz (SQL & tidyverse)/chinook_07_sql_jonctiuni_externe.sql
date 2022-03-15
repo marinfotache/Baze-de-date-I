@@ -9,13 +9,16 @@
 --        Studiu de caz: Interogări SQL pentru baza de date `chinook`
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
--- 					SQL07: Jonctiuni externe (OUTER JOIN)
+-- 					SQL07: Joncțiuni externe (OUTER JOIN)
 -- 					SQL07: OUTER JOINs
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2022-03-15
+
 
 -- ############################################################################
---    Care sunt artistii care, momentan, nu au niciun album preluat in BD?
+--    Care sunt artiștii care, momentan, nu au niciun album preluat în BD?
+-- ############################################################################
+--    Extract the artist with no album stored currently in the database
 -- ############################################################################
 
 -- solutie bazata pe diferenta
@@ -36,9 +39,13 @@ ORDER BY name
 
 
 -- ############################################################################
--- Extrageti numarul albumelor fiecarui artist; pentru artistii (actualmente)
--- 					fara albume, sa se afiseze `0`
+--  Extrageți numărul albumelor fiecarui artist; pentru artiștii (actualmente)
+-- 					fără albume, să se afișeze `0`
 -- ############################################################################
+--  Display the number of albums for each artist; when the artist has no
+--    albums, display 0
+-- ############################################################################
+
 
 -- solutia din scriptul anterior afiseaza numai artistii care au macar
 -- un album preluat in BD (rezultatul are 204 linii)
@@ -56,7 +63,9 @@ ORDER BY name
 
 
 -- ############################################################################
---     Care sunt artistii care, momentan, nu au niciun album preluat in BD?
+--    Care sunt artiștii care, momentan, nu au niciun album preluat în BD? (2)
+-- ############################################################################
+--    Extract the artist with no album stored currently in the database (2)
 -- ############################################################################
 
 -- solutie bazata pe grupare
@@ -69,10 +78,14 @@ ORDER BY name
 
 
 -- ############################################################################
---             Afisati, pentru fiecare client din baza de date,
---        vanzarile pe anul 2010 (in raport trebuie inclusi si clientii
---                 pentru care nu sunt vanzari in 2010)
+--             Afisați, pentru TOȚI clienții din baza de date,
+--        vânzările pe anul 2010 (în raport trebuie incluși și clienții
+--                 pentru care nu sunt vânzari în 2010)
 -- ############################################################################
+--         List sales on 2010 for ALL customers, including those with
+--     no sales (of course, for those without sales, zero must be displayed)
+-- ############################################################################
+
 
 -- solutie bazata pe LEFT JOIN si CASE
 SELECT lastname || ' ' || firstname AS customer_name, city, state, country,
@@ -94,9 +107,13 @@ GROUP BY lastname || ' ' || firstname, city, state, country
 
 
 
+
 -- ############################################################################
---            Afisati, pentru fiecare client, pe trei linii separate,
---                  vanzarile pe anii 2010, 2011 si 2012
+--             Afișati, pentru fiecare client, pe trei linii separate,
+--                     vânzările pe anii 2010, 2011 și 2012 (2)
+-- ############################################################################
+--             Display, for each customer, on three different rows,
+--                     the total sales on 2010, 2011 și 2012 (2)
 -- ############################################################################
 
 
@@ -126,8 +143,11 @@ ORDER BY customer_name, year
 
 
 -- ############################################################################
---              Afisati, pentru fiecare client, pe coloane separate,
---                 vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--                 Afișați, pentru fiecare client, pe coloane separate,
+--                       vânzările pe anii 2010, 2011 și 2012 (2)
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012  (2)
 -- ############################################################################
 
 -- solutia urmatoare este eronata !!!!! (trebuie folosite subconsultari in
@@ -180,7 +200,9 @@ ORDER BY 1
 
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
 -- ############################################################################
 
 
