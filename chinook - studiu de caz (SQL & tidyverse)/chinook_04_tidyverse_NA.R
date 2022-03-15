@@ -6,15 +6,13 @@
 ##############################################################################
 
 ##############################################################################
-##        Studiu de caz: Interogări SQL pentru baza de date `chinook`
-##        Case study: SQL Queries for `chinook` database
+##        Studiu de caz: Interogări tidyverse pentru baza de date `chinook`
+##        Case study: tidyverse queries for `chinook` database
 ##############################################################################
 ## 			tidyverse04: Tratamentul valorilor lipsă
 ## 			tidyverse04: Missing values (NA) treatment (in R NULLs are not NAs!!!)
 ##############################################################################
 ## ultima actualizare / last update: 2022-03-14
-
-
 
 library(tidyverse)
 library(lubridate)

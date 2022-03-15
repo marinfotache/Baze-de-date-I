@@ -6,8 +6,8 @@
 ##############################################################################
 
 ##############################################################################
-##        Studiu de caz: Interogări SQL pentru baza de date `chinook`
-##        Case study: SQL Queries for `chinook` database
+##        Studiu de caz: Interogări tidyverse pentru baza de date `chinook`
+##        Case study: tidyverse queries for `chinook` database
 ##############################################################################
 ## 			tidyverse02: Joncțiuni interne
 ## 			tidyverse02: INNER JOINs
