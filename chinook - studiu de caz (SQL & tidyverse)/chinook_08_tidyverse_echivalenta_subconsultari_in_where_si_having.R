@@ -1,25 +1,40 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###   08: Subconsultari SQL in clauzele WHERE si HAVING si echivalentele
-###                  lor in `tidyverse`. Diviziune relationala (1)
-################################################################################
-### ultima actualizare: 2021-04-15
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
 
+##############################################################################
+##        Studiu de caz: Interogări tidyverse pentru baza de date `chinook`
+##        Case study: tidyverse queries for `chinook` database
+##############################################################################
+## tidyverse08: Echivalențe ale subconsultărilor SQL. Diviziune relațională (1)
+## tidyverse08: Subqueries (sort of). Relational division (1)
+##############################################################################
+## ultima actualizare / last update: 2022-03-15
 
 library(tidyverse)
 library(lubridate)
 setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
-############################################################################
-###         Echivalenta subconsultarilor SQL din clauza WHERE
-############################################################################
 
-############################################################################
-# 	Care sunt celelalte albume ale artistului sau formatiei care a
-#     			lansat albumul `Houses of the Holy`
-############################################################################
+###############################################################################
+##        Echivalențe ale subconsultărilor SQL (necorelate) în clauza WHERE
+###############################################################################
+##               Equivalents of SQL uncorrelated subqueries in WHERE
+###############################################################################
+
+
+
+##############################################################################
+##       Care sunt celelalte albume ale artistului sau formației care a
+##                  lansat albumul `Houses of the Holy`
+##############################################################################
+##       List the other albums of the artist/band that released
+##                    the album `Houses of the Holy`
+##############################################################################
 
 # solutie echivalenta auto-jonctiunii, fara afisarea artistului,
 # cu includerea albumului-ancora ('Houses Of The Holy')
@@ -80,9 +95,11 @@ temp <- album %>%
 
 
 
-############################################################################
-## 	Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
-############################################################################
+##############################################################################
+##     Care sunt piesele de pe albumul `Achtung Baby` al formației U2?
+##############################################################################
+##     List all tracks on the album `Achtung Baby` released by U2?
+##############################################################################
 
 temp <- track %>%
      filter (albumid == album %>%
@@ -107,11 +124,15 @@ temp <- track %>%
 
 
 
-############################################################################
-## 	          Care sunt piesele comune (cu acelasi titlu) de pe
-## 		    albumele `Fear Of The Dark` si `A Real Live One`
-## 			ale formatiei 'Iron Maiden' (reluare)
-############################################################################
+##############################################################################
+##			Care sunt piesele comune (cu acelasi titlu) de pe
+##			albumele `Fear Of The Dark` si `A Real Live One`
+##					ale formatiei 'Iron Maiden' (reluare)
+##############################################################################
+##			Extract the tracks (track name) included on both `Fear Of The Dark` and
+## `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
+##     both albums) (reprise)
+##############################################################################
 
 
 temp <- artist %>%
@@ -134,9 +155,11 @@ temp <- artist %>%
 
 
 
-############################################################################
-## 		   Care sunt facturile din prima zi de vanzari?
-############################################################################
+##############################################################################
+##              Care sunt facturile din prima zi de vânzări?
+##############################################################################
+##              Extract invoices issued in the first day with sales
+##############################################################################
 
 # solutie care foloseste jonctiunea interna si `top_n`
 temp <- invoice %>%
@@ -198,9 +221,11 @@ temp <- invoice %>%
      slice(1)
 
 
-############################################################################
-## 	    Care sunt facturile din prima saptamana de vanzari?
-############################################################################
+##############################################################################
+##          Care sunt facturile din prima săptămână de vânzări?
+##############################################################################
+##       List invoices issued in the first week since the sales begun
+##############################################################################
 
 # prima solutie bazata pe un predicat similar `between`
 temp <- invoice %>%
@@ -227,9 +252,11 @@ temp <- invoice %>%
 
 
 
-############################################################################
-## 	      Care sunt facturile din prima luna de vanzari?
-############################################################################
+##############################################################################
+##           Care sunt facturile din prima lună de vânzări?
+##############################################################################
+##       List invoices issued in the first month since the sales begun
+##############################################################################
 
 # prima solutie bazata pe un predicat similar `between`
 temp <- invoice %>%
@@ -256,10 +283,11 @@ temp <- invoice %>%
      )
 
 
-############################################################################
-##    Cate facturi s-au emis in prima luna calendaristica a vanzarilor ?
-##           (adica prima luna IANUARIE sau APRILIE ...)
-############################################################################
+##############################################################################
+##       Câte facturi s-au emis în anul și luna primei facturi?
+##############################################################################
+##   How many invoices were issued in the whole month when the sales begun?
+##############################################################################
 
 # solutie care `mimeaza` pe o singura subconsulare
 temp <- invoice %>%
@@ -282,10 +310,11 @@ temp <- invoice %>%
 
 
 
-############################################################################
-##        Cate facturi s-au emis in primele 10 zile cu vanzari ?
-############################################################################
-
+##############################################################################
+##           Câte facturi s-au emis în primele 10 zile cu vânzări ?
+##############################################################################
+##   How many invoices were issued in the first 10 days with sales ?
+##############################################################################
 
 # prima solutie bazata pe `top_n`
 temp <- invoice %>%
@@ -319,9 +348,11 @@ temp <- invoice %>%
      )
 
 
-############################################################################
-## 	Care sunt cei mai vechi cinci angajati ai companiei?
-############################################################################
+##############################################################################
+##       Care sunt cei mai vechi cinci angajați ai companiei?
+##############################################################################
+##                    Extract the first five employed people
+##############################################################################
 
 # solutia bazata pe `top_n` ia in calcul si valorile egale, deci preferabila
 # functiei `head` (functia `head` e oarecum echivalenta LIMIT-ului)
@@ -331,14 +362,21 @@ temp <- employee %>%
 
 
 
-############################################################################
-###           Echivalenta subconsultarilor SQL din clauza HAVING
-############################################################################
+--
+##############################################################################
+##         Echivalențe ale subconsultărilor SQL incluse în clauza HAVING
+##############################################################################
+##         tidyverse equivalents of SQL subqueries included in HAVING
+##############################################################################
 
-############################################################################
-##    Care sunt albumele formatiei Led Zeppelin care au mai multe piese
-##                  decat albumul `IV`
-############################################################################
+
+##############################################################################
+##     Care sunt albumele formației Led Zeppelin care au mai multe piese
+##                           decât albumul `IV`
+##############################################################################
+##     List the albums released by Led Zeppelin with more tracks than
+##                           the album `IV`
+##############################################################################
 
 
 # solutie care `mimeaza` o subconsultare ce contine numarul pieselor de
@@ -378,10 +416,13 @@ temp <- artist %>%
 
 
 
-############################################################################
-## 		Care este albumul (sau albumele) formatiei Queen
-##   		cu cele mai multe piese?
-############################################################################
+##############################################################################
+##           Care este albumul (sau albumele) formației Queen
+##                     cu cele mai multe piese?
+##############################################################################
+##           List the album (or albums) released by `Queen`
+##                     having the largest number of tracks
+##############################################################################
 
 # solutie bazata pe `top_n`
 temp <- artist %>%
@@ -408,9 +449,11 @@ temp <- artist %>%
 
 
 
-############################################################################
-##    Extrageti TOP 7 albume ale formatiei `U2`, cu cele mai multe piese?
-############################################################################
+##############################################################################
+##		Extrageți TOP 7 albume ale formației `U2`, după numărul de piese?
+##############################################################################
+##		    Get TOP 7 albums released by `U2`, by their number of tracks?
+##############################################################################
 
 temp <- artist %>%
      inner_join(album) %>%
@@ -425,15 +468,21 @@ temp <- artist %>%
 
 
 
-############################################################################
-###                       Diviziune relationala (1)
-############################################################################
+##############################################################################
+##                      Diviziune relațională (1)
+##############################################################################
+##                        Relational division (1)
+##############################################################################
 
 
-############################################################################
-##     Extrageti artistii si albumele de pe care s-au vandut toate piesele.
-## Nota: se iau in calcul numai albumele cu cel putin doua piese
-############################################################################
+##############################################################################
+##    Extrageți artiștii și albumele de pe care s-au vândut toate piesele.
+##Notă: se iau în calcul numai albumele cu cel puțin două piese
+##############################################################################
+##    List the artist and their albums for which all album tracks were
+##     sold
+##Important notice: only albums with at least two tracks are considered
+##############################################################################
 
 
 # solutie care compara, pentru fiecare album, numarul de piese de pe album
@@ -486,10 +535,13 @@ temp <- artist %>%                      # se extrage numarul de piese vandute de
 
 
 
-############################################################################
-## 	 Care sunt artistii `vanduti` in toate tarile din urmatorul set:
-##              ('USA', 'France', 'United Kingdom', 'Spain')
-############################################################################
+##############################################################################
+##	 Care sunt artiștii cu vânzări în toate țările din urmatorul set:
+## ('USA', 'France', 'United Kingdom', 'Spain')
+##############################################################################
+##	 Find the artists with sales in ALL of the countries from the following set:
+## ('USA', 'France', 'United Kingdom', 'Spain')
+##############################################################################
 
 # echivalenta primei solutii SQL (vezi scriptul `chinook_08_sql...`)
 temp <- artist %>%
@@ -556,10 +608,13 @@ temp <- artist %>%
 
 
 
-############################################################################
-###   Care sunt artistii `vanduti` in toate orasele din 'United Kingdom'
-###                 din care provin clientii
-############################################################################
+##############################################################################
+##   Care sunt artiștii cu vânzări în toate orașele din 'United Kingdom' din
+##                         care provin clienții
+##############################################################################
+##   Find the artist with sales in all the 'United Kingdom' cities where is
+##                         at least one customer
+##############################################################################
 
 temp <- artist %>%
           rename(artist_name = name ) %>%
@@ -605,16 +660,20 @@ temp <- artist %>%
 
 
 
-# -- ############################################################################
-# --                Probleme de rezolvat la curs/laborator/acasa
-# -- ############################################################################
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
 # #
-# # -- Care primul (sau primii) angajat(i) in companie?
+# # ##Care primul (sau primii) angajat(i) in companie?
 # #
-# # -- Care sunt artistii care au in baza de date mai multe albume decat
+# # ##Care sunt artistii care au in baza de date mai multe albume decat
 #       formatia `Queen`?
 # #
 # #
+
+
 
 
 ##
@@ -710,12 +769,19 @@ temp <- artist %>%
         arrange(album_duration)
 
 
+##############################################################################
+##	 Care sunt artiștii `vânduți` în toate țările din care provin clienții?
+##############################################################################
+##	     Find the artists with sales in all of the countries with customers
+##############################################################################
 
 
 
-############################################################################
-## 	   La ce intrebari raspund urmatoarele interogari ?
-############################################################################
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################
 
 ##
 temp <- customer %>%

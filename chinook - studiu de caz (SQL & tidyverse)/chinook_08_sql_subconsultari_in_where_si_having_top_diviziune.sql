@@ -14,18 +14,24 @@
 -- 					SQL08: (Non-correlated) subqueries included in WHERE and HAVING.
 --								Relational division (1)
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2022-03-15
 
 
 --
 -- ############################################################################
---                         Subconsultari IN clauza WHERE
+--               Subconsultări (necorelate) în clauza WHERE
 -- ############################################################################
---
+--                    Uncorrelated subqueries in WHERE
+-- ############################################################################
+
+
 
 -- ############################################################################
---        Care sunt celelalte albume ale artistului sau formatiei care a
+--        Care sunt celelalte albume ale artistului sau formației care a
 --                   lansat albumul `Houses of the Holy`
+-- ############################################################################
+--        List the other albums of the artist/band that released
+--                     the album `Houses of the Holy`
 -- ############################################################################
 
 
@@ -73,7 +79,9 @@ ORDER BY 2
 
 
 -- ############################################################################
---      Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
+--      Care sunt piesele de pe albumul `Achtung Baby` al formației U2?
+-- ############################################################################
+--      List all tracks on the album `Achtung Baby` released by U2?
 -- ############################################################################
 
 
@@ -104,12 +112,16 @@ WHERE albumid IN  (SELECT albumid
 				WHERE title = 'Achtung Baby' AND name = 'U2')
 
 
+-- ############################################################################
+-- 			Care sunt piesele comune (cu acelasi titlu) de pe
+-- 			albumele `Fear Of The Dark` si `A Real Live One`
+-- 					ale formatiei 'Iron Maiden' (reluare)
+-- ############################################################################
+-- 			Extract the tracks (track name) included on both `Fear Of The Dark` and
+--  `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
+--      both albums) (reprise)
+-- ############################################################################
 
--- ############################################################################
---               Care sunt piesele comune (cu acelasi titlu) de pe
---                albumele `Fear Of The Dark` si `A Real Live One`
---                  ale formatiei 'Iron Maiden' (reluare)
--- ############################################################################
 
 -- solutie bazata pe subconsultare in clauza WHERE
 SELECT track.name
@@ -127,7 +139,9 @@ WHERE artist.name = 'Iron Maiden' AND title = 'Fear Of The Dark'
 
 
 -- ############################################################################
---               Care sunt facturile din prima zi de vanzari?
+--               Care sunt facturile din prima zi de vânzări?
+-- ############################################################################
+--               Extract invoices issued in the first day with sales
 -- ############################################################################
 
 -- solutie bazata pe o subconsultare ce foloseste functia MIN
@@ -159,8 +173,11 @@ WHERE invoicedate = (
 
 
 -- ############################################################################
---           Care sunt facturile din prima saptamana de vanzari?
+--           Care sunt facturile din prima săptămână de vânzări?
 -- ############################################################################
+--        List invoices issued in the first week since the sales begun
+-- ############################################################################
+
 SELECT *
 FROM invoice
 WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND
@@ -168,17 +185,22 @@ WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND
 
 
 -- ############################################################################
---            Care sunt facturile din prima luna de vanzari?
+--            Care sunt facturile din prima lună de vânzări?
 -- ############################################################################
+--        List invoices issued in the first month since the sales begun
+-- ############################################################################
+
 SELECT *
 FROM invoice
 WHERE invoicedate BETWEEN (SELECT MIN(invoicedate) FROM invoice) AND
 	(SELECT MIN(invoicedate) + INTERVAL '1 MONTH' - INTERVAL '1 DAYS' FROM invoice)
 
 
+
 -- ############################################################################
---     Cate facturi s-au emis in prima luna calendaristica a vanzarilor ?
---              (adica prima luna IANUARIE sau APRILIE ...)
+--        Câte facturi s-au emis în anul și luna primei facturi?
+-- ############################################################################
+--    How many invoices were issued in the whole month when the sales begun?
 -- ############################################################################
 
 -- solutie bazata pe o singura subconsultare
@@ -203,8 +225,11 @@ WHERE EXTRACT (YEAR FROM invoicedate) =
 
 
 -- ############################################################################
---            Cate facturi s-au emis in primele 10 zile cu vanzari ?
+--            Câte facturi s-au emis în primele 10 zile cu vânzări ?
 -- ############################################################################
+--    How many invoices were issued in the first 10 days with sales ?
+-- ############################################################################
+
 
 -- solutie bazata pe o subconsultare in clauza WHERE care prezinta LIMIT si
 --    SELECT DISTINCT (atentie, DISTINCT este obligatorie!);
@@ -251,7 +276,9 @@ WHERE invoicedate <=  (SELECT distinct invoicedate
 
 
 -- ############################################################################
---        Care sunt cei mai vechi cinci angajati ai companiei?
+--        Care sunt cei mai vechi cinci angajați ai companiei?
+-- ############################################################################
+--                     Extract the first five employed people
 -- ############################################################################
 
 -- solutia bazata pe LIMIT extrage un rezultat incomplet!!!!
@@ -287,13 +314,19 @@ ORDER BY hiredate
 
 --
 -- ############################################################################
---                       Subconsultari IN clauza HAVING
+--                       Subconsultări în clauza HAVING
 -- ############################################################################
---
+--                       Subqueries included in HAVING
+-- ############################################################################
+
+
 
 -- ############################################################################
---      Care sunt albumele formatiei Led Zeppelin care au mai multe piese
---                            decat albumul `IV`
+--      Care sunt albumele formației Led Zeppelin care au mai multe piese
+--                            decât albumul `IV`
+-- ############################################################################
+--      List the albums released by Led Zeppelin with more tracks than
+--                            the album `IV`
 -- ############################################################################
 
 -- solutie bazata pe o subconsultare in clauza HAVING
@@ -313,8 +346,11 @@ ORDER BY 1
 
 
 -- ############################################################################
---            Care este albumul (sau albumele) formatiei Queen
+--            Care este albumul (sau albumele) formației Queen
 --                      cu cele mai multe piese?
+-- ############################################################################
+--            List the album (or albums) released by `Queen`
+--                      having the largest number of tracks
 -- ############################################################################
 
 -- solutie bazata pe `>= ALL`
@@ -356,7 +392,9 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 		Extrageti TOP 7 albume ale formatiei `U2`, cu cele mai multe piese?
+-- 		Extrageți TOP 7 albume ale formației `U2`, după numărul de piese?
+-- ############################################################################
+-- 		    Get TOP 7 albums released by `U2`, by their number of tracks?
 -- ############################################################################
 
 
@@ -393,13 +431,19 @@ ORDER BY 2 DESC
 
 --
 -- ############################################################################
---                       Diviziune relationala (1)
+--                       Diviziune relațională (1)
+-- ############################################################################
+--                         Relational division (1)
 -- ############################################################################
 --
 
 -- ############################################################################
---     Extrageti artistii si albumele de pe care s-au vandut toate piesele.
--- Nota: se iau in calcul numai albumele cu cel putin doua piese
+--     Extrageți artiștii și albumele de pe care s-au vândut toate piesele.
+-- Notă: se iau în calcul numai albumele cu cel puțin două piese
+-- ############################################################################
+--     List the artist and their albums for which all album tracks were
+--      sold
+-- Important notice: only albums with at least two tracks are considered
 -- ############################################################################
 
 
@@ -447,7 +491,9 @@ ORDER BY 1
 
 
 -- ############################################################################
--- 	 Care sunt artistii `vanduti` in toate tarile din care provin clientii?
+-- 	 Care sunt artiștii `vânduți` în toate țările din care provin clienții?
+-- ############################################################################
+-- 	     Find the artists with sales in all of the countries with customers
 -- ############################################################################
 
 -- enuntul sugereaza diviziunea relationala, insa solutia e una non-diviziune
@@ -464,7 +510,10 @@ HAVING COUNT(DISTINCT country) = (SELECT COUNT(DISTINCT country) FROM customer)
 
 
 -- ############################################################################
--- 	 Care sunt artistii `vanduti` in toate tarile din urmatorul set:
+-- 	 Care sunt artiștii cu vânzări în toate țările din urmatorul set:
+--  ('USA', 'France', 'United Kingdom', 'Spain')
+-- ############################################################################
+-- 	 Find the artists with sales in ALL of the countries from the following set:
 --  ('USA', 'France', 'United Kingdom', 'Spain')
 -- ############################################################################
 
@@ -503,8 +552,11 @@ HAVING string_agg(DISTINCT country, '|' ORDER BY country)  IN (
 
 
 -- ############################################################################
---    Care sunt artistii `vanduti` in toate orasele din 'United Kingdom' din
---                          care provin clientii
+--    Care sunt artiștii cu vânzări în toate orașele din 'United Kingdom' din
+--                          care provin clienții
+-- ############################################################################
+--    Find the artist with sales in all the 'United Kingdom' cities where is
+--                          at least one customer
 -- ############################################################################
 
 --
@@ -543,7 +595,9 @@ HAVING string_agg(DISTINCT city, '|' ORDER BY city) = (
 
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
 -- ############################################################################
 
 -- Care primul (sau primii) angajat(i) in companie?
