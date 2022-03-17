@@ -21,17 +21,17 @@ library(lubridate)
 setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
--- ############################################################################
--- 		Știind că `trackid` respectă ordinea (poziția) pieselor de pe albume,
---  să se numeroteze toate piesele de pe toate albumele formației
--- `Led Zeppelin`; albumele vor fi ordonate alfabetic, iar piesele după
--- poziția lor în cadrul albumului
--- ############################################################################
--- 		As `trackid` incorporated the track order on each album,
---  attach a track number from 1 to N (where N is the number of tracks on
---  the current album) for every track on each album released by `Led Zeppelin`;
---  albums will be ordered alphabetically, and tracks by their album position
--- ############################################################################
+##############################################################################
+##		Știind că `trackid` respectă ordinea (poziția) pieselor de pe albume,
+## să se numeroteze toate piesele de pe toate albumele formației
+##`Led Zeppelin`; albumele vor fi ordonate alfabetic, iar piesele după
+##poziția lor în cadrul albumului
+##############################################################################
+##		As `trackid` incorporated the track order on each album,
+## attach a track number from 1 to N (where N is the number of tracks on
+## the current album) for every track on each album released by `Led Zeppelin`;
+## albums will be ordered alphabetically, and tracks by their album position
+##############################################################################
 
 # solutie cu row_number()
 temp <- artist %>%
@@ -75,18 +75,18 @@ temp <- artist %>%
 
 
 
--- ############################################################################
--- 		Știind că `trackid` respectă ordinea (poziția) pieselor de pe albume,
---  să se numeroteze toate piesele de pe toate albumele tuturor artiștilor;
--- artiștii și albumele vor fi ordonate alfabetic, iar piesele după
--- poziția lor în cadrul albumului
--- ############################################################################
--- 		As `trackid` incorporated the track order on each album,
---  attach a track number from 1 to N (where N is the number of tracks on
---  the current album) for every track on each album released by every artist;
---  artists and albums will be ordered alphabetically, and tracks by
---  their album position
--- ############################################################################
+##############################################################################
+##		Știind că `trackid` respectă ordinea (poziția) pieselor de pe albume,
+## să se numeroteze toate piesele de pe toate albumele tuturor artiștilor;
+##artiștii și albumele vor fi ordonate alfabetic, iar piesele după
+##poziția lor în cadrul albumului
+##############################################################################
+##		As `trackid` incorporated the track order on each album,
+## attach a track number from 1 to N (where N is the number of tracks on
+## the current album) for every track on each album released by every artist;
+## artists and albums will be ordered alphabetically, and tracks by
+## their album position
+##############################################################################
 
 # solutie cu row_number()
 temp <- artist %>%
@@ -114,11 +114,11 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---         Extrageți primele trei piese de pe fiecare album al formației U2
--- ############################################################################
---         List only the first three tracks on each album released by U2
--- ############################################################################
+##############################################################################
+##        Extrageți primele trei piese de pe fiecare album al formației U2
+##############################################################################
+##        List only the first three tracks on each album released by U2
+##############################################################################
 # solutii preluate din scriptul `chinook_05_tidyverse_functii_... .R`
 
 # solutie cu `top_n`
@@ -146,13 +146,13 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---              Afisați topul albumelor lansate de formația Queen,
---                      dupa numărul de piese conținute
--- ############################################################################
---                Get the top al albums released by `Queen`,
---                       ranked by their number of tracks
--- ############################################################################
+##############################################################################
+##             Afisați topul albumelor lansate de formația Queen,
+##                     dupa numărul de piese conținute
+##############################################################################
+##               Get the top al albums released by `Queen`,
+##                      ranked by their number of tracks
+##############################################################################
 
 # solutie cu min_rank()
 temp <- artist %>%
@@ -179,13 +179,13 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---              Care este albumul (sau albumele) formației Queen
---                       cu cele mai multe piese? (reluare)
--- ############################################################################
---                List the album (or albums) released by `Queen`
---                  having the largest number of tracks (reprise)
--- ############################################################################
+##############################################################################
+##             Care este albumul (sau albumele) formației Queen
+##                      cu cele mai multe piese? (reluare)
+##############################################################################
+##               List the album (or albums) released by `Queen`
+##                 having the largest number of tracks (reprise)
+##############################################################################
 
 # solutie cu min_rank()
 temp <- artist %>%
@@ -200,16 +200,16 @@ temp <- artist %>%
         filter (album_rank == 1)
 
 
--- ############################################################################
--- 	Pentru fiecare album al fiecărui artist, afișați poziția albumului (după
---  numărul de piese conținute) în clasamentul pe albume ale artistului și
---  poziția în clasamentul general (al albumelor tuturor artiștilor)
--- ############################################################################
--- 	For each album of every artist, compute (and display) the rankings (in terms
---    of number of tracks included) of the album within the artist (taking
---    into account all artist's albums) and overall (takin in to account all
---    the albums of all the artists)
--- ############################################################################
+##############################################################################
+##	Pentru fiecare album al fiecărui artist, afișați poziția albumului (după
+## numărul de piese conținute) în clasamentul pe albume ale artistului și
+## poziția în clasamentul general (al albumelor tuturor artiștilor)
+##############################################################################
+##	For each album of every artist, compute (and display) the rankings (in terms
+##   of number of tracks included) of the album within the artist (taking
+##   into account all artist's albums) and overall (takin in to account all
+##   the albums of all the artists)
+##############################################################################
 
 # solutie cu min_rank()
 temp <- artist %>%
@@ -244,13 +244,13 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---      Luând în calcul numărul de piese conținute, pe ce poziție se găsește
---       albumul `Machine Head` în ierarhia albumelor formației `Deep Purple`?
--- ############################################################################
---      Taking into account the number of tracks contained, find the position
---     of the album `Machine Head` in the ranking of `Deep Purple`'s albums?
--- ############################################################################
+##############################################################################
+##     Luând în calcul numărul de piese conținute, pe ce poziție se găsește
+##      albumul `Machine Head` în ierarhia albumelor formației `Deep Purple`?
+##############################################################################
+##     Taking into account the number of tracks contained, find the position
+##    of the album `Machine Head` in the ranking of `Deep Purple`'s albums?
+##############################################################################
 
 # solutie cu dense_rank()
 temp <- artist %>%
@@ -266,11 +266,11 @@ temp <- artist %>%
 
 
 
--- ############################################################################
---    Extrageți, pentru fiecare an, topul celor mai bine vândute trei piese
--- ############################################################################
---    Get TOP 3 best selling tracks for each year
--- ############################################################################
+##############################################################################
+##   Extrageți, pentru fiecare an, topul celor mai bine vândute trei piese
+##############################################################################
+##   Get TOP 3 best selling tracks for each year
+##############################################################################
 
 temp <- invoice %>%
         mutate (year = lubridate::year(invoicedate)) %>%
@@ -292,13 +292,13 @@ temp <- invoice %>%
 
 
 
--- ############################################################################
---    Pentru fiecare lună cu vânzări, afișați creșterea sau scăderea valorii
---                 vânzărilor, comparativ cu luna precedentă
--- ############################################################################
---    For each month with sales, compute the sales increase or decrease,
---        relative to the previous month
--- ############################################################################
+##############################################################################
+##   Pentru fiecare lună cu vânzări, afișați creșterea sau scăderea valorii
+##                vânzărilor, comparativ cu luna precedentă
+##############################################################################
+##   For each month with sales, compute the sales increase or decrease,
+##       relative to the previous month
+##############################################################################
 
 temp <- invoice %>%
         mutate (year = lubridate::year(invoicedate),
@@ -312,15 +312,15 @@ temp <- invoice %>%
                    difference = current_month__sales - previous_month__sales)
 
 
--- ############################################################################
---    Pentru fiecare lună cu vânzări, calculați creșterea sau scăderea valorii
---       vânzărilor, comparativ cu luna precedentă, însă numai în cadrul
---       anului (diferența se va calcula numai între lunile anului curent)
--- ############################################################################
---    For each month with sales, compute the sales increase or decrease,
---        relative to the previous month; the sales increase/decrease
---        would be computed only within the current year
--- ############################################################################
+##############################################################################
+##   Pentru fiecare lună cu vânzări, calculați creșterea sau scăderea valorii
+##      vânzărilor, comparativ cu luna precedentă, însă numai în cadrul
+##      anului (diferența se va calcula numai între lunile anului curent)
+##############################################################################
+##   For each month with sales, compute the sales increase or decrease,
+##       relative to the previous month; the sales increase/decrease
+##       would be computed only within the current year
+##############################################################################
 
 temp <- invoice %>%
         mutate (year = lubridate::year(invoicedate),
@@ -339,19 +339,19 @@ temp <- invoice %>%
 
 
 
--- ############################################################################
---                Probleme de rezolvat la curs/laborator/acasa
--- ############################################################################
---                To be completed during lectures/labs or at home
--- ############################################################################
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
 
--- ...
+##...
 
--- ############################################################################
---              La ce întrebări răspund următoarele interogări ?
--- ############################################################################
---           For what requiremens the following queries provide the result?
--- ############################################################################
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requiremens the following queries provide the result?
+##############################################################################
 
 ##
 # # ...

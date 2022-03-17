@@ -9,22 +9,31 @@
 --        Studiu de caz: Interogări SQL pentru baza de date `chinook`
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
--- 					SQL12: Interogări recursiv
+-- 					SQL12: Interogări recursive
 -- 					SQL12: Recursive queries
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2022-03-17
 --
 
 
 -- ############################################################################
---   		A. Interogari recursive pentru probleme `pseudo-recursive`
+--   		A. Interogări recursive pentru probleme `pseudo-recursive`
+-- ############################################################################
+--   		A. Recursive queries for non-recursive problems :-)
 -- ############################################################################
 
 
 -- ############################################################################
--- 		Stiind ca `trackid` respecta ordinea pieselor de pe albume,
---  sa se numeroteze toate piesele de pe toate albumele formatiei
--- `Led Zeppelin`; albumele vor fi ordonate alfabetic
+-- 		Știind că `trackid` respectă ordinea (poziția) pieselor de pe albume,
+--  să se numeroteze toate piesele de pe toate albumele formației
+-- `Led Zeppelin`; albumele vor fi ordonate alfabetic, iar piesele după
+-- poziția lor în cadrul albumului (reluare)
+-- ############################################################################
+-- 		As `trackid` incorporated the track order on each album,
+--  attach a track number from 1 to N (where N is the number of tracks on
+--  the current album) for every track on each album released by `Led Zeppelin`;
+--  albums will be ordered alphabetically, and tracks by their album position
+-- (reprise)
 -- ############################################################################
 
 
@@ -154,11 +163,16 @@ GROUP BY albumid, album_title, artist_name
 -- ############################################################################
 --            B. Interogari recursive pentru probleme `recursive`
 -- ############################################################################
+--            B. Recursive queries for `recursive` problems
+-- ############################################################################
 
 
 -- ############################################################################
---                 Afisati nivelul ierarhic al fiecarui angajat
---                   (incepand cu 0 de la `General Manager`)
+--                 Afișați nivelul ierarhic al fiecărui angajat
+--                   (începând cu 0 de la `General Manager`)
+-- ############################################################################
+--              Display the hierarchical level of each employee
+--                   (starting with 0 from the `General Manager`)
 -- ############################################################################
 
 WITH RECURSIVE hierarchy ( employeeid, lastname, firstname, title,
@@ -183,8 +197,15 @@ ORDER BY hierarchical_level DESC
 --                         cu `General Manager`
 -- ############################################################################
 
+-- ############################################################################
+--                 Afișați nivelul ierarhic al fiecărui angajat
+--                   (începând `General Manager`)
+-- ############################################################################
+--             display, for each employee, the full managerial path
+--                   (starting with the `General Manager`)
+-- ############################################################################
 
--- display, for each employee, the full managerial path
+--
 WITH RECURSIVE hierarchy ( employeeid, lastname, firstname, title,
 		reportsto, hierarchical_level, full_managerial_path) AS (
 	SELECT employeeid, lastname, firstname, title,
@@ -208,7 +229,10 @@ ORDER BY 2
 
 
 -- ############################################################################
---               Extrageti toti sefii angajatei 'Jane Peacock'
+--               Extrageți toți șefii angajatei 'Jane Peacock'
+-- ############################################################################
+--               List all the bosses (first level, second level, ...)
+--                      from the employee  'Jane Peacock'
 -- ############################################################################
 
 
@@ -235,9 +259,12 @@ ORDER BY hierarchical_level
 
 
 -- ############################################################################
---             Extrageti toti subordonatii (directi si indirecti) ai
+--             Extrageți toți subordonații (direcți și indirecți) ai
 --                        angajatei 'Nancy Edwards'
 -- ############################################################################
+--             Extract all subordinates of  'Nancy Edwards'
+-- ############################################################################
+
 
 WITH RECURSIVE hierarchy ( employeeid, lastname, firstname, title,
 		reportsto, hierarchical_level, subordination_path) AS (
@@ -261,9 +288,10 @@ ORDER BY hierarchical_level
 
 
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
 -- ############################################################################
-
+--                To be completed during lectures/labs or at home
+-- ############################################################################
 
 
 
