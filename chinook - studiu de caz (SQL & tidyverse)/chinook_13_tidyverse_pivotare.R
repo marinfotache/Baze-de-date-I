@@ -1,16 +1,27 @@
-################################################################################
-###         Interogari `tidyverse` vs SQL - BD Chinook (IE/SPE/CIG)          ###
-################################################################################
-###                     13: Pivotare (tabeve-pivot) in `tidyverse`
-################################################################################
-# # -- ultima actualizare: 2021-11-08
+##############################################################################
+## Universitatea Al.I.Cuza Iași / Al.I.Cuza University of Iasi (Romania)
+## Facultatea de Economie si Administrarea Afacerilor / Faculty of
+##          Economics and Business Administration
+## Colectivul de Informatică Economică / Dept. of Business Information Systems
+##############################################################################
+
+##############################################################################
+##        Studiu de caz: Interogări tidyverse pentru baza de date `chinook`
+##        Case study: tidyverse queries for `chinook` database
+##############################################################################
+## 					tidyverse13: Pivotare
+## 					tidyverse13: Pivoting
+##############################################################################
+## ultima actualizare / last update: 2022-03-17
 
 
-
-############################################################################
-##             Afisati, pentru fiecare client, pe coloane separate,
-##                vanzarile pe anii 2010, 2011 si 2012 (reluare)
-############################################################################
+##############################################################################
+##              Afișați, pentru fiecare client, pe coloane separate,
+##                    vânzările pe anii 2010, 2011 și 2012 (6)
+##############################################################################
+##            Display, for each customer, on three different columns,
+##                    the total sales on 2010, 2011 și 2012  (6)
+##############################################################################
 
 
 temp <- customer %>%
@@ -29,3 +40,28 @@ temp <- customer %>%
 
 
 
+##############################################################################
+##               Probleme de rezolvat la curs/laborator/acasa
+##############################################################################
+##               To be completed during lectures/labs or at home
+##############################################################################
+
+##############################################################################
+##              Afișați, pentru fiecare client, pe coloane separate,
+##                    vânzările pentru fircare an (2009-2013)
+##############################################################################
+##            Display, for each customer, on three different columns,
+##                    the total sales on each year (2009-2013)
+##############################################################################
+
+
+
+
+##...
+
+
+##############################################################################
+##             La ce întrebări răspund următoarele interogări ?
+##############################################################################
+##          For what requirements the following queries provide the result?
+##############################################################################

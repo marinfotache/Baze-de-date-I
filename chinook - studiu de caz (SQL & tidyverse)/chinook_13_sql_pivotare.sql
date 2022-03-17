@@ -9,25 +9,18 @@
 --        Studiu de caz: Interogări SQL pentru baza de date `chinook`
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
--- 					SQL14: Pivotare în SQL (PostgreSQL)
--- 					SQL14: Pivoting in SQL (PostgreSQL)
+-- 					SQL13: Pivotare în SQL (PostgreSQL)
+-- 					SQL13: Pivoting in SQL (PostgreSQL)
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
-
-
--- ############################################################################
---                Interogari BD Chinook - IE, CIG si SPE:
--- ############################################################################
---
--- 13: Pivotare in SQL (PostgreSQL)
---
--- ultima actualizare: 2021-04-17
-
+-- ultima actualizare / last update: 2022-03-17
 
 
 -- ############################################################################
---             Afisati, pentru fiecare client, pe coloane separate,
---                vanzarile pe anii 2010, 2011 si 2012 (reluare)
+--               Afișați, pentru fiecare client, pe coloane separate,
+--                     vânzările pe anii 2010, 2011 și 2012 (6)
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on 2010, 2011 și 2012  (6)
 -- ############################################################################
 
 -- solutie bazata pe subconsultari in clauza FROM
@@ -108,11 +101,14 @@ FROM crosstab(
 -- notice the NULL values
 
 
+-- ############################################################################
+--               Afișați, pentru fiecare client, pe coloane separate,
+--                     vânzările pentru fircare an (2009-2013)
+-- ############################################################################
+--             Display, for each customer, on three different columns,
+--                     the total sales on each year (2009-2013)
+-- ############################################################################
 
--- ############################################################################
--- 			Afisati, pentru fiecare client, pe coloane separate,
--- 					vanzarile pe tori anii (2009-2013)
--- ############################################################################
 
 SELECT * FROM crosstab(
    -- central query
@@ -132,8 +128,20 @@ SELECT * FROM crosstab(
 
 
 
+
 -- ############################################################################
---               Probleme de rezolvat la curs/laborator/acasa
+--                Probleme de rezolvat la curs/laborator/acasa
+-- ############################################################################
+--                To be completed during lectures/labs or at home
+-- ############################################################################
+
+-- ...
+
+
+-- ############################################################################
+--              La ce întrebări răspund următoarele interogări ?
+-- ############################################################################
+--           For what requiremens the following queries provide the result?
 -- ############################################################################
 
 
