@@ -1,1 +1,1 @@
-Baza de date Rock folosită la testele Moodle, în varinatele în limba română (`Rock-RO`) și engleză (`Rock-EN`)
+Baza de date ROCK folosită la testele Moodle, în variantele română (`Rock-RO`) și engleză (`Rock-EN`)
