@@ -3,4 +3,4 @@ https://github.com/marinfotache/Baze-de-date-I/tree/master/chinook%20-%20studiu%
 
 Pentru materiale suplimentare legate de lucrul în R (`tidyverse`), vezi:
 https://github.com/marinfotache/Data-Processing-Analysis-Science-with-R
-Chestiunile legate de `tidyverse` sunt acoperite în secțiunea `03 Data_Processing`, însă pentru deprinderea eelementelor de bază privind lucrul în R vă recomand și secțiunile `01...` și `02...`.
+Chestiunile legate de `tidyverse` sunt acoperite în secțiunea `03 Data_Processing`, însă pentru deprinderea elementelor de bază privind lucrul în R vă recomand și secțiunile `01...` și `02...`.
