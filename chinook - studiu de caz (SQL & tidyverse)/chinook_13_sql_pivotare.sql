@@ -12,7 +12,7 @@
 -- 					SQL13: Pivotare în SQL (PostgreSQL)
 -- 					SQL13: Pivoting in SQL (PostgreSQL)
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-17
+-- ultima actualizare / last update: 2022-05-02
 
 
 -- ############################################################################
@@ -22,6 +22,17 @@
 --             Display, for each customer, on three different columns,
 --                     the total sales on 2010, 2011 și 2012  (6)
 -- ############################################################################
+
+-- solutie bazata pe CASE
+SELECT lastname || ' ' || firstname AS customer_name,
+	city, state, country,
+	SUM(CASE WHEN EXTRACT (YEAR FROM invoicedate) = 2010 THEN total ELSE 0 END) AS sales2010,
+	SUM(CASE WHEN EXTRACT (YEAR FROM invoicedate) = 2011 THEN total ELSE 0 END) AS sales2011,
+	SUM(CASE WHEN EXTRACT (YEAR FROM invoicedate) = 2012 THEN total ELSE 0 END) AS sales2012
+FROM customer NATURAL JOIN invoice
+GROUP BY lastname || ' ' || firstname, city, state, country
+ORDER BY 1
+
 
 -- solutie bazata pe subconsultari in clauza FROM
 SELECT lastname || ' ' || firstname AS customer_name,
@@ -103,7 +114,7 @@ FROM crosstab(
 
 -- ############################################################################
 --               Afișați, pentru fiecare client, pe coloane separate,
---                     vânzările pentru fircare an (2009-2013)
+--                     vânzările pentru fiecare an (2009-2013)
 -- ############################################################################
 --             Display, for each customer, on three different columns,
 --                     the total sales on each year (2009-2013)
