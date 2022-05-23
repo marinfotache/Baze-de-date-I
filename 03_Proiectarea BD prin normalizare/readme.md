@@ -28,3 +28,8 @@ Prezentările conțin și linkuri către tutoriale video (în limba română) pe
 ### Rezolvarea unui exemplu de subiect pentru testul de normalizare (2021)
 
 - [Calendar multi-confesional - partea I (curs BD 2021-05-17 IE2)](https://1drv.ms/v/s!AgPvmBEDzTOSi6JUVfrHHM_fr4FTRw?e=TskXDh)
+
+### Studiu de caz S.C. CUPIDONU NEVROTIC SRL (2022)
+
+- Vezi prezentarea `03i Studiu de caz CUPIDONU NEVROTIC.pptx`
+
