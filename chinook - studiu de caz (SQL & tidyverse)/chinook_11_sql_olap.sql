@@ -12,7 +12,7 @@
 -- 					SQL11: Opțiuni OLAP
 -- 					SQL11: OLAP features
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-17
+-- ultima actualizare / last update: 2022-11-05
 --
 
 
@@ -362,6 +362,37 @@ WITH
 SELECT year, month, sales as current_month__sales,
 	LAG (sales, 1) OVER (PARTITION BY year ORDER BY month) AS previous_month__sales,
 	sales - COALESCE(LAG (sales, 1) OVER (PARTITION BY year ORDER BY month), 0) AS difference
+FROM monthly_sales
+ORDER BY year, month
+
+
+
+
+
+-- ############################################################################
+--    Pentru fiecare lună cu vânzări, afișați vânzările cumulate de la
+--  începutul anului curent și vânzările cumulate de la prima vânzare 
+-- ############################################################################
+--    For each month with sales, compute the cumulative sales, relative to
+--     both the current year and overall (all previous months and current month)
+-- ############################################################################
+
+WITH
+	-- the table expression computes the monthly sales
+	monthly_sales AS
+		(SELECT
+		 	EXTRACT (YEAR FROM invoicedate) AS year,
+		 	EXTRACT (MONTH FROM invoicedate) AS month,
+		 	SUM(total) AS sales
+		 FROM invoice
+		 GROUP BY EXTRACT (YEAR FROM invoicedate), EXTRACT (MONTH FROM invoicedate)
+		 ORDER BY 1, 2
+		)
+SELECT year, month, sales as current_month__sales,
+	SUM(sales) OVER (PARTITION BY year ORDER BY month ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) 
+		AS cumulative_sales_crt_month__within_crt_year,
+	SUM(sales) OVER (ORDER BY year, MONTH ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) 
+		AS cumulative_sales_crt_month__overall		
 FROM monthly_sales
 ORDER BY year, month
 
