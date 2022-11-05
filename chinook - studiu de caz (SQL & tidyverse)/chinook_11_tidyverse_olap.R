@@ -12,13 +12,14 @@
 ## 		tidyverse11: Opțiuni OLAP
 ## 		tidyverse11: OLAP features
 ##############################################################################
-## ultima actualizare / last update: 2022-03-17
+## ultima actualizare / last update: 2022-11-05
 
 
 library(tidyverse)
 library(lubridate)
 
 setwd('/Users/marinfotache/Downloads/chinook')
+setwd('/Users/marinfotache/OneDrive/Baze de date 2022/Studii de caz/chinook')
 load("chinook.RData")
 
 ##############################################################################
@@ -335,6 +336,31 @@ temp <- invoice %>%
                 previous_month__sales = lag(sales, default = 0),
                 difference = current_month__sales - previous_month__sales) %>%
         ungroup()
+
+
+
+###############################################################################
+###   Pentru fiecare lună cu vânzări, afișați vânzările cumulate de la
+### începutul anului curent și vânzările cumulate de la prima vânzare 
+###############################################################################
+###    For each month with sales, compute the cumulative sales, relative to
+###  both the current year and overall (all previous months and current month)
+###############################################################################
+
+# solution with `cumsum`
+
+temp <- invoice %>%
+        mutate (year = lubridate::year(invoicedate),
+                month = lubridate::month(invoicedate)) %>%
+        group_by(year, month) %>%
+        summarise (sales = sum(total)) %>%
+        ungroup() %>%
+        arrange(year, month) %>%
+        transmute (year, month, sales) %>%
+        group_by(year) %>%
+        mutate (cumulative_sales_crt_month__within_crt_year = cumsum(sales)) %>%
+        ungroup() %>%
+        mutate (cumulative_sales_crt_month__overall = cumsum(sales)) 
 
 
 
