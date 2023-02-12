@@ -31,5 +31,5 @@ Prezentările conțin și linkuri către tutoriale video (în limba română) pe
 - [03i Studiu de caz CUPIDONU NEVROTIC.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03i%20Studiu%20de%20caz%20CUPIDONU%20NEVROTIC.pptx)
 
 ### Video:
-- [Partea I - 16.05.2022 ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxhH-Yeho4pkYmzOA?e=txxBny)
+- [Partea I - 16.05.2022 - 1h:54min ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxhH-Yeho4pkYmzOA?e=txxBny)
 - [Partea a II-a - 23.05.2022 ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxgaNokgXnuW3sFhA?e=jWV2cg)
