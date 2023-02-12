@@ -28,6 +28,9 @@ Prezentările conțin și linkuri către tutoriale video (în limba română) pe
 ### Rezolvarea unui exemplu de subiect pentru testul de normalizare (2022)
 
 ## Studiu de caz S.C. CUPIDONU NEVROTIC SRL (2022)
+# Slide-urile sunt disponibile în fișierul `03i Studiu de caz CUPIDONU NEVROTIC.pptx`
+# Video:
+- [Partea I - 16.05.2022 ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxhH-Yeho4pkYmzOA?e=txxBny)
+- [Partea a II-a - 23.05.2022 ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxgaNokgXnuW3sFhA?e=jWV2cg)
 
-- Vezi prezentarea `03i Studiu de caz CUPIDONU NEVROTIC.pptx`
 
