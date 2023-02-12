@@ -3,7 +3,7 @@
 Pentru tutorialele video de pe OneDrive, nu uitați că playerul implicit s-ar putea să nu funcționeze cum trebuie (pe calculatorul meu, uneori, NU se aude sunetul la redarea directă pe OneDrive). De aceea, vă recomand să descărcați video-tutoriale și să le vizionați cu `VLC Player` sau ceva similar.
 
 
-### V-aș sugera să parcurgeți materialele bibliografice postate în următoarea secvență:.
+## V-aș sugera să parcurgeți materialele bibliografice postate în următoarea secvență:.
 
 - [03a_Introducere_in_proiectareaBD.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03a_Introducere_in_proiectareaBD.pptx)
 - [PBD2005_Cap02_Normalizare.pdf (paragrafele de la 2.2 la 2.6)](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/PBD2005_Cap02_Normalizare.pdf)
@@ -25,12 +25,8 @@ Pentru tutorialele video de pe OneDrive, nu uitați că playerul implicit s-ar p
 Prezentările conțin și linkuri către tutoriale video (în limba română) pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
 
 
-### Rezolvarea unui exemplu de subiect pentru testul de normalizare (2022)
-
 ## Studiu de caz S.C. CUPIDONU NEVROTIC SRL (2022)
-# Slide-urile sunt disponibile în fișierul `03i Studiu de caz CUPIDONU NEVROTIC.pptx`
-# Video:
+### Slide-urile sunt disponibile în fișierul `03i Studiu de caz CUPIDONU NEVROTIC.pptx`
+### Video:
 - [Partea I - 16.05.2022 ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxhH-Yeho4pkYmzOA?e=txxBny)
 - [Partea a II-a - 23.05.2022 ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxgaNokgXnuW3sFhA?e=jWV2cg)
-
-
