@@ -25,7 +25,6 @@ Pentru tutorialele video de pe OneDrive, nu uitați că playerul implicit s-ar p
 Prezentările conțin și linkuri către tutoriale video (în limba română) pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
 
 
-
 ## Studiu de caz S.C. CUPIDONU' NEVROTIC SRL (2022)
 
 ### Slide-uri
