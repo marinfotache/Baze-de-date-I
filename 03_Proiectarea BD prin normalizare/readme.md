@@ -25,10 +25,10 @@ Pentru tutorialele video de pe OneDrive, nu uitați că playerul implicit s-ar p
 Prezentările conțin și linkuri către tutoriale video (în limba română) pe care, de asemenea, vi le-aș recomanda (mai ales celora care au probleme cu somnul)!
 
 
-## Studiu de caz S.C. CUPIDONU NEVROTIC SRL (2022)
+## Studiu de caz S.C. CUPIDONU' NEVROTIC SRL (2022)
 
 ### Slide-uri
-- [03i Studiu de caz CUPIDONU NEVROTIC.pptx]()
+- [03i Studiu de caz CUPIDONU NEVROTIC.pptx](https://github.com/marinfotache/Baze-de-date-I/blob/master/03_Proiectarea%20BD%20prin%20normalizare/03i%20Studiu%20de%20caz%20CUPIDONU%20NEVROTIC.pptx)
 
 ### Video:
 - [Partea I - 16.05.2022 ](https://1drv.ms/v/s!AgPvmBEDzTOSkdxhH-Yeho4pkYmzOA?e=txxBny)
