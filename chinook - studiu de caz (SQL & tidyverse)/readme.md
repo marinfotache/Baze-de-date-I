@@ -4,7 +4,7 @@
 
 Este posibil ca playerul implicit de pe OneDrive să nu funcționeze cum trebuie (pe calculatorul meu NU se aude sunetul la redarea directă pe OneDrive). De aceea, vă recomand să descărcați video-tutoriale și să le vizionați cu `VLC Player` sau ceva similar.
 
-### Video-tutoriale (vor fi actualizate săptămânal în perioada februarie-mai):
+### Video-tutoriale:
 
 #### 1. Schemele bazelor de date `chinook` și `rock`
 - [Înregistrare Curs Baze de date 2021-02-16 CIG2](https://1drv.ms/v/s!AgPvmBEDzTOSitoIaNVx3kQboMWJWA?e=AauM6b)
