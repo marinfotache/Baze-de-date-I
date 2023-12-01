@@ -12,7 +12,7 @@
 -- 					SQL02: Joncțiuni interne
 -- 					SQL02: INNER JOINs
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2023-12-01
 
 
 -- ############################################################################
@@ -21,12 +21,17 @@
 --                   Extract the albums released by the band `U2`
 -- ############################################################################
 
+-------------------------------------------------------------------------------
 -- sol. 1 - NATURAL JOIN
+-------------------------------------------------------------------------------
 select *
 from album natural join artist
 where name = 'U2'
 
+-------------------------------------------------------------------------------
 -- sol. 2 - ECHI-JOIN
+-------------------------------------------------------------------------------
+
 select *
 from album inner join artist on album.artistid = artist.artistid
 where name = 'U2'
@@ -37,20 +42,30 @@ from album inner join artist on album.artistid = artist.artistid
 where name = 'U2'
 
 
+
 -- ############################################################################
 -- 		Care sunt piesele de pe albumul `Achtung Baby` al formatiei U2?
 -- ############################################################################
 -- 	 Extract the tracks included on the album `Achtung Baby` released by `U2`
 -- ############################################################################
 
+-------------------------------------------------------------------------------
 -- sol. eronata care foloseste NATURAL JOIN
+-------------------------------------------------------------------------------
+-- WRONG solution based on NATURAL JOIN
+-------------------------------------------------------------------------------
 select *
 from album
 	natural join artist
 	natural join track
 where name = 'U2'
 
+
+-------------------------------------------------------------------------------
 -- sol. corecta - folosind INNER JOIN
+-------------------------------------------------------------------------------
+-- correct solution is based on INNER JOIN
+-------------------------------------------------------------------------------
 select track.*
 from album
 	natural join artist
@@ -94,7 +109,7 @@ ORDER BY 1 ;
 
 
 -- ############################################################################
--- 								         AUTOJONCTIUNE / SELF-JOIN
+-- 						AUTOJONCTIUNE / SELF-JOIN
 -- ############################################################################
 
 
@@ -120,7 +135,7 @@ WHERE album.title = 'Achtung Baby'
 --               'For Those About To Rock (We Salute You)'?
 -- ############################################################################
 
--- solutie care utilizeaza AUTO JOIN
+-- auto-jonctiune / SELF-JOIN 
 SELECT track1.*
 FROM track track1
 	INNER JOIN track track2 ON track1.albumid = track2.albumid
@@ -134,12 +149,18 @@ WHERE track2.name = 'For Those About To Rock (We Salute You)'
 -- 	   Extract customers from the same country as customer `Robert Brown`
 -- ############################################################################
 
+-------------------------------------------------------------------------------
+-- sol. 1
+-------------------------------------------------------------------------------
 select customer1.*
 from customer customer1
 	inner join customer customer2 on customer1.country = customer2.country
 where customer2.firstname = 'Robert' and customer2.lastname = 'Brown'
 
--- sau
+
+-------------------------------------------------------------------------------
+-- sol.2
+-------------------------------------------------------------------------------
 select customer2.*
 from customer customer1
 	inner join customer customer2 on customer1.country = customer2.country
@@ -149,7 +170,7 @@ where customer1.firstname = 'Robert' and customer1.lastname = 'Brown'
 
 -- ############################################################################
 -- 	Care este șeful angajatului cu numele (lastname) 'Johnson'
---      și prenummele (firstname) 'Steve'
+--      și prenumele (firstname) 'Steve'
 -- ############################################################################
 -- 	Display the boss of the employee whose lastname is 'Johnson' and
 --      the firstname is 'Steve'
@@ -187,13 +208,35 @@ WHERE subordonati.lastname = 'Johnson' AND subordonati.firstname = 'Steve'
 ############################################################################
 */
 
--- Afisare piesele si artistii din playlistul `Heavy Metal Classic`
 
--- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
---	`Robert Plant`
+--############################################################################
+--###       Afisare piese si artisti din playlistul `Heavy Metal Classic`
+--############################################################################
+--###       Display tracks and artist in `Heavy Metal Classic` playlist
+--############################################################################
 
--- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
---	nici `Robert Plant`, nici `Jimmy Page`
+
+--############################################################################
+--### Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, 
+--###  NU apare `Robert Plant`
+--############################################################################
+--###   Display `Led Zeppelin`'s tracks not (co-)written by `Robert Plant` 
+--############################################################################
+
+
+--############################################################################
+--### Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, 
+--###  NU apar nici `Robert Plant`, nici `Jimmy Page`
+--############################################################################
+--###   Display `Led Zeppelin`'s tracks whose (co)composer(s) are 
+--###      neither `Robert Plant` nor `Jimmy Page`
+--############################################################################
+
+--##############################################################################
+--##	   Care sunt clientii din aceeasi tara ca si clientul `Robert Brown`
+--##############################################################################
+--##	   Extract customers from the same country as customer `Robert Brown`
+--##############################################################################
 
 
 

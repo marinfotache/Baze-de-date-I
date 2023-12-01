@@ -12,8 +12,7 @@
 ## 			tidyverse02: Joncțiuni interne
 ## 			tidyverse02: INNER JOINs
 ##############################################################################
-## ultima actualizare / last update: 2022-03-14
-
+## ultima actualizare / last update: 2023-12-01
 
 library(tidyverse)
 library(lubridate)
@@ -219,8 +218,6 @@ temp <- artist %>%
 ##  Extract all the albums of the band who released the album 'Achtung Baby'?
 ##############################################################################
 
-# ##solutie care `emuleaza` AUTO JOIN-ul din SQL
-
 # sol 1 - NATURAL JOIN + select
 temp <- album %>%
      filter (title == 'Achtung Baby') %>%
@@ -280,26 +277,92 @@ temp <- employee %>%
 
 
 
-#
-# ##############################################################################
-# ##               Probleme de rezolvat la curs/laborator/acasa
-# ##############################################################################
-#
-#
-# ##Afisare piesele si artistii din playlistul `Heavy Metal Classic`
-#
-#
-# ##Care sunt piesele formatiei `Led Zeppelin` compuse de cel putin trei muzicieni?
-#
-#
-###Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
-#--	`Robert Plant`
-#
-###Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
-#--	nici `Robert Plant`, nici `Jimmy Page`
+
+############################################################################
+###                Probleme de rezolvat la curs/laborator/acasa
+############################################################################
+###                To be completed during lectures/labs or at home
+############################################################################
+
+
+############################################################################
+##          În ce țări s-a vândut muzica formației `Led Zeppelin`?
+############################################################################
+##          Find the countries where `Led Zeppelin` tracks were sold
+############################################################################
+
+
+
+############################################################################
+##   Care sunt piesele formatiei `Led Zeppelin` la care, printre autori,
+##               se numara bateristul `John Bonham`
+############################################################################
+##   List the tracks released by `Led Zeppelin` having `John Bonham`
+##               as one of the composers
+############################################################################
+
+
+
+############################################################################
+##       Afisare piese si artisti din playlistul `Heavy Metal Classic`
+############################################################################
+##       Display tracks and artist in `Heavy Metal Classic` playlist
+############################################################################
+
+
+############################################################################
+## Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, 
+##  NU apare `Robert Plant`
+############################################################################
+##   Display `Led Zeppelin`'s tracks not (co-)written by `Robert Plant` 
+############################################################################
+
+
+############################################################################
+## Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, 
+##  NU apar nici `Robert Plant`, nici `Jimmy Page`
+############################################################################
+##   Display `Led Zeppelin`'s tracks whose (co)composer(s) are 
+##      neither `Robert Plant` nor `Jimmy Page`
+############################################################################
 
 ##############################################################################
 ##	   Care sunt clientii din aceeasi tara ca si clientul `Robert Brown`
 ##############################################################################
 ##	   Extract customers from the same country as customer `Robert Brown`
 ##############################################################################
+
+
+
+############################################################################
+###       Scrieti in tidyverse echivalentele urmatoarelor interogari SQL
+############################################################################
+###      Translate into `tidyverse` the following SQL queries    
+############################################################################
+
+
+SELECT track.*
+FROM track
+	INNER JOIN album ON track.albumid = album.albumid
+	INNER JOIN artist ON album.artistid = artist.artistid
+WHERE artist.name = 'Led Zeppelin'	AND
+	(UPPER(composer) LIKE '%BONHAM%' OR 	UPPER(composer) LIKE '%LED ZEPPELIN%')
+
+
+--
+select name as artist_name, title as album_title
+from artist inner join album on artist.artistid = album.artistid
+where name = title
+order by 1 ;
+
+
+--
+select track.name as track_name,
+	title as album_title, artist.name as artist_name,
+    milliseconds / 1000 as duration_seconds
+from track
+		inner join album on track.albumid = album.albumid
+		inner join artist on album.artistid = artist.artistid
+where artist.name = 'U2'
+order by milliseconds desc
+limit 9
