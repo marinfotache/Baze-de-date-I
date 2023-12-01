@@ -12,7 +12,7 @@
 ## 			tidyverse04: Tratamentul valorilor lipsă
 ## 			tidyverse04: Missing values (NA) treatment (in R NULLs are not NAs!!!)
 ##############################################################################
-## ultima actualizare / last update: 2022-03-14
+## ultima actualizare / last update: 2023-12-01
 
 library(tidyverse)
 library(lubridate)
@@ -53,7 +53,7 @@ temp <- customer %>%
 ## Extract the tracks released by `Black Sabbath` whose composers are unknown
 ##############################################################################
 
-# solutia bazata pe functia `is.na`
+# `is.na`
 temp <- artist %>%
      filter (name == 'Black Sabbath') %>%
      select (-name) %>%
@@ -63,7 +63,7 @@ temp <- artist %>%
      filter (is.na(composer))
 
 
-# a doua solutia bazata pe functia `is.na`
+# `is.na`
 temp <- artist %>%
      filter (name == 'Black Sabbath') %>%
      inner_join(album) %>%
@@ -88,13 +88,13 @@ temp <- artist %>%
 ##  la atributul `state`, in locul valorii NULL, afisati `-`
 #############################################################################
 
-# solutie cu `if_else`
+# `if_else`
 temp <- customer %>%
     select (customerid:lastname, state) %>%
     mutate(state2 = if_else(is.na(state), '-', state))
 
 
-# solutie cu `case_when`
+# `case_when`
 temp <- customer %>%
     select (customerid:lastname, state) %>%
     mutate(state2 = case_when(
@@ -102,7 +102,7 @@ temp <- customer %>%
             TRUE ~ state))
 
 
-# solutie cu `coalesce` - vezi mai jos
+#  `coalesce` - vezi mai jos / see below
 #
 #
 
@@ -136,7 +136,7 @@ temp <- customer %>%
 ##  `COMPOZITOR NECUNOSCUT`
 ##############################################################################
 
-# solutie bazata pe functia `coalesce`
+#  `coalesce`
 temp <- artist %>%
      filter (name == 'Black Sabbath') %>%
      select (-name) %>%

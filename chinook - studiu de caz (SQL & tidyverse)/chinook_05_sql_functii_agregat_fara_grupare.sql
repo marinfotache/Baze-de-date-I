@@ -12,7 +12,7 @@
 -- 					SQL05: Funcții agregat (count, count distinct, ...) fără grupare
 -- 					SQL05: Aggregate functions without gruping
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2023-12-01
 
 
 -- ############################################################################
@@ -21,10 +21,11 @@
 --                How many artists are stored in the database?
 -- ############################################################################
 
+-- sol. 1
 SELECT COUNT(*) AS nr_artisti
 FROM artist
 
--- sau
+-- sol. 2 
 SELECT COUNT(artistid) AS nr_artisti
 FROM artist
 
@@ -35,15 +36,15 @@ FROM artist
 --                 How many tracks are stored in the database?
 -- ############################################################################
 
--- solutie corecta
+-- ok
 SELECT COUNT(*) AS nr_piese
 FROM track
 
--- alta solutie corecta
+-- ok
 SELECT COUNT(trackid) AS nr_piese
 FROM track
 
--- solutie incorecta
+-- NOT OK!
 SELECT COUNT(composer) AS nr_piese
 FROM track
 
@@ -71,11 +72,11 @@ FROM customer
 -- 				         How many artist released at least an album?
 -- ############################################################################
 
--- solutie eronata!!!
+-- solutie eronata! / error!
 SELECT COUNT(artistid)
 FROM album
 
--- solutie corecta - COUNT DISTINCT
+-- COUNT DISTINCT
 SELECT COUNT(DISTINCT artistid)
 FROM album
 
@@ -178,7 +179,7 @@ LIMIT 1
 SELECT MAX(invoicedate) AS prima_zi
 FROM invoice
 
--- solutie fara MAX
+-- solutie fara MAX / sol. without MAX
 SELECT invoicedate AS prima_zi
 FROM invoice
 ORDER BY invoicedate DESC

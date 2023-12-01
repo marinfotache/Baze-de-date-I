@@ -12,11 +12,10 @@
 ## 	  tidyverse05: Funcții agregat (count, count distinct, ...) fără grupare
 ## 		tidyverse05: Aggregate functions without gruping
 ##############################################################################
-## ultima actualizare / last update: 2022-03-14
+## ultima actualizare / last update: 2023-12-01
 
 library(tidyverse)
 library(lubridate)
-
 setwd('/Users/marinfotache/Downloads/chinook')
 load("chinook.RData")
 
@@ -33,17 +32,17 @@ temp <- artist %>%
      count(artistid)
 
 
-# Solutie 1 - `count()`
+# Sol.1 1 - `count()`
 temp <- artist %>%
      count()
 
 
-# Solutie 2 - `summarise`, `n()`
+# Sol. 2 - `summarise`, `n()`
 temp <- artist %>%
      summarise(n_of_artists = n())
 
 
-# Solutie 3 - `tally()`
+# Sol. 3 - `tally()`
 temp <- artist %>%
      tally()
 
@@ -55,12 +54,12 @@ temp <- artist %>%
 ##				                  How many customers have fax?
 ##############################################################################
 
-# sol 1
+# sol. 1
 temp <- customer %>%
         filter(!is.na(fax)) %>%
         tally()
 
-# sol 2
+# sol. 2
 temp <- customer %>%
         filter(!is.na(fax)) %>%
         summarise(n_of_customers_with_faxes = n())
@@ -75,18 +74,18 @@ temp <- customer %>%
 ##############################################################################
 
 
-# solutie bazata pe `n_distinct`
+# `n_distinct`
 temp <- album %>%
      summarise (n = n_distinct(artistid))
 
 
-# solutie bazata pe `semi-join` si `count`
+#  `semi-join` + `count`
 temp <- artist %>%
      semi_join(album) %>%
      count()
 
 
-# solutie bazata pe `semi-join` si `summarise`+`n()`
+#  `semi-join` + `summarise` + `n()`
 temp <- artist %>%
      semi_join(album) %>%
      summarise (n = n())
@@ -99,7 +98,7 @@ temp <- artist %>%
 ##               In how many contries originate the customers?
 ##############################################################################
 
-# solutie bazata pe `n_distinct`
+# `n_distinct`
 temp <- customer %>%
      summarise (n = n_distinct(country))
 
@@ -144,7 +143,7 @@ temp <- album %>%
 ##              on the album `Achtung Baby` released by `U2`
 ##############################################################################
 
-# solutie bazata pe `summarise` si `mean`
+#  `summarise` + `mean`
 temp <- album %>%
      filter (title == 'Achtung Baby') %>%
      semi_join(artist %>%
@@ -161,7 +160,7 @@ temp <- album %>%
 ##              released by `U2`
 ##############################################################################
 
-# solutie bazata pe `summarise` si `mean`
+# `summarise` + `mean`
 temp <- album %>%
      semi_join(artist %>%
                     filter (name == 'U2')) %>%
@@ -178,7 +177,7 @@ temp <- album %>%
 ##              released by `Pink Floyd`
 ##############################################################################
 
-# solutie bazata pe `summarise`, `mean` si `lubridate::seconds_to_period`
+# `summarise` + `mean` + `lubridate::seconds_to_period`
 temp <- album %>%
      semi_join(artist %>%
                     filter (name == 'Pink Floyd')) %>%
@@ -194,46 +193,46 @@ temp <- album %>%
 ##                     Find the date of the first sale.
 ##############################################################################
 
-# solutie cu functia `min`
+# `min`
 temp <- invoice %>%
     summarise(first_day = min(invoicedate))
 
 
-# solutie cu optiunea `head`
+# `head`
 temp <- invoice %>%
     arrange (invoicedate) %>%
     head(1)  %>%
     transmute (first_day = invoicedate)
 
-# solutie cu optiunea `tail`
+#  `tail`
 temp <- invoice %>%
     arrange (desc(invoicedate)) %>%
     tail(1)  %>%
     transmute (first_day = invoicedate)
 
 
-# solutie cu optiunea `top` (atentie la `-1`!!!)
+#  `top` (`-1`!!!)
 temp <- invoice %>%
     distinct(invoicedate) %>%
     top_n (-1, invoicedate) %>%
     transmute (first_day = invoicedate)
 
 
-# solutie cu `slice`
+# `slice`
 temp <- invoice %>%
     distinct(invoicedate) %>%
     arrange(invoicedate)  %>%
     slice(1)
 
 
-# alta solutie cu `slice`
+#  `slice`
 temp <- invoice %>%
     distinct(invoicedate) %>%
     arrange(desc(invoicedate))  %>%
      slice(nrow(.))
 
 
-# solutie cu filtrare ce foloseste `rownum()`
+# filtrare ce foloseste `rownum()` / filter using `rownum()`
 temp <- invoice %>%
     distinct(invoicedate) %>%
     arrange(invoicedate)  %>%
@@ -251,21 +250,21 @@ temp <- invoice %>%
      summarise(last_day = max(invoicedate))
 
 
-# solutie cu optiunea `head`
+# `head`
 temp <- invoice %>%
     arrange (desc(invoicedate)) %>%
     head(1)  %>%
     transmute (last_day = invoicedate)
 
 
-# solutie cu optiunea `tail`
+# `tail`
 temp <- invoice %>%
     arrange (invoicedate) %>%
     tail(1)  %>%
     transmute (last_day = invoicedate)
 
 
-# solutie cu optiunea `top_n`
+# `top_n`
 temp <- invoice %>%
     distinct(invoicedate) %>%
     top_n (1, invoicedate) %>%

@@ -12,7 +12,7 @@
 -- 					SQL04: Tratamentul (meta)valorilor NULL
 -- 					SQL04: NULL values treatment
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2023-12-01
 
 
 -- ############################################################################
@@ -24,7 +24,6 @@
 -- ############################################################################
 --             Extract the individual (non-companies) customers
 -- ############################################################################
-
 SELECT *
 FROM customer
 WHERE company IS NULL
@@ -35,11 +34,9 @@ WHERE company IS NULL
 -- ############################################################################
 --##               Which are the customers representing companies?
 --############################################################################
-
 SELECT *
 FROM customer
 WHERE company IS NOT NULL
-
 
 
 -- ############################################################################
@@ -48,14 +45,11 @@ WHERE company IS NOT NULL
 -- ############################################################################
 --  Extract the tracks released by `Black Sabbath` whose composers are unknown
 -- ############################################################################
-
-
 SELECT *
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
 	INNER JOIN track ON album.albumid = track.albumid
 WHERE artist.name = 'Black Sabbath' AND composer is null
-
 
 
 -- ############################################################################
@@ -67,14 +61,13 @@ WHERE artist.name = 'Black Sabbath' AND composer is null
 -- the city name concatenated with its state and country)
 -- ############################################################################
 
--- solutie eronata !!!! De ce?
+-- solutie eronata !!!! De ce?  / Where is the error?
 SELECT DISTINCT city || ' - ' || state || ' - ' || country
 FROM customer
 
 -- comparati cu...
 SELECT DISTINCT city, state, country
 FROM customer
-
 
 
 -- ############################################################################
@@ -105,7 +98,10 @@ FROM customer
 -- `COMPOZITOR NECUNOSCUT`
 -- ############################################################################
 
-SELECT track.name, COALESCE(composer, 'COMPOZITOR NECUNOSCUT') AS compozitor
+-- CASE
+SELECT track.name,
+	CASE WHEN composer IS NULL THEN 'COMPOZITOR NECUNOSCUT'
+		ELSE composer END AS compozitor
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
 	INNER JOIN track ON album.albumid = track.albumid
@@ -113,6 +109,13 @@ WHERE artist.name = 'Black Sabbath'
 ORDER BY 1
 
 
+-- COALESCE()
+SELECT track.name, COALESCE(composer, 'COMPOZITOR NECUNOSCUT') AS compozitor
+FROM artist
+	INNER JOIN album ON artist.artistid = album.artistid
+	INNER JOIN track ON album.albumid = track.albumid
+WHERE artist.name = 'Black Sabbath'
+ORDER BY 1
 
 
 
