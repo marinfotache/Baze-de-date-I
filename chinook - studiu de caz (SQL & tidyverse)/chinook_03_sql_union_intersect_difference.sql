@@ -12,7 +12,7 @@
 -- 					SQL03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
 -- 					SQL03: Ansemble operators: (UNION, INTERSECT, EXCEPT)
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2023-12-01
 
 
 
@@ -28,8 +28,11 @@
 -- 				'Iron Maiden' - `Fear Of The Dark` and `A Real Live One`
 -- ############################################################################
 
-
+-------------------------------------------------------------------------------
 -- solutie bazata pe OR (dubluri eliminate)
+-------------------------------------------------------------------------------
+-- sol. using OR (duplicates removed) 
+-------------------------------------------------------------------------------
 SELECT DISTINCT track.name
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
@@ -39,7 +42,11 @@ WHERE artist.name = 'Iron Maiden' AND (title = 'Fear Of The Dark'
 ORDER BY 1
 
 
+-------------------------------------------------------------------------------
 -- solutie bazata pe UNION (dubluri eliminate)
+-------------------------------------------------------------------------------
+-- sol. using UNION (duplicates removed) 
+-------------------------------------------------------------------------------
 SELECT track.name
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
@@ -54,7 +61,11 @@ WHERE artist.name = 'Iron Maiden' AND title = 'A Real Live One'
 ORDER BY 1
 
 
+-------------------------------------------------------------------------------
 -- solutie bazata pe UNION ALL (dubluri ne-eliminate)
+-------------------------------------------------------------------------------
+-- sol. using UNION ALL (duplicates not removed) 
+-------------------------------------------------------------------------------
 SELECT track.name
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
@@ -78,13 +89,13 @@ ORDER BY 1
 --    `Adams` (lastname) `Andrew` (firstname)
 -- ############################################################################
 
--- subordonatii de ordinul 1
+-- subordonatii de ordinul 1 / first-order subordinates
 SELECT subordonati1.*
 FROM employee sefi
 	INNER JOIN employee subordonati1 ON sefi.employeeid = subordonati1.reportsto
 WHERE sefi.lastname = 'Adams' AND sefi.firstname = 'Andrew'
 UNION
--- subordonatii de ordinul 2
+-- subordonatii de ordinul 2 / second-order subordinates
 SELECT subordonati2.*
 FROM employee sefi
 	INNER JOIN employee subordonati1 ON sefi.employeeid = subordonati1.reportsto
@@ -107,29 +118,36 @@ WHERE sefi.lastname = 'Adams' AND sefi.firstname = 'Andrew'
 --      both albums)
 -- ############################################################################
 
--- solutie ERONATA 1 !!!
+-------------------------------------------------------------------------------
+-- solutie ERONATA 1!
+-------------------------------------------------------------------------------
+-- wrong solutions no. 1!
+-------------------------------------------------------------------------------
 SELECT track.name
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
 	INNER JOIN track ON album.albumid = track.albumid
-WHERE artist.name = 'Iron Maiden' AND title = 'Fear Of The Dark'
-	AND title = 'A Real Live One'
+WHERE artist.name = 'Iron Maiden' AND title = 'Fear Of The Dark' AND title = 'A Real Live One'
 -- nicio linie!!!
 
 
--- solutie ERONATA 2 !!!
+-------------------------------------------------------------------------------
+-- solutie ERONATA 2!
+-------------------------------------------------------------------------------
+-- wrong solutions no. 2!
+-------------------------------------------------------------------------------
 SELECT track.name
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
 	INNER JOIN track ON album.albumid = track.albumid
 WHERE artist.name = 'Iron Maiden' AND (title = 'Fear Of The Dark'
 	OR title = 'A Real Live One')
--- extrage solutie extrage, de fapt, piesele de pe ambele albume,
--- nu piesele comune!!!
+-- extrage solutie extrage, de fapt, piesele de pe ambele albume, nu piesele comune!
 
 
-
--- solutie corecta bazata pe intersect
+-------------------------------------------------------------------------------
+-- INTERSECT
+-------------------------------------------------------------------------------
 SELECT track.name
 FROM artist
 	INNER JOIN album ON artist.artistid = album.artistid
@@ -143,7 +161,9 @@ FROM artist
 WHERE artist.name = 'Iron Maiden' AND title = 'A Real Live One'
 
 
--- solutie bazata de auto-join
+-------------------------------------------------------------------------------
+-- autojonctiune / self-join
+-------------------------------------------------------------------------------
 SELECT track1.name
 FROM artist artist1
 	INNER JOIN album album1 ON artist1.artistid = album1.artistid
@@ -154,6 +174,7 @@ FROM artist artist1
 		AND album2.title = 'A Real Live One'
 	INNER JOIN artist artist2 ON album2.artistid = artist2.artistid
 		AND artist2.name = 'Iron Maiden'
+
 
 
 -- ############################################################################
@@ -233,6 +254,14 @@ WHERE artist.name = 'Led Zeppelin' AND
 	)
 
 
+-- sol 3 
+SELECT track.*
+FROM track
+	INNER JOIN album ON track.albumid = album.albumid
+	INNER JOIN artist ON album.artistid = artist.artistid
+WHERE artist.name = 'Led Zeppelin' AND composer NOT LIKE '%Page%'
+	AND NOT (composer LIKE '%Plant%')
+
 
 
 
@@ -262,7 +291,14 @@ WHERE playlist.name = 'Music'
 
 
 
--- Care sunt piesele formatiei `Led Zeppelin` compuse numai de `Robert Plant`
+--############################################################################
+--### Care sunt piesele formatiei `Led Zeppelin` compuse numai 
+--###    de `Robert Plant` 
+--############################################################################
+--###   Display `Led Zeppelin`'s tracks authored only by `Robert Plant` 
+--############################################################################
+
+
 
 -- Care sunt piesele formatiei `Led Zeppelin` compuse, impreuna, de `Robert Plant` si
 --  `Jimmy Page`, cu sau fara alti colegi/muzicieni?
@@ -272,13 +308,3 @@ WHERE playlist.name = 'Music'
 
 -- Care sunt piesele formatiei `Led Zeppelin` la care, printre compozitori, nu apare
 --	`Robert Plant`
-
-
-
--- ############################################################################
---              La ce întrebări răspund următoarele interogări ?
--- ############################################################################
---           For what requiremens the following queries provide the result?
--- ############################################################################
-
--- (interogarile vor scrise "in direct", in timpul cursului)

@@ -12,8 +12,7 @@
 ## 			tidyverse03: Operatori ansamblisti (UNION, INTERSECT, EXCEPT)
 ## 			tidyverse03: Ansemble operators: (UNION, INTERSECT, EXCEPT)
 ##############################################################################
-## ultima actualizare / last update: 2022-03-14
-
+## ultima actualizare / last update: 2023-12-01
 
 library(tidyverse)
 library(lubridate)
@@ -35,7 +34,7 @@ load("chinook.RData")
 ##				'Iron Maiden' - `Fear Of The Dark` and `A Real Live One`
 ##############################################################################
 
-# solutia urmatoare nu elimina dublurile
+# solutia urmatoare nu elimina dublurile / duplicates NOT removed
 temp <- artist %>%
      filter (name == 'Iron Maiden') %>%
      select (-name) %>%
@@ -45,7 +44,7 @@ temp <- artist %>%
      select (name) %>%
      arrange(name)
 
-# solutia urmatoare elimina dublurile
+# solutia urmatoare elimina dublurile / duplicated removed
 temp <- artist %>%
      filter (name == 'Iron Maiden') %>%
      select (-name) %>%
@@ -56,7 +55,7 @@ temp <- artist %>%
      arrange(name)
 
 
-# sol. 1 cu `union`
+# sol. - `union`
 temp <- dplyr::union(
      artist %>%
           filter (name == 'Iron Maiden') %>%
@@ -75,7 +74,7 @@ temp <- dplyr::union(
      arrange(name)
 
 
-# sol. 2 cu `union`
+# sol. 2 - `union`
 temp <- artist %>%
           filter (name == 'Iron Maiden') %>%
           select (-name) %>%
@@ -99,19 +98,19 @@ temp <- artist %>%
 ## Care sunt subordonatii de ordinul 1 (directi) si 2 (subordonatii directi ai
 ## subordonatilor de ordinul 1) ai lui `Adams` (lastname) `Andrew` (firstname)
 ##############################################################################
-##Extract first-order and second-order subordinates of
+## Extract first-order and second-order subordinates of
 ##   `Adams` (lastname) `Andrew` (firstname)
 ##############################################################################
 
-# solutie bazata pe `union`
+# `union`
 temp <-
-        # subordonatii de ordinul I
+        # subordonatii de ordinul I / first-order subordinates
         employee %>%
                 filter (lastname == 'Adams' & firstname == 'Andrew') %>%
                 transmute (boss_employeeid = employeeid) %>%
                 inner_join(employee, by = c('boss_employeeid' = 'reportsto')) %>%
                 select (-boss_employeeid) %>%
-        dplyr::union( # subordonatii de ordinul II
+        dplyr::union( # subordonatii de ordinul II /  second-order subordinates
                 employee %>%
                         filter (lastname == 'Adams' & firstname == 'Andrew') %>%
                         transmute (boss_employeeid = employeeid) %>%
@@ -123,15 +122,15 @@ temp <-
 
 
 
-# solutie bazata pe `bind_rows`
+# `bind_rows`
 temp <- bind_rows(
-        # subordonatii de ordinul I
+        # subordonatii de ordinul I / first-order subordinates
         employee %>%
                 filter (lastname == 'Adams' & firstname == 'Andrew') %>%
                 transmute (boss_employeeid = employeeid) %>%
                 inner_join(employee, by = c('boss_employeeid' = 'reportsto')) %>%
                 select (-boss_employeeid),
-        # subordonarii de ordinul II
+        # subordonarii de ordinul II  /  second-order subordinates
         employee %>%
                 filter (lastname == 'Adams' & firstname == 'Andrew') %>%
                 transmute (boss_employeeid = employeeid) %>%
@@ -154,9 +153,9 @@ temp <- bind_rows(
 ##			albumele `Fear Of The Dark` si `A Real Live One`
 ##					ale formatiei 'Iron Maiden'
 ##############################################################################
-##			Extract the tracks (track name) included on both `Fear Of The Dark` and
-## `A Real Live One` albums released by 'Iron Maiden' (the common tracks of
-##     both albums)
+##			Extract the tracks (track name) included on both 
+##  `Fear Of The Dark` and `A Real Live One` albums released by 
+##   'Iron Maiden' (the common tracks of both albums)
 ##############################################################################
 
 # solutie eronata 1 !!! (AND)
@@ -178,7 +177,7 @@ temp <- artist %>%
           select (name)
 
 
-# solutie corecta bazata pe `intersect`
+# `intersect`
 temp <- dplyr::intersect(
      artist %>%
           filter (name == 'Iron Maiden') %>%
@@ -197,9 +196,7 @@ temp <- dplyr::intersect(
      )
 
 
-# solutie corecta bazata pe `intersect`
-#
-# de vazut ce e in neregula !!!
+#  `intersect`
 temp <- artist %>%
           filter (name == 'Iron Maiden') %>%
           select (-name) %>%
@@ -218,7 +215,7 @@ temp <- artist %>%
                         )
 
 
-# ##solutie bazata de auto-join
+#  auto-join / self-join
 temp <- artist %>%
           filter (name == 'Iron Maiden') %>%
           select (-name) %>%
@@ -238,7 +235,7 @@ temp <- artist %>%
 
 
 
-# solutie noua (fara echivalent in SQL-PostgreSQL): SEMI JOIN
+# semi_join
 temp <- track %>%
      semi_join(
           album %>%
@@ -274,7 +271,7 @@ temp <- track %>%
 ##############################################################################
 
 
-# solutie bazata pe `setdiff` (exchivalentul EXCEPT)
+# `setdiff` (~ EXCEPT)
 temp <- dplyr::setdiff(
      artist %>%
           filter (name == 'Iron Maiden') %>%
@@ -293,7 +290,7 @@ temp <- dplyr::setdiff(
      )
 
 
-# solutie noua (fara echivalent in SQL-PostgreSQL): ANTI JOIN
+# anti_join
 temp <- track %>%
      semi_join(
           album %>%
