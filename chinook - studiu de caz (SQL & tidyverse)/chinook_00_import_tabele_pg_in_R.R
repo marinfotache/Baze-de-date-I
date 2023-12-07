@@ -38,8 +38,8 @@ con <- dbConnect(RPostgres::Postgres(), dbname="chinook", user="postgres",
 
 # On Mac OS
 
-con <- dbConnect(RPostgres::Postgres(), host='localhost', port='5432', 
-                 dbname='chinook', user='postgres', password='postgres')
+con <- dbConnect(RPostgres::Postgres(), host='localhost', port='5435', 
+                 dbname='ucll', user='postgres', password='postgres')
 
 
 
@@ -59,13 +59,9 @@ for (i in 1:nrow(tables)) {
 }
 
 
-###  D. Close PostgreSQL connection
-for (connection in dbListConnections(drv) ) {
-    dbDisconnect(connection)
-}
 
 ### Remove objects (other than the data frames)
-rm(con, drv, temp, i, tables)
+rm(con, temp, i, tables)
 
 
 # Save all the data frames in a single .RData file (change the default directory according to your system)

@@ -12,7 +12,7 @@
 ## 		tidyverse01: Filtrare simpla, regular expressions, structuri CASE
 ## 		tidyverse01: Data frame filters, regular expressions, CASE structures
 ##############################################################################
-## ultima actualizare / last update: 2022-03-14
+## ultima actualizare / last update: 2023-12-07
 
 ##############################################################################
 ### Functii/operatori/optiuni utilizate (si prezente in subiectele
@@ -48,7 +48,7 @@ library(lubridate)
 
 setwd('/Users/marinfotache/Downloads/chinook')
 load(file = 'chinook.RData')
-
+#glimpse(invoice)
 
 ############################################################################
 ###                          Interogări `tidyverse`                      ###
