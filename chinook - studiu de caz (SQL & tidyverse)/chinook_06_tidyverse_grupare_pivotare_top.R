@@ -12,13 +12,12 @@
 ## 		tidyverse06: Grupare, subtotaluri, filtrare grupuri (HAVING)
 ## 		tidyverse06: group_by, subtotals, group filters
 ##############################################################################
-## ultima actualizare / last update: 2022-03-14
+## ultima actualizare / last update: 2023-12-01
 
 library(tidyverse)
 library(lubridate)
 
 setwd('/Users/marinfotache/Downloads/chinook')
-setwd('/Users/marinfotache/OneDrive/Baze de date 2022/Studii de caz/chinook')
 load("chinook.RData")
 
 
@@ -305,7 +304,10 @@ temp <- bind_rows(
 
 # solutie 1 - bazate pe sum(if_else...)
 temp <- invoice %>%
-          transmute(customerid, invoicedate = lubridate::ymd(invoicedate), total) %>%
+          transmute(customerid, 
+                    invoicedate,
+                    #invoicedate = lubridate::ymd(invoicedate), 
+                    total) %>%
      inner_join(customer) %>%
      mutate(year = lubridate::year(invoicedate)) %>%
      filter( year %in% c(2010, 2011, 2012) ) %>%
@@ -333,9 +335,13 @@ temp <- invoice %>%
 
 
 # solutie 2 (mai) noua - bazate pe `tidyr::pivot_wider`
+glimpse(invoice)
 
 temp <- invoice %>%
-          transmute(customerid, invoicedate = lubridate::ymd(invoicedate), total) %>%
+          transmute(customerid, 
+                    invoicedate,
+                    #invoicedate = lubridate::ymd(invoicedate), 
+                    total) %>%
      inner_join(customer) %>%
      mutate(year = lubridate::year(invoicedate)) %>%
      filter( year %in% c(2010, 2011, 2012) ) %>%
@@ -345,7 +351,7 @@ temp <- invoice %>%
      mutate(year = paste0('sales', year)) %>%   # vrem ca in antet sa apara `salesxxxx`
      tidyr::pivot_wider(names_from = year, values_from = total, values_fill = 0)
 
-
+glimpse(temp)
 
 ##############################################################################
 ##                Afișați, pentru fiecare client, pe coloane separate,

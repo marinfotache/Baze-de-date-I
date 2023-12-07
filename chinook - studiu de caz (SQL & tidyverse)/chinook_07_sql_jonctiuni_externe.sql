@@ -215,7 +215,7 @@ ORDER BY 1
 -- ############################################################################
 --              La ce întrebări răspund următoarele interogări ?
 -- ############################################################################
---           For what requiremens the following queries provide the result?
+--           For what requirements the following queries provide the result?
 -- ############################################################################
 
 --

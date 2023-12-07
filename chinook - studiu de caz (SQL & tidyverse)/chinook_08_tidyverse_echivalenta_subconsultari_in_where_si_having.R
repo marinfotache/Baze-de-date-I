@@ -289,7 +289,7 @@ temp <- invoice %>%
 ##   How many invoices were issued in the whole month when the sales begun?
 ##############################################################################
 
-# solutie care `mimeaza` pe o singura subconsulare
+# solutie care `mimeaza` o singura subconsulare
 temp <- invoice %>%
      filter ( paste(lubridate::year(invoicedate),
                     lubridate::month(invoicedate) + 100, sep = '-') ==
@@ -362,7 +362,6 @@ temp <- employee %>%
 
 
 
---
 ##############################################################################
 ##         Echivalențe ale subconsultărilor SQL incluse în clauza HAVING
 ##############################################################################

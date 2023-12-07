@@ -12,14 +12,13 @@
 ## 		tidyverse11: Opțiuni OLAP
 ## 		tidyverse11: OLAP features
 ##############################################################################
-## ultima actualizare / last update: 2022-11-05
+## ultima actualizare / last update: 2023-12-07
 
 
 library(tidyverse)
 library(lubridate)
 
 setwd('/Users/marinfotache/Downloads/chinook')
-setwd('/Users/marinfotache/OneDrive/Baze de date 2022/Studii de caz/chinook')
 load("chinook.RData")
 
 ##############################################################################

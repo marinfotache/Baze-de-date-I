@@ -45,8 +45,6 @@ FROM (
 				NATURAL JOIN artist
 
 
-
-
 -- ############################################################################
 -- 			Care sunt piesele comune (cu acelasi titlu) de pe
 -- 			albumele `Fear Of The Dark` si `A Real Live One`

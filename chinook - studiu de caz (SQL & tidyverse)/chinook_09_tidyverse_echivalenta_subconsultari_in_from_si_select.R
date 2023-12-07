@@ -9,10 +9,11 @@
 ##        Studiu de caz: Interogări tidyverse pentru baza de date `chinook`
 ##        Case study: tidyverse queries for `chinook` database
 ##############################################################################
-## 			tidyverse09:  Echivalențe `tidyverse` ale subconsultărilor SQL
-##             incluse în clauzele FROM si SELECT. Diviziune relationala (2)
-## 			tidyverse09: `tidyverse` equivalent solutions for SQL subqueries
-##             included in FROM and SELECTT. Relational division (2)
+## 	      tidyverse09:  Echivalențe `tidyverse` ale subconsultărilor SQL
+##         incluse în clauzele FROM si SELECT. Diviziune relationala (2)
+##############################################################################
+## 	     tidyverse09: `tidyverse` equivalent solutions for SQL subqueries
+##            included in FROM and SELECTT. Relational division (2)
 ##############################################################################
 ## ultima actualizare / last update: 2022-03-15
 

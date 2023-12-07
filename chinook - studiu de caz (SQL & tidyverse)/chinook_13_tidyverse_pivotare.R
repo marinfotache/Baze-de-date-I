@@ -14,6 +14,11 @@
 ##############################################################################
 ## ultima actualizare / last update: 2022-03-17
 
+library(tidyverse)
+library(lubridate)
+
+setwd('/Users/marinfotache/Downloads/chinook')
+load("chinook.RData")
 
 ##############################################################################
 ##              Afișați, pentru fiecare client, pe coloane separate,
@@ -22,6 +27,16 @@
 ##            Display, for each customer, on three different columns,
 ##                    the total sales on 2010, 2011 și 2012  (6)
 ##############################################################################
+
+
+temp <- customer %>%
+     inner_join(invoice) %>%
+     group_by(customer_info = paste(lastname, firstname, city, state, country, sep = ', ')) %>%
+     summarise(
+          sales2010 = sum(if_else(year(invoicedate) == 2010, total, 0)),
+          sales2011 = sum(if_else(year(invoicedate) == 2011, total, 0)),
+          sales2012 = sum(if_else(year(invoicedate) == 2012, total, 0))
+     )
 
 
 temp <- customer %>%
@@ -37,6 +52,25 @@ temp <- customer %>%
      select(-customerid) %>%
      arrange(customer_name, year) %>%
      pivot_wider(names_from = year, values_from = sales)
+
+
+
+##############################################################################
+##              Afișați, pentru fiecare client, pe coloane separate,
+##                    vânzările penttru fiecatre an
+##############################################################################
+##            Display, for each customer, on three different columns,
+##                    the total sales on each year
+##############################################################################
+
+temp <- customer %>%
+     inner_join(invoice) %>%
+     group_by(customer_info = paste(lastname, firstname, city, state, country, sep = ', '), 
+              year = year(invoicedate)) %>%
+     summarise(sales = sum(total)) %>%
+#     ungroup() %>%
+     pivot_wider(names_from = year, values_from = sales, values_fill = 0)
+
 
 
 

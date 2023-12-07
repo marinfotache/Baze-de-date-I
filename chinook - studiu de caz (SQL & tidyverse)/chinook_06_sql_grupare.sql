@@ -12,7 +12,7 @@
 -- 					SQL06: Grupare, subtotaluri, filtrare grupuri (HAVING)
 -- 					SQL06: GROUP BY, subtotals, group filters (HAVING)
 -- ############################################################################
--- ultima actualizare / last update: 2022-03-12
+-- ultima actualizare / last update: 2023-12-01
 
 
 -- ############################################################################
@@ -20,12 +20,10 @@
 -- ############################################################################
 --              Display the number of albums released by each artist
 -- ############################################################################
-
 SELECT name AS artist_name, COUNT(*) as n_of_albums
 FROM artist NATURAL JOIN album
 GROUP BY name
 ORDER BY 1
-
 
 
 -- ############################################################################
@@ -33,7 +31,6 @@ ORDER BY 1
 -- ############################################################################
 --           Find the artist that released the largest number of albums
 -- ############################################################################
-
 SELECT name AS artist_name, COUNT(*) as n_of_albums
 FROM artist NATURAL JOIN album
 GROUP BY name
@@ -41,13 +38,11 @@ ORDER BY 2 DESC
 LIMIT 1
 
 
-
 -- ############################################################################
 --     Extrageți durata totală a pieselor (în minute) pentru fiecare artist
 -- ############################################################################
 -- Compute the total duration (in minutes) of the tracks released by each artist
 -- ############################################################################
-
 SELECT artist.name AS artist_name,
 	ROUND(SUM(milliseconds / 60000)) AS duration_minutes
 FROM artist
@@ -55,7 +50,6 @@ FROM artist
 	INNER JOIN track ON album.albumid = track.albumid
 GROUP BY artist.name
 ORDER BY artist.name
-
 
 
 -- ############################################################################
@@ -66,7 +60,6 @@ ORDER BY artist.name
 --   Display the total duration (in the HH:MI:SS format) of each album
 --    released by each artist
 -- ############################################################################
-
 SELECT artist.name AS artist_name, title AS album_title,
 	SUM(milliseconds / 1000) * interval '1 sec' AS duration
 FROM artist
@@ -86,7 +79,6 @@ ORDER BY artist.name, title
 -- include a sub-total with the duration (in minutes and seconds) of each album,
 --    another subtotal on artist level, and a grand total
 -- ############################################################################
-
 
 -- solutie bazata pe grupare si pe UNION
 SELECT artist.name AS artist_name, title AS album_title, track.name as track_name,

@@ -9,10 +9,10 @@
 --        Studiu de caz: Interogări SQL pentru baza de date `chinook`
 --        Case study: SQL Queries for `chinook` database
 -- ############################################################################
--- 					SQL08: Subconsultări (necorelate) în WHERE și HAVING.
---								Diviziune relațională (1)
--- 					SQL08: (Non-correlated) subqueries included in WHERE and HAVING.
---								Relational division (1)
+-- 			SQL08: Subconsultări (necorelate) în WHERE și HAVING.
+--					 Diviziune relațională (1)
+-- 		SQL08: (Non-correlated) subqueries included in WHERE and HAVING.
+--					Relational division (1)
 -- ############################################################################
 -- ultima actualizare / last update: 2022-03-15
 
@@ -306,7 +306,7 @@ WHERE hiredate <= (
 					SELECT hiredate
 					FROM employee
 					ORDER BY hiredate
-	        OFFSET 4
+	        		OFFSET 4
 					LIMIT 1
 					)
 ORDER BY hiredate
@@ -631,7 +631,7 @@ FROM artist
 WHERE name IN  (
 	SELECT title
 	FROM album)
-ORDER BY 1 ;
+  ORDER BY 1 ;
 
 
 SELECT title, name

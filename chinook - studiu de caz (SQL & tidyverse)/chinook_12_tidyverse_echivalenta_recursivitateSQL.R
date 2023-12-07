@@ -12,7 +12,7 @@
 ## 					tidyverse12: Interogări recursive
 ## 					tidyverse12: SQL recursive queries' equivalents
 ##############################################################################
-## ultima actualizare / last update: 2022-03-17
+## ultima actualizare / last update: 2023-12-07
 
 library(tidyverse)
 library(lubridate)
