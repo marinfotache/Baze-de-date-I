@@ -341,28 +341,28 @@ temp <- employee %>%
 ############################################################################
 
 
-SELECT track.*
-FROM track
-	INNER JOIN album ON track.albumid = album.albumid
-	INNER JOIN artist ON album.artistid = artist.artistid
-WHERE artist.name = 'Led Zeppelin'	AND
-	(UPPER(composer) LIKE '%BONHAM%' OR 	UPPER(composer) LIKE '%LED ZEPPELIN%')
-
-
---
-select name as artist_name, title as album_title
-from artist inner join album on artist.artistid = album.artistid
-where name = title
-order by 1 ;
-
-
---
-select track.name as track_name,
-	title as album_title, artist.name as artist_name,
-    milliseconds / 1000 as duration_seconds
-from track
-		inner join album on track.albumid = album.albumid
-		inner join artist on album.artistid = artist.artistid
-where artist.name = 'U2'
-order by milliseconds desc
-limit 9
+# SELECT track.*
+# FROM track
+# 	INNER JOIN album ON track.albumid = album.albumid
+# 	INNER JOIN artist ON album.artistid = artist.artistid
+# WHERE artist.name = 'Led Zeppelin'	AND
+# 	(UPPER(composer) LIKE '%BONHAM%' OR 	UPPER(composer) LIKE '%LED ZEPPELIN%')
+# 
+# 
+# --
+# select name as artist_name, title as album_title
+# from artist inner join album on artist.artistid = album.artistid
+# where name = title
+# order by 1 ;
+# 
+# 
+# --
+# select track.name as track_name,
+# 	title as album_title, artist.name as artist_name,
+#     milliseconds / 1000 as duration_seconds
+# from track
+# 		inner join album on track.albumid = album.albumid
+# 		inner join artist on album.artistid = artist.artistid
+# where artist.name = 'U2'
+# order by milliseconds desc
+# limit 9
